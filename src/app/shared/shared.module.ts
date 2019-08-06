@@ -17,6 +17,7 @@ import { ChartComponent } from './charts/chart/chart.component';
 import { ClickListComponent } from './charts/click-list/click-list.component';
 import { ComboChartComponent } from './charts/combo-chart/combo-chart.component';
 import { ComboSeriesVerticalComponent } from './charts/combo-series-vertical/combo-series-vertical.component';
+import { GaugeChartComponent } from './charts/gauge-chart/gauge-chart.component';
 import { LineAndBarChartComponent } from './charts/line-and-bar-chart/line-and-bar-chart.component';
 import { LineChartComponent } from './charts/line-chart/line-chart.component';
 import { NumberCardChartComponent } from './charts/number-card-chart/number-card-chart.component';
@@ -81,7 +82,8 @@ import { DeployConfigFormComponent } from '../widget_modules/deploy/deploy-confi
     PlainTextChartComponent,
     DeployDetailComponent,
     DeployWidgetComponent,
-    OneChartLayoutComponent
+    OneChartLayoutComponent,
+    GaugeChartComponent
   ],
   entryComponents: [
     DeployDetailComponent,
@@ -101,7 +103,8 @@ import { DeployConfigFormComponent } from '../widget_modules/deploy/deploy-confi
     PlaceholderWidgetComponent,
     PlainTextChartComponent,
     TwoByTwoLayoutComponent,
-    OneChartLayoutComponent
+    OneChartLayoutComponent,
+    GaugeChartComponent
   ],
   imports: [
     CommonModule,
@@ -131,7 +134,8 @@ import { DeployConfigFormComponent } from '../widget_modules/deploy/deploy-confi
     TwoByTwoLayoutComponent,
     WidgetComponent,
     WidgetDirective,
-    WidgetHeaderComponent
+    WidgetHeaderComponent,
+    GaugeChartComponent
   ]
 })
 export class SharedModule { }
