@@ -24,7 +24,7 @@ export class WidgetHeaderComponent implements OnInit {
   @Input() title;
   @Input() status;
   @Input() configForm: Type<any>;
-  @ViewChild(WidgetDirective, {static: true}) appWidget: WidgetDirective;
+  @ViewChild(WidgetDirective) appWidget: WidgetDirective;
   private widgetComponent;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver,

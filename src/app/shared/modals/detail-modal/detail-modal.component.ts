@@ -13,7 +13,7 @@ export class DetailModalComponent implements OnInit {
 
   @Input() Title;
   @Input() detailView: Type<any>;
-  @ViewChild(DetailModalDirective, {static: true}) modalTypeTag: DetailModalDirective;
+  @ViewChild(DetailModalDirective) modalTypeTag: DetailModalDirective;
 
   constructor(
     public activeModal: NgbActiveModal,

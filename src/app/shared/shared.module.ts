@@ -83,7 +83,8 @@ import { DeployConfigFormComponent } from '../widget_modules/deploy/deploy-confi
     DeployDetailComponent,
     DeployWidgetComponent,
     OneChartLayoutComponent,
-    GaugeChartComponent
+    GaugeChartComponent,
+    DeployConfigFormComponent
   ],
   entryComponents: [
     DeployDetailComponent,
@@ -104,7 +105,8 @@ import { DeployConfigFormComponent } from '../widget_modules/deploy/deploy-confi
     PlainTextChartComponent,
     TwoByTwoLayoutComponent,
     OneChartLayoutComponent,
-    GaugeChartComponent
+    GaugeChartComponent,
+    DeployConfigFormComponent
   ],
   imports: [
     CommonModule,
