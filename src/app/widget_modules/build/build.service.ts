@@ -5,15 +5,18 @@ import { map } from 'rxjs/operators';
 
 import { IBuild, IBuildResponse } from './interfaces';
 
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class BuildService {
 
-  buildDetailRoute = '/api/build/';
+  buildDetailRoute = '/api/build/'; 
 
   constructor(private http: HttpClient) { }
 
+  
   fetchDetails(componentId: string, numberOfDays: number): Observable<IBuild[]> {
     const params = {
       params: new HttpParams().set('componentId', componentId).set('numberOfDays', numberOfDays.toFixed(0))

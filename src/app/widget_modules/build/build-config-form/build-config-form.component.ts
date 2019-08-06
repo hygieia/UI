@@ -19,7 +19,7 @@ export class BuildConfigFormComponent implements OnInit {
   buildConfigForm: FormGroup;
 
   model: any;
-  searching = false;
+  searching = false;             
   searchFailed = false;
 
   typeAheadResults: (text$: Observable<string>) => Observable<any>;
@@ -90,7 +90,7 @@ export class BuildConfigFormComponent implements OnInit {
       collectorItemId: this.buildConfigForm.value.buildJob.id
     };
     this.activeModal.close(newConfig);
-  }
+  }                                                                                                                                                                                                       
 
   private loadSavedBuildJob() {
     this.dashboardService.dashboardConfig$.pipe(take(1),
