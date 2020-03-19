@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DeployDetailComponent } from './deploy-detail.component';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {IClickListItemDeploy} from '../../../shared/charts/click-list/click-list-interfaces';
 
 describe('DeployDetailComponent', () => {
   let component: DeployDetailComponent;
@@ -22,5 +23,11 @@ describe('DeployDetailComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  it('should set detail data', () => {
+    component.detailData = {
+      name: 'testName', version: ''
+    } as IClickListItemDeploy;
+    expect(component.data.name).toEqual('testName');
   });
 });
