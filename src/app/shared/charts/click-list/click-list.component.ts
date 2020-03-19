@@ -3,8 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DashStatus } from '../../dash-status/DashStatus';
 import { DetailModalComponent } from '../../modals/detail-modal/detail-modal.component';
 import { ChartComponent } from '../chart/chart.component';
-import {IClickListData, IClickListItem, IClickListItemDeploy} from './click-list-interfaces';
-import {DeployDetailComponent} from '../../../widget_modules/deploy/deploy-detail/deploy-detail.component';
+import {IClickListData, IClickListItem} from './click-list-interfaces';
 
 @Component({
   selector: 'app-click-list',
