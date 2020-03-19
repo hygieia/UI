@@ -32,7 +32,6 @@ export class FormModalComponent implements OnInit {
     this.activeModal.close();
   }
   closeModal() {
-    console.log("here")
     this.activeModal.close('Modal Closed');
   }
 
