@@ -34,6 +34,7 @@ export class BuildConfigFormComponent implements OnInit {
 
   @Input()
   set widgetConfig(widgetConfig: any) {
+    if (!widgetConfig) { return; }
     this.widgetConfigId = widgetConfig.options.id;
     this.buildConfigForm.get('buildDurationThreshold').setValue(widgetConfig.options.buildDurationThreshold);
     this.buildConfigForm.get('consecutiveFailureThreshold').setValue(widgetConfig.options.consecutiveFailureThreshold);

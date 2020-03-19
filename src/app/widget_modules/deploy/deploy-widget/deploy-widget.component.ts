@@ -5,7 +5,7 @@ import {
 } from 'src/app/shared/charts/click-list/click-list-interfaces';
 import { DeployService } from 'src/app/widget_modules/deploy/deploy.service';
 import { of, Subscription } from 'rxjs';
-import { DEPLOY_CHARTS } from 'src/app/widget_modules/deploy/deploy-detail/deploy-charts';
+import { DEPLOY_CHARTS } from 'src/app/widget_modules/deploy/deploy-widget/deploy-charts';
 import { IDeploy } from 'src/app/widget_modules/deploy/interfaces';
 import { DashStatus } from 'src/app/shared/dash-status/DashStatus';
 import { DashboardService } from 'src/app/shared/dashboard.service';

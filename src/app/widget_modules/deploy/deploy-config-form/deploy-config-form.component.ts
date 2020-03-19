@@ -31,6 +31,7 @@ export class DeployConfigFormComponent implements OnInit {
 
   @Input()
   set widgetConfig(widgetConfig) {
+    if (!widgetConfig) { return; }
     this.widgetConfigId = widgetConfig.options.id;
 
     if (widgetConfig.options.deployRegex !== undefined && widgetConfig.options.deployRegex !== null) {
