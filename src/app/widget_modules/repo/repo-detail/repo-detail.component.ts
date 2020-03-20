@@ -1,16 +1,16 @@
 import {Component, Input, OnInit, Type} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import { IClickListItemDeploy } from '../../../shared/charts/click-list/click-list-interfaces';
+import {ILineChartRepoItem} from '../../../shared/charts/line-chart/line-chart-interfaces';
 
 @Component({
-  selector: 'app-deploy-detail',
-  templateUrl: './deploy-detail.component.html',
-  styleUrls: ['./deploy-detail.component.scss']
+  selector: 'app-repo-detail',
+  templateUrl: './repo-detail.component.html',
+  styleUrls: ['./repo-detail.component.scss']
 })
-export class DeployDetailComponent implements OnInit {
+export class RepoDetailComponent implements OnInit {
   @Input() detailView: Type<any>;
 
-  public data: IClickListItemDeploy;
+  public data: ILineChartRepoItem;
 
   constructor(
     public activeModal: NgbActiveModal,
