@@ -16,27 +16,24 @@ export class RepoService {
 
   constructor(private http: HttpClient) { }
 
-  fetchIssues(componentId: string, numberOfDays: number): Observable<IRepo[]> {
-    const params = {
+  private getParams(componentId: string, numberOfDays: number) {
+    return {
       params: new HttpParams().set('componentId', componentId).set('numberOfDays', numberOfDays.toFixed(0))
     };
-    return this.http.get<IRepoResponse>(this.repoIssueDetailRoute, params).pipe(
+  }
+
+  fetchIssues(componentId: string, numberOfDays: number): Observable<IRepo[]> {
+    return this.http.get<IRepoResponse>(this.repoIssueDetailRoute, this.getParams(componentId, numberOfDays)).pipe(
       map(response => response.result));
   }
 
   fetchCommits(componentId: string, numberOfDays: number): Observable<IRepo[]> {
-    const params = {
-      params: new HttpParams().set('componentId', componentId).set('numberOfDays', numberOfDays.toFixed(0))
-    };
-    return this.http.get<IRepoResponse>(this.repoCommitDetailRoute, params).pipe(
+    return this.http.get<IRepoResponse>(this.repoCommitDetailRoute, this.getParams(componentId, numberOfDays)).pipe(
       map(response => response.result));
   }
 
   fetchPullRequests(componentId: string, numberOfDays: number): Observable<IRepo[]> {
-    const params = {
-      params: new HttpParams().set('componentId', componentId).set('numberOfDays', numberOfDays.toFixed(0))
-    };
-    return this.http.get<IRepoResponse>(this.repoPullDetailRoute, params).pipe(
+    return this.http.get<IRepoResponse>(this.repoPullDetailRoute, this.getParams(componentId, numberOfDays)).pipe(
       map(response => response.result));
   }
 }

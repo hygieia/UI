@@ -11,6 +11,9 @@ export class RepoDetailComponent implements OnInit {
   @Input() detailView: Type<any>;
 
   public data: ILineChartRepoItem;
+  private dateClicked: Date;
+  private repoDataInstances;
+  private series: string;
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -20,7 +23,22 @@ export class RepoDetailComponent implements OnInit {
   }
 
   @Input()
+  set lineChart(data: any) {
+    this.dateClicked = data.name;
+    this.series = data.series;
+  }
+
+  @Input()
   set detailData(data: any) {
-    this.data = data;
+    if (this.series === 'Commits') {
+      this.repoDataInstances = data.dataPoints[0].instances;
+    } else if (this.series === 'Pulls') {
+      this.repoDataInstances = data.dataPoints[1].instances;
+    } else {
+      this.repoDataInstances = data.dataPoints[2].instances;
+    }
+    this.data = this.repoDataInstances.filter(repoInstance => {
+      return (repoInstance.date).getTime() === (this.dateClicked).getTime();
+    });
   }
 }

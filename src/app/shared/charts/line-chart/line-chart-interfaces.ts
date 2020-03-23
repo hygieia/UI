@@ -6,7 +6,6 @@ export interface ILineChartData {
   dataPoints: any;
 }
 
-
 export interface ILineChartRepoItem extends ILineChartData {
   number: string;
   author: string;

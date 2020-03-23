@@ -28,10 +28,6 @@ export class LineChartComponent extends ChartComponent {
   yAxisTickFormatting: (val: number) => string = this.formatInteger;
   xAxisTickFormatting: (val: Date) => string = this.formatToDayAndMonth;
 
-  private dateClicked;
-  private repoDataInstances;
-  private repoDataToSend;
-
   formatInteger(val: number): string {
     if (Number.isInteger(val)) {
       return val.toFixed(0);
@@ -44,23 +40,11 @@ export class LineChartComponent extends ChartComponent {
   }
 
   onSelect(event) {
-    const modalRef = this.modalService.open(DetailModalComponent);
-    modalRef.componentInstance.title = 'Details';
-
-    if (this.data && (this.data as ILineChartData).detailComponent && this.data.dataPoints[0].name === 'Commits') {
-      this.dateClicked = event.name;
-      if (event.series === 'Commits') {
-        this.repoDataInstances = this.data.dataPoints[0].instances;
-      } else if (event.series === 'Pulls') {
-        this.repoDataInstances = this.data.dataPoints[1].instances;
-      } else {
-        this.repoDataInstances = this.data.dataPoints[2].instances;
-      }
-      this.repoDataToSend = this.repoDataInstances.filter(repoInstance => {
-        return (repoInstance.date).getTime() === (this.dateClicked).getTime();
-      });
-      console.log(this.repoDataToSend);
-      modalRef.componentInstance.detailData = this.repoDataToSend;
+    if (this.data && (this.data as ILineChartData).detailComponent) {
+      const modalRef = this.modalService.open(DetailModalComponent);
+      modalRef.componentInstance.title = 'Details';
+      modalRef.componentInstance.lineChart = event;
+      modalRef.componentInstance.detailData = this.data;
       (modalRef.componentInstance as DetailModalComponent).detailView = this.data.detailComponent;
     }
   }

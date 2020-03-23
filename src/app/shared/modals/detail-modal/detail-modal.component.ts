@@ -10,6 +10,7 @@ import {IClickListItem} from '../../charts/click-list/click-list-interfaces';
 })
 export class DetailModalComponent implements OnInit {
   @Input() detailView: Type<any>;
+  @Input() lineChart: Type<any>;
   @ViewChild(DetailModalDirective, {static: true}) modalTypeTag: DetailModalDirective;
   public detailData: IClickListItem;
 
@@ -25,6 +26,7 @@ export class DetailModalComponent implements OnInit {
       const viewContainerRef = this.modalTypeTag.viewContainerRef;
       viewContainerRef.clear();
       const componentRef = viewContainerRef.createComponent(componentFactory);
+      componentRef.instance.lineChart = this.lineChart;
       componentRef.instance.detailData = this.detailData;
       this.cdr.detectChanges();
     }
