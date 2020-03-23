@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {forkJoin, of, Subscription} from 'rxjs';
-import {catchError, distinctUntilChanged, map, startWith, switchMap, tap} from 'rxjs/operators';
+import {catchError, distinctUntilChanged, map, startWith, switchMap, tap, timeInterval} from 'rxjs/operators';
 import { DashboardService } from 'src/app/shared/dashboard.service';
 import { LayoutDirective } from 'src/app/shared/layouts/layout.directive';
 import { TwoByTwoLayoutComponent } from 'src/app/shared/layouts/two-by-two-layout/two-by-two-layout.component';
@@ -18,6 +18,8 @@ import { RepoService } from '../repo.service';
 import { REPO_CHARTS} from './repo-charts';
 import { IRepo } from '../interfaces';
 import {CollectorService} from '../../../shared/collector.service';
+import * as moment from 'moment';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-repo-widget',
@@ -30,9 +32,9 @@ export class RepoWidgetComponent extends WidgetComponent implements OnInit, Afte
   // Reference to the subscription used to refresh the widget
   private intervalRefreshSubscription: Subscription;
   private params;
-  private groupedCommitData = [];
-  private groupedPullData = [];
-  private groupedIssueData = [];
+  private groupedCommit = [];
+  private groupedPull = [];
+  private groupedIssue = [];
 
   @ViewChild(LayoutDirective, {static: false}) childLayoutTag: LayoutDirective;
 
@@ -105,78 +107,72 @@ export class RepoWidgetComponent extends WidgetComponent implements OnInit, Afte
     this.charts[0].data.dataPoints[1].series = this.countRepoPerDay(allPulls, startDate, 'pull');
     this.charts[0].data.dataPoints[2].series = this.countRepoPerDay(allIssues, startDate, 'issue');
 
-    // Sends data to line chart component onSelect
-    this.charts[0].data.dataPoints[0].instances = this.groupedCommitData;
-    this.charts[0].data.dataPoints[1].instances = this.groupedPullData;
-    this.charts[0].data.dataPoints[2].instances = this.groupedIssueData;
+    // TODO: Fix - (ADDED FOR NOW) because I can't get the countRepoPerDay object items AND the length returned.
+    this.charts[0].data.dataPoints[0].instances = this.groupedCommit;
+    this.charts[0].data.dataPoints[1].instances = this.groupedPull;
+    this.charts[0].data.dataPoints[2].instances = this.groupedIssue;
   }
 
   countRepoPerDay(allInRepo: IRepo[], startDate: Date, type: string): any[] {
     const counts = {};
     const date = new Date(startDate.getTime());
-    let regexNumber;
     let repoTime;
+    let repoNumber;
+    let repoRegex;
+    let repoAuthor;
     for (let i = 0; i < this.REPO_PER_DAY_TIME_RANGE; i++) {
       counts[this.toMidnight(date).getTime()] = 0;
       date.setDate(date.getDate() + 1);
     }
-    allInRepo.forEach(repo => {
+    const dataArray = allInRepo.map(repo => {
       let obj = {};
       if (type === 'commit') {
+        repoNumber = repo.scmRevisionNumber;
+        repoRegex = repo.scmRevisionNumber.match(new RegExp('^.{0,7}'))[0];
+        repoAuthor = repo.scmAuthor;
         repoTime = repo.scmCommitTimestamp;
+      } else if (type === 'pull') {
+        repoNumber = repo.number;
+        repoRegex = repo.number;
+        repoAuthor = repo.mergeAuthor;
+        repoTime = repo.timestamp;
       } else {
+        repoNumber = repo.scmRevisionNumber;
+        repoRegex = repo.scmRevisionNumber.match(new RegExp('^.{0,7}'))[0];
+        repoAuthor = repo.scmAuthor;
         repoTime = repo.timestamp;
       }
       const index = this.toMidnight(new Date(repoTime)).getTime();
       counts[index] = counts[index] + 1;
-
-      if (repo.scmRevisionNumber) {
-        regexNumber = repo.scmRevisionNumber.match(new RegExp('^.{0,7}'))[0];
-      }
-
-      if (type === 'commit') {
-        obj = {
-          number: repo.scmRevisionNumber,
-          regexNum: regexNumber,
-          author: repo.scmAuthor,
-          message: repo.scmCommitLog,
-          time: repo.scmCommitTimestamp,
-          date: new Date(index)
-        };
-        this.groupedCommitData.push(obj);
-      } else if (type === 'pull') {
-        obj = {
-          number: repo.number,
-          regexNum: repo.number,
-          author: repo.mergeAuthor,
-          message: repo.scmCommitLog,
-          time: repo.mergedAt,
-          date: new Date(index)
-        };
-        this.groupedPullData.push(obj);
-      } else {
-        obj = {
-          number: repo.scmRevisionNumber,
-          regexNum: regexNumber,
-          author: repo.scmAuthor,
-          message: repo.scmCommitLog,
-          time: repo.timestamp,
-          date: new Date(index)
-        };
-        this.groupedIssueData.push(obj);
-      }
+      obj = {
+        number: repoNumber,
+        regexNumber: repoRegex,
+        author: repoAuthor,
+        message: repo.scmCommitLog,
+        time: repoTime,
+        date: index
+      };
+      return obj;
     });
-    const dataArray = [];
-    for (const key of Object.keys(counts)) {
-      const data = counts[key];
-      dataArray.push(
+
+    const dataArrayToSend = [];
+    const groupedResults = _.groupBy(dataArray, (result) => moment(new Date(result['time']), 'DD/MM/YYYY').startOf('day'));
+    for (const key of Object.keys(groupedResults)) {
+      if (type === 'commit') {
+        this.groupedCommit.push(groupedResults[key]);
+      } else if (type === 'issue') {
+        this.groupedIssue.push(groupedResults[key]);
+      } else {
+        this.groupedPull.push(groupedResults[key]);
+      }
+      dataArrayToSend.push(
         {
-          name: new Date(+key),
-          value: data
+          name: new Date(key),
+          value: groupedResults[key].length
         }
       );
     }
-    return dataArray;
+    return dataArrayToSend;
   }
 
   // *********************** TOTAL REPO COUNTS ************************

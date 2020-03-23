@@ -3,7 +3,6 @@ import { LineChartComponent } from 'src/app/shared/charts/line-chart/line-chart.
 import { NumberCardChartComponent } from 'src/app/shared/charts/number-card-chart/number-card-chart.component';
 import { IChart } from 'src/app/shared/interfaces';
 import {RepoDetailComponent} from '../repo-detail/repo-detail.component';
-import {ChartComponent} from '../../../shared/charts/chart/chart.component';
 
 export let REPO_CHARTS: IChart[] = [
   {
@@ -15,18 +14,15 @@ export let REPO_CHARTS: IChart[] = [
       dataPoints: [
         {
           name: 'Commits',
-          series: [],
-          instances: []
+          series: []
         },
         {
           name: 'Pulls',
-          series: [],
-          instances: []
+          series: []
         },
         {
           name: 'Issues',
-          series: [],
-          instances: []
+          series: []
         },
       ]} as ILineChartData,
     xAxisLabel: 'Date',

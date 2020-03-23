@@ -37,8 +37,8 @@ export class RepoDetailComponent implements OnInit {
     } else {
       this.repoDataInstances = data.dataPoints[2].instances;
     }
-    this.data = this.repoDataInstances.filter(repoInstance => {
-      return (repoInstance.date).getTime() === (this.dateClicked).getTime();
-    });
+
+    // TODO: FIX - I was setting instances, but I don't think we want that with the data that we have.
+    this.data = data;//this.repoDataInstances.filter(repoInstance => (repoInstance.date).getTime() === (this.dateClicked).getTime());
   }
 }
