@@ -18,6 +18,7 @@ import { RepoService } from '../repo.service';
 import { REPO_CHARTS} from './repo-charts';
 import { IRepo } from '../interfaces';
 import {CollectorService} from '../../../shared/collector.service';
+// @ts-ignore
 import moment from 'moment';
 import * as _ from 'lodash';
 
