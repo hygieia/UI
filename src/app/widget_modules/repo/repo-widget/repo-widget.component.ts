@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {forkJoin, of, Subscription} from 'rxjs';
-import {catchError, distinctUntilChanged, map, startWith, switchMap, tap, timeInterval} from 'rxjs/operators';
+import {catchError, distinctUntilChanged, startWith, switchMap } from 'rxjs/operators';
 import { DashboardService } from 'src/app/shared/dashboard.service';
 import { LayoutDirective } from 'src/app/shared/layouts/layout.directive';
 import { TwoByTwoLayoutComponent } from 'src/app/shared/layouts/two-by-two-layout/two-by-two-layout.component';
