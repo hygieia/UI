@@ -14,5 +14,6 @@ export interface IRepo {
   number: string;
   mergedAt: string;
   mergeAuthor: string;
+  userId: string;
 }
 

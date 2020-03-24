@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, ComponentFactoryResolver, Input, OnInit, Type, ViewChild } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DetailModalDirective } from './detail-modal.directive';
-import {IClickListItem} from '../../charts/click-list/click-list-interfaces';
 
 @Component({
   selector: 'app-detail-modal',
@@ -10,9 +9,8 @@ import {IClickListItem} from '../../charts/click-list/click-list-interfaces';
 })
 export class DetailModalComponent implements OnInit {
   @Input() detailView: Type<any>;
-  @Input() lineChart: Type<any>;
   @ViewChild(DetailModalDirective, {static: true}) modalTypeTag: DetailModalDirective;
-  public detailData: IClickListItem;
+  public detailData: any;
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -26,7 +24,6 @@ export class DetailModalComponent implements OnInit {
       const viewContainerRef = this.modalTypeTag.viewContainerRef;
       viewContainerRef.clear();
       const componentRef = viewContainerRef.createComponent(componentFactory);
-      componentRef.instance.lineChart = this.lineChart;
       componentRef.instance.detailData = this.detailData;
       this.cdr.detectChanges();
     }

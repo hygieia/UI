@@ -25,7 +25,8 @@ class MockRepoService {
         timestamp: 'testTime',
         number: 'testNum',
         mergeAuthor: 'testAuthor',
-        mergedAt: 'testMerge'
+        mergedAt: 'testMerge',
+        userId: 'testUser'
       }
     ]
   };
@@ -59,7 +60,8 @@ describe('RepoWidgetComponent', () => {
     timestamp: 'testTime',
     number: 'testNum',
     mergeAuthor: 'testAuthor',
-    mergedAt: 'testMerge'
+    mergedAt: 'testMerge',
+    userId: 'testUser'
   } as IRepo;
 
   const IRepo2 = {
@@ -72,7 +74,8 @@ describe('RepoWidgetComponent', () => {
     timestamp: 'testTime',
     number: 'testNum',
     mergeAuthor: 'testAuthor',
-    mergedAt: 'testMerge'
+    mergedAt: 'testMerge',
+    userId: 'testUser'
   } as IRepo;
 
   const IRepo3 = {
@@ -85,7 +88,8 @@ describe('RepoWidgetComponent', () => {
     timestamp: 'testTime',
     number: 'testNum',
     mergeAuthor: 'testAuthor',
-    mergedAt: 'testMerge'
+    mergedAt: 'testMerge',
+    userId: 'testUser'
   } as IRepo;
 
   beforeEach(async(() => {
@@ -116,11 +120,11 @@ describe('RepoWidgetComponent', () => {
     component.generateTotalRepoCounts([IRepo1], [IRepo2], [IRepo3]);
   });
 
-  it('should hit countRepoPerDay if statements', () => {
+  it('should hit collectRepoCommits, Pulls, and Issues', () => {
     const date = new Date(123);
-    component.countRepoPerDay([IRepo1], date, 'commit');
-    component.countRepoPerDay([IRepo1], date, 'pull');
-    component.countRepoPerDay([IRepo1], date, 'issue');
+    component.collectRepoCommits([IRepo1]);
+    component.collectRepoPulls([IRepo1]);
+    component.collectRepoIssues([IRepo1]);
   });
 
   it('should create', () => {

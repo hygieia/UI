@@ -14,18 +14,15 @@ export let REPO_CHARTS: IChart[] = [
       dataPoints: [
         {
           name: 'Commits',
-          series: [],
-          instances: []
+          series: []
         },
         {
           name: 'Pulls',
-          series: [],
-          instances: []
+          series: []
         },
         {
           name: 'Issues',
-          series: [],
-          instances: []
+          series: []
         },
       ]} as ILineChartData,
     xAxisLabel: 'Date',
