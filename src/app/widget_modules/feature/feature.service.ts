@@ -14,34 +14,43 @@ export class FeatureService {
 
   featureSprintDetailRoute = '/api/iteration/';
 
-  featureProjectDetailRoute = '/api/scope/';
+  featureProjectDetailRoute = '/api/scope';
   featureProjectsByCollectorId = '/api/scopecollector/';
   //featureProjectsByCollectorIdPage = '/api/scopecollector/page/';
-  featureTeamDetailRoute = '/api/team/';
+  featureTeamDetailRoute = '/api/team';
 
   featureTeamsByCollectorId = '/api/teamcollector/';
   featureTeamsByCollectorIdPage = '/api/teamcollector/page/';
 
   constructor(private http: HttpClient) { }
 
-  fetchSprint (componentId: string, filterTeamId, filterProjectId, agileType: string): Observable<IFeature[]> {
+  // fetchSprint (componentId: string, filterTeamId, filterProjectId, agileType: string): Observable<IFeature[]> {
+  //   const params = {
+  //     params: new HttpParams().set('componentId', componentId).set('filterTeamId', filterTeamId).set('filterProjectId', filterProjectId).set('agileType', agileType)
+  //   };
+  //
+  //   return this.http.get<IFeatureResponse>(this.featureSprintDetailRoute, params).pipe(
+  //     map(response => response.result));
+  // }
+
+  fetchSprint (componentId: string, filterTeamId): Observable<IFeature[]> {
     const params = {
-      params: new HttpParams().set('componentId', componentId).set('filterTeamId', filterTeamId).set('filterProjectId', filterProjectId).set('agileType', agileType)
+      params: new HttpParams().set('componentId', componentId).set('filterTeamId', filterTeamId)
     };
 
     return this.http.get<IFeatureResponse>(this.featureSprintDetailRoute, params).pipe(
       map(response => response.result));
   }
 
-  fetchProjects() {
-    return this.http.get<IFeatureResponse>(this.featureProjectDetailRoute).pipe(
-      map(response => response.result));
-  }
-
-  fetchTeams() {
-    return this.http.get<IFeatureResponse>(this.featureTeamDetailRoute).pipe(
-      map(response => response.result));
-  }
+  // fetchProjects() {
+  //   return this.http.get<IFeatureResponse>(this.featureProjectDetailRoute).pipe(
+  //     map(response => response.result));
+  // }
+  //
+  // fetchTeams() {
+  //   return this.http.get<IFeatureResponse>(this.featureTeamDetailRoute).pipe(
+  //     map(response => response.result));
+  // }
 
   fetchAggregateSprintEstimates(componentId, filterTeamId, filterProjectId, estimateMetricType, agileType) {
     const params = {

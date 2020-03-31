@@ -19,6 +19,7 @@ import {WidgetComponent} from 'src/app/shared/widget/widget.component';
 import {FeatureService} from '../feature.service';
 import {IFeature} from '../interfaces';
 import {FEATURE_CHARTS} from './feature-charts';
+import {OneByTwoLayoutComponent} from '../../../shared/layouts/one-by-two-layout/one-by-two-layout.component';
 
 @Component({
   selector: 'app-feature-widget',
@@ -74,8 +75,6 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
         if (!widgetConfig) {
           return of([]);
         }
-        this.featureTimeThreshold = 1000 * 60 * widgetConfig.options.featureDurationThreshold;
-
         // sprintType: kanban or scrum
         // teamName: "Hygieia Standup Board"
         // sprintType: "kanban"
@@ -119,15 +118,11 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
 
         //return this.featureService.fetchSprint(this.params.componentId, this.params.filterTeamId, this.params.filterProjectId, this.params.agileType);
         return forkJoin(
-          this.featureService.fetchProjects().pipe(catchError(err => of(err))),
-          this.featureService.fetchTeams().pipe(catchError(err => of(err))),
-          this.featureService.fetchSprint(this.params.componentId, this.params.filterTeamId, this.params.filterProjectId, this.params.agileType).pipe(catchError(err => of(err))),
+          this.featureService.fetchSprint(this.params.componentId, this.params.filterTeamId).pipe(catchError(err => of(err))),
           this.featureService.fetchFeatureWip(this.params.componentId, this.params.filterTeamId, this.params.filterProjectId, this.params.estimateMetricType, this.params.agileType).pipe(catchError(err => of(err))),
           this.featureService.fetchAggregateSprintEstimates(this.params.componentId, this.params.filterTeamId, this.params.filterProjectId, this.params.estimateMetricType, this.params.agileType).pipe(catchError(err => of(err))));
-      })).subscribe(([projects, teams, sprint, wip, estimates]) => {
+      })).subscribe(([sprint, wip, estimates]) => {
         // Call methods here to play with data
-        console.log(projects);
-        console.log(teams);
         console.log(sprint);
         console.log(wip);
         console.log(estimates);
@@ -158,6 +153,7 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
 
   // *********************** ITERATION SUMMARY ************************
 
+  // featureSprintDetailRoute from feature service.
   private generateIterationSummary(result: IFeature[]) {
     // const openCount = result.filter(build => this.checkBuildAfterDate(build, today)).length;
     // const wipCount = result.filter(build => this.checkBuildAfterDate(build, bucketOneStartDate)).length;
