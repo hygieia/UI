@@ -44,10 +44,12 @@ import { DeployWidgetComponent } from '../widget_modules/deploy/deploy-widget/de
 import { DeployDetailComponent } from '../widget_modules/deploy/deploy-detail/deploy-detail.component';
 import { OneChartLayoutComponent } from './layouts/one-chart-layout/one-chart-layout.component';
 import { DeployConfigFormComponent } from '../widget_modules/deploy/deploy-config-form/deploy-config-form.component';
-import {RepoConfigFormComponent} from '../widget_modules/repo/repo-config-form/repo-config-form.component';
-import {RepoDetailComponent} from '../widget_modules/repo/repo-detail/repo-detail.component';
-import {RepoWidgetComponent} from '../widget_modules/repo/repo-widget/repo-widget.component';
-import {OneByTwoLayoutComponent} from './layouts/one-by-two-layout/one-by-two-layout.component';
+import { RepoConfigFormComponent } from '../widget_modules/repo/repo-config-form/repo-config-form.component';
+import { RepoDetailComponent } from '../widget_modules/repo/repo-detail/repo-detail.component';
+import { RepoWidgetComponent } from '../widget_modules/repo/repo-widget/repo-widget.component';
+import { OneByTwoLayoutComponent } from './layouts/one-by-two-layout/one-by-two-layout.component';
+import { FeatureConfigFormComponent } from '../widget_modules/feature/feature-config-form/feature-config-form.component';
+import { FeatureWidgetComponent } from '../widget_modules/feature/feature-widget/feature-widget.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +68,8 @@ import {OneByTwoLayoutComponent} from './layouts/one-by-two-layout/one-by-two-la
     DashboardComponent,
     DetailModalComponent,
     DetailModalDirective,
+    FeatureConfigFormComponent,
+    FeatureWidgetComponent,
     FormModalComponent,
     FormModalDirective,
     LayoutComponent,
@@ -105,6 +109,8 @@ import {OneByTwoLayoutComponent} from './layouts/one-by-two-layout/one-by-two-la
     ComboChartComponent,
     ConfirmationModalComponent,
     DetailModalComponent,
+    FeatureConfigFormComponent,
+    FeatureWidgetComponent,
     FormModalComponent,
     GaugeChartComponent,
     LineAndBarChartComponent,

@@ -30,3 +30,8 @@ export interface IClickListItemDeploy extends IClickListItem {
   lastUpdated: number;
   regex: string;
 }
+
+export interface IClickListItemFeature extends IClickListItem {
+  projectName: string;
+  teamName: string;
+}

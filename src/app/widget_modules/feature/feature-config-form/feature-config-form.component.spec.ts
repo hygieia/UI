@@ -1,0 +1,48 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { FeatureConfigFormComponent } from './feature-config-form.component';
+
+describe('FeatureConfigFormComponent', () => {
+  let component: FeatureConfigFormComponent;
+  let fixture: ComponentFixture<FeatureConfigFormComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [ReactiveFormsModule, NgbModule, SharedModule, HttpClientTestingModule],
+      declarations: [ ],
+      providers: [NgbActiveModal]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(FeatureConfigFormComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  // it('should set widgetConfig', () => {
+  //   let widgetConfigData = {
+  //     options: {
+  //       id: 1232,
+  //       buildDurationThreshold: '',
+  //       consecutiveFailureThreshold: '',
+  //     }
+  //   };
+  //   component.widgetConfig = widgetConfigData;
+  //
+  //   widgetConfigData = null;
+  //   component.widgetConfig = widgetConfigData;
+  // });
+
+  // it('should call ngOnInit()', () => {
+  //   component.ngOnInit();
+  // });
+});
