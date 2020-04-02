@@ -2,31 +2,33 @@
   <div class="modal-body">
     <div class="container">
       <div class="form-group">
-        <label class="modal-label" for="buildJob">Build Job</label>
-        <input id="buildJob" type="search" class="form-control" [class.is-invalid]="searchFailed" formControlName="buildJob"
-       [ngbTypeahead]="typeAheadResults" [inputFormatter]="getBuildTitle" [resultFormatter]="getBuildTitle" placeholder="Build Job" required/>
+        <label class="modal-label" for="featureTool">Feature Tool</label>
+        <select id="featureTool" class="form-control" placeholder="Select a List Type" aria-label="featureTool" formControlName="featureTool" ng-model="featureTool" ng-options="hello"></select>
+      </div>
+
+      <div class="form-group">
+        <label class="modal-label" for="projectName">Project Name</label>
+        <input id="projectName" type="search" class="form-control" [class.is-invalid]="searchFailed" formControlName="projectName"
+               [ngbTypeahead]="typeAheadResults" [inputFormatter]="getProjectName" [resultFormatter]="getProjectName" placeholder="Project Name" required/>
         <span *ngIf="searching">searching...</span>
         <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
       </div>
       <div class="form-group">
-        <label class="modal-label" for="buildDurationThreshold">Build Duration Threshold</label>
-        <div class="input-group mb-3">
-          <input id="buildDurationThreshold" type="text" class="form-control" placeholder="Build Duration Threshold" aria-label="Build Duration Threshold"
-            aria-describedby="minutes-label" formControlName="buildDurationThreshold" required>
-          <div class="input-group-append">
-            <span class="input-group-text" id="minutes-label">minutes</span>
-          </div>
-        </div>
+        <label class="modal-label" for="teamName">Team Name</label>
+        <input id="teamName" type="search" class="form-control" [class.is-invalid]="searchFailed" formControlName="teamName"
+               [ngbTypeahead]="typeAheadResults" [inputFormatter]="getTeamName" [resultFormatter]="getTeamName" placeholder="Team Name" required/>
+        <span *ngIf="searching">searching...</span>
+        <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
       </div>
+
       <div class="form-group">
-        <label class="modal-label" for="consecutive-failure-threshold">Alert Takeover Criteria</label>
-        <div class="input-group mb-3">
-          <input id="consecutive-failure-threshold" type="text" class="form-control" placeholder="Alert Takeover Criteria" aria-label="Alert Takeover Criteria"
-            aria-describedby="consecutive-build-fails" formControlName="consecutiveFailureThreshold" required>
-          <div class="input-group-append">
-            <span class="input-group-text" id="consecutive-build-fails">consecutive build fails</span>
-          </div>
-        </div>
+        <label class="modal-label" for="sprintType">Sprint Type</label>
+        <select id="sprintType" class="form-control" placeholder="Select a sprint type" aria-label="sprintType" formControlName="sprintType" ng-model="sprintType" ng-options="hello"></select>
+      </div>
+
+      <div class="form-group">
+        <label class="modal-label" for="listType">List Type</label>
+        <select id="listType" class="form-control" placeholder="Select a listType" aria-label="listType" formControlName="listType" ng-model="listType" ng-options="hello"></select>
       </div>
     </div>
   </div>
@@ -34,7 +36,7 @@
     <div class="container">
       <div class="row">
         <div class="col text-center">
-          <button [disabled]="!buildConfigForm.valid">
+          <button [disabled]="!featureConfigForm.valid">
             Save
           </button>
         </div>

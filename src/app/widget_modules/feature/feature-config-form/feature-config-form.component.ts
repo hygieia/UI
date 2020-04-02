@@ -21,22 +21,64 @@ export class FeatureConfigFormComponent implements OnInit {
   searchFailed = false;
   typeAheadResults: (text$: Observable<string>) => Observable<any>;
 
-  getBuildTitle = (collectorItem: any) => {
+  public featureToolTypes;
+  public sprintTypes;
+  public featureTypes;
+
+  getProjectName = (collectorItem: any) => {
     if (!collectorItem) {
       return '';
     }
-    const description = (collectorItem.description as string);
-    return collectorItem.niceName + ' : ' + description;
-  }
+    const name = (collectorItem.projectName as string);
+    return name;
+  };
 
+  getTeamName = (collectorItem) => {
+    if (!collectorItem) {
+      return '';
+    }
+    const description = (collectorItem.options.teamName as string);
+    return description;
+  };
+
+  // Agile Content Tool Type:
+  //   VersionOne
+  // Jira
+  //
+  // Project Name:
+  //   Drop down
+  //
+  // Team Name: drop down
+  //
+  // Sprint Type:
+  //   Kanban
+  // Scrum
+  // Both
+  //
+  // List Feature Type:
+  //   Epics
+  // Issues
+
+  // Agile Content Tool Type: options.featureTool
+  // Project Name: options.projectName
+  // Team Name: options.teamName
+  // Sprint Type: options.showStatus = true or false for kanban, scrum OR sprintType
+  // Feature Type: options.listType
   @Input()
   set widgetConfig(widgetConfig: any) {
     if (!widgetConfig) {
       return;
     }
+    console.log(widgetConfig.options);
     this.widgetConfigId = widgetConfig.options.id;
-    this.featureConfigForm.get('buildDurationThreshold').setValue(widgetConfig.options.buildDurationThreshold);
-    this.featureConfigForm.get('consecutiveFailureThreshold').setValue(widgetConfig.options.consecutiveFailureThreshold);
+    this.featureConfigForm.get('featureTool').setValue(widgetConfig.options.featureTool);
+    this.featureConfigForm.get('projectName').setValue(widgetConfig.options.projectName);
+    this.featureConfigForm.get('teamName').setValue(widgetConfig.options.teamName);
+    this.featureConfigForm.get('sprintType').setValue(widgetConfig.options.showStatus);
+    this.featureConfigForm.get('listType').setValue(widgetConfig.options.listType);
+    this.featureToolTypes = ['Jira', 'VersionOne'];
+    this.featureTypes = ['epics','issues'];
+    this.sprintTypes = ['kanban','scrum','both'];
   }
 
   constructor(
@@ -56,7 +98,7 @@ export class FeatureConfigFormComponent implements OnInit {
         tap(() => this.searching = true),
         switchMap(term => {
           return term.length < 2 ? of([]) :
-            this.collectorService.searchItems('build', term).pipe(
+            this.collectorService.searchItems('feature', term).pipe(
               tap(() => this.searchFailed = false),
               catchError(() => {
                 this.searchFailed = true;
@@ -66,52 +108,75 @@ export class FeatureConfigFormComponent implements OnInit {
         tap(() => this.searching = false)
       );
 
-    this.loadSavedBuildJob();
+    this.loadSavedFeatureDetails();
     this.getDashboardComponent();
   }
 
   private createForm() {
     this.featureConfigForm = this.formBuilder.group({
-      buildDurationThreshold: ['', Validators.required],
-      consecutiveFailureThreshold: '',
-      buildJob: ''
+      featureTool: '',
+      projectName: '',
+      teamName: '',
+      sprintType: '',
+      listType: ''
     });
   }
 
+  // id: '5b2aa4232dbb6e05ecb9b55a',
+  // name: 'feature',
+  // componentId: '59f88f5e6a3cf205f312c62e',
+  // options: {
+  //   id: 'feature0',
+  //   featureTool: 'Jira',
+  //   teamName: 'My Team',
+  //   teamId: '16910',
+  //   projectName: 'MY ART',
+  //   projectId: '138300',
+  //   showStatus: {
+  //     kanban: true,
+  //     scrum: false
+  //   },
+  //   estimateMetricType: 'storypoints',
+  //   sprintType: 'kanban',
+  //   listType: 'issues'
   private submitForm() {
     const newConfig = {
-      name: 'build',
+      name: 'feature',
+      componentId: this.componentId,
       options: {
         id: this.widgetConfigId,
-        buildDurationThreshold: +this.featureConfigForm.value.buildDurationThreshold,
-        consecutiveFailureThreshold: +this.featureConfigForm.value.consecutiveFailureThreshold
+        featureTool: this.featureConfigForm.value.featureTool,
+        projectName: this.featureConfigForm.value.projectName,
+        teamName: this.featureConfigForm.value.teamName,
+        sprintType: this.featureConfigForm.value.sprintType,
+        listType: this.featureConfigForm.value.listType
+
       },
-      componentId: this.componentId,
-      collectorItemId: this.featureConfigForm.value.buildJob.id
     };
     this.activeModal.close(newConfig);
   }
 
-  private loadSavedBuildJob() {
+  private loadSavedFeatureDetails() {
     this.dashboardService.dashboardConfig$.pipe(take(1),
       map(dashboard => {
-        const buildCollector = dashboard.application.components[0].collectorItems.Build;
-        const savedCollectorBuildJob = buildCollector ? buildCollector[0].description : null;
-
-        if (savedCollectorBuildJob) {
-          const buildId = buildCollector[0].id;
-          return buildId;
+        const featureCollector = dashboard.application.components[0].collectorItems.AgileTool;
+        if (featureCollector[0].id) {
+          return featureCollector[0].id;
         }
         return null;
       }),
-      switchMap(buildId => {
-        if (buildId) {
-          return this.collectorService.getItemsById(buildId);
+      switchMap(featureId => {
+        if (featureId) {
+          return this.collectorService.getItemsById(featureId);
         }
         return of(null);
       })).subscribe(collectorData => {
-        this.featureConfigForm.get('buildJob').setValue(collectorData);
-      });
+        this.featureConfigForm.get('featureTool').setValue(collectorData);
+        this.featureConfigForm.get('projectName').setValue(collectorData);
+        this.featureConfigForm.get('teamName').setValue(collectorData);
+        this.featureConfigForm.get('sprintType').setValue(collectorData);
+        this.featureConfigForm.get('listType').setValue(collectorData);
+    });
   }
 
   private getDashboardComponent() {

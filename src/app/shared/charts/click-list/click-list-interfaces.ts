@@ -21,6 +21,7 @@ export interface IClickListItem {
   statusText: string;
   title: string;
   subtitles: any[];
+  url: string;
 }
 
 export interface IClickListItemDeploy extends IClickListItem {
@@ -32,6 +33,16 @@ export interface IClickListItemDeploy extends IClickListItem {
 }
 
 export interface IClickListItemFeature extends IClickListItem {
-  projectName: string;
-  teamName: string;
+  sEpicName: string;
+  sEpicUrl: string;
+  sEstimate: string;
+  sEpicNumber: string;
+  sNumber: string;
+  sName: string;
+  sUrl: string;
+  name: string;
+  url: string;
+  number: string;
+  type: string;
+  time: string;
 }

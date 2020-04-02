@@ -5,6 +5,8 @@ export interface IFeatureResponse {
 
 export interface IFeature {
   id: string;
-  collectorItemId: string;
+  openEstimate: number;
+  inProgressEstimate: number;
+  completeEstimate: number;
 }
 

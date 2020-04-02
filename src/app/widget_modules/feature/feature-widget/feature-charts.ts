@@ -34,7 +34,7 @@ export let FEATURE_CHARTS: IChart[] = [
     colorScheme: 'vivid'
   },
   {
-    title: 'Epics in Progress',
+    title: 'Epics/Issues in Progress and Points',
     component: ClickListComponent,
     data: [],
     xAxisLabel: '',

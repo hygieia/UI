@@ -10,8 +10,10 @@ import {
 import {ActivatedRoute} from '@angular/router';
 import {forkJoin, of, Subscription} from 'rxjs';
 import {catchError, distinctUntilChanged, startWith, switchMap} from 'rxjs/operators';
-import {IClickListData, IClickListItemFeature} from 'src/app/shared/charts/click-list/click-list-interfaces';
-import {DashStatus} from 'src/app/shared/dash-status/DashStatus';
+import {
+  IClickListData,
+  IClickListItem, IClickListItemFeature
+} from 'src/app/shared/charts/click-list/click-list-interfaces';
 import {DashboardService} from 'src/app/shared/dashboard.service';
 import {LayoutDirective} from 'src/app/shared/layouts/layout.directive';
 import {TwoByTwoLayoutComponent} from 'src/app/shared/layouts/two-by-two-layout/two-by-two-layout.component';
@@ -19,7 +21,7 @@ import {WidgetComponent} from 'src/app/shared/widget/widget.component';
 import {FeatureService} from '../feature.service';
 import {IFeature} from '../interfaces';
 import {FEATURE_CHARTS} from './feature-charts';
-import {OneByTwoLayoutComponent} from '../../../shared/layouts/one-by-two-layout/one-by-two-layout.component';
+import {FeatureDetailComponent} from '../feature-detail/feature-detail.component';
 
 @Component({
   selector: 'app-feature-widget',
@@ -28,11 +30,7 @@ import {OneByTwoLayoutComponent} from '../../../shared/layouts/one-by-two-layout
 })
 export class FeatureWidgetComponent extends WidgetComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  private featureTimeThreshold: number;
-  // Default build time threshold
-  private readonly BUILD_TIME_THRESHOLD = 900000;
   private params;
-
   // Reference to the subscription used to refresh the widget
   private intervalRefreshSubscription: Subscription;
 
@@ -75,6 +73,8 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
         if (!widgetConfig) {
           return of([]);
         }
+
+        // TODO: DELETE LATER
         // sprintType: kanban or scrum
         // teamName: "Hygieia Standup Board"
         // sprintType: "kanban"
@@ -91,41 +91,45 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
           featureTool: widgetConfig.options.featureTool,
           teamName: widgetConfig.options.teamName,
           projectName: widgetConfig.options.projectName,
-          componentId: widgetConfig.componentId,
-          filterTeamId: widgetConfig.options.teamId,
-          filterProjectId: widgetConfig.options.projectId,
+          component: widgetConfig.componentId,
+          teamId: widgetConfig.options.teamId,
+          projectId: widgetConfig.options.projectId,
           agileType: widgetConfig.options.sprintType,
           listType: widgetConfig.options.listType,
           estimateMetricType: widgetConfig.options.estimateMetricType
         };
-        // Part 1 of Feature widget (Title, Project name, and Team name)
-        // const featureData = {
-        //   status: DashStatus.PASS,
-        //   statusText: '',
-        //   title: this.params.featureTool,
-        //   subtitles: [],
-        //   projectName: this.params.projectName,
-        //   teamName: this.params.teamName,
-        // } as IClickListItemFeature;
-        //
-        // this.charts[0].data = {
-        //   items: featureData,
-        //   clickableContent: null,
-        //   clickableHeader: null
-        // } as IClickListData;
 
-        console.log(widgetConfig);
+        let items: IClickListItem[]= [];
+        items[0] = {
+          title: 'Feature Tool: ' + this.params.featureTool
+        } as IClickListItem;
+
+        items[1] = {
+          title: 'Project Name: ' + this.params.projectName
+        } as IClickListItem;
+
+        items[2] = {
+          title: 'Team Name: ' + this.params.teamName
+        } as IClickListItem;
+
+        // Part 1 of Feature widget (Title, Project name, and Team name)
+        this.charts[0].data = {
+          items: items,
+          clickableContent: null,
+          clickableHeader: null
+        } as IClickListData;
 
         //return this.featureService.fetchSprint(this.params.componentId, this.params.filterTeamId, this.params.filterProjectId, this.params.agileType);
         return forkJoin(
-          this.featureService.fetchSprint(this.params.componentId, this.params.filterTeamId).pipe(catchError(err => of(err))),
-          this.featureService.fetchFeatureWip(this.params.componentId, this.params.filterTeamId, this.params.filterProjectId, this.params.estimateMetricType, this.params.agileType).pipe(catchError(err => of(err))),
-          this.featureService.fetchAggregateSprintEstimates(this.params.componentId, this.params.filterTeamId, this.params.filterProjectId, this.params.estimateMetricType, this.params.agileType).pipe(catchError(err => of(err))));
-      })).subscribe(([sprint, wip, estimates]) => {
-        // Call methods here to play with data
-        console.log(sprint);
-        console.log(wip);
-        console.log(estimates);
+          this.featureService.fetchFeatureWip(this.params.component, this.params.teamId, this.params.projectId, this.params.estimateMetricType, this.params.agileType).pipe(catchError(err => of(err))),
+          this.featureService.fetchAggregateSprintEstimates(this.params.component, this.params.teamId, this.params.projectId, this.params.estimateMetricType, this.params.agileType).pipe(catchError(err => of(err))));
+      })).subscribe(([wip, estimates]) => {
+        if (this.params.listType === 'epics') {
+          this.processFeatureWipResponse(wip as IClickListItem, 'epics');
+        } else {
+          this.processFeatureWipResponse(wip as IClickListItem, 'issues');
+        }
+        this.generateIterationSummary(estimates);
 
         super.loadComponent(this.childLayoutTag);
       });
@@ -138,33 +142,50 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
     }
   }
 
-  // *********************** MAIN DETAILS *****************************
-  // private generateTitleDetails(result: IFeature[]) {
-  //   const featureData = {
-  //     status: deployStatus,
-  //     statusText: deployStatusText,
-  //     title: this.params.,
-  //     subtitles: [],
-  //     projectName: ,
-  //     teamName: ,
-  //   } as IClickListItemFeature;
-  //
-  // }
-
   // *********************** ITERATION SUMMARY ************************
 
-  // featureSprintDetailRoute from feature service.
-  private generateIterationSummary(result: IFeature[]) {
-    // const openCount = result.filter(build => this.checkBuildAfterDate(build, today)).length;
-    // const wipCount = result.filter(build => this.checkBuildAfterDate(build, bucketOneStartDate)).length;
-
-    // this.charts[3].data[0].value = openCount;
-    // this.charts[3].data[1].value = wipCount;
+  // Displays Sprint information for Open, WIP, Done
+  private generateIterationSummary(result: IFeature) {
+    this.charts[1].data[0].value = result.openEstimate;
+    this.charts[1].data[1].value = result.inProgressEstimate;
+    this.charts[1].data[2].value = result.completeEstimate;
   }
 
-  //// *********************** HELPER UTILS *********************
+  // **************************** EPICS/ISSUES *******************************
 
-  // private checkFeatureStatus(feature: IFeature, status: string): boolean {
-  //   return build.buildStatus === status;
-  // }
+  private processFeatureWipResponse(data, issueOrEpic: string) {
+    let issueOrEpicCollection: IClickListItemFeature[] = [];
+
+    data.forEach(curr => {
+      issueOrEpicCollection.push(curr);
+    });
+
+    const items = issueOrEpicCollection.map(curr => {
+      if (issueOrEpic === 'epics') {
+        return {
+          title: curr.sEpicName,
+          name: curr.sEpicName,
+          url: curr.sEpicUrl,
+          number: curr.sEpicNumber,
+          type: 'Epic',
+          time: curr.sEstimate
+        } as IClickListItemFeature;
+      } else {
+        return {
+          title: curr.sName,
+          name: curr.sName,
+          url: curr.sUrl,
+          number: curr.sNumber,
+          type: 'Issue',
+          time: curr.sEstimate
+        } as IClickListItemFeature;
+      }
+    });
+
+    this.charts[2].data = {
+      items: items,
+      clickableContent: FeatureDetailComponent,
+      clickableHeader: null
+    } as IClickListData;
+  }
 }
