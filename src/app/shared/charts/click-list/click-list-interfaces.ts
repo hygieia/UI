@@ -38,11 +38,15 @@ export interface IClickListItemFeature extends IClickListItem {
   sEstimate: string;
   sEpicNumber: string;
   sNumber: string;
+  sEstimateTime: string;
   sName: string;
+  sStatus: string;
   sUrl: string;
+  progressStatus: string;
   name: string;
   url: string;
   number: string;
   type: string;
   time: string;
+  changeDate: string;
 }

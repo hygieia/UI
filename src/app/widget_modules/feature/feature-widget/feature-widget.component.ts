@@ -74,30 +74,23 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
           return of([]);
         }
 
-        // TODO: DELETE LATER
-        // sprintType: kanban or scrum
-        // teamName: "Hygieia Standup Board"
-        // sprintType: "kanban"
-        // teamId: "27480"
-        // featureTool: "Jira"
-        // showStatus: {kanban: true, scrum: false}
-        // id: "feature0"
-        // projectName: "Pipeline ART"
-        // projectId: "138300"
-        // estimateMetricType: "storypoints"
-        // listType: "epics"
         this.params = {
           id: widgetConfig.options.id,
           featureTool: widgetConfig.options.featureTool,
-          teamName: widgetConfig.options.teamName,
-          projectName: widgetConfig.options.projectName,
+          teamName: widgetConfig.options.teamName.options.teamName,
+          projectName: widgetConfig.options.projectName.options.projectName,
           component: widgetConfig.componentId,
-          teamId: widgetConfig.options.teamId,
-          projectId: widgetConfig.options.projectId,
+          teamId: widgetConfig.options.teamName.options.teamId,
+          projectId: widgetConfig.options.projectName.options.projectId,
           agileType: widgetConfig.options.sprintType,
           listType: widgetConfig.options.listType,
-          estimateMetricType: widgetConfig.options.estimateMetricType
         };
+
+        return forkJoin(
+          this.featureService.fetchFeatureWip(this.params.component, this.params.teamId, this.params.projectId, this.params.agileType).pipe(catchError(err => of(err))),
+          this.featureService.fetchAggregateSprintEstimates(this.params.component, this.params.teamId, this.params.projectId, this.params.agileType).pipe(catchError(err => of(err))),
+          this.featureService.fetchIterations(this.params.component, this.params.teamId, this.params.projectId, this.params.agileType).pipe(catchError(err => of(err))));
+      })).subscribe(([wip, estimates, iterations]) => {
 
         let items: IClickListItem[]= [];
         items[0] = {
@@ -112,25 +105,30 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
           title: 'Team Name: ' + this.params.teamName
         } as IClickListItem;
 
-        // Part 1 of Feature widget (Title, Project name, and Team name)
+        if (this.params.listType === 'epics') {
+          this.processFeatureWipResponse(wip as IClickListItem, 'epics');
+        } else {
+          items[3] = {
+            title: 'Backlog items: ' + iterations.filter(curr => curr.sStatus === 'Backlog').length
+          } as IClickListItem;
+
+          items[4] = {
+            title: 'In Progress items: ' + iterations.filter(curr => curr.sStatus === 'In Progress').length
+          } as IClickListItem;
+
+          items[5] = {
+            title: 'Done items: ' + iterations.filter(curr => curr.sStatus === 'Done').length
+          } as IClickListItem;
+
+          this.processFeatureWipResponse(iterations as IClickListItemFeature, 'issues');
+        }
         this.charts[0].data = {
           items: items,
           clickableContent: null,
           clickableHeader: null
         } as IClickListData;
 
-        //return this.featureService.fetchSprint(this.params.componentId, this.params.filterTeamId, this.params.filterProjectId, this.params.agileType);
-        return forkJoin(
-          this.featureService.fetchFeatureWip(this.params.component, this.params.teamId, this.params.projectId, this.params.estimateMetricType, this.params.agileType).pipe(catchError(err => of(err))),
-          this.featureService.fetchAggregateSprintEstimates(this.params.component, this.params.teamId, this.params.projectId, this.params.estimateMetricType, this.params.agileType).pipe(catchError(err => of(err))));
-      })).subscribe(([wip, estimates]) => {
-        if (this.params.listType === 'epics') {
-          this.processFeatureWipResponse(wip as IClickListItem, 'epics');
-        } else {
-          this.processFeatureWipResponse(wip as IClickListItem, 'issues');
-        }
         this.generateIterationSummary(estimates);
-
         super.loadComponent(this.childLayoutTag);
       });
   }
@@ -153,12 +151,19 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
 
   // **************************** EPICS/ISSUES *******************************
 
+  // Displays epics or issues
   private processFeatureWipResponse(data, issueOrEpic: string) {
     let issueOrEpicCollection: IClickListItemFeature[] = [];
 
-    data.forEach(curr => {
-      issueOrEpicCollection.push(curr);
-    });
+    if (issueOrEpic === 'issues') {
+      issueOrEpicCollection = data.sort((a: IClickListItemFeature, b: IClickListItemFeature): number => {
+        return a.changeDate > b.changeDate ? 1 : -1;
+      }).reverse().slice(0,10);
+    } else {
+      data.forEach(curr => {
+        issueOrEpicCollection.push(curr);
+      });
+    }
 
     const items = issueOrEpicCollection.map(curr => {
       if (issueOrEpic === 'epics') {
@@ -167,17 +172,20 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
           name: curr.sEpicName,
           url: curr.sEpicUrl,
           number: curr.sEpicNumber,
+          progressStatus: '-',
           type: 'Epic',
           time: curr.sEstimate
         } as IClickListItemFeature;
       } else {
+        const regexText = curr.changeDate.match(new RegExp('^([^T]*);*'))[0];
         return {
-          title: curr.sName,
+          title: curr.sName + ': ' + regexText,
           name: curr.sName,
           url: curr.sUrl,
           number: curr.sNumber,
+          progressStatus: curr.sStatus,
           type: 'Issue',
-          time: curr.sEstimate
+          time: curr.sEstimateTime
         } as IClickListItemFeature;
       }
     });
