@@ -28,7 +28,7 @@ export class FeatureConfigFormComponent implements OnInit {
     const projectName = (collectorItem.options.projectName as string);
     return projectName;
 
-  };
+  }
 
   getTeamName = (collectorItem) => {
     if (!collectorItem) {
@@ -36,7 +36,7 @@ export class FeatureConfigFormComponent implements OnInit {
     }
     const teamName = (collectorItem.options.teamName as string);
     return teamName;
-  };
+  }
 
   @Input()
   set widgetConfig(widgetConfig: any) {

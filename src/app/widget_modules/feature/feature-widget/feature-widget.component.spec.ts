@@ -5,66 +5,28 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { from, Observable, of, ReplaySubject } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { DashboardService } from 'src/app/shared/dashboard.service';
 import { SharedModule } from 'src/app/shared/shared.module';
-
-import { GET_DASHBOARD_MOCK, POST_DASHBOARD_MOCK } from '../../../shared/dashboard.service.mockdata';
 import { FeatureService } from '../feature.service';
 import { IFeature } from '../interfaces';
 import { FeatureWidgetComponent } from './feature-widget.component';
 
 class MockFeatureService {
+  mockFeatureData = {
+    result: [
+      {
+        id: 'id',
+        openEstimate: 1,
+        inProgressEstimate: 2,
+        completeEstimate: 3,
+      },
+    ],
+  };
 
-  // mockBuildData = {
-  //   result: [
-  //     {
-  //       id: '5c8a88ceaa8ebb3c1bfd1391',
-  //       collectorItemId: '5b84328d92678d061457d5f1',
-  //       timestamp: 1552583719241,
-  //       number: '696',
-  //       buildUrl: 'https://jenkins.com',
-  //       startTime: 1552582765454,
-  //       endTime: 1552583719091,
-  //       duration: 953637,
-  //       buildStatus: 'Success',
-  //       codeRepos: [
-  //         {
-  //           url: 'https://github.com/org/repo',
-  //           branch: 'master',
-  //           type: 'GIT'
-  //         }
-  //       ],
-  //       sourceChangeSet: []
-  //     },
-  //   ],
-  //   lastUpdated: 1553613455230
-  // };
-
-  // fetchDetails(): Observable<IFeature[]> {
-  //   return of(this.mockFeatureData.result);
-  // }
-}
-
-class MockDashboardService {
-  private dashboardSubject = new ReplaySubject<any>(1);
-
-  public dashboardConfig$ = this.dashboardSubject.asObservable();
-  public dashboardRefresh$ = from([1, 2, 3]);
-
-  loadDashboard(dashboardId: string) {
-    of(GET_DASHBOARD_MOCK).subscribe(res => this.dashboardSubject.next(res));
+  fetchDetails(): Observable<IFeature[]> {
+    return of(this.mockFeatureData.result);
   }
-
-  upsertWidget(dashboardId: string, widgetConfig: any) {
-    return of(POST_DASHBOARD_MOCK);
-  }
-
-  upsertLocally(newComponent: any, newConfig: any) {
-    of(GET_DASHBOARD_MOCK).subscribe(dashboard => this.dashboardSubject.next(dashboard));
-  }
-
-  clearDashboard() {}
 }
 
 @NgModule({
@@ -81,11 +43,17 @@ describe('FeatureWidgetComponent', () => {
   let modalService: NgbModal;
   let fixture: ComponentFixture<FeatureWidgetComponent>;
 
+  const IFeatureTest = {
+    id: '123',
+    openEstimate: 1,
+    inProgressEstimate: 2,
+    completeEstimate: 3
+  } as IFeature;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       providers: [
-        { provide: FeatureService, useClass: MockFeatureService },
-        { provide: DashboardService, useClass: MockDashboardService}
+        { provide: FeatureService, useClass: MockFeatureService }
       ],
       imports: [
         TestModule, HttpClientTestingModule, SharedModule, CommonModule, BrowserAnimationsModule, RouterModule.forRoot([])
@@ -106,6 +74,81 @@ describe('FeatureWidgetComponent', () => {
     fixture.detectChanges();
     expect(component).toBeTruthy();
     expect(featureService).toBeTruthy();
+    expect(dashboardService).toBeTruthy();
+    expect(modalService).toBeTruthy();
+    expect(fixture).toBeTruthy();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(FeatureWidgetComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should generateIterationSummary', () => {
+    component.generateIterationSummary(IFeatureTest);
+  });
+
+  it('should generateFeatureSummary with issues', () => {
+    const params = {
+      listType: 'issues',
+      featureTool: 'featureTool',
+      projectName: 'projectName',
+      teamName: 'teamName'
+    };
+
+    const iterations = [
+      {
+        sName: 'name',
+        changeDate: 'date',
+        sUrl: 'url',
+        sNumber: 'num',
+        sEstimateTime: 'time',
+        sStatus: 'Backlog',
+      },
+      {
+        sStatus: 'In Progress',
+        changeDate: 'date',
+        sName: 'name',
+        sUrl: 'url',
+        sNumber: 'num',
+        sEstimateTime: 'time',
+      },
+      {
+        sStatus: 'Done',
+        changeDate: 'date',
+        sName: 'name',
+        sUrl: 'url',
+        sNumber: 'num',
+        sEstimateTime: 'time',
+      }];
+
+    component.generateFeatureSummary(iterations, params);
+  });
+
+  it('should generateFeatureSummary with epics', () => {
+    const params = {
+      listType: 'epics',
+      featureTool: 'featureTool',
+      projectName: 'projectName',
+      teamName: 'teamName'
+    };
+
+    const wip = [
+      {
+        sEpicName: 'name',
+        sEpicUrl: 'url',
+        sEpicNumber: 'num',
+        sEstimate: 'time',
+      },
+      {
+        sEpicName: 'name',
+        sEpicUrl: 'url',
+        sEpicNumber: 'num',
+        sEstimate: 'time',
+      }];
+
+    component.generateFeatureSummary(wip, params);
   });
 });
 

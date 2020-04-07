@@ -87,14 +87,17 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
         };
 
         return forkJoin(
-          this.featureService.fetchFeatureWip(this.params.component, this.params.teamId, this.params.projectId, this.params.agileType).pipe(catchError(err => of(err))),
-          this.featureService.fetchAggregateSprintEstimates(this.params.component, this.params.teamId, this.params.projectId, this.params.agileType).pipe(catchError(err => of(err))),
-          this.featureService.fetchIterations(this.params.component, this.params.teamId, this.params.projectId, this.params.agileType).pipe(catchError(err => of(err))));
+          this.featureService.fetchFeatureWip(this.params.component, this.params.teamId, this.params.projectId,
+            this.params.agileType).pipe(catchError(err => of(err))),
+          this.featureService.fetchAggregateSprintEstimates(this.params.component, this.params.teamId,
+            this.params.projectId, this.params.agileType).pipe(catchError(err => of(err))),
+          this.featureService.fetchIterations(this.params.component, this.params.teamId, this.params.projectId,
+            this.params.agileType).pipe(catchError(err => of(err))));
       })).subscribe(([wip, estimates, iterations]) => {
         if (this.params.listType === 'epics') {
           this.generateFeatureSummary(wip, this.params);
         } else {
-          this.generateFeatureSummary(iterations, this.params)
+          this.generateFeatureSummary(iterations, this.params);
         }
         this.generateIterationSummary(estimates);
         super.loadComponent(this.childLayoutTag);
@@ -111,7 +114,7 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
   // ********************** FEATURE SUMMARY ***************************
 
   generateFeatureSummary(content, params) {
-    let items: IClickListItem[]= [];
+    const items: IClickListItem[] = [];
     items[0] = {
       title: 'Feature Tool: ' + params.featureTool
     } as IClickListItem;
@@ -140,7 +143,7 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
 
     this.processFeatureWipResponse(content as IClickListItemFeature, params.listType);
     this.charts[0].data = {
-      items: items,
+      items,
       clickableContent: null,
       clickableHeader: null
     } as IClickListData;
@@ -164,7 +167,7 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
     if (issueOrEpic === 'issues') {
       issueOrEpicCollection = data.sort((a: IClickListItemFeature, b: IClickListItemFeature): number => {
         return a.changeDate > b.changeDate ? 1 : -1;
-      }).reverse().slice(0,10);
+      }).reverse().slice(0, 10);
     } else {
       data.forEach(curr => {
         issueOrEpicCollection.push(curr);
@@ -197,7 +200,7 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
     });
 
     this.charts[2].data = {
-      items: items,
+      items,
       clickableContent: FeatureDetailComponent,
       clickableHeader: null
     } as IClickListData;

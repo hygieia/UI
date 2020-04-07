@@ -29,7 +29,7 @@ describe('FeatureConfigFormComponent', () => {
   });
 
   it('should getProjectName and getTeamName', () => {
-    let collectorItem = {
+    const collectorItem = {
       options: {
         id: 123,
         featureTool: 'featureTool',
@@ -47,7 +47,7 @@ describe('FeatureConfigFormComponent', () => {
   });
 
   it('should set widgetConfig', () => {
-    let widgetConfigData = {
+    const widgetConfigData = {
       options: {
         id: 123,
         featureTool: 'featureTool',
