@@ -1,7 +1,6 @@
 import { ClickListComponent } from 'src/app/shared/charts/click-list/click-list.component';
 import { NumberCardChartComponent } from 'src/app/shared/charts/number-card-chart/number-card-chart.component';
 import { IChart } from 'src/app/shared/interfaces';
-import {ChartComponent} from '../../../shared/charts/chart/chart.component';
 
 export let FEATURE_CHARTS: IChart[] = [
   {
