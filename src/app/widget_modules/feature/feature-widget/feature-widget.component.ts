@@ -91,7 +91,11 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
           this.featureService.fetchAggregateSprintEstimates(this.params.component, this.params.teamId, this.params.projectId, this.params.agileType).pipe(catchError(err => of(err))),
           this.featureService.fetchIterations(this.params.component, this.params.teamId, this.params.projectId, this.params.agileType).pipe(catchError(err => of(err))));
       })).subscribe(([wip, estimates, iterations]) => {
-        this.generateFeatureSummary(wip, iterations);
+        if (this.params.listType === 'epics') {
+          this.generateFeatureSummary(wip, this.params);
+        } else {
+          this.generateFeatureSummary(iterations, this.params)
+        }
         this.generateIterationSummary(estimates);
         super.loadComponent(this.childLayoutTag);
       });
@@ -106,37 +110,35 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
 
   // ********************** FEATURE SUMMARY ***************************
 
-  generateFeatureSummary(wip, iterations) {
+  generateFeatureSummary(content, params) {
     let items: IClickListItem[]= [];
     items[0] = {
-      title: 'Feature Tool: ' + this.params.featureTool
+      title: 'Feature Tool: ' + params.featureTool
     } as IClickListItem;
 
     items[1] = {
-      title: 'Project Name: ' + this.params.projectName
+      title: 'Project Name: ' + params.projectName
     } as IClickListItem;
 
     items[2] = {
-      title: 'Team Name: ' + this.params.teamName
+      title: 'Team Name: ' + params.teamName
     } as IClickListItem;
 
-    if (this.params.listType === 'epics') {
-      this.processFeatureWipResponse(wip as IClickListItem, 'epics');
-    } else {
+    if (params.listType === 'issues') {
       items[3] = {
-        title: 'Backlog items: ' + iterations.filter(curr => curr.sStatus === 'Backlog').length
+        title: 'Backlog items: ' + content.filter(curr => curr.sStatus === 'Backlog').length
       } as IClickListItem;
 
       items[4] = {
-        title: 'In Progress items: ' + iterations.filter(curr => curr.sStatus === 'In Progress').length
+        title: 'In Progress items: ' + content.filter(curr => curr.sStatus === 'In Progress').length
       } as IClickListItem;
 
       items[5] = {
-        title: 'Done items: ' + iterations.filter(curr => curr.sStatus === 'Done').length
+        title: 'Done items: ' + content.filter(curr => curr.sStatus === 'Done').length
       } as IClickListItem;
-
-      this.processFeatureWipResponse(iterations as IClickListItemFeature, 'issues');
     }
+
+    this.processFeatureWipResponse(content as IClickListItemFeature, params.listType);
     this.charts[0].data = {
       items: items,
       clickableContent: null,
@@ -156,7 +158,7 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
   // **************************** EPICS/ISSUES *******************************
 
   // Displays epics or issues
-  processFeatureWipResponse(data, issueOrEpic: string) {
+  private processFeatureWipResponse(data, issueOrEpic: string) {
     let issueOrEpicCollection: IClickListItemFeature[] = [];
 
     if (issueOrEpic === 'issues') {

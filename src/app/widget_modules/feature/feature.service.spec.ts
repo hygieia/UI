@@ -1,7 +1,6 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { inject, TestBed } from '@angular/core/testing';
 import { FeatureService } from './feature.service';
-import {RepoService} from '../repo/repo.service';
 
 describe('FeatureService', () => {
   beforeEach(() => TestBed.configureTestingModule({

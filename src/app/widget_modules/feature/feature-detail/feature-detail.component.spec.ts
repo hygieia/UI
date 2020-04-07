@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FeatureDetailComponent } from './feature-detail.component';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
-describe('DeployDetailComponent', () => {
+describe('FeatureDetailComponent', () => {
   let component: FeatureDetailComponent;
   let fixture: ComponentFixture<FeatureDetailComponent>;
 

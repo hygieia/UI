@@ -53,14 +53,10 @@ describe('FeatureConfigFormComponent', () => {
         featureTool: 'featureTool',
         sprintType: 'sprint',
         listType: 'listType',
-        projectName: 'project',
-        teamName: 'team'
       }
     };
     component.widgetConfig = widgetConfigData;
-
-    widgetConfigData = null;
-    component.widgetConfig = widgetConfigData;
+    component.widgetConfig = null;
   });
 
   it('should call ngOnInit()', () => {
