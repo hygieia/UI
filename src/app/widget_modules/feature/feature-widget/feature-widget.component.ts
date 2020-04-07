@@ -91,43 +91,7 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
           this.featureService.fetchAggregateSprintEstimates(this.params.component, this.params.teamId, this.params.projectId, this.params.agileType).pipe(catchError(err => of(err))),
           this.featureService.fetchIterations(this.params.component, this.params.teamId, this.params.projectId, this.params.agileType).pipe(catchError(err => of(err))));
       })).subscribe(([wip, estimates, iterations]) => {
-
-        let items: IClickListItem[]= [];
-        items[0] = {
-          title: 'Feature Tool: ' + this.params.featureTool
-        } as IClickListItem;
-
-        items[1] = {
-          title: 'Project Name: ' + this.params.projectName
-        } as IClickListItem;
-
-        items[2] = {
-          title: 'Team Name: ' + this.params.teamName
-        } as IClickListItem;
-
-        if (this.params.listType === 'epics') {
-          this.processFeatureWipResponse(wip as IClickListItem, 'epics');
-        } else {
-          items[3] = {
-            title: 'Backlog items: ' + iterations.filter(curr => curr.sStatus === 'Backlog').length
-          } as IClickListItem;
-
-          items[4] = {
-            title: 'In Progress items: ' + iterations.filter(curr => curr.sStatus === 'In Progress').length
-          } as IClickListItem;
-
-          items[5] = {
-            title: 'Done items: ' + iterations.filter(curr => curr.sStatus === 'Done').length
-          } as IClickListItem;
-
-          this.processFeatureWipResponse(iterations as IClickListItemFeature, 'issues');
-        }
-        this.charts[0].data = {
-          items: items,
-          clickableContent: null,
-          clickableHeader: null
-        } as IClickListData;
-
+        this.generateFeatureSummary(wip, iterations);
         this.generateIterationSummary(estimates);
         super.loadComponent(this.childLayoutTag);
       });
@@ -140,10 +104,50 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
     }
   }
 
+  // ********************** FEATURE SUMMARY ***************************
+
+  generateFeatureSummary(wip, iterations) {
+    let items: IClickListItem[]= [];
+    items[0] = {
+      title: 'Feature Tool: ' + this.params.featureTool
+    } as IClickListItem;
+
+    items[1] = {
+      title: 'Project Name: ' + this.params.projectName
+    } as IClickListItem;
+
+    items[2] = {
+      title: 'Team Name: ' + this.params.teamName
+    } as IClickListItem;
+
+    if (this.params.listType === 'epics') {
+      this.processFeatureWipResponse(wip as IClickListItem, 'epics');
+    } else {
+      items[3] = {
+        title: 'Backlog items: ' + iterations.filter(curr => curr.sStatus === 'Backlog').length
+      } as IClickListItem;
+
+      items[4] = {
+        title: 'In Progress items: ' + iterations.filter(curr => curr.sStatus === 'In Progress').length
+      } as IClickListItem;
+
+      items[5] = {
+        title: 'Done items: ' + iterations.filter(curr => curr.sStatus === 'Done').length
+      } as IClickListItem;
+
+      this.processFeatureWipResponse(iterations as IClickListItemFeature, 'issues');
+    }
+    this.charts[0].data = {
+      items: items,
+      clickableContent: null,
+      clickableHeader: null
+    } as IClickListData;
+  }
+
   // *********************** ITERATION SUMMARY ************************
 
   // Displays Sprint information for Open, WIP, Done
-  private generateIterationSummary(result: IFeature) {
+  generateIterationSummary(result: IFeature) {
     this.charts[1].data[0].value = result.openEstimate;
     this.charts[1].data[1].value = result.inProgressEstimate;
     this.charts[1].data[2].value = result.completeEstimate;
@@ -152,7 +156,7 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
   // **************************** EPICS/ISSUES *******************************
 
   // Displays epics or issues
-  private processFeatureWipResponse(data, issueOrEpic: string) {
+  processFeatureWipResponse(data, issueOrEpic: string) {
     let issueOrEpicCollection: IClickListItemFeature[] = [];
 
     if (issueOrEpic === 'issues') {

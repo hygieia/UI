@@ -28,21 +28,42 @@ describe('FeatureConfigFormComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('should set widgetConfig', () => {
-  //   let widgetConfigData = {
-  //     options: {
-  //       id: 1232,
-  //       buildDurationThreshold: '',
-  //       consecutiveFailureThreshold: '',
-  //     }
-  //   };
-  //   component.widgetConfig = widgetConfigData;
-  //
-  //   widgetConfigData = null;
-  //   component.widgetConfig = widgetConfigData;
-  // });
+  it('should getProjectName and getTeamName', () => {
+    let collectorItem = {
+      options: {
+        id: 123,
+        featureTool: 'featureTool',
+        sprintType: 'sprint',
+        listType: 'listType',
+        projectName: 'project',
+        teamName: 'team'
+      }
+    };
+    component.getProjectName(collectorItem);
+    component.getProjectName(null);
 
-  // it('should call ngOnInit()', () => {
-  //   component.ngOnInit();
-  // });
+    component.getTeamName(collectorItem);
+    component.getTeamName(null);
+  });
+
+  it('should set widgetConfig', () => {
+    let widgetConfigData = {
+      options: {
+        id: 123,
+        featureTool: 'featureTool',
+        sprintType: 'sprint',
+        listType: 'listType',
+        projectName: 'project',
+        teamName: 'team'
+      }
+    };
+    component.widgetConfig = widgetConfigData;
+
+    widgetConfigData = null;
+    component.widgetConfig = widgetConfigData;
+  });
+
+  it('should call ngOnInit()', () => {
+    component.ngOnInit();
+  });
 });
