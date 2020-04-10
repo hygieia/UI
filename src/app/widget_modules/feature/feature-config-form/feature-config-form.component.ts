@@ -47,8 +47,6 @@ export class FeatureConfigFormComponent implements OnInit {
     this.featureConfigForm.get('featureTool').setValue(widgetConfig.options.featureTool);
     this.featureConfigForm.get('sprintType').setValue(widgetConfig.options.sprintType);
     this.featureConfigForm.get('listType').setValue(widgetConfig.options.listType);
-    this.featureConfigForm.get('projectName').setValue(widgetConfig.options.projectName);
-    this.featureConfigForm.get('teamName').setValue(widgetConfig.options.teamName);
   }
 
   constructor(
@@ -98,8 +96,10 @@ export class FeatureConfigFormComponent implements OnInit {
       options: {
         id: this.widgetConfigId,
         featureTool: this.featureConfigForm.value.featureTool,
-        projectName: this.featureConfigForm.value.projectName,
-        teamName: this.featureConfigForm.value.teamName,
+        projectName: this.featureConfigForm.value.projectName.options.projectName,
+        teamName: this.featureConfigForm.value.teamName.options.teamName,
+        projectId: this.featureConfigForm.value.projectName.options.projectId,
+        teamId: this.featureConfigForm.value.teamName.options.teamId,
         sprintType: this.featureConfigForm.value.sprintType,
         listType: this.featureConfigForm.value.listType
       },
@@ -124,8 +124,8 @@ export class FeatureConfigFormComponent implements OnInit {
         }
         return of(null);
       })).subscribe(collectorData => {
-        this.featureConfigForm.get('projectName').setValue(collectorData);
-        this.featureConfigForm.get('teamName').setValue(collectorData);
+      this.featureConfigForm.get('projectName').setValue(collectorData);
+      this.featureConfigForm.get('teamName').setValue(collectorData);
     });
   }
 

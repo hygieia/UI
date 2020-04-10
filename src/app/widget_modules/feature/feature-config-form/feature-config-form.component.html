@@ -15,6 +15,7 @@
         <span *ngIf="searching">searching...</span>
         <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
       </div>
+
       <div class="form-group">
         <label class="modal-label" for="teamName">Team Name</label>
         <input id="teamName" type="search" class="form-control" [class.is-invalid]="searchFailed" formControlName="teamName"
