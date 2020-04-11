@@ -92,9 +92,6 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
           this.featureService.fetchIterations(this.params.component, this.params.teamId, this.params.projectId,
             this.params.agileType).pipe(catchError(err => of(err))));
       })).subscribe(([wip, estimates, iterations]) => {
-        console.log(wip);
-        console.log(estimates);
-        console.log(iterations);
         if (this.params.listType === 'epics') {
           this.generateFeatureSummary(wip, this.params);
         } else {
