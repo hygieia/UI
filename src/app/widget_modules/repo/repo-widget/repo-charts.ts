@@ -35,43 +35,15 @@ export let REPO_CHARTS: IChart[] = [
     title: 'Commits, Pull Requests, and Issues Summary',
     component: NumberCardChartComponent,
     data: [
-      {
-        name: 'Commits Today',
-        value: []
-      },
-      {
-        name: 'Commits Last 7 Days',
-        value: []
-      },
-      {
-        name: 'Commits Last 14 Days',
-        value: []
-      },
-      {
-        name: 'Pulls Today',
-        value: []
-      },
-      {
-        name: 'Pulls Last 7 Days',
-        value: []
-      },
-      {
-        name: 'Pulls Last 14 Days',
-        value: []
-      },
-      {
-        name: 'Issues Today',
-        value: []
-      },
-      {
-        name: 'Issues Last 7 Days',
-        value: []
-      },
-      {
-        name: 'Issues Last 14 Days',
-        value: []
-      }
-    ],
+  {
+    "name": "Germany",
+    "value": 8940000
+  },
+  {
+    "name": "USA",
+    "value": 5000000
+  }
+],
     xAxisLabel: '',
     yAxisLabel: '',
     colorScheme: {

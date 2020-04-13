@@ -93,6 +93,8 @@ export class WidgetHeaderComponent implements OnInit {
       })
     );
 
+
+    console.log(newWidgetConfig$);
     // Take the modified widgetConfig and upsert it.
     const upsertDashboardResult$ = newWidgetConfig$.pipe(
       switchMap(widgetConfig => {

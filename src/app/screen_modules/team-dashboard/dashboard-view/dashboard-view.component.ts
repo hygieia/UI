@@ -13,6 +13,8 @@ import {BuildConfigFormComponent} from '../../../widget_modules/build/build-conf
 import {DeployConfigFormComponent} from 'src/app/widget_modules/deploy/deploy-config-form/deploy-config-form.component';
 import {RepoConfigFormComponent} from '../../../widget_modules/repo/repo-config-form/repo-config-form.component';
 import {RepoWidgetComponent} from '../../../widget_modules/repo/repo-widget/repo-widget.component';
+import {IACConfigFormComponent} from '../../../widget_modules/infrastructure-as-code/iac-config-form/iac-config-form.component';
+import {IACWidgetComponent} from '../../../widget_modules/infrastructure-as-code/iac-widget/iac-widget.component';
 import {FeatureWidgetComponent} from '../../../widget_modules/feature/feature-widget/feature-widget.component';
 import {FeatureConfigFormComponent} from '../../../widget_modules/feature/feature-config-form/feature-config-form.component';
 
@@ -72,11 +74,11 @@ export class DashboardViewComponent extends DashboardComponent implements OnInit
         configForm: RepoConfigFormComponent
       },
       {
-        title: 'Placeholder',
-        component: PlaceholderWidgetComponent,
+        title: 'Infrastructure As Code',
+        component: IACWidgetComponent,
         status: 'Success',
         widgetSize: 'col-xl-4',
-        configForm: BuildConfigFormComponent
+        configForm: IACConfigFormComponent
       },
       {
         title: 'Placeholder',

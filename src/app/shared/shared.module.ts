@@ -50,7 +50,14 @@ import { RepoWidgetComponent } from '../widget_modules/repo/repo-widget/repo-wid
 import { OneByTwoLayoutComponent } from './layouts/one-by-two-layout/one-by-two-layout.component';
 import { FeatureConfigFormComponent } from '../widget_modules/feature/feature-config-form/feature-config-form.component';
 import { FeatureWidgetComponent } from '../widget_modules/feature/feature-widget/feature-widget.component';
-import {FeatureDetailComponent} from '../widget_modules/feature/feature-detail/feature-detail.component';
+import { FeatureDetailComponent } from '../widget_modules/feature/feature-detail/feature-detail.component';
+import { IACConfigFormComponent } from '../widget_modules/infrastructure-as-code/iac-config-form/iac-config-form.component';
+import { IACWidgetComponent } from '../widget_modules/infrastructure-as-code/iac-widget/iac-widget.component';
+import { IACMasterComponent } from '../widget_modules/infrastructure-as-code/iac-master/iac-master.component';
+import { IACCardComponent } from '../widget_modules/infrastructure-as-code/iac-card/iac-card.component';
+import { IACAdvPieChartComponent } from '../widget_modules/infrastructure-as-code/iac-adv-pie-chart/iac-adv-pie-chart.component';
+import { IACStatusBarChartComponent } from '../widget_modules/infrastructure-as-code/iac-status-bar-chart/iac-status-bar-chart.component';
+import { IACStatusLineChartComponent } from '../widget_modules/infrastructure-as-code/iac-status-line-chart/iac-status-line-chart.component';
 
 @NgModule({
   declarations: [
@@ -97,7 +104,15 @@ import {FeatureDetailComponent} from '../widget_modules/feature/feature-detail/f
     DeployDetailComponent,
     DeployWidgetComponent,
     OneChartLayoutComponent,
-    GaugeChartComponent
+    GaugeChartComponent,
+    IACConfigFormComponent,
+    IACWidgetComponent,
+    IACMasterComponent,
+    IACCardComponent,
+    IACAdvPieChartComponent,
+    IACStatusBarChartComponent,
+    IACStatusLineChartComponent
+    
   ],
   entryComponents: [
     DeployDetailComponent,
@@ -126,8 +141,15 @@ import {FeatureDetailComponent} from '../widget_modules/feature/feature-detail/f
     RepoDetailComponent,
     RepoWidgetComponent,
     RepoConfigFormComponent,
-    TwoByTwoLayoutComponent
-  ],
+    TwoByTwoLayoutComponent,
+    IACConfigFormComponent,
+    IACWidgetComponent,
+    IACMasterComponent,
+    IACCardComponent,
+    IACAdvPieChartComponent,
+    IACStatusBarChartComponent,
+    IACStatusLineChartComponent
+    ],
   imports: [
     CommonModule,
     DragDropModule,

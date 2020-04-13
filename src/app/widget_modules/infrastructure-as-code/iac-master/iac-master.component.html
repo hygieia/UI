@@ -1,0 +1,17 @@
+<!-- Generic Progress Bar Template -->
+<div style="padding: 20px;" *ngIf="stage=='LOADING'">
+	<p>
+		<ngb-progressbar type="info" [value]="100" [striped]="true">Loading...
+		</ngb-progressbar>
+	</p>
+</div>
+
+<!-- Generic Status Show, in case if REST fails -->
+<div class="page-wrap d-flex flex-row align-items-center "
+	*ngIf="stage=='FAIL'">
+	<div class="row justify-content-center">
+		<div class="text-center stripes">
+			<h3>{{message}}</h3>
+		</div>
+	</div>
+</div>
