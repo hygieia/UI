@@ -44,9 +44,13 @@ import { DeployWidgetComponent } from '../widget_modules/deploy/deploy-widget/de
 import { DeployDetailComponent } from '../widget_modules/deploy/deploy-detail/deploy-detail.component';
 import { OneChartLayoutComponent } from './layouts/one-chart-layout/one-chart-layout.component';
 import { DeployConfigFormComponent } from '../widget_modules/deploy/deploy-config-form/deploy-config-form.component';
-import {RepoConfigFormComponent} from '../widget_modules/repo/repo-config-form/repo-config-form.component';
-import {RepoDetailComponent} from '../widget_modules/repo/repo-detail/repo-detail.component';
-import {RepoWidgetComponent} from '../widget_modules/repo/repo-widget/repo-widget.component';
+import { RepoConfigFormComponent } from '../widget_modules/repo/repo-config-form/repo-config-form.component';
+import { RepoDetailComponent } from '../widget_modules/repo/repo-detail/repo-detail.component';
+import { RepoWidgetComponent } from '../widget_modules/repo/repo-widget/repo-widget.component';
+import { OneByTwoLayoutComponent } from './layouts/one-by-two-layout/one-by-two-layout.component';
+import { FeatureConfigFormComponent } from '../widget_modules/feature/feature-config-form/feature-config-form.component';
+import { FeatureWidgetComponent } from '../widget_modules/feature/feature-widget/feature-widget.component';
+import {FeatureDetailComponent} from '../widget_modules/feature/feature-detail/feature-detail.component';
 import {StaticAnalysisConfigFormComponent} from "../widget_modules/static-analysis/static-anaylsis-config-form/staticAnalysis-config-form.component";
 import {StaticAnalysisDetailComponent} from "../widget_modules/static-analysis/static-analysis-detail/staticAnalysis-detail.component";
 import {StaticAnalysisWidgetComponent} from "../widget_modules/static-analysis/static-analysis-widget/staticAnalysis-widget.component";
@@ -68,6 +72,9 @@ import {StaticAnalysisWidgetComponent} from "../widget_modules/static-analysis/s
     DashboardComponent,
     DetailModalComponent,
     DetailModalDirective,
+    FeatureConfigFormComponent,
+    FeatureDetailComponent,
+    FeatureWidgetComponent,
     FormModalComponent,
     FormModalDirective,
     LayoutComponent,
@@ -76,6 +83,7 @@ import {StaticAnalysisWidgetComponent} from "../widget_modules/static-analysis/s
     LineChartComponent,
     MinutesPipe,
     NumberCardChartComponent,
+    OneByTwoLayoutComponent,
     PaginationComponent,
     PlaceholderWidgetComponent,
     RepoConfigFormComponent,
@@ -109,11 +117,15 @@ import {StaticAnalysisWidgetComponent} from "../widget_modules/static-analysis/s
     ComboChartComponent,
     ConfirmationModalComponent,
     DetailModalComponent,
+    FeatureConfigFormComponent,
+    FeatureDetailComponent,
+    FeatureWidgetComponent,
     FormModalComponent,
     GaugeChartComponent,
     LineAndBarChartComponent,
     LineChartComponent,
     NumberCardChartComponent,
+    OneByTwoLayoutComponent,
     OneChartLayoutComponent,
     PlaceholderWidgetComponent,
     PlainTextChartComponent,
@@ -147,6 +159,7 @@ import {StaticAnalysisWidgetComponent} from "../widget_modules/static-analysis/s
     LineAndBarChartComponent,
     LineChartComponent,
     NumberCardChartComponent,
+    OneByTwoLayoutComponent,
     PaginationComponent,
     ReactiveFormsModule,
     TemplatesDirective,
