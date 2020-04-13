@@ -47,6 +47,9 @@ import { DeployConfigFormComponent } from '../widget_modules/deploy/deploy-confi
 import {RepoConfigFormComponent} from '../widget_modules/repo/repo-config-form/repo-config-form.component';
 import {RepoDetailComponent} from '../widget_modules/repo/repo-detail/repo-detail.component';
 import {RepoWidgetComponent} from '../widget_modules/repo/repo-widget/repo-widget.component';
+import {StaticAnalysisConfigFormComponent} from "../widget_modules/static-analysis/static-anaylsis-config-form/staticAnalysis-config-form.component";
+import {StaticAnalysisDetailComponent} from "../widget_modules/static-analysis/static-analysis-detail/staticAnalysis-detail.component";
+import {StaticAnalysisWidgetComponent} from "../widget_modules/static-analysis/static-analysis-widget/staticAnalysis-widget.component";
 
 @NgModule({
   declarations: [
@@ -89,7 +92,10 @@ import {RepoWidgetComponent} from '../widget_modules/repo/repo-widget/repo-widge
     DeployDetailComponent,
     DeployWidgetComponent,
     OneChartLayoutComponent,
-    GaugeChartComponent
+    GaugeChartComponent,
+    StaticAnalysisConfigFormComponent,
+    StaticAnalysisDetailComponent,
+    StaticAnalysisWidgetComponent
   ],
   entryComponents: [
     DeployDetailComponent,
@@ -114,7 +120,10 @@ import {RepoWidgetComponent} from '../widget_modules/repo/repo-widget/repo-widge
     RepoDetailComponent,
     RepoWidgetComponent,
     RepoConfigFormComponent,
-    TwoByTwoLayoutComponent
+    TwoByTwoLayoutComponent,
+    StaticAnalysisConfigFormComponent,
+    StaticAnalysisDetailComponent,
+    StaticAnalysisWidgetComponent
   ],
   imports: [
     CommonModule,

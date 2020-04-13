@@ -30,3 +30,10 @@ export interface IClickListItemDeploy extends IClickListItem {
   lastUpdated: number;
   regex: string;
 }
+
+export interface IClickListItemStaticAnalysis extends IClickListData {
+  url: string;
+  version?: string;
+  name?: string;
+  timestamp?: any;
+}
