@@ -15,8 +15,8 @@ import {RepoConfigFormComponent} from '../../../widget_modules/repo/repo-config-
 import {RepoWidgetComponent} from '../../../widget_modules/repo/repo-widget/repo-widget.component';
 import {FeatureWidgetComponent} from '../../../widget_modules/feature/feature-widget/feature-widget.component';
 import {FeatureConfigFormComponent} from '../../../widget_modules/feature/feature-config-form/feature-config-form.component';
-import { StaticAnalysisWidgetComponent } from "../../../widget_modules/static-analysis/static-analysis-widget/staticAnalysis-widget.component";
-import { StaticAnalysisConfigFormComponent } from "../../../widget_modules/static-analysis/static-anaylsis-config-form/staticAnalysis-config-form.component";
+import { StaticAnalysisWidgetComponent } from "../../../widget_modules/static-analysis/static-analysis-widget/static-analysis-widget.component";
+import { StaticAnalysisConfigFormComponent } from "../../../widget_modules/static-analysis/static-anaylsis-config-form/static-analysis-config-form.component";
 
 @Component({
   selector: 'app-dashboard-view',

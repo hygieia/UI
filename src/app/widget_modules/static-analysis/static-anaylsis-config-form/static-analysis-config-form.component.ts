@@ -8,8 +8,8 @@ import { DashboardService } from 'src/app/shared/dashboard.service';
 
 @Component({
   selector: 'app-staticAnalysis-config-form',
-  templateUrl: './staticAnalysis-config-form.component.html',
-  styleUrls: ['./staticAnalysis-config-form.component.scss']
+  templateUrl: './static-analysis-config-form.component.html',
+  styleUrls: ['./static-analysis-config-form.component.scss']
 })
 export class StaticAnalysisConfigFormComponent implements OnInit {
 
@@ -36,7 +36,7 @@ export class StaticAnalysisConfigFormComponent implements OnInit {
       return;
     }
     this.widgetConfigId = widgetConfig.options.id;
-    this.staticAnalysisConfigForm.get('staticAnalysisJob').setValue(widgetConfig.options.staticAnalysisItem);
+    this.staticAnalysisConfigForm.get('staticAnalysisJob').setValue(widgetConfig.collectorItemId);
   }
 
   constructor(

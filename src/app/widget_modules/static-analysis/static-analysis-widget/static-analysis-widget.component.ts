@@ -23,7 +23,7 @@ import {WidgetComponent} from 'src/app/shared/widget/widget.component';
 import {StaticAnalysisService} from '../static-analysis.service';
 import {STATICANALYSIS_CHARTS} from './static-analysis-charts';
 import {IStaticAnalysis} from "../interfaces";
-import {StaticAnalysisDetailComponent} from "../static-analysis-detail/staticAnalysis-detail.component";
+import {StaticAnalysisDetailComponent} from "../static-analysis-detail/static-analysis-detail.component";
 import {isUndefined} from "util";
 
 @Component({
@@ -34,7 +34,7 @@ import {isUndefined} from "util";
 export class StaticAnalysisWidgetComponent extends WidgetComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // Code Quality Metric Field Names
-  private readonly staticAnalysisMetrics = {
+  public readonly staticAnalysisMetrics = {
     // quality gate
     qualityGateDetails: 'quality_gate_details',
     alertStatus: 'alert_status',
@@ -58,7 +58,7 @@ export class StaticAnalysisWidgetComponent extends WidgetComponent implements On
   };
 
   // Code Quality Quality Gate Status Names
-  private readonly qualityGateStatuses = {
+  public readonly qualityGateStatuses = {
     OK: "OK",
     WARN: "WARN",
     FAILED: "ERROR",
@@ -137,7 +137,7 @@ export class StaticAnalysisWidgetComponent extends WidgetComponent implements On
 
   // *********************** DETAILS/QUALITY *********************
 
-  private generateProjectDetails(result: IStaticAnalysis) {
+  generateProjectDetails(result: IStaticAnalysis) {
 
     const qualityGateStatus = result.metrics.find(metric => metric.name == this.staticAnalysisMetrics.alertStatus).value;
     const displayStatus = (qualityGateStatus == this.qualityGateStatuses.OK) ? DashStatus.PASS :
@@ -184,7 +184,7 @@ export class StaticAnalysisWidgetComponent extends WidgetComponent implements On
 
   // *********************** VIOLATIONS *****************************
 
-  private generateViolations(result: IStaticAnalysis) {
+  generateViolations(result: IStaticAnalysis) {
 
     this.charts[1].data[0].value = result.metrics.find(metric => metric.name == this.staticAnalysisMetrics.blockerViolations).value;
     this.charts[1].data[1].value = result.metrics.find(metric => metric.name == this.staticAnalysisMetrics.criticalViolations).value;
@@ -195,7 +195,7 @@ export class StaticAnalysisWidgetComponent extends WidgetComponent implements On
 
   // *********************** COVERAGE (CODE, LINE) ****************************
 
-  private generateCoverage(result: IStaticAnalysis) {
+  generateCoverage(result: IStaticAnalysis) {
     // code coverage %
     this.charts[2].data.dataPoints[0].value = parseFloat(result.metrics.find(metric => metric.name == this.staticAnalysisMetrics.codeCoverage).value);
     // lines of code
@@ -205,7 +205,7 @@ export class StaticAnalysisWidgetComponent extends WidgetComponent implements On
 
   // *********************** UNIT TEST METRICS ****************************
 
-  private generateUnitTestMetrics(result: IStaticAnalysis) {
+  generateUnitTestMetrics(result: IStaticAnalysis) {
 
     let testSuccesses = result.metrics.find(metric => metric.name == this.staticAnalysisMetrics.testSuccesses);
     let testFailures = result.metrics.find(metric => metric.name == this.staticAnalysisMetrics.testFailures);

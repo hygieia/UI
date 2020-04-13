@@ -5,8 +5,8 @@ import {
 
 @Component({
   selector: 'app-build-detail',
-  templateUrl: './staticAnalysis-detail.component.html',
-  styleUrls: ['./staticAnalysis-detail.component.scss']
+  templateUrl: './static-analysis-detail.component.html',
+  styleUrls: ['./static-analysis-detail.component.scss']
 })
 export class StaticAnalysisDetailComponent implements OnInit {
 

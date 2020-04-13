@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { StaticAnalysisWidgetComponent } from './static-analysis-widget/staticAnalysis-widget.component';
+import { StaticAnalysisWidgetComponent } from './static-analysis-widget/static-analysis-widget.component';
 
 const routes: Routes = [
 ];
