@@ -5,6 +5,7 @@ import { DashboardComponent } from 'src/app/shared/dashboard/dashboard.component
 import { TemplatesDirective } from 'src/app/shared/templates/templates.directive';
 import { BuildWidgetComponent } from 'src/app/widget_modules/build/build-widget/build-widget.component';
 import { DeployWidgetComponent } from 'src/app/widget_modules/deploy/deploy-widget/deploy-widget.component';
+import {RepoWidgetComponent} from '../../../widget_modules/repo/repo-widget/repo-widget.component';
 import { CaponeTemplateComponent } from '../capone-template/capone-template.component';
 import { ITemplate } from './dashboard-view';
 import {BuildConfigFormComponent} from '../../../widget_modules/build/build-config-form/build-config-form.component';

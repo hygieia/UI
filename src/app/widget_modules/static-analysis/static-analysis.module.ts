@@ -3,10 +3,10 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-import { StaticAnalysisConfigFormComponent } from './static-anaylsis-config-form/static-analysis-config-form.component';
-import { StaticAnalysisDetailComponent } from './static-analysis-detail/static-analysis-detail.component';
+import { StaticAnalysisConfigFormComponent } from './static-anaylsis-config-form/staticAnalysis-config-form.component';
+import { StaticAnalysisDetailComponent } from './static-analysis-detail/staticAnalysis-detail.component';
 import { StaticAnalysisRoutingModule } from './static-analysis-routing-module';
-import { StaticAnalysisWidgetComponent } from './static-analysis-widget/static-analysis-widget.component';
+import { StaticAnalysisWidgetComponent } from './static-analysis-widget/staticAnalysis-widget.component';
 
 @NgModule({
   declarations: [StaticAnalysisWidgetComponent, StaticAnalysisConfigFormComponent, StaticAnalysisDetailComponent],
