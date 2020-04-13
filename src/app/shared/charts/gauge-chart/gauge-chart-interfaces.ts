@@ -1,3 +1,5 @@
+import { Type } from '@angular/core';
+
 export interface IGaugeChartData {
   dataPoints: any;
   min: number;
