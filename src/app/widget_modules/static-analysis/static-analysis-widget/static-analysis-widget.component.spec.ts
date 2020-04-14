@@ -165,7 +165,7 @@ describe('StaticAnalysisWidgetComponent', () => {
     component.ngOnInit();
     expect(component.staticAnalysisMetrics).toBeDefined();
     expect(component.qualityGateStatuses).toBeDefined();
-  })
+  });
 
   it('should call ngOnDestroy', () => {
     component.ngOnDestroy();

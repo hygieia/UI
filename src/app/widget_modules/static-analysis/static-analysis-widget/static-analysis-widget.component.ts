@@ -236,7 +236,7 @@ export class StaticAnalysisWidgetComponent extends WidgetComponent implements On
         status: null,
         statusText: '',
         title: 'Success',
-        subtitles: [isUndefined(testSuccesses) ? '' : (parseFloat(testSuccesses.value) / 100) * parseInt(totalTests.value,10)],
+        subtitles: [isUndefined(testSuccesses) ? '' : (parseFloat(testSuccesses.value) / 100) * parseInt(totalTests.value, 10)],
       },
       {
         status: null,
