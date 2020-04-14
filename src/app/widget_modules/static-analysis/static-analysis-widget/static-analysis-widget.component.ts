@@ -139,6 +139,10 @@ export class StaticAnalysisWidgetComponent extends WidgetComponent implements On
 
   generateProjectDetails(result: IStaticAnalysis) {
 
+    if (!result) {
+      return;
+    }
+
     const qualityGateStatus = result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.alertStatus).value;
     const displayStatus = (qualityGateStatus === this.qualityGateStatuses.OK) ? DashStatus.PASS :
       (qualityGateStatus === this.qualityGateStatuses.FAILED) ? DashStatus.FAIL : DashStatus.WARN;
@@ -186,6 +190,10 @@ export class StaticAnalysisWidgetComponent extends WidgetComponent implements On
 
   generateViolations(result: IStaticAnalysis) {
 
+    if (!result) {
+      return;
+    }
+
     this.charts[1].data[0].value = result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.blockerViolations).value;
     this.charts[1].data[1].value = result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.criticalViolations).value;
     this.charts[1].data[2].value = result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.majorViolations).value;
@@ -196,6 +204,11 @@ export class StaticAnalysisWidgetComponent extends WidgetComponent implements On
   // *********************** COVERAGE (CODE, LINE) ****************************
 
   generateCoverage(result: IStaticAnalysis) {
+
+    if (!result) {
+      return;
+    }
+
     const coverage = result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.codeCoverage);
     // code coverage %
     this.charts[2].data.dataPoints[0].value = parseFloat(coverage.value);
@@ -209,6 +222,10 @@ export class StaticAnalysisWidgetComponent extends WidgetComponent implements On
 
   generateUnitTestMetrics(result: IStaticAnalysis) {
 
+    if (!result) {
+      return;
+    }
+
     const testSuccesses = result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.testSuccesses);
     const testFailures = result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.testFailures);
     const testErrors = result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.testErrors);
@@ -219,7 +236,7 @@ export class StaticAnalysisWidgetComponent extends WidgetComponent implements On
         status: null,
         statusText: '',
         title: 'Success',
-        subtitles: [isUndefined(testSuccesses) ? '' : (parseFloat(testSuccesses.value) / 100) * parseInt(totalTests.value)],
+        subtitles: [isUndefined(testSuccesses) ? '' : (parseFloat(testSuccesses.value) / 100) * parseInt(totalTests.value,10)],
       },
       {
         status: null,

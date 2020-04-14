@@ -161,6 +161,12 @@ describe('StaticAnalysisWidgetComponent', () => {
     expect(component.charts).toBeDefined();
   });
 
+  it('should set interval refresh subscription', () => {
+    component.ngOnInit();
+    expect(component.staticAnalysisMetrics).toBeDefined();
+    expect(component.qualityGateStatuses).toBeDefined();
+  })
+
   it('should call ngOnDestroy', () => {
     component.ngOnDestroy();
   });
@@ -169,7 +175,7 @@ describe('StaticAnalysisWidgetComponent', () => {
     component.stopRefreshInterval();
   });
 
-  it('should call ngOnDestroy', () => {
+  it('should call ngAfterViewInit', () => {
     component.ngAfterViewInit();
   });
 
@@ -194,6 +200,9 @@ describe('StaticAnalysisWidgetComponent', () => {
     expect(component.charts[0].data.version).toEqual('0.0.1');
     expect(component.charts[0].data.name).toEqual('sonar-project-1');
     expect(component.charts[0].data.timestamp).toEqual(new Date(1552590574305));
+
+    // data is null
+    component.generateProjectDetails(null);
   });
 
   it('should generateViolations', () => {
@@ -202,17 +211,26 @@ describe('StaticAnalysisWidgetComponent', () => {
     expect(component.charts[1].data[1].value).toEqual('1');
     expect(component.charts[1].data[2].value).toEqual('1');
     expect(component.charts[1].data[3].value).toEqual('3');
+
+    // data is null
+    component.generateViolations(null);
   });
 
   it('should generateCoverage', () => {
     component.generateCoverage(staticAnalysisTestData);
     expect(component.charts[2].data.dataPoints[0].value).toEqual(55.5);
     expect(component.charts[2].data.units).toEqual('123 lines of code');
+
+    // data is null
+    component.generateCoverage(null);
   });
 
-  it('should generateCoverage', () => {
+  it('should generateUnitTestMetrics', () => {
     component.generateUnitTestMetrics(staticAnalysisTestData);
     expect(component.charts[3].data.items.length).toEqual(4);
+
+    // data is null
+    component.generateUnitTestMetrics(null);
   });
 
 });
