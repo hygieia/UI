@@ -51,4 +51,14 @@ describe('StaticAnalysisConfigFormComponent', () => {
     component.ngOnInit();
   });
 
+  it('should have an initial static config form', () => {
+    const widgetConfigData = {
+      options: {
+        id: 123,
+      }
+    };
+    component.widgetConfig = widgetConfigData;
+    expect(component.staticAnalysisConfigForm).toBeDefined();
+  });
+
 });

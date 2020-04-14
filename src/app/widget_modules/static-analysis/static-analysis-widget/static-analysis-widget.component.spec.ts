@@ -154,12 +154,27 @@ describe('StaticAnalysisWidgetComponent', () => {
     component.ngOnInit();
   });
 
-  it('should hit stopRefreshInterval', () => {
+  it('should set initial value of widgetId, layout, and charts', () => {
+    component.ngOnInit();
+    expect(component.widgetId).toBeDefined();
+    expect(component.layout).toBeDefined();
+    expect(component.charts).toBeDefined();
+  });
+
+  it('should call ngOnDestroy', () => {
     component.ngOnDestroy();
   });
 
-  it('should hit startRefreshInterval', () => {
+  it('should hit stopRefreshInterval', () => {
+    component.stopRefreshInterval();
+  });
+
+  it('should call ngOnDestroy', () => {
     component.ngAfterViewInit();
+  });
+
+  it('should hit startRefreshInterval', () => {
+    component.startRefreshInterval();
   });
 
   it('should loadEmptyChart', () => {

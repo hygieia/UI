@@ -25,6 +25,10 @@ describe('StaticAnalysisDetailComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should call ngOnInit()', () => {
+    component.ngOnInit();
+  });
+
   it('should set detailData', () => {
     const detailData = {
       name: 'sonar-project-1',
@@ -39,5 +43,9 @@ describe('StaticAnalysisDetailComponent', () => {
 
     component.detailData = null;
     expect(component.data).toEqual(null);
+  });
+
+  it('should check isDate', () => {
+    expect(component.isDate(new Date(1552590574305))).toBe(true);
   });
 });
