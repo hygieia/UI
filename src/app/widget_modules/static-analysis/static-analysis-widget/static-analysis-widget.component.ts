@@ -143,31 +143,27 @@ export class StaticAnalysisWidgetComponent extends WidgetComponent implements On
       return;
     }
 
-    const qualityGateStatus = result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.alertStatus).value;
-    const displayStatus = (qualityGateStatus === this.qualityGateStatuses.OK) ? DashStatus.PASS :
-      (qualityGateStatus === this.qualityGateStatuses.FAILED) ? DashStatus.FAIL : DashStatus.WARN;
-
     const latestDetails = [
       {
-        status: DashStatus.IN_PROGRESS,
+        status: null,
         statusText: '',
         title: 'Name',
         subtitles: [result.name],
       },
       {
-        status: DashStatus.IN_PROGRESS,
+        status: null,
         statusText: '',
         title: 'Version',
         subtitles: [result.version],
       },
       {
-        status: displayStatus,
-        statusText: displayStatus === DashStatus.PASS ? '' : '!',
+        status: null,
+        statusText: '',
         title: 'Quality Gate',
         subtitles: [result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.alertStatus).value],
       },
       {
-        status: DashStatus.IN_PROGRESS,
+        status: null,
         statusText: '',
         title: 'Technical Debt',
         subtitles: [result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.techDebt).formattedValue],
