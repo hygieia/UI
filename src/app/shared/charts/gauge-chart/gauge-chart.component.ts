@@ -13,7 +13,7 @@ export class GaugeChartComponent extends ChartComponent {
 
   constructor() {
     super();
-    this.scaleFactor = 1;
+    this.scaleFactor = 0.7;
   }
 
   formatAppendPercent(val: number): string {
