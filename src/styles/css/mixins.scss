@@ -33,6 +33,7 @@
 
 @mixin text-standard-date {
   @include text(1.2, 2);
+  color: #aab;
 }
 
 @mixin text-lg {
