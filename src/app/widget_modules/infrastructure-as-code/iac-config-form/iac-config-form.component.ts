@@ -91,6 +91,9 @@ ngAfterViewInit()
 	}
   
   this.createCollectorItem(collectorItemRequest);
+	
+   
+
   }
 
   private createCollectorItem(config){
@@ -106,7 +109,10 @@ ngAfterViewInit()
         
       const newConfig = {
       name: 'InfrastrutureAsCode',
-     
+      options: {
+        id: this.widgetConfigId,
+        apiToken: this.iacConfigForm.value.apiToken
+      },
       componentId: this.componentId,
       collectorItemIds: [result.id]
     };
