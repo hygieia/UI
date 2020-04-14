@@ -7,7 +7,7 @@ import { CollectorService } from 'src/app/shared/collector.service';
 import { DashboardService } from 'src/app/shared/dashboard.service';
 
 @Component({
-  selector: 'app-staticAnalysis-config-form',
+  selector: 'app-static-analysis-config-form',
   templateUrl: './static-analysis-config-form.component.html',
   styleUrls: ['./static-analysis-config-form.component.scss']
 })

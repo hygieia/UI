@@ -9,7 +9,7 @@ import { Observable, of } from 'rxjs';
 import { DashboardService } from 'src/app/shared/dashboard.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-import { StaticAnalysisService } from "../static-analysis.service";
+import { StaticAnalysisService } from '../static-analysis.service';
 import { IStaticAnalysis } from '../interfaces';
 import { StaticAnalysisWidgetComponent} from './static-analysis-widget.component';
 
@@ -79,63 +79,63 @@ describe('StaticAnalysisWidgetComponent', () => {
       metrics: [
         {
           name: component.staticAnalysisMetrics.blockerViolations,
-          value: "1",
-          formattedValue: "1",
+          value: '1',
+          formattedValue: '1',
         },
         {
           name: component.staticAnalysisMetrics.criticalViolations,
-          value: "1",
-          formattedValue: "1",
+          value: '1',
+          formattedValue: '1',
         },
         {
           name: component.staticAnalysisMetrics.majorViolations,
-          value: "1",
-          formattedValue: "1",
+          value: '1',
+          formattedValue: '1',
         },
         {
           name: component.staticAnalysisMetrics.totalIssues,
-          value: "3",
-          formattedValue: "3",
+          value: '3',
+          formattedValue: '3',
         },
         {
           name: component.staticAnalysisMetrics.codeCoverage,
-          value: "55.5",
-          formattedValue: "55.5%",
+          value: '55.5',
+          formattedValue: '55.5%',
         },
         {
           name : component.staticAnalysisMetrics.numCodeLines,
-          value : "123",
-          formattedValue : "123",
+          value : '123',
+          formattedValue : '123',
         },
         {
           name : component.staticAnalysisMetrics.alertStatus,
-          value : "OK",
-          formattedValue : "OK",
+          value : 'OK',
+          formattedValue : 'OK',
         },
         {
           name : component.staticAnalysisMetrics.techDebt,
-          value : "60",
-          formattedValue : "60min"
+          value : '60',
+          formattedValue : '60min'
         },
         {
           name : component.staticAnalysisMetrics.totalTests,
-          value : "10",
-          formattedValue : "10"
+          value : '10',
+          formattedValue : '10'
         },
         {
           name : component.staticAnalysisMetrics.testSuccesses,
-          value : "10",
-          formattedValue : "10"
+          value : '10',
+          formattedValue : '10'
         },
         {
           name : component.staticAnalysisMetrics.testFailures,
-          value : "0",
-          formattedValue : "0"
+          value : '0',
+          formattedValue : '0'
         },
         {
           name : component.staticAnalysisMetrics.testErrors,
-          value : "0",
-          formattedValue : "0"
+          value : '0',
+          formattedValue : '0'
         },
       ],
     } as IStaticAnalysis;

@@ -3,14 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import {IStaticAnalysis, IStaticAnalysisResponse} from "./interfaces";
+import {IStaticAnalysis, IStaticAnalysisResponse} from './interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StaticAnalysisService {
 
-  staticAnalysisRoute = "/api/quality/static-analysis";
+  staticAnalysisRoute = '/api/quality/static-analysis';
 
   constructor(private http: HttpClient) { }
 

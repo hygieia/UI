@@ -1,9 +1,9 @@
 import { IChart } from 'src/app/shared/interfaces';
 
-import {GaugeChartComponent} from "../../../shared/charts/gauge-chart/gauge-chart.component";
-import {IGaugeChartData} from "../../../shared/charts/gauge-chart/gauge-chart-interfaces";
-import {NumberCardChartComponent} from "../../../shared/charts/number-card-chart/number-card-chart.component";
-import {ClickListComponent} from "../../../shared/charts/click-list/click-list.component";
+import {GaugeChartComponent} from '../../../shared/charts/gauge-chart/gauge-chart.component';
+import {IGaugeChartData} from '../../../shared/charts/gauge-chart/gauge-chart-interfaces';
+import {NumberCardChartComponent} from '../../../shared/charts/number-card-chart/number-card-chart.component';
+import {ClickListComponent} from '../../../shared/charts/click-list/click-list.component';
 
 export let STATICANALYSIS_CHARTS: IChart[] = [
   {
@@ -19,19 +19,19 @@ export let STATICANALYSIS_CHARTS: IChart[] = [
     component: NumberCardChartComponent,
     data: [
       {
-        name: "Blocker Violations",
+        name: 'Blocker Violations',
         value: 0,
       },
       {
-        name: "Critical Violations",
+        name: 'Critical Violations',
         value: 0,
       },
       {
-        name: "Major Violations",
+        name: 'Major Violations',
         value: 0,
       },
       {
-        name: "Total Issues",
+        name: 'Total Issues',
         value: 0,
       }
     ],
@@ -45,7 +45,7 @@ export let STATICANALYSIS_CHARTS: IChart[] = [
     data: {
       dataPoints: [
         {
-          name: "Code Coverage",
+          name: 'Code Coverage',
           value: 0,
         },
       ],

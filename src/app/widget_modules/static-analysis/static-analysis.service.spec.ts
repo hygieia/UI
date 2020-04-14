@@ -1,7 +1,7 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { inject, TestBed } from '@angular/core/testing';
 
-import { StaticAnalysisService } from "./static-analysis.service";
+import { StaticAnalysisService } from './static-analysis.service';
 
 describe('StaticAnalysisService', () => {
   beforeEach(() => TestBed.configureTestingModule({

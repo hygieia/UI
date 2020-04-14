@@ -22,12 +22,12 @@ import {TwoByTwoLayoutComponent} from 'src/app/shared/layouts/two-by-two-layout/
 import {WidgetComponent} from 'src/app/shared/widget/widget.component';
 import {StaticAnalysisService} from '../static-analysis.service';
 import {STATICANALYSIS_CHARTS} from './static-analysis-charts';
-import {IStaticAnalysis} from "../interfaces";
-import {StaticAnalysisDetailComponent} from "../static-analysis-detail/static-analysis-detail.component";
-import {isUndefined} from "util";
+import {IStaticAnalysis} from '../interfaces';
+import {StaticAnalysisDetailComponent} from '../static-analysis-detail/static-analysis-detail.component';
+import {isUndefined} from 'util';
 
 @Component({
-  selector: 'app-staticAnalysis-widget',
+  selector: 'app-static-analysis-widget',
   templateUrl: './static-analysis-widget.component.html',
   styleUrls: ['./static-analysis-widget.component.scss']
 })
@@ -51,18 +51,18 @@ export class StaticAnalysisWidgetComponent extends WidgetComponent implements On
     // vulnerabilities
     newVulnerabilities: 'new_vulnerabilities',
     // unit test metrics
-    testSuccesses: "test_success_density",
-    testFailures: "test_failures",
-    testErrors: "test_errors",
-    totalTests: "tests",
+    testSuccesses: 'test_success_density',
+    testFailures: 'test_failures',
+    testErrors: 'test_errors',
+    totalTests: 'tests',
   };
 
   // Code Quality Quality Gate Status Names
   public readonly qualityGateStatuses = {
-    OK: "OK",
-    WARN: "WARN",
-    FAILED: "ERROR",
-  }
+    OK: 'OK',
+    WARN: 'WARN',
+    FAILED: 'ERROR',
+  };
 
   // Reference to the subscription used to refresh the widget
   private intervalRefreshSubscription: Subscription;
@@ -139,9 +139,9 @@ export class StaticAnalysisWidgetComponent extends WidgetComponent implements On
 
   generateProjectDetails(result: IStaticAnalysis) {
 
-    const qualityGateStatus = result.metrics.find(metric => metric.name == this.staticAnalysisMetrics.alertStatus).value;
-    const displayStatus = (qualityGateStatus == this.qualityGateStatuses.OK) ? DashStatus.PASS :
-      (qualityGateStatus == this.qualityGateStatuses.FAILED) ? DashStatus.FAIL : DashStatus.WARN;
+    const qualityGateStatus = result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.alertStatus).value;
+    const displayStatus = (qualityGateStatus === this.qualityGateStatuses.OK) ? DashStatus.PASS :
+      (qualityGateStatus === this.qualityGateStatuses.FAILED) ? DashStatus.FAIL : DashStatus.WARN;
 
     const latestDetails = [
       {
@@ -158,15 +158,15 @@ export class StaticAnalysisWidgetComponent extends WidgetComponent implements On
       },
       {
         status: displayStatus,
-        statusText: displayStatus == DashStatus.PASS ? '' : '!',
+        statusText: displayStatus === DashStatus.PASS ? '' : '!',
         title: 'Quality Gate',
-        subtitles: [result.metrics.find(metric => metric.name == this.staticAnalysisMetrics.alertStatus).value],
+        subtitles: [result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.alertStatus).value],
       },
       {
         status: DashStatus.IN_PROGRESS,
         statusText: '',
         title: 'Technical Debt',
-        subtitles: [result.metrics.find(metric => metric.name == this.staticAnalysisMetrics.techDebt).formattedValue],
+        subtitles: [result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.techDebt).formattedValue],
       },
     ] as IClickListItem[];
 
@@ -186,20 +186,22 @@ export class StaticAnalysisWidgetComponent extends WidgetComponent implements On
 
   generateViolations(result: IStaticAnalysis) {
 
-    this.charts[1].data[0].value = result.metrics.find(metric => metric.name == this.staticAnalysisMetrics.blockerViolations).value;
-    this.charts[1].data[1].value = result.metrics.find(metric => metric.name == this.staticAnalysisMetrics.criticalViolations).value;
-    this.charts[1].data[2].value = result.metrics.find(metric => metric.name == this.staticAnalysisMetrics.majorViolations).value;
-    this.charts[1].data[3].value = result.metrics.find(metric => metric.name == this.staticAnalysisMetrics.totalIssues).value;
+    this.charts[1].data[0].value = result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.blockerViolations).value;
+    this.charts[1].data[1].value = result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.criticalViolations).value;
+    this.charts[1].data[2].value = result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.majorViolations).value;
+    this.charts[1].data[3].value = result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.totalIssues).value;
 
   }
 
   // *********************** COVERAGE (CODE, LINE) ****************************
 
   generateCoverage(result: IStaticAnalysis) {
+    const coverage = result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.codeCoverage);
     // code coverage %
-    this.charts[2].data.dataPoints[0].value = parseFloat(result.metrics.find(metric => metric.name == this.staticAnalysisMetrics.codeCoverage).value);
+    this.charts[2].data.dataPoints[0].value = parseFloat(coverage.value);
     // lines of code
-    this.charts[2].data.units = result.metrics.find(metric => metric.name == this.staticAnalysisMetrics.numCodeLines).value + " lines of code"
+    const loc = result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.numCodeLines);
+    this.charts[2].data.units = loc.value + ' lines of code';
 
   }
 
@@ -207,18 +209,17 @@ export class StaticAnalysisWidgetComponent extends WidgetComponent implements On
 
   generateUnitTestMetrics(result: IStaticAnalysis) {
 
-    let testSuccesses = result.metrics.find(metric => metric.name == this.staticAnalysisMetrics.testSuccesses);
-    let testFailures = result.metrics.find(metric => metric.name == this.staticAnalysisMetrics.testFailures);
-    let testErrors = result.metrics.find(metric => metric.name == this.staticAnalysisMetrics.testErrors);
-    let totalTests = result.metrics.find(metric => metric.name == this.staticAnalysisMetrics.totalTests);
+    const testSuccesses = result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.testSuccesses);
+    const testFailures = result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.testFailures);
+    const testErrors = result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.testErrors);
+    const totalTests = result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.totalTests);
 
     const latestDetails = [
       {
         status: null,
         statusText: '',
         title: 'Success',
-        // convert % success to # of tests
-        subtitles: [isUndefined(testSuccesses) ? '' : (parseFloat(testSuccesses.value)/100)*parseInt(totalTests.value)],
+        subtitles: [isUndefined(testSuccesses) ? '' : (parseFloat(testSuccesses.value) / 100) * parseInt(totalTests.value)],
       },
       {
         status: null,

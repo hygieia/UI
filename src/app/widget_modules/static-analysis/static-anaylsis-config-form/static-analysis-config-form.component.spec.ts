@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { StaticAnalysisConfigFormComponent } from "./static-analysis-config-form.component";
+import { StaticAnalysisConfigFormComponent } from './static-analysis-config-form.component';
 
 describe('StaticAnalysisConfigFormComponent', () => {
   let component: StaticAnalysisConfigFormComponent;
@@ -30,15 +30,15 @@ describe('StaticAnalysisConfigFormComponent', () => {
 
   it('should getStaticAnalysisTitle', () => {
     const collectorItem = {
-      description : "example-repo",
-      niceName : "example",
+      description : 'example-repo',
+      niceName : 'example',
     };
     expect(component.getStaticAnalysisTitle(collectorItem)).toEqual('example : example-repo');
     expect(component.getStaticAnalysisTitle(null)).toEqual('');
   });
 
   it('should set widgetConfig', () => {
-    let widgetConfigData = {
+    const widgetConfigData = {
       options: {
         id: 123,
       }

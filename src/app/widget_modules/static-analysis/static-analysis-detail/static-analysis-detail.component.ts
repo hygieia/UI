@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, Output} from '@angular/core';
 import {
   IClickListItemStaticAnalysis
-} from "../../../shared/charts/click-list/click-list-interfaces";
+} from '../../../shared/charts/click-list/click-list-interfaces';
 
 @Component({
   selector: 'app-build-detail',
