@@ -36,7 +36,6 @@ import { IACService } from '../iac.service';
 import { IACCardComponent } from '../iac-card/iac-card.component';
 import { IACStatusBarChartComponent } from '../iac-status-bar-chart/iac-status-bar-chart.component';
 import { IACStatusLineChartComponent } from '../iac-status-line-chart/iac-status-line-chart.component';
-import { IACAdvPieChartComponent } from '../iac-adv-pie-chart/iac-adv-pie-chart.component';
 import {OneChartLayoutComponent} from '../../../shared/layouts/one-chart-layout/one-chart-layout.component';
 
 @Component({

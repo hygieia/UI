@@ -55,7 +55,6 @@ import { IACConfigFormComponent } from '../widget_modules/infrastructure-as-code
 import { IACWidgetComponent } from '../widget_modules/infrastructure-as-code/iac-widget/iac-widget.component';
 import { IACMasterComponent } from '../widget_modules/infrastructure-as-code/iac-master/iac-master.component';
 import { IACCardComponent } from '../widget_modules/infrastructure-as-code/iac-card/iac-card.component';
-import { IACAdvPieChartComponent } from '../widget_modules/infrastructure-as-code/iac-adv-pie-chart/iac-adv-pie-chart.component';
 import { IACStatusBarChartComponent } from '../widget_modules/infrastructure-as-code/iac-status-bar-chart/iac-status-bar-chart.component';
 import { IACStatusLineChartComponent } from '../widget_modules/infrastructure-as-code/iac-status-line-chart/iac-status-line-chart.component';
 import {
@@ -114,7 +113,6 @@ import {StaticAnalysisWidgetComponent} from '../widget_modules/static-analysis/s
     IACWidgetComponent,
     IACMasterComponent,
     IACCardComponent,
-    IACAdvPieChartComponent,
     IACStatusBarChartComponent,
     IACStatusLineChartComponent,
     StaticAnalysisConfigFormComponent,
@@ -153,7 +151,6 @@ import {StaticAnalysisWidgetComponent} from '../widget_modules/static-analysis/s
     IACWidgetComponent,
     IACMasterComponent,
     IACCardComponent,
-    IACAdvPieChartComponent,
     IACStatusBarChartComponent,
     IACStatusLineChartComponent,
     StaticAnalysisConfigFormComponent,
