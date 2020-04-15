@@ -2,14 +2,14 @@
   <!--  <div class="modal-content-main">-->
   <table class ="table-content" modalTypeTag>
     <tr>
+      <th>Build Job</th>
       <th>Status</th>
       <th>Date</th>
-      <th>Url</th>
     </tr>
     <tr *ngFor="let item of this.data">
-      <td class="tableName">{{item?.status}}</td>
-      <td>{{item?.subtitles}}</td>
-      <td><a href="{{item?.url}}">{{item?.regex}}</a></td>
+      <td class="tableName"><a href="{{item?.url}}">{{item?.number}}</a></td>
+      <td>{{item?.status}}</td>
+      <td>{{item?.subtitles | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
     </tr>
   </table>
   <!--  </div>-->

@@ -119,11 +119,7 @@ export class BuildWidgetComponent extends WidgetComponent implements OnInit, Aft
   }
 
   private countBuildsPerDay(builds: IBuild[]): any[] {
-    let regexText = '';
     const dataArray = builds.map(build => {
-      if (build.buildUrl) {
-        regexText = build.buildUrl.match(new RegExp('^(https?:\/\/)?(?:www.)?([^\/]+)'))[0];
-      }
       return {
         status: build.buildStatus,
         subtitles: [
@@ -131,7 +127,7 @@ export class BuildWidgetComponent extends WidgetComponent implements OnInit, Aft
         ],
         time: (build.endTime),
         url: build.buildUrl,
-        regex: regexText
+        number: build.number
       };
     });
     return dataArray;
@@ -165,17 +161,11 @@ export class BuildWidgetComponent extends WidgetComponent implements OnInit, Aft
     };
     const latestBuildData = sorted.map(build => {
       let buildStatusText = '';
-      let regexText = 'N/A';
       const buildStatus = buildStatusTable[build.buildStatus.toLowerCase()] ?
         buildStatusTable[build.buildStatus.toLowerCase()] : DashStatus.FAIL;
       if (buildStatus === DashStatus.FAIL) {
         buildStatusText = '!';
       }
-
-      if (build.buildUrl) {
-        regexText = build.buildUrl.match(new RegExp('^(https?:\/\/)?(?:www.)?([^\/]+)'))[0];
-      }
-
       return {
         status: buildStatus,
         statusText: buildStatusText,
@@ -184,7 +174,7 @@ export class BuildWidgetComponent extends WidgetComponent implements OnInit, Aft
           new Date(build.endTime)
         ],
         url: build.buildUrl,
-        regex: regexText
+        number: build.number
       } as IClickListItem;
     });
     this.charts[1].data = {
