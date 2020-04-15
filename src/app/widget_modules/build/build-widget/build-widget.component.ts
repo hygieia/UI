@@ -20,6 +20,9 @@ import { BuildDetailComponent } from '../build-detail/build-detail.component';
 import { BuildService } from '../build.service';
 import { IBuild } from '../interfaces';
 import { BUILD_CHARTS } from './build-charts';
+import * as _ from 'lodash';
+// @ts-ignore
+import moment from 'moment';
 
 @Component({
   selector: 'app-build-widget',
@@ -111,32 +114,42 @@ export class BuildWidgetComponent extends WidgetComponent implements OnInit, Aft
       && !this.checkBuildStatus(build, 'InProgress'));
     const failedBuilds = result.filter(build => this.checkBuildAfterDate(build, startDate)
       && !this.checkBuildStatus(build, 'InProgress') && !this.checkBuildStatus(build, 'Success'));
-    this.charts[0].data.dataPoints[0].series = this.countBuildsPerDay(allBuilds, startDate);
-    this.charts[0].data.dataPoints[1].series = this.countBuildsPerDay(failedBuilds, startDate);
+    this.charts[0].data.dataPoints[0].series = this.collectDataArray(this.countBuildsPerDay(allBuilds));
+    this.charts[0].data.dataPoints[1].series = this.collectDataArray(this.countBuildsPerDay(failedBuilds));
   }
 
-  private countBuildsPerDay(builds: IBuild[], startDate: Date): any[] {
-    const counts = {};
-    const date = new Date(startDate.getTime());
-    for (let i = 0; i < this.BUILDS_PER_DAY_TIME_RANGE; i++) {
-      counts[this.toMidnight(date).getTime()] = 0;
-      date.setDate(date.getDate() + 1);
-    }
-    builds.forEach(build => {
-      const index = this.toMidnight(new Date(build.endTime)).getTime();
-      counts[index] = counts[index] + 1;
+  private countBuildsPerDay(builds: IBuild[]): any[] {
+    let regexText = '';
+    const dataArray = builds.map(build => {
+      if (build.buildUrl) {
+        regexText = build.buildUrl.match(new RegExp('^(https?:\/\/)?(?:www.)?([^\/]+)'))[0];
+      }
+      return {
+        status: build.buildStatus,
+        subtitles: [
+          new Date(build.endTime)
+        ],
+        time: (build.endTime),
+        url: build.buildUrl,
+        regex: regexText
+      };
     });
-    const dataArray = [];
-    for (const key of Object.keys(counts)) {
-      const data = counts[key];
-      dataArray.push(
+    return dataArray;
+  }
+
+  private collectDataArray(content: any[]) {
+    const dataArrayToSend = [];
+    const groupedResults = _.groupBy(content, (result) => moment(new Date(result.time), 'DD/MM/YYYY').startOf('day'));
+    for (const key of Object.keys(groupedResults)) {
+      dataArrayToSend.push(
         {
-          name: new Date(+key),
-          value: data
+          name: new Date(key),
+          value: groupedResults[key].length,
+          data: groupedResults[key]
         }
       );
     }
-    return dataArray;
+    return dataArrayToSend;
   }
 
   // *********************** LATEST BUILDS *****************************
@@ -152,11 +165,17 @@ export class BuildWidgetComponent extends WidgetComponent implements OnInit, Aft
     };
     const latestBuildData = sorted.map(build => {
       let buildStatusText = '';
+      let regexText = 'N/A';
       const buildStatus = buildStatusTable[build.buildStatus.toLowerCase()] ?
         buildStatusTable[build.buildStatus.toLowerCase()] : DashStatus.FAIL;
       if (buildStatus === DashStatus.FAIL) {
         buildStatusText = '!';
       }
+
+      if (build.buildUrl) {
+        regexText = build.buildUrl.match(new RegExp('^(https?:\/\/)?(?:www.)?([^\/]+)'))[0];
+      }
+
       return {
         status: buildStatus,
         statusText: buildStatusText,
@@ -164,7 +183,8 @@ export class BuildWidgetComponent extends WidgetComponent implements OnInit, Aft
         subtitles: [
           new Date(build.endTime)
         ],
-        url: build.buildUrl
+        url: build.buildUrl,
+        regex: regexText
       } as IClickListItem;
     });
     this.charts[1].data = {
@@ -272,7 +292,7 @@ export class BuildWidgetComponent extends WidgetComponent implements OnInit, Aft
   }
 
   private checkBuildAfterDate(build: IBuild, date: Date): boolean {
-    return build.endTime >= date.getTime();
+    return (build.endTime) >= date.getTime();
   }
 
   private checkBuildStatus(build: IBuild, status: string): boolean {

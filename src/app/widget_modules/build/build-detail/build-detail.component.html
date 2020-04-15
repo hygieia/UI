@@ -1,3 +1,16 @@
-<p>
-  build-detail works!
-</p>
+<div>
+  <!--  <div class="modal-content-main">-->
+  <table class ="table-content" modalTypeTag>
+    <tr>
+      <th>Status</th>
+      <th>Date</th>
+      <th>Url</th>
+    </tr>
+    <tr *ngFor="let item of this.data">
+      <td class="tableName">{{item?.status}}</td>
+      <td>{{item?.subtitles}}</td>
+      <td><a href="{{item?.url}}">{{item?.regex}}</a></td>
+    </tr>
+  </table>
+  <!--  </div>-->
+</div>
