@@ -20,9 +20,9 @@ import { BuildDetailComponent } from '../build-detail/build-detail.component';
 import { BuildService } from '../build.service';
 import { IBuild } from '../interfaces';
 import { BUILD_CHARTS } from './build-charts';
-import * as _ from 'lodash';
 // @ts-ignore
 import moment from 'moment';
+import * as __ from 'lodash';
 
 @Component({
   selector: 'app-build-widget',
@@ -139,7 +139,7 @@ export class BuildWidgetComponent extends WidgetComponent implements OnInit, Aft
 
   private collectDataArray(content: any[]) {
     const dataArrayToSend = [];
-    const groupedResults = _.groupBy(content, (result) => moment(new Date(result.time), 'DD/MM/YYYY').startOf('day'));
+    const groupedResults = __.groupBy(content, (result) => moment(new Date(result.time), 'DD/MM/YYYY').startOf('day'));
     for (const key of Object.keys(groupedResults)) {
       dataArrayToSend.push(
         {
