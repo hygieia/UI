@@ -58,6 +58,11 @@ import { IACCardComponent } from '../widget_modules/infrastructure-as-code/iac-c
 import { IACAdvPieChartComponent } from '../widget_modules/infrastructure-as-code/iac-adv-pie-chart/iac-adv-pie-chart.component';
 import { IACStatusBarChartComponent } from '../widget_modules/infrastructure-as-code/iac-status-bar-chart/iac-status-bar-chart.component';
 import { IACStatusLineChartComponent } from '../widget_modules/infrastructure-as-code/iac-status-line-chart/iac-status-line-chart.component';
+import {
+  StaticAnalysisConfigFormComponent
+} from '../widget_modules/static-analysis/static-anaylsis-config-form/static-analysis-config-form.component';
+import {StaticAnalysisDetailComponent} from '../widget_modules/static-analysis/static-analysis-detail/static-analysis-detail.component';
+import {StaticAnalysisWidgetComponent} from '../widget_modules/static-analysis/static-analysis-widget/static-analysis-widget.component';
 
 @NgModule({
   declarations: [
@@ -111,8 +116,10 @@ import { IACStatusLineChartComponent } from '../widget_modules/infrastructure-as
     IACCardComponent,
     IACAdvPieChartComponent,
     IACStatusBarChartComponent,
-    IACStatusLineChartComponent
-    
+    IACStatusLineChartComponent,
+    StaticAnalysisConfigFormComponent,
+    StaticAnalysisDetailComponent,
+    StaticAnalysisWidgetComponent
   ],
   entryComponents: [
     DeployDetailComponent,
@@ -148,8 +155,11 @@ import { IACStatusLineChartComponent } from '../widget_modules/infrastructure-as
     IACCardComponent,
     IACAdvPieChartComponent,
     IACStatusBarChartComponent,
-    IACStatusLineChartComponent
-    ],
+    IACStatusLineChartComponent,
+    StaticAnalysisConfigFormComponent,
+    StaticAnalysisDetailComponent,
+    StaticAnalysisWidgetComponent
+  ],
   imports: [
     CommonModule,
     DragDropModule,
