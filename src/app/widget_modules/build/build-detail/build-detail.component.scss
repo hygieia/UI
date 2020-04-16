@@ -11,6 +11,8 @@ button {
   background-color: #565859;
   color: lightgrey;
   display: table-row;
+  margin: 0px;
+  padding: 0px;
 }
 
 .table-row {
@@ -28,7 +30,8 @@ a {
   color: white;
 }
 
-.table-cell {
+p {
   display: table-cell;
-  padding: 8px;
+  padding: 12px;
+  padding-left: 50px;
 }

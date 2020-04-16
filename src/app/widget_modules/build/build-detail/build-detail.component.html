@@ -1,24 +1,12 @@
 <div class = "table-content">
   <div class = "table-heading">
-    <div class="table-cell">
       <p>Build Job</p>
-    </div>
-    <div class="table-cell">
       <p>Status</p>
-    </div>
-    <div class="table-cell">
       <p>Date</p>
-    </div>
   </div>
   <div class="table-row" *ngFor="let item of this.data">
-    <div class="table-cell">
       <p class="table-name"><a href="{{item?.url}}">{{item?.number}}</a></p>
-    </div>
-    <div class="table-cell">
-      <p>{{item?.status}}</p>
-    </div>
-    <div class="table-cell">
+      <p>{{item?.statusText}}</p>
       <p>{{item?.subtitles | date: 'yyyy-MM-dd HH:mm:ss'}}</p>
-    </div>
   </div>
 </div>

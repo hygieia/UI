@@ -121,7 +121,7 @@ export class BuildWidgetComponent extends WidgetComponent implements OnInit, Aft
   private countBuildsPerDay(builds: IBuild[]): any[] {
     const dataArray = builds.map(build => {
       return {
-        status: build.buildStatus,
+        statusText: build.buildStatus,
         subtitles: [
           new Date(build.endTime)
         ],
@@ -168,7 +168,7 @@ export class BuildWidgetComponent extends WidgetComponent implements OnInit, Aft
       }
       return {
         status: buildStatus,
-        statusText: buildStatusText,
+        statusText: build.buildStatus,
         title: build.number,
         subtitles: [
           new Date(build.endTime)
