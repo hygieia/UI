@@ -23,7 +23,6 @@ import { TestWidgetComponent } from 'src/app/widget_modules/test/test-widget/tes
 import { TestConfigFormComponent } from 'src/app/widget_modules/test/test-config-form/test-config-form.component';
 import {SecurityScanWidgetComponent} from '../../../widget_modules/security-scan/security-scan-widget/security-scan-widget.component';
 import {SecurityScanConfigComponent} from '../../../widget_modules/security-scan/security-scan-config/security-scan-config.component';
-import {RepoWidgetComponent} from '../../../widget_modules/repo/repo-widget/repo-widget.component';
 import {OSSWidgetComponent} from '../../../widget_modules/opensource-scan/oss-widget/oss-widget.component';
 import {OSSConfigFormComponent} from '../../../widget_modules/opensource-scan/oss-config-form/oss-config-form.component';
 
