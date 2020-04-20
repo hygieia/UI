@@ -1,0 +1,56 @@
+<div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Administer Api Token</h4>
+        <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div style="padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;">
+<form name="cdf" [formGroup]="apiForm" class="form"  novalidate>
+
+    <label class="modal-label">Api User</label>
+    <input type="text" formControlName="apiUser" name="apiUser" class="form-control" placeholder="Api User"
+        autocomplete="off" [ngClass]="{ 'is-invalid': f.apiUser.touched && f.apiUser.errors }" />
+        
+    <div *ngIf="f.apiUser.touched && f.apiUser.errors" class="invalid-feedback">
+        <div *ngIf="f.apiUser.errors.required">Api user name is required</div>
+        <div *ngIf="f.apiUser.errors.minlength">Min length of 6 characters</div>
+        <div *ngIf="f.apiUser.errors.maxlength">Max length of 50 characters</div>
+        <div *ngIf="f.apiUser.errors.pattern">Special character(s) found. Please enter only letters, numbers or spaces.
+        </div>
+    </div>
+    <div *ngIf="apiTokenError" class="invalid-feedback">Error updating api token.</div>
+
+    <br>
+    <label class="modal-label" id="dtLabel">Expiration Date</label>
+    <div class="row">
+        <div class="col-xs-offset-3 col-xs-6">
+            <input type="text" name="expDt" placeholder="yyyy-mm-dd" #d="ngbDatepicker" ngbDatepicker
+                formControlName="date" />
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+            </div>
+        </div>
+    </div>
+
+    <label class="modal-label">Api Key</label>
+    <input type="text" name="apiKey" class="form-control"
+        placeholder="Api Key will only be visible till this dialog box is open" formControlName="apiKey" maxlength="100"
+        autocomplete="off" [ngClass]="{ 'is-invalid': f.apiKey.errors }" />
+    <div *ngIf=" f.apiKey.errors" class="invalid-feedback">
+        <div>Error generating api token</div>
+    </div>
+
+    <!-- <div class="button-row row text-center">
+        <button type="submit" class="btn btn-primary btn-wide">Create</button>
+    </div> -->
+</form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary btn-wide" (click)="submit()">Create</button>
+</div>
+</div>
+</div>

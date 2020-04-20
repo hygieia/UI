@@ -1,0 +1,43 @@
+<div class="widget-modal">
+    <div class="widget-modal-heading">
+        Generate Api Tokens
+    </div>
+    <div class="widget-modal-body">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="text-center" [hidden]="apitokens">Loading Api Tokens...</div>
+                <div [hidden]="!error">
+                    {{error.data}}
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-15">
+                        <div class="btn-block col-xs-15">
+                            <span class="col-xs-3"><h3>Api User</h3></span>
+                            <span class="col-xs-3"><h3>Expiration Date</h3></span>
+                            <span class="col-xs-6"><button type="button" class="btn btn-primary btn-wide pull-right" (click)="generateToken()">New</button>
+                            </span>
+                        </div>
+
+                        <input type="text" class="form-control" id="tokenSearch" placeholder="Filter Api Users" [(ngModel)]="tokenSearch">
+                        <div class="dash-modal-row delete-dashboard-row clearfix"
+                            *ngFor="let apitoken of apitokens | adminfilter:{apiUser:tokenSearch} | orderBy:'apiUser' ">
+                            <div class="btn-block col-xs-15">
+                                <span class="col-xs-3">{{apitoken.apiUser}}</span>
+                                 <span>{{apitoken.expirationDt | date:'MM/dd/yyyy HH:mm:ss'}}</span> 
+                                <a  (click)="deleteToken(apitoken.id)">
+                                  <dash-trash class="clickable pull-right"></dash-trash>
+                                </a>
+                                <dash-edit class="clickable pull-right" (click)="editToken(apitoken)"></dash-edit> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center" [hidden]="!(apitokens && !apitokens.length)">
+                    No results
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
