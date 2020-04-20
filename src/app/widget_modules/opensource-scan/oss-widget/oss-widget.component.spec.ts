@@ -12,6 +12,7 @@ import {NgbModal, NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {OpensourceScanService} from "../opensource-scan.service";
 import {DashboardService} from "../../../shared/dashboard.service";
 import {DashStatus} from "../../../shared/dash-status/DashStatus";
+import {IOpensourceScan} from "../interfaces";
 
 @NgModule({
   declarations: [],
