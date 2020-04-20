@@ -96,6 +96,7 @@ import { DataItem } from './data-item.interfaces';
 })
 export class PieGridComponent extends BaseChartComponent {
   @Input() designatedTotal: number;
+<<<<<<< HEAD
   @Input() tooltipDisabled = false;
   @Input() tooltipText: (o: any) => any;
   @Input() label = 'Total';
@@ -103,6 +104,15 @@ export class PieGridComponent extends BaseChartComponent {
   @Input() activeEntries: any[] = [];
   @Input() customLabelValue: number;
   @Input() useCustomLabelValue = false;
+=======
+  @Input() tooltipDisabled: boolean = false;
+  @Input() tooltipText: (o: any) => any;
+  @Input() label: string = 'Total';
+  @Input() minWidth: number = 150;
+  @Input() activeEntries: any[] = [];
+  @Input() customLabelValue: number;
+  @Input() useCustomLabelValue: boolean = false;
+>>>>>>> added new charts and updated static code analysis widget design
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
