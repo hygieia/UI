@@ -91,41 +91,41 @@ import {
 })
 export class BarHorizontalComponent extends BaseChartComponent {
   @Input() legend = false;
-  @Input() legendTitle: string = 'Legend';
-  @Input() legendPosition: string = 'right';
+  @Input() legendTitle = 'Legend';
+  @Input() legendPosition = 'right';
   @Input() xAxis = false;
   @Input() yAxis = false;
   @Input() showXAxisLabel = false;
   @Input() showYAxisLabel = false;
   @Input() xAxisLabel;
   @Input() yAxisLabel;
-  @Input() tooltipDisabled: boolean = false;
+  @Input() tooltipDisabled = false;
   @Input() gradient: boolean;
-  @Input() showGridLines: boolean = true;
+  @Input() showGridLines = true;
   @Input() activeEntries: any[] = [];
   @Input() schemeType: string;
-  @Input() trimXAxisTicks: boolean = true;
-  @Input() trimYAxisTicks: boolean = true;
-  @Input() rotateXAxisTicks: boolean = true;
-  @Input() maxXAxisTickLength: number = 16;
-  @Input() maxYAxisTickLength: number = 16;
+  @Input() trimXAxisTicks = true;
+  @Input() trimYAxisTicks = true;
+  @Input() rotateXAxisTicks = true;
+  @Input() maxXAxisTickLength = 16;
+  @Input() maxYAxisTickLength = 16;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
   @Input() xAxisTicks: any[];
   @Input() yAxisTicks: any[];
   @Input() barPadding = 8;
-  @Input() roundDomains: boolean = false;
-  @Input() roundEdges: boolean = true;
+  @Input() roundDomains = false;
+  @Input() roundEdges = true;
   @Input() xScaleMax: number;
   @Input() xScaleMin: number;
-  @Input() showDataLabel: boolean = false;
+  @Input() showDataLabel = false;
   @Input() dataLabelFormatting: any;
-  @Input() noBarWhenZero: boolean = true;
+  @Input() noBarWhenZero = true;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
-  @ContentChild('tooltipTemplate',{static: true}) tooltipTemplate: TemplateRef<any>;
+  @ContentChild('tooltipTemplate', { static: true }) tooltipTemplate: TemplateRef<any>;
 
   dims: ViewDimensions;
   yScale: any;
@@ -135,8 +135,8 @@ export class BarHorizontalComponent extends BaseChartComponent {
   transform: string;
   colors: ColorHelper;
   margin = [10, 20, 10, 20];
-  xAxisHeight: number = 0;
-  yAxisWidth: number = 0;
+  xAxisHeight = 0;
+  yAxisWidth = 0;
   legendOptions: any;
   dataLabelMaxWidth: any = { negative: 0, positive: 0 };
 

@@ -2,9 +2,9 @@ import { IChart } from 'src/app/shared/interfaces';
 
 import {NumberCardChartComponent} from '../../../shared/charts/number-card-chart/number-card-chart.component';
 import {ClickListComponent} from '../../../shared/charts/click-list/click-list.component';
-import {PieGridChartComponent} from "../../../shared/charts/pie-grid-chart/pie-grid-chart.component";
-import {IPieGridData} from "../../../shared/charts/pie-grid-chart/pie-grid-interfaces";
-import {DataItem} from "../../../shared/ngx-charts/pie-grid/data-item.interfaces";
+import {PieGridChartComponent} from '../../../shared/charts/pie-grid-chart/pie-grid-chart.component';
+import {IPieGridData} from '../../../shared/charts/pie-grid-chart/pie-grid-interfaces';
+import {DataItem} from '../../../shared/ngx-charts/pie-grid/data-item.interfaces';
 
 export let STATICANALYSIS_CHARTS: IChart[] = [
   {

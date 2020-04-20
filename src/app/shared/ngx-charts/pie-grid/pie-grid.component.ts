@@ -20,7 +20,7 @@ import {
   gridLayout,
   formatLabel
 } from '@swimlane/ngx-charts';
-import { DataItem } from "./data-item.interfaces";
+import { DataItem } from './data-item.interfaces';
 
 // This component is based on the pie grid chart example from ngx-charts.
 // https://github.com/swimlane/ngx-charts/blob/master/projects/swimlane/ngx-charts/src/lib/pie-chart/pie-grid.component.ts
@@ -96,13 +96,13 @@ import { DataItem } from "./data-item.interfaces";
 })
 export class PieGridComponent extends BaseChartComponent {
   @Input() designatedTotal: number;
-  @Input() tooltipDisabled: boolean = false;
+  @Input() tooltipDisabled = false;
   @Input() tooltipText: (o: any) => any;
-  @Input() label: string = 'Total';
-  @Input() minWidth: number = 150;
+  @Input() label = 'Total';
+  @Input() minWidth = 150;
   @Input() activeEntries: any[] = [];
   @Input() customLabelValue: number;
-  @Input() useCustomLabelValue: boolean = false;
+  @Input() useCustomLabelValue = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

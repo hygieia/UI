@@ -1,4 +1,4 @@
-import {DataItem} from "../../ngx-charts/pie-grid/data-item.interfaces";
+import {DataItem} from '../../ngx-charts/pie-grid/data-item.interfaces';
 
 export interface IPieGridData {
   results: DataItem[];

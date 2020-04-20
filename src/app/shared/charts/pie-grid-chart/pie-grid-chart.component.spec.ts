@@ -4,8 +4,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { NgxUIModule } from '@swimlane/ngx-ui';
 
-import { PieGridChartComponent } from "./pie-grid-chart.component";
-import {PieGridComponent} from "../../ngx-charts/pie-grid/pie-grid.component";
+import { PieGridChartComponent } from './pie-grid-chart.component';
+import {PieGridComponent} from '../../ngx-charts/pie-grid/pie-grid.component';
 
 describe('PieGridChartComponent', () => {
   let component: PieGridChartComponent;
