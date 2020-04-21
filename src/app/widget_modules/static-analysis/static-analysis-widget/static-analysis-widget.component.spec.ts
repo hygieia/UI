@@ -12,7 +12,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { StaticAnalysisService } from '../static-analysis.service';
 import { IStaticAnalysis } from '../interfaces';
 import { StaticAnalysisWidgetComponent} from './static-analysis-widget.component';
-import {GET_DASHBOARD_MOCK} from "../../../shared/dashboard.service.mockdata";
+import {GET_DASHBOARD_MOCK} from '../../../shared/dashboard.service.mockdata';
 
 class MockStaticAnalysisService {
 
@@ -186,7 +186,7 @@ describe('StaticAnalysisWidgetComponent', () => {
 
   it('should hit startRefreshInterval with results', () => {
     inject([HttpTestingController, StaticAnalysisWidgetComponent],
-      (httpMock: HttpTestingController, component: StaticAnalysisWidgetComponent) => {
+      (httpMock: HttpTestingController, staticComponent: StaticAnalysisWidgetComponent) => {
         const widgetConfig = {
           name: 'codeAnalysis',
           options: {
@@ -195,38 +195,14 @@ describe('StaticAnalysisWidgetComponent', () => {
           componentId: this.componentId,
           collectorItemId: this.staticAnalysisConfigForm.value.staticAnalysisJob.id
         };
-        component.ngOnInit();
-        component.startRefreshInterval();
+        staticComponent.ngOnInit();
+        staticComponent.startRefreshInterval();
 
         const request = httpMock.expectOne(req => req.method === 'GET');
         request.flush(GET_DASHBOARD_MOCK);
 
         dashboardService.dashboardConfig$.subscribe(dashboard => {
           expect(dashboard).toBeTruthy();
-        });
-      });
-
-  });
-
-  it('should hit startRefreshInterval with NO results', () => {
-    inject([HttpTestingController, StaticAnalysisWidgetComponent],
-      (httpMock: HttpTestingController, component: StaticAnalysisWidgetComponent) => {
-        const widgetConfig = {
-          name: 'codeAnalysis',
-          options: {
-            id: this.widgetConfigId,
-          },
-          componentId: this.componentId,
-          collectorItemId: this.staticAnalysisConfigForm.value.staticAnalysisJob.id
-        };
-
-        const request = httpMock.expectOne(req => req.method === 'GET');
-        request.flush(null);
-
-        component.ngOnInit();
-        component.startRefreshInterval();
-        dashboardService.dashboardConfig$.subscribe(dashboard => {
-          expect(dashboard).toBeFalsy();
         });
       });
 

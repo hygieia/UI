@@ -4,8 +4,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { StaticAnalysisConfigFormComponent } from './static-analysis-config-form.component';
-import {DashboardService} from "../../../shared/dashboard.service";
-import {GET_DASHBOARD_MOCK} from "../../../shared/dashboard.service.mockdata";
+import {DashboardService} from '../../../shared/dashboard.service';
+import {GET_DASHBOARD_MOCK} from '../../../shared/dashboard.service.mockdata';
 
 describe('StaticAnalysisConfigFormComponent', () => {
   let component: StaticAnalysisConfigFormComponent;
