@@ -6,36 +6,18 @@ import {
 	OnDestroy,
 	OnInit,
 	ViewChild,
-	Input,
-	Output,
-	EventEmitter,
-	TemplateRef,
-    Type
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { interval, Observable, of, Subscription, from } from 'rxjs';
+import { Subscription} from 'rxjs';
 import { map } from 'rxjs/operators';
-import { sequenceEqual, switchMap } from 'rxjs/operators';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { distinctUntilChanged, startWith,  take } from 'rxjs/operators';
-import { IClickListData, IClickListItem } from 'src/app/shared/charts/click-list/click-list-interfaces'; ``
-import { DashStatus } from 'src/app/shared/dash-status/DashStatus';
+import { FormBuilder} from '@angular/forms';
 import { DashboardService } from 'src/app/shared/dashboard.service';
 import { LayoutDirective } from 'src/app/shared/layouts/layout.directive';
-import { TwoByTwoLayoutComponent } from 'src/app/shared/layouts/two-by-two-layout/two-by-two-layout.component';
 import { WidgetComponent } from 'src/app/shared/widget/widget.component';
 
 import { CollectorService } from 'src/app/shared/collector.service';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {NgbProgressbarConfig} from '@ng-bootstrap/ng-bootstrap';
-import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { FormsModule } from '@angular/forms';
 import { IACService } from '../iac.service';
-import { IACCardComponent } from '../iac-card/iac-card.component';
-import { IACStatusBarChartComponent } from '../iac-status-bar-chart/iac-status-bar-chart.component';
-import { IACStatusLineChartComponent } from '../iac-status-line-chart/iac-status-line-chart.component';
 import {OneChartLayoutComponent} from '../../../shared/layouts/one-chart-layout/one-chart-layout.component';
 
 @Component({
@@ -45,11 +27,8 @@ import {OneChartLayoutComponent} from '../../../shared/layouts/one-chart-layout/
 })
 export class IACWidgetComponent extends WidgetComponent implements OnInit, AfterViewInit, OnDestroy {
 
-// make it complex and framwowrk oriebnted but one at a time, take one nesting or coplexity at a time
- 
-
   // Reference to the subscription used to refresh the widget
-  private intervalRefreshSubscription: Subscription;
+ // private intervalRefreshSubscription: Subscription;
   @ViewChild(LayoutDirective, {static: false}) childLayoutTag: LayoutDirective;
 
 ngOnInit(){
@@ -110,15 +89,8 @@ startRefreshInterval(){
  
 
 stopRefreshInterval(){
-	console.log("refresh");
 	
 }
-
-
-
-
-
-	
 
 }
 

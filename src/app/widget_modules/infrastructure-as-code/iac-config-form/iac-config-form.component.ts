@@ -9,7 +9,6 @@ import { IACService } from '../iac.service';
 
 import { WidgetHeaderComponent } from 'src/app/shared/widget-header/widget-header.component'
 import {COLLECTOR_TYPE} from '../interfaces';
-//import {Collector} from 'src/app/shared/model/iac-collector';
 
 @Component({
   selector: 'app-iac-config-form',
