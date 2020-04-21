@@ -27,28 +27,6 @@ describe('DashboardService', () => {
       })
   );
 
-  it('should clear a dashboard', () => {
-    const service: DashboardService = TestBed.get(DashboardService);
-
-    // just clear dashboard
-    service.clearDashboard();
-
-    // clear after loading
-    inject([HttpTestingController, DashboardService],
-      (httpMock: HttpTestingController, service: DashboardService) => {
-        service.loadDashboard('123');
-        service.dashboardConfig$.subscribe(dashboard => {
-          expect(dashboard).toBeTruthy();
-        });
-
-        const request = httpMock.expectOne(req => req.method === 'GET');
-        request.flush(GET_DASHBOARD_MOCK);
-
-        service.clearDashboard();
-      });
-
-  });
-
   it('should be able to upsert individual widgets',
     inject([HttpTestingController, DashboardService],
       (httpMock: HttpTestingController, service: DashboardService) => {
