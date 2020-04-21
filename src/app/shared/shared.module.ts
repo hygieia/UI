@@ -50,7 +50,7 @@ import { RepoWidgetComponent } from '../widget_modules/repo/repo-widget/repo-wid
 import { OneByTwoLayoutComponent } from './layouts/one-by-two-layout/one-by-two-layout.component';
 import { FeatureConfigFormComponent } from '../widget_modules/feature/feature-config-form/feature-config-form.component';
 import { FeatureWidgetComponent } from '../widget_modules/feature/feature-widget/feature-widget.component';
-import { FeatureDetailComponent } from '../widget_modules/feature/feature-detail/feature-detail.component';
+import {FeatureDetailComponent} from '../widget_modules/feature/feature-detail/feature-detail.component';
 import { IACConfigFormComponent } from '../widget_modules/infrastructure-as-code/iac-config-form/iac-config-form.component';
 import { IACWidgetComponent } from '../widget_modules/infrastructure-as-code/iac-widget/iac-widget.component';
 import { IACMasterComponent } from '../widget_modules/infrastructure-as-code/iac-master/iac-master.component';
