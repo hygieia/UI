@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, inject, TestBed} from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -12,6 +12,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { StaticAnalysisService } from '../static-analysis.service';
 import { IStaticAnalysis } from '../interfaces';
 import { StaticAnalysisWidgetComponent} from './static-analysis-widget.component';
+import {GET_DASHBOARD_MOCK} from "../../../shared/dashboard.service.mockdata";
 
 class MockStaticAnalysisService {
 
@@ -172,6 +173,10 @@ describe('StaticAnalysisWidgetComponent', () => {
   });
 
   it('should hit stopRefreshInterval', () => {
+    // should go into if statement
+    component.stopRefreshInterval();
+    // if statement resolves to false
+    dashboardService.dashboardConfig$ = null;
     component.stopRefreshInterval();
   });
 
@@ -179,8 +184,52 @@ describe('StaticAnalysisWidgetComponent', () => {
     component.ngAfterViewInit();
   });
 
-  it('should hit startRefreshInterval', () => {
-    component.startRefreshInterval();
+  it('should hit startRefreshInterval with results', () => {
+    inject([HttpTestingController, StaticAnalysisWidgetComponent],
+      (httpMock: HttpTestingController, component: StaticAnalysisWidgetComponent) => {
+        const widgetConfig = {
+          name: 'codeAnalysis',
+          options: {
+            id: this.widgetConfigId,
+          },
+          componentId: this.componentId,
+          collectorItemId: this.staticAnalysisConfigForm.value.staticAnalysisJob.id
+        };
+        component.ngOnInit();
+        component.startRefreshInterval();
+
+        const request = httpMock.expectOne(req => req.method === 'GET');
+        request.flush(GET_DASHBOARD_MOCK);
+
+        dashboardService.dashboardConfig$.subscribe(dashboard => {
+          expect(dashboard).toBeTruthy();
+        });
+      });
+
+  });
+
+  it('should hit startRefreshInterval with NO results', () => {
+    inject([HttpTestingController, StaticAnalysisWidgetComponent],
+      (httpMock: HttpTestingController, component: StaticAnalysisWidgetComponent) => {
+        const widgetConfig = {
+          name: 'codeAnalysis',
+          options: {
+            id: this.widgetConfigId,
+          },
+          componentId: this.componentId,
+          collectorItemId: this.staticAnalysisConfigForm.value.staticAnalysisJob.id
+        };
+
+        const request = httpMock.expectOne(req => req.method === 'GET');
+        request.flush(null);
+
+        component.ngOnInit();
+        component.startRefreshInterval();
+        dashboardService.dashboardConfig$.subscribe(dashboard => {
+          expect(dashboard).toBeFalsy();
+        });
+      });
+
   });
 
   it('should loadEmptyChart', () => {
