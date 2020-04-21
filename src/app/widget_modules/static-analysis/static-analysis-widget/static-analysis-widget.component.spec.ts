@@ -205,24 +205,24 @@ describe('StaticAnalysisWidgetComponent', () => {
     component.generateProjectDetails(null);
   });
 
-  it('should generateViolations', () => {
-    component.generateViolations(staticAnalysisTestData);
-    expect(component.charts[1].data[0].value).toEqual('1');
-    expect(component.charts[1].data[1].value).toEqual('1');
-    expect(component.charts[1].data[2].value).toEqual('1');
-    expect(component.charts[1].data[3].value).toEqual('3');
-
-    // data is null
-    component.generateViolations(null);
-  });
-
   it('should generateCoverage', () => {
     component.generateCoverage(staticAnalysisTestData);
-    expect(component.charts[2].data.dataPoints[0].value).toEqual(55.5);
-    expect(component.charts[2].data.units).toEqual('123 lines of code');
+    expect(component.charts[1].data.results[0].value).toEqual(55.5);
+    expect(component.charts[1].data.customLabelValue).toEqual(123);
 
     // data is null
     component.generateCoverage(null);
+  });
+
+  it('should generateViolations', () => {
+    component.generateViolations(staticAnalysisTestData);
+    expect(component.charts[2].data[0].value).toEqual(1);
+    expect(component.charts[2].data[1].value).toEqual(1);
+    expect(component.charts[2].data[2].value).toEqual(1);
+    expect(component.charts[2].data[3].value).toEqual(3);
+
+    // data is null
+    component.generateViolations(null);
   });
 
   it('should generateUnitTestMetrics', () => {
