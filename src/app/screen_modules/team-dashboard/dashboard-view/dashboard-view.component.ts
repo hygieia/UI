@@ -21,6 +21,8 @@ import {
 import {
   StaticAnalysisConfigFormComponent
 } from '../../../widget_modules/static-analysis/static-anaylsis-config-form/static-analysis-config-form.component';
+import { TestWidgetComponent } from 'src/app/widget_modules/test/test-widget/test-widget.component';
+import { TestConfigFormComponent } from 'src/app/widget_modules/test/test-config-form/test-config-form.component';
 
 @Component({
   selector: 'app-dashboard-view',
@@ -84,11 +86,16 @@ export class DashboardViewComponent extends DashboardComponent implements OnInit
         configForm: StaticAnalysisConfigFormComponent
       },
       {
-        title: 'Placeholder',
-        component: PlaceholderWidgetComponent,
+        title: 'Test',
+        component: TestWidgetComponent,
         status: 'Success',
+<<<<<<< HEAD
         widgetSize: 'col-xl-2',
         configForm: BuildConfigFormComponent
+=======
+        widgetSize: 'col-xl-4',
+        configForm: TestConfigFormComponent
+>>>>>>> Add test result viewer for quality widget
       }
     ];
   }

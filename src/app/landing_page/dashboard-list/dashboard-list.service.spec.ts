@@ -19,7 +19,7 @@ describe('DashboardListService', () => {
     expect(dashboardListService).toBeTruthy();
   });
   it('should call getAllDashboards', () => {
-    const dashboardListResponse = [
+    const dashboardListResponse = 
       {
         data: [
           { title: 'test'},
@@ -27,7 +27,7 @@ describe('DashboardListService', () => {
           { title: 'test2'}
         ],
         total: '3'
-      }];
+      };
     let response;
     spyOn(dashboardListService, 'getAllDashboards').and.returnValue(of(dashboardListResponse));
 
@@ -38,7 +38,7 @@ describe('DashboardListService', () => {
     expect(response).toEqual(dashboardListResponse);
   });
   it('should call getMyDashboards', () => {
-    const dashboardListResponse = [
+    const dashboardListResponse = 
       {
         data: [
           { title: 'test'},
@@ -46,7 +46,7 @@ describe('DashboardListService', () => {
           { title: 'test2'}
         ],
         total: '3'
-      }];
+      };
     let response;
     spyOn(dashboardListService, 'getMyDashboards').and.returnValue(of(dashboardListResponse));
 

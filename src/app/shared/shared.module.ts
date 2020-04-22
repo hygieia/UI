@@ -61,6 +61,10 @@ import {BarHorizontalComponent} from './ngx-charts/bar-horizontal/bar-horizontal
 import {PieGridChartComponent} from './charts/pie-grid-chart/pie-grid-chart.component';
 import {PieGridComponent} from './ngx-charts/pie-grid/pie-grid.component';
 
+import { TestConfigFormComponent } from '../widget_modules/test/test-config-form/test-config-form.component';
+import { TestDetailComponent } from '../widget_modules/test/test-detail/test-detail.component';
+import { TestWidgetComponent } from '../widget_modules/test/test-widget/test-widget.component';
+
 @NgModule({
   declarations: [
     DeployConfigFormComponent,
@@ -113,7 +117,10 @@ import {PieGridComponent} from './ngx-charts/pie-grid/pie-grid.component';
     GaugeChartComponent,
     StaticAnalysisConfigFormComponent,
     StaticAnalysisDetailComponent,
-    StaticAnalysisWidgetComponent
+    StaticAnalysisWidgetComponent,
+    TestConfigFormComponent, 
+    TestDetailComponent, 
+    TestWidgetComponent
   ],
   entryComponents: [
     DeployDetailComponent,
@@ -149,7 +156,11 @@ import {PieGridComponent} from './ngx-charts/pie-grid/pie-grid.component';
     TwoByTwoLayoutComponent,
     StaticAnalysisConfigFormComponent,
     StaticAnalysisDetailComponent,
-    StaticAnalysisWidgetComponent
+    StaticAnalysisWidgetComponent,
+    TwoByTwoLayoutComponent,
+    TestConfigFormComponent, 
+    TestDetailComponent, 
+    TestWidgetComponent
   ],
   imports: [
     CommonModule,
