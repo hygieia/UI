@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams} from "@angular/common/http";
-import {map} from "rxjs/operators";
-import {Observable} from "rxjs";
-import {ISecurityScan, ISecurityScanResponse} from "./security-scan-interfaces";
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {ISecurityScan, ISecurityScanResponse} from './security-scan-interfaces';
 
 @Injectable({
   providedIn: 'root'

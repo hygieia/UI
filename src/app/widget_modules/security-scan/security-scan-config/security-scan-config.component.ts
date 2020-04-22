@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
-import {CollectorService} from "../../../shared/collector.service";
-import {DashboardService} from "../../../shared/dashboard.service";
-import {catchError, debounceTime, distinctUntilChanged, map, switchMap, take, tap} from "rxjs/operators";
-import {Observable, of} from "rxjs";
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {CollectorService} from '../../../shared/collector.service';
+import {DashboardService} from '../../../shared/dashboard.service';
+import {catchError, debounceTime, distinctUntilChanged, map, switchMap, take, tap} from 'rxjs/operators';
+import {Observable, of} from 'rxjs';
 
 @Component({
   selector: 'app-security-scan-config',
@@ -48,7 +48,7 @@ export class SecurityScanConfigComponent implements OnInit {
 
   private createForm() {
     this.securityConfigForm = this.formBuilder.group({
-      sJob:''
+      sJob: ''
     });
   }
 
@@ -106,7 +106,7 @@ export class SecurityScanConfigComponent implements OnInit {
         }
         return of(null);
       })).subscribe(collectorData => {
-      if(collectorData) {
+      if (collectorData) {
         this.securityConfigForm.get('sJob').setValue(collectorData);
       }
     });

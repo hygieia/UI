@@ -1,8 +1,8 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SecurityScanConfigComponent } from './security-scan-config.component';
-import {ReactiveFormsModule} from "@angular/forms";
-import {NgbActiveModal, NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {ReactiveFormsModule} from '@angular/forms';
+import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 describe('SecurityScanConfigComponent', () => {
   let component: SecurityScanConfigComponent;

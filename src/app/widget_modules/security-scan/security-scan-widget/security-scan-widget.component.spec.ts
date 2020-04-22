@@ -1,46 +1,46 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SecurityScanWidgetComponent } from './security-scan-widget.component';
-import {SecurityScanService} from "../security-scan.service";
-import {DashboardService} from "../../../shared/dashboard.service";
-import {NgbModal, NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {Observable, of} from "rxjs";
-import {ISecurityScan} from "../security-scan-interfaces";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {SharedModule} from "../../../shared/shared.module";
-import {CommonModule} from "@angular/common";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {RouterModule} from "@angular/router";
-import {NgModule, NO_ERRORS_SCHEMA} from "@angular/core";
+import {SecurityScanService} from '../security-scan.service';
+import {DashboardService} from '../../../shared/dashboard.service';
+import {NgbModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {Observable, of} from 'rxjs';
+import {ISecurityScan} from '../security-scan-interfaces';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {SharedModule} from '../../../shared/shared.module';
+import {CommonModule} from '@angular/common';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {RouterModule} from '@angular/router';
+import {NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 
 class MockSecurityScanService {
   mockSecurityScanData = {
     result: [
       {
-        id: "testId",
-        collectorItemId: "testCollItemId",
+        id: 'testId',
+        collectorItemId: 'testCollItemId',
         timestamp: 1234,
-        type: "SecurityAnalysis",
+        type: 'SecurityAnalysis',
         metrics: [
           {
-            name: "High",
-            value: "6",
-            formattedValue: "6",
-            status: "Alert"
+            name: 'High',
+            value: '6',
+            formattedValue: '6',
+            status: 'Alert'
           },
           {
-            name: "Score",
-            value: "62",
-            formattedValue: "62"
+            name: 'Score',
+            value: '62',
+            formattedValue: '62'
           },
         ]
       }
     ],
     lastUpdated: 1234,
-    reportUrl: "https://testscan.com/testComponent/report.html"
+    reportUrl: 'https://testscan.com/testComponent/report.html'
   };
 
-  getSecurityScanDetails(componentId : string, max: number): Observable<ISecurityScan[]> {
+  getSecurityScanDetails(componentId: string, max: number): Observable<ISecurityScan[]> {
     return of(this.mockSecurityScanData.result as ISecurityScan[]);
   }
 }
@@ -58,6 +58,17 @@ describe('SecurityScanWidgetComponent', () => {
   let dashboardService: DashboardService;
   let modalService: NgbModule;
   let fixture: ComponentFixture<SecurityScanWidgetComponent>;
+  const mockSecurityScan: ISecurityScan = {
+    id: 'testId',
+    collectorItemId: 'testCollItemId',
+    timestamp: 1234,
+    type: 'SecurityAnalysis',
+    metrics: [{
+        name: 'High',
+        value: '6',
+        formattedValue: '6',
+        status: 'Alert'
+      }]} as ISecurityScan;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -81,6 +92,8 @@ describe('SecurityScanWidgetComponent', () => {
     fixture.detectChanges();
     expect(component).toBeTruthy();
     expect(securityScanService).toBeTruthy();
+    expect(dashboardService).toBeTruthy();
+    expect(modalService).toBeTruthy();
   });
 
   it('should create chart', () => {

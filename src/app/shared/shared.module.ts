@@ -56,8 +56,8 @@ import {
 } from '../widget_modules/static-analysis/static-anaylsis-config-form/static-analysis-config-form.component';
 import {StaticAnalysisDetailComponent} from '../widget_modules/static-analysis/static-analysis-detail/static-analysis-detail.component';
 import {StaticAnalysisWidgetComponent} from '../widget_modules/static-analysis/static-analysis-widget/static-analysis-widget.component';
-import {SecurityScanConfigComponent} from "../widget_modules/security-scan/security-scan-config/security-scan-config.component";
-import {SecurityScanWidgetComponent} from "../widget_modules/security-scan/security-scan-widget/security-scan-widget.component";
+import {SecurityScanConfigComponent} from '../widget_modules/security-scan/security-scan-config/security-scan-config.component';
+import {SecurityScanWidgetComponent} from '../widget_modules/security-scan/security-scan-widget/security-scan-widget.component';
 
 @NgModule({
   declarations: [

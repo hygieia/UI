@@ -7,21 +7,21 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-import {WidgetComponent} from "../../../shared/widget/widget.component";
-import {DashboardService} from "../../../shared/dashboard.service";
-import {ActivatedRoute} from "@angular/router";
-import {SecurityScanService} from "../security-scan.service";
-import {catchError, distinctUntilChanged, startWith, switchMap} from "rxjs/operators";
-import {LayoutDirective} from "../../../shared/layouts/layout.directive";
-import {ISecurityScan} from "../security-scan-interfaces";
-import {of, Subscription} from "rxjs";
-import {SECURITY_SCAN_CHARTS} from "../security-scan-widget/security-scan-charts";
+import {WidgetComponent} from '../../../shared/widget/widget.component';
+import {DashboardService} from '../../../shared/dashboard.service';
+import {ActivatedRoute} from '@angular/router';
+import {SecurityScanService} from '../security-scan.service';
+import {catchError, distinctUntilChanged, startWith, switchMap} from 'rxjs/operators';
+import {LayoutDirective} from '../../../shared/layouts/layout.directive';
+import {ISecurityScan} from '../security-scan-interfaces';
+import {of, Subscription} from 'rxjs';
+import {SECURITY_SCAN_CHARTS} from '../security-scan-widget/security-scan-charts';
 import {
   IClickListData,
   IClickListItem,
-} from "../../../shared/charts/click-list/click-list-interfaces";
-import {OneChartLayoutComponent} from "../../../shared/layouts/one-chart-layout/one-chart-layout.component";
-import {DashStatus} from "../../../shared/dash-status/DashStatus";
+} from '../../../shared/charts/click-list/click-list-interfaces';
+import {OneChartLayoutComponent} from '../../../shared/layouts/one-chart-layout/one-chart-layout.component';
+import {DashStatus} from '../../../shared/dash-status/DashStatus';
 
 @Component({
   selector: 'app-security-scan-widget',
@@ -74,7 +74,7 @@ export class SecurityScanWidgetComponent extends WidgetComponent implements OnIn
           .pipe(catchError(err => of(err)));
         // );
       })).subscribe(result => {
-      if (result && result.length > 0){
+      if (result && result.length > 0) {
         this.loadCharts(result);
       }
       super.loadComponent(this.childLayoutTag);
@@ -93,12 +93,12 @@ export class SecurityScanWidgetComponent extends WidgetComponent implements OnIn
 
   generateSecurityScanData(result: ISecurityScan[]) {
     const sData = result[0].metrics.map(metric => {
-      const status = metric.name ==='High' ? DashStatus.CRITICAL : (metric.name === 'Medium' ?
+      const riskStatus = metric.name === 'High' ? DashStatus.CRITICAL : (metric.name === 'Medium' ?
         DashStatus.WARN : DashStatus.PASS);
       return {
         title: metric.name,
         subtitles : [metric.value],
-        status: status,
+        status: riskStatus,
         statusText: metric.status,
       } as IClickListItem;
     });
