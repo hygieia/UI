@@ -8,6 +8,17 @@ describe('SecurityScanConfigComponent', () => {
   let component: SecurityScanConfigComponent;
   let fixture: ComponentFixture<SecurityScanConfigComponent>;
 
+  const secScanCollectorItem = {
+    id: '1234',
+    description: 'scan1',
+    collectorId: '4321',
+    collector: {
+      id: '4321',
+      name: 'Scanner',
+      collectorType: 'StaticSecurityScan'
+    }
+  }
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, ReactiveFormsModule, NgbModule],
@@ -42,5 +53,18 @@ describe('SecurityScanConfigComponent', () => {
 
   it('should call ngOnInit()', () => {
     component.ngOnInit();
+  });
+
+  it('should get security scan job title', () => {
+    const secJobTitle = component.getSecurityJobTitle(secScanCollectorItem);
+    expect(secJobTitle).toEqual('Scanner : scan1');
+  });
+
+  it('should assign selected job after submit', () => {
+    component.createForm()
+    expect(component.securityConfigForm.get('sJob').value).toEqual('');
+    component.securityConfigForm = component.formBuilder.group({sJob: 'secJob1'});
+    component.submitForm();
+    expect(component.securityConfigForm.get('sJob').value).toEqual('secJob1'); 
   });
 });

@@ -39,14 +39,14 @@ export class SecurityScanConfigComponent implements OnInit {
 
   constructor(
     public activeModal: NgbActiveModal,
-    private formBuilder: FormBuilder,
+    public formBuilder: FormBuilder,
     private collectorService: CollectorService,
     private dashboardService: DashboardService
   ) {
     this.createForm();
   }
 
-  private createForm() {
+  createForm() {
     this.securityConfigForm = this.formBuilder.group({
       sJob: ''
     });

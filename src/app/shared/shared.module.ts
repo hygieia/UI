@@ -18,7 +18,7 @@ import { ClickListComponent } from './charts/click-list/click-list.component';
 import { ComboChartComponent } from './charts/combo-chart/combo-chart.component';
 import { ComboSeriesVerticalComponent } from './charts/combo-series-vertical/combo-series-vertical.component';
 import { GaugeChartComponent } from './charts/gauge-chart/gauge-chart.component';
-import { LineAndBarChartComponent } from './charts/line-and-bar-chart/line-and-bar-chart.component';
+import { LineAndBarChartComponent } from './ngx-charts/line-and-bar-chart/line-and-bar-chart.component';
 import { LineChartComponent } from './charts/line-chart/line-chart.component';
 import { NumberCardChartComponent } from './charts/number-card-chart/number-card-chart.component';
 import { PlainTextChartComponent } from './charts/plain-text-chart/plain-text-chart.component';
@@ -58,10 +58,15 @@ import {StaticAnalysisDetailComponent} from '../widget_modules/static-analysis/s
 import {StaticAnalysisWidgetComponent} from '../widget_modules/static-analysis/static-analysis-widget/static-analysis-widget.component';
 import {SecurityScanConfigComponent} from '../widget_modules/security-scan/security-scan-config/security-scan-config.component';
 import {SecurityScanWidgetComponent} from '../widget_modules/security-scan/security-scan-widget/security-scan-widget.component';
+import { HorizontalBarChartComponent } from './charts/horizontal-bar-chart/horizontal-bar-chart.component';
+import {BarHorizontalComponent} from './ngx-charts/bar-horizontal/bar-horizontal.component';
+import {PieGridChartComponent} from './charts/pie-grid-chart/pie-grid-chart.component';
+import {PieGridComponent} from './ngx-charts/pie-grid/pie-grid.component';
 
 @NgModule({
   declarations: [
     DeployConfigFormComponent,
+    BarHorizontalComponent,
     BaseTemplateComponent,
     BuildConfigFormComponent,
     BuildDetailComponent,
@@ -81,6 +86,7 @@ import {SecurityScanWidgetComponent} from '../widget_modules/security-scan/secur
     FeatureWidgetComponent,
     FormModalComponent,
     FormModalDirective,
+    HorizontalBarChartComponent,
     LayoutComponent,
     LayoutDirective,
     LineAndBarChartComponent,
@@ -89,6 +95,8 @@ import {SecurityScanWidgetComponent} from '../widget_modules/security-scan/secur
     NumberCardChartComponent,
     OneByTwoLayoutComponent,
     PaginationComponent,
+    PieGridComponent,
+    PieGridChartComponent,
     PlaceholderWidgetComponent,
     RepoConfigFormComponent,
     RepoDetailComponent,
@@ -115,6 +123,7 @@ import {SecurityScanWidgetComponent} from '../widget_modules/security-scan/secur
     DeployDetailComponent,
     DeployWidgetComponent,
     DeployConfigFormComponent,
+    BarHorizontalComponent,
     BuildConfigFormComponent,
     BuildDetailComponent,
     BuildWidgetComponent,
@@ -128,11 +137,14 @@ import {SecurityScanWidgetComponent} from '../widget_modules/security-scan/secur
     FeatureWidgetComponent,
     FormModalComponent,
     GaugeChartComponent,
+    HorizontalBarChartComponent,
     LineAndBarChartComponent,
     LineChartComponent,
     NumberCardChartComponent,
     OneByTwoLayoutComponent,
     OneChartLayoutComponent,
+    PieGridComponent,
+    PieGridChartComponent,
     PlaceholderWidgetComponent,
     PlainTextChartComponent,
     RepoDetailComponent,
@@ -155,6 +167,7 @@ import {SecurityScanWidgetComponent} from '../widget_modules/security-scan/secur
     ReactiveFormsModule
   ],
   exports: [
+    BarHorizontalComponent,
     BuildWidgetComponent,
     CaponeTemplateComponent,
     ChartComponent,
@@ -162,6 +175,7 @@ import {SecurityScanWidgetComponent} from '../widget_modules/security-scan/secur
     ComboChartComponent,
     ComboSeriesVerticalComponent,
     CommonModule,
+    HorizontalBarChartComponent,
     LayoutComponent,
     LayoutDirective,
     LineAndBarChartComponent,
@@ -169,6 +183,8 @@ import {SecurityScanWidgetComponent} from '../widget_modules/security-scan/secur
     NumberCardChartComponent,
     OneByTwoLayoutComponent,
     PaginationComponent,
+    PieGridComponent,
+    PieGridChartComponent,
     ReactiveFormsModule,
     TemplatesDirective,
     TwoByTwoLayoutComponent,
