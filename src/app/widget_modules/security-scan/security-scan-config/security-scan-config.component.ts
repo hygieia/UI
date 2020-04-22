@@ -40,8 +40,8 @@ export class SecurityScanConfigComponent implements OnInit {
   constructor(
     public activeModal: NgbActiveModal,
     public formBuilder: FormBuilder,
-    private collectorService: CollectorService,
-    private dashboardService: DashboardService
+    public collectorService: CollectorService,
+    public dashboardService: DashboardService
   ) {
     this.createForm();
   }
@@ -88,7 +88,7 @@ export class SecurityScanConfigComponent implements OnInit {
     this.activeModal.close(newConfig);
   }
 
-  private loadSavedSecurityJob() {
+  loadSavedSecurityJob() {
     this.dashboardService.dashboardConfig$.pipe(take(1),
       map(dashboard => {
         const securityCollector = dashboard.application.components[0].collectorItems.StaticSecurityScan;
