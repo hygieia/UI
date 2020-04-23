@@ -1,11 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { NgbModal, NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-import {Observable, of} from 'rxjs';
 import { TestConfigFormComponent } from './test-config-form.component';
-import { ReactiveFormsModule, FormArray } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('TestConfigFormComponent', () => {
   let component: TestConfigFormComponent;
