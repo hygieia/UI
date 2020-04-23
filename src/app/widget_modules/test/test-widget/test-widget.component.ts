@@ -20,7 +20,7 @@ import {
   take
 } from 'rxjs/operators';
 import { LayoutDirective } from 'src/app/shared/layouts/layout.directive';
-import { Subscription, of, Observable, forkJoin } from 'rxjs';
+import { Subscription, of } from 'rxjs';
 import { ITest, TestType } from '../interfaces';
 import { IClickListItemTest, IClickListData } from 'src/app/shared/charts/click-list/click-list-interfaces';
 import { TestDetailComponent } from '../test-detail/test-detail.component';

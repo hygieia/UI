@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Observable, of, ReplaySubject } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { TestWidgetComponent } from './test-widget.component'
 import { ITest, TestType } from '../interfaces';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
@@ -11,7 +11,6 @@ import { NgbModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { TestService } from '../test.service';
 import { DashboardService } from 'src/app/shared/dashboard.service';
-import { IClickListItemTest } from 'src/app/shared/charts/click-list/click-list-interfaces';
 
 class MockTestService {
   mockTestData = {
