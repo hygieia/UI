@@ -21,6 +21,8 @@ import {
 import {
   StaticAnalysisConfigFormComponent
 } from '../../../widget_modules/static-analysis/static-anaylsis-config-form/static-analysis-config-form.component';
+import {IACConfigFormComponent} from '../../../widget_modules/infrastructure-as-code/iac-config-form/iac-config-form.component';
+import {IACWidgetComponent} from '../../../widget_modules/infrastructure-as-code/iac-widget/iac-widget.component';
 
 @Component({
   selector: 'app-dashboard-view',
@@ -84,11 +86,11 @@ export class DashboardViewComponent extends DashboardComponent implements OnInit
         configForm: StaticAnalysisConfigFormComponent
       },
       {
-        title: 'Placeholder',
-        component: PlaceholderWidgetComponent,
+        title: 'Infrastructure As Code',
+        component: IACWidgetComponent,
         status: 'Success',
         widgetSize: 'col-xl-2',
-        configForm: BuildConfigFormComponent
+        configForm: IACConfigFormComponent
       }
     ];
   }

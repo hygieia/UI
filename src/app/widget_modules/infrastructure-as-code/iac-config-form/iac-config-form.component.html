@@ -1,0 +1,47 @@
+  <div class="modal-body">
+<form [formGroup]="iacConfigForm" (ngSubmit)="submitForm()">
+    <div class="container">
+      <!-- <div class="form-group">
+        <label class="modal-label" for="apiToken">Terraform API Token</label>
+        <input id="apiToken" type="search" class="form-control" [class.is-invalid]="searchFailed" formControlName="iacJob"
+       [ngbTypeahead]="typeAheadResults" [inputFormatter]="getIACTitle" [resultFormatter]="getIACTitle" placeholder="IAC Job" required/>
+        <span *ngIf="searching">searching...</span>
+        <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
+      </div> -->
+      <div class="form-group">
+        <label class="modal-label" for="apiToken">API Token</label>
+        <div class="input-group mb-3">
+          <input id="apiToken" type="text" class="form-control" placeholder="API Token" aria-label="API Token"
+              formControlName="apiToken" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="modal-label" for="description">Description</label>
+        <div class="input-group mb-3">
+          <textarea id="description"  class="form-control" placeholder="Description" aria-label="Description"
+              formControlName="description" ></textarea>
+        </div>
+      </div>
+      <!-- <div class="form-group">
+        <label class="modal-label" for="consecutive-failure-threshold">Alert Takeover Criteria</label>
+        <div class="input-group mb-3">
+          <input id="consecutive-failure-threshold" type="text" class="form-control" placeholder="Alert Takeover Criteria" aria-label="Alert Takeover Criteria"
+            aria-describedby="consecutive-iac-fails" formControlName="consecutiveFailureThreshold" required>
+          <div class="input-group-append">
+            <span class="input-group-text" id="consecutive-iac-fails">consecutive iac fails</span>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  <div class="modal-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col text-center">
+          <button class="btn btn-primary btn-lg" [disabled]="!iacConfigForm.valid">
+            Save Details
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

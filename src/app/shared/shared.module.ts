@@ -60,6 +60,12 @@ import { HorizontalBarChartComponent } from './charts/horizontal-bar-chart/horiz
 import {BarHorizontalComponent} from './ngx-charts/bar-horizontal/bar-horizontal.component';
 import {PieGridChartComponent} from './charts/pie-grid-chart/pie-grid-chart.component';
 import {PieGridComponent} from './ngx-charts/pie-grid/pie-grid.component';
+import { IACConfigFormComponent } from '../widget_modules/infrastructure-as-code/iac-config-form/iac-config-form.component';
+import { IACWidgetComponent } from '../widget_modules/infrastructure-as-code/iac-widget/iac-widget.component';
+import { IACMasterComponent } from '../widget_modules/infrastructure-as-code/iac-master/iac-master.component';
+import { IACCardComponent } from '../widget_modules/infrastructure-as-code/iac-card/iac-card.component';
+import { IACStatusBarChartComponent } from '../widget_modules/infrastructure-as-code/iac-status-bar-chart/iac-status-bar-chart.component';
+import { IACStatusLineChartComponent } from '../widget_modules/infrastructure-as-code/iac-status-line-chart/iac-status-line-chart.component';
 
 @NgModule({
   declarations: [
@@ -113,7 +119,13 @@ import {PieGridComponent} from './ngx-charts/pie-grid/pie-grid.component';
     GaugeChartComponent,
     StaticAnalysisConfigFormComponent,
     StaticAnalysisDetailComponent,
-    StaticAnalysisWidgetComponent
+    StaticAnalysisWidgetComponent,
+    	IACConfigFormComponent,
+    IACWidgetComponent,
+    IACMasterComponent,
+    IACCardComponent,
+    IACStatusBarChartComponent,
+    IACStatusLineChartComponent
   ],
   entryComponents: [
     DeployDetailComponent,
@@ -149,7 +161,13 @@ import {PieGridComponent} from './ngx-charts/pie-grid/pie-grid.component';
     TwoByTwoLayoutComponent,
     StaticAnalysisConfigFormComponent,
     StaticAnalysisDetailComponent,
-    StaticAnalysisWidgetComponent
+    StaticAnalysisWidgetComponent,
+    	IACConfigFormComponent,
+    IACWidgetComponent,
+    IACMasterComponent,
+    IACCardComponent,
+    IACStatusBarChartComponent,
+    IACStatusLineChartComponent
   ],
   imports: [
     CommonModule,
