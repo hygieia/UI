@@ -89,13 +89,8 @@ export class DashboardViewComponent extends DashboardComponent implements OnInit
         title: 'Test',
         component: TestWidgetComponent,
         status: 'Success',
-<<<<<<< HEAD
         widgetSize: 'col-xl-2',
-        configForm: BuildConfigFormComponent
-=======
-        widgetSize: 'col-xl-4',
         configForm: TestConfigFormComponent
->>>>>>> Add test result viewer for quality widget
       }
     ];
   }
