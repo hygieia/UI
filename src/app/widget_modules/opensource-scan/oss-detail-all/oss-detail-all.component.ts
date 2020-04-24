@@ -21,6 +21,8 @@ export class OSSDetailAllComponent implements OnInit {
 
   @Input()
   set detailData(data: any) {
-    this.data = data;
+    if (data) {
+      this.data = data.items;
+    }
   }
 }
