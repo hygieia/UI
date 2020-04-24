@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable, of } from 'rxjs';
-import { TestWidgetComponent } from './test-widget.component'
+import { TestWidgetComponent } from './test-widget.component';
 import { ITest, TestType } from '../interfaces';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -16,8 +16,7 @@ class MockTestService {
   mockTestData = {
     results: [
     ]
-
-  }
+  };
 
   fetchTestResults(): Observable<ITest[]> {
     return of(this.mockTestData.results);
@@ -62,7 +61,7 @@ describe('TestWidgetComponent', () => {
 
     testResultData = [{
       result: {},
-      description: "description",
+      description: 'description',
       timestamp: 1,
       executionId: '1',
       duration: 1,
@@ -77,21 +76,21 @@ describe('TestWidgetComponent', () => {
       testCapabilities: [{}],
     }] as ITest[];
 
-    testCollectorItem = { 
-      _id : "id1234",
-      description : "Testtool : 123", 
-      niceName : "Testtool", 
-      enabled : true, 
+    testCollectorItem = {
+      _id : 'id1234',
+      description : 'Testtool : 123',
+      niceName : 'Testtool',
+      enabled : true,
       errors : [],
-      pushed : true, 
-      collectorId : "1234", 
-      lastUpdated : 1586901809977, 
+      pushed : true,
+      collectorId : '1234',
+      lastUpdated : 1586901809977,
       options : {
-          jobName : "testpipeline1234", 
-          instanceUrl : "url", 
-          testType : "Functional"
+          jobName : 'testpipeline1234',
+          instanceUrl : 'url',
+          testType : 'Functional'
       }
-  }
+    };
   }));
 
   beforeEach(() => {
@@ -144,11 +143,11 @@ describe('TestWidgetComponent', () => {
 
   it('should generate chart', () => {
     component.generateTestChart(testResultData);
-    expect(component.charts[0]).toBeTruthy;
+    expect(component.charts[0]).toBeTruthy();
   });
 
   it('should format title correctly', () => {
-    expect(component.formatTitle('123456', 6)).toBe('123...')
+    expect(component.formatTitle('123456', 6)).toBe('123...');
     expect(component.formatTitle('123456789', 8)).toBe('12345...');
   });
 

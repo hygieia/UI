@@ -118,8 +118,8 @@ import { TestWidgetComponent } from '../widget_modules/test/test-widget/test-wid
     StaticAnalysisConfigFormComponent,
     StaticAnalysisDetailComponent,
     StaticAnalysisWidgetComponent,
-    TestConfigFormComponent, 
-    TestDetailComponent, 
+    TestConfigFormComponent,
+    TestDetailComponent,
     TestWidgetComponent
   ],
   entryComponents: [
@@ -158,8 +158,8 @@ import { TestWidgetComponent } from '../widget_modules/test/test-widget/test-wid
     StaticAnalysisDetailComponent,
     StaticAnalysisWidgetComponent,
     TwoByTwoLayoutComponent,
-    TestConfigFormComponent, 
-    TestDetailComponent, 
+    TestConfigFormComponent,
+    TestDetailComponent,
     TestWidgetComponent
   ],
   imports: [

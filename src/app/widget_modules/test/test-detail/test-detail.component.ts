@@ -11,7 +11,7 @@ export class TestDetailComponent implements OnInit {
   @Input() detailView: Type<any>;
 
   public data: any;
-  
+
   constructor(
     public activeModal: NgbActiveModal
   ) { }
@@ -24,7 +24,7 @@ export class TestDetailComponent implements OnInit {
   }
 
   hasData() {
-    return this.data != undefined;
+    return this.data !== undefined;
   }
- 
+
 }

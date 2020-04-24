@@ -19,8 +19,7 @@ describe('DashboardListService', () => {
     expect(dashboardListService).toBeTruthy();
   });
   it('should call getAllDashboards', () => {
-    const dashboardListResponse = 
-      {
+    const dashboardListResponse = {
         data: [
           { title: 'test'},
           { title: 'test1'},
@@ -38,8 +37,7 @@ describe('DashboardListService', () => {
     expect(response).toEqual(dashboardListResponse);
   });
   it('should call getMyDashboards', () => {
-    const dashboardListResponse = 
-      {
+    const dashboardListResponse = {
         data: [
           { title: 'test'},
           { title: 'test1'},

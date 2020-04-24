@@ -15,7 +15,7 @@ describe('TestConfigFormComponent', () => {
       imports: [ReactiveFormsModule, NgbModule, SharedModule, HttpClientTestingModule],
       providers: [NgbActiveModal]
     })
-    
+
     .compileComponents();
   }));
 
@@ -31,32 +31,32 @@ describe('TestConfigFormComponent', () => {
 
   it('should call ngOnInit()', () => {
     component.ngOnInit();
-  })
+  });
 
   it('should set widget config', () => {
     const widgetConfigData = {
       options: {
-        id: "test0"
+        id: 'test0'
       }
     };
     component.widgetConfig = widgetConfigData;
     component.widgetConfig = null;
-  })
+  });
 
   it('should get test result title', () => {
     const collectorItem = {
-      niceName: "niceName",
-      description: "description",
+      niceName: 'niceName',
+      description: 'description',
       options: {
         id: 123,
         testType: 'Functional',
         jobName: 'job name',
         instanceUrl: 'instanceUrl'
       }
-    }
+    };
     expect(component.getTestResultTitle(collectorItem)).toBe('niceName : description');
   });
-  
+
   it('should get/add functional tests', () => {
     expect(component.functionalTests.controls.length).toBe(0);
     component.addFunctionalTest();
@@ -71,6 +71,6 @@ describe('TestConfigFormComponent', () => {
     expect(component.performanceTests.controls.length).toBe(1);
     component.addPerformanceTest();
     expect(component.performanceTests.controls.length).toBe(2);
-  })
+  });
 
 });

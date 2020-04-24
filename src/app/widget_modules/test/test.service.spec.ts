@@ -32,13 +32,13 @@ describe('test result service', () => {
           {
             result: [
                 {
-                    id: "123",
-                    collectorItemId: "123",
+                    id: '123',
+                    collectorItemId: '123',
                     timestamp: 1554902828596,
-                    executionId: "3",
-                    buildId: "123",
-                    description: "description",
-                    url: "url",
+                    executionId: '3',
+                    buildId: '123',
+                    description: 'description',
+                    url: 'url',
                     startTime: 1554902456534,
                     endTime: 1554902464256,
                     duration: 7722,
@@ -47,14 +47,14 @@ describe('test result service', () => {
                     skippedCount: 0,
                     totalCount: 1,
                     unknownStatusCount: 0,
-                    type: "Functional",
-                    targetAppName: "hygieiaTestCuc",
-                    targetEnvName: "dev",
+                    type: 'Functional',
+                    targetAppName: 'hygieiaTestCuc',
+                    targetEnvName: 'dev',
                     testCapabilities: [
                         {
                             timestamp: 0,
-                            executionId: "3",
-                            description: "/test",
+                            executionId: '3',
+                            description: '/test',
                             startTime: 0,
                             endTime: 0,
                             duration: 0,
@@ -63,8 +63,8 @@ describe('test result service', () => {
                             skippedTestSuiteCount: 0,
                             totalTestSuiteCount: 1,
                             unknownStatusTestSuiteCount: 0,
-                            status: "Success",
-                            type: "Functional",
+                            status: 'Success',
+                            type: 'Functional',
                             testSuites: [],
                             tags: []
                         }

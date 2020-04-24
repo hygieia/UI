@@ -15,12 +15,12 @@ export class TestService {
 
   fetchTestResults(componentId: string, endDateBegins: number, endDateEnds: number, depth: number, type: TestType[]): Observable<ITest[]> {
     const params = {
-      params: new HttpParams().set("componentId", componentId)
-                              .set("endDateBegins", endDateBegins.toFixed(0))
-                              .set("endDateEnds", endDateEnds.toFixed(0))
-                              .set("depth", depth.toFixed(0))
-                              .set("types", type.toString())
-    }
+      params: new HttpParams().set('componentId', componentId)
+                              .set('endDateBegins', endDateBegins.toFixed(0))
+                              .set('endDateEnds', endDateEnds.toFixed(0))
+                              .set('depth', depth.toFixed(0))
+                              .set('types', type.toString())
+    };
     return this.http.get<ITest>(this.testDetailRoute, params).pipe(map(response => response.result));
   }
 }

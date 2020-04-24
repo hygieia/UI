@@ -16,21 +16,21 @@ export class TestConfigFormComponent implements OnInit {
 
   private widgetConfigId: string;
   private componentId: string;
-  readonly COLLECTOR_ITEM_TYPE = "Test";
+  readonly COLLECTOR_ITEM_TYPE = 'Test';
 
   testConfigForm: FormGroup;
-  searching =false;
+  searching = false;
   searchFailed = false;
   typeAheadResults: (text$: Observable<string>) => Observable<any>;
 
   // Format test result title
-  getTestResultTitle (collectorItem: any) {
-    return collectorItem ? collectorItem.niceName + " : " + collectorItem.description : "";
+  getTestResultTitle(collectorItem: any) {
+    return collectorItem ? collectorItem.niceName + ' : ' + collectorItem.description : '';
   }
 
   @Input()
   set widgetConfig(widgetConfig: any) {
-    if(!widgetConfig) { return ; }
+    if (!widgetConfig) { return ; }
     this.widgetConfigId = widgetConfig.options.id;
   }
 
@@ -62,7 +62,7 @@ export class TestConfigFormComponent implements OnInit {
                 this.searchFailed = true;
                 return of([]);
               })
-            )
+            );
         }),
         tap(() => this.searching = false),
       );
@@ -78,17 +78,17 @@ export class TestConfigFormComponent implements OnInit {
   // Create forms for each test collector item and load them into respective form arrays
   private loadSavedTestResults() {
     this.dashboardService.dashboardConfig$.pipe(take(1)).subscribe(dashboard => {
-      let testCollectorItems = dashboard.application.components[0].collectorItems.Test;
-      let functionalTestCount:number = 0;
-      let performanceTestCount:number = 0;
-      for(let testCollectorItem of testCollectorItems) {
-        if(testCollectorItem.options.testType == TestType.Functional.toString()) {
+      const testCollectorItems = dashboard.application.components[0].collectorItems.Test;
+      let functionalTestCount = 0;
+      let performanceTestCount = 0;
+      for (const testCollectorItem of testCollectorItems) {
+        if (testCollectorItem.options.testType === TestType.Functional.toString()) {
           this.addFunctionalTest();
-          this.functionalTests.controls[functionalTestCount].get("test").setValue(testCollectorItem);
+          this.functionalTests.controls[functionalTestCount].get('test').setValue(testCollectorItem);
           functionalTestCount++;
-        }else if(testCollectorItem.options.testType == TestType.Performance.toString()) {
+        } else if (testCollectorItem.options.testType === TestType.Performance.toString()) {
           this.addPerformanceTest();
-          this.performanceTests.controls[performanceTestCount].get("test").setValue(testCollectorItem);
+          this.performanceTests.controls[performanceTestCount].get('test').setValue(testCollectorItem);
           performanceTestCount++;
         }
       }
@@ -99,10 +99,10 @@ export class TestConfigFormComponent implements OnInit {
     this.testConfigForm = this.formBuilder.group({
       functionalTests: this.formBuilder.array([]),
       performanceTests: this.formBuilder.array([]),
-    })
+    });
   }
 
-  get functionalTests(): FormArray{
+  get functionalTests(): FormArray {
     return this.testConfigForm.get('functionalTests') as FormArray;
   }
   get performanceTests(): FormArray {
@@ -111,14 +111,14 @@ export class TestConfigFormComponent implements OnInit {
 
   addFunctionalTest() {
     const test = this.formBuilder.group({
-      test: new FormControl(""),
+      test: new FormControl(''),
     });
     this.functionalTests.push(test);
   }
 
   addPerformanceTest() {
     const test = this.formBuilder.group({
-      test: new FormControl(""),
+      test: new FormControl(''),
     });
     this.performanceTests.push(test);
   }
@@ -134,21 +134,21 @@ export class TestConfigFormComponent implements OnInit {
 
   // Create new config which will be posted to database
   private submitForm() {
-    let newConfig = {
-      name: "test",
+    const newConfig = {
+      name: 'test',
       options: {
         id: this.widgetConfigId
       },
       componentId: this.componentId,
-      collectorItemIds :[]
-    }
-    for(let control of this.functionalTests.controls) {
-      if(control.value.test.id != undefined ) {
+      collectorItemIds : []
+    };
+    for (const control of this.functionalTests.controls) {
+      if (control.value.test.id !== undefined ) {
         newConfig.collectorItemIds.push(control.value.test.id);
       }
     }
-    for(let control of this.performanceTests.controls) {
-      if(control.value.test.id != undefined ) {
+    for (const control of this.performanceTests.controls) {
+      if (control.value.test.id !== undefined ) {
         newConfig.collectorItemIds.push(control.value.test.id);
       }
     }

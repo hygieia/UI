@@ -18,4 +18,4 @@ export let TEST_CHARTS: IChart[] = [
     yAxisLabel: '',
     colorScheme: {}
   }
-]
+];

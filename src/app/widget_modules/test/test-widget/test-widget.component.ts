@@ -1,10 +1,11 @@
-import { 
-  Component, 
-  OnInit, 
-  ComponentFactoryResolver, 
+import {
+  Component,
+  OnInit,
+  ComponentFactoryResolver,
   ChangeDetectorRef,
   AfterViewInit,
-  ViewChild
+  ViewChild,
+  OnDestroy
 } from '@angular/core';
 import { WidgetComponent } from 'src/app/shared/widget/widget.component';
 import { OneByTwoLayoutComponent } from 'src/app/shared/layouts/one-by-two-layout/one-by-two-layout.component';
@@ -12,10 +13,10 @@ import { TestService } from '../test.service';
 import { DashboardService } from 'src/app/shared/dashboard.service';
 import { ActivatedRoute } from '@angular/router';
 import { TEST_CHARTS } from './test-charts';
-import { 
-  startWith, 
-  distinctUntilChanged, 
-  switchMap, 
+import {
+  startWith,
+  distinctUntilChanged,
+  switchMap,
   map,
   take
 } from 'rxjs/operators';
@@ -30,7 +31,7 @@ import { TestDetailComponent } from '../test-detail/test-detail.component';
   templateUrl: './test-widget.component.html',
   styleUrls: ['./test-widget.component.sass']
 })
-export class TestWidgetComponent extends WidgetComponent implements OnInit, AfterViewInit {
+export class TestWidgetComponent extends WidgetComponent implements OnInit, AfterViewInit, OnDestroy {
 
    // Reference to the subscription used to refresh the widget
   private intervalRefreshSubscription: Subscription;
@@ -46,7 +47,7 @@ export class TestWidgetComponent extends WidgetComponent implements OnInit, Afte
               private testService: TestService) {
     super(componentFactoryResolver, cdr, dashboardService, route);
   }
-  
+
   ngOnInit() {
     this.widgetId = 'test0',
     this.layout = OneByTwoLayoutComponent;
@@ -69,13 +70,14 @@ export class TestWidgetComponent extends WidgetComponent implements OnInit, Afte
       distinctUntilChanged(), // If dashboard is loaded the first time, ignore widget double refresh
       switchMap( _ => this.getCurrentWidgetConfig()),
       switchMap( widgetConfig => {
-        if(!widgetConfig) {
+        if (!widgetConfig) {
           return of([]);
         }
-        let currentTime: number = new Date().getTime();
-        let tests$ = this.testService.fetchTestResults(widgetConfig.componentId, currentTime-this.TEST_TIME_RANGE, currentTime, 4, [TestType.Functional, TestType.Performance]);
+        const currentTime: number = new Date().getTime();
+        const tests$ = this.testService.fetchTestResults(widgetConfig.componentId, currentTime - this.TEST_TIME_RANGE,
+          currentTime, 4, [TestType.Functional, TestType.Performance]);
         return tests$;
-      })).subscribe(tests => {
+      })).subscribe( tests => {
         this.loadCharts(tests);
       });
   }
@@ -91,17 +93,17 @@ export class TestWidgetComponent extends WidgetComponent implements OnInit, Afte
     super.loadComponent(this.childLayoutTag);
   }
 
-  // ************************* Generate chart ************************* 
+  // ************************* Generate chart *************************
   generateTestChart(tests: ITest[]) {
-    let chartItems = {}
+    const chartItems = {};
     // Generate chart item for each TEST collector item
     this.dashboardService.dashboardConfig$.pipe(take(1)).subscribe(dashboard => {
-      let testCollectorItems = dashboard.application.components[0].collectorItems.Test;
-      for(let testCollectorItem of testCollectorItems) {
-        let type = testCollectorItem.options.testType;
-        let tmp = tests.filter(test => test.collectorItemId == testCollectorItem.id);
-        let chartItem = this.generateTestClickListChartItem(tmp, testCollectorItem.description);
-        if(chartItems[type] == undefined) {
+      const testCollectorItems = dashboard.application.components[0].collectorItems.Test;
+      for (const testCollectorItem of testCollectorItems) {
+        const type = testCollectorItem.options.testType;
+        const tmp = tests.filter(test => test.collectorItemId === testCollectorItem.id);
+        const chartItem = this.generateTestClickListChartItem(tmp, testCollectorItem.description);
+        if (chartItems[type] === undefined) {
           chartItems[type] = [];
         }
         chartItems[type].push(chartItem);
@@ -115,36 +117,36 @@ export class TestWidgetComponent extends WidgetComponent implements OnInit, Afte
     this.charts[1].data = {
       items: chartItems[TestType.Performance],
       clickableContent: TestDetailComponent
-    } as IClickListData
+    } as IClickListData;
   }
 
-  // ************************* Generate individual chart item ************************* 
+  // ************************* Generate individual chart item *************************
   generateTestClickListChartItem(tests: ITest[], title: string): IClickListItemTest {
-    if(tests == undefined || tests.length == 0) {
+    if (tests === undefined || tests.length === 0) {
       return {
-        title: this.formatTitle(title,100),
+        title: this.formatTitle(title, 100),
         subtitles: [
-          "No data found.",
-          ""
-        ] 
-      } as IClickListItemTest
-    } 
-    let test = tests[0];
-    let successRate = ((test.successCount / test.totalCount) * 100).toFixed(0) + '%';
-      return {
-        title: this.formatTitle(title,100),
-        subtitles: [
-          successRate,
-          new Date(test.endTime),
-        ],
-        data: test
-      } as IClickListItemTest
+          'No data found.',
+          ''
+        ]
+      } as IClickListItemTest;
+    }
+    const test = tests[0];
+    const successRate = ((test.successCount / test.totalCount) * 100).toFixed(0) + '%';
+    return {
+      title: this.formatTitle(title, 100),
+      subtitles: [
+        successRate,
+        new Date(test.endTime),
+      ],
+      data: test
+    } as IClickListItemTest;
   }
 
   // ************************* HELPER FUNCTIONS *************************
   formatTitle(title: string, length: number): string {
-    let fit = title.length < length;
-    return fit ? title : title.slice(0, length-3) + '...';
+    const fit = title.length < length;
+    return fit ? title : title.slice(0, length - 3) + '...';
   }
 }
 

@@ -37,12 +37,12 @@ describe('TestDetailComponent', () => {
       title: 'title',
       subtitle: [],
       data: {
-        id: "1",
-        collectorItemId: "1",
+        id: '1',
+        collectorItemId: '1',
         timestamp: 1556890677839,
-        executionId: "1",
-        description: "Success",
-        url: "xxx.com",
+        executionId: '1',
+        description: 'Success',
+        url: 'xxx.com',
         startTime: 1556889630000,
         endTime: 1556890537000,
         duration: 907000,
@@ -51,17 +51,17 @@ describe('TestDetailComponent', () => {
         skippedCount: 0,
         totalCount: 1,
         unknownStatusCount: 0,
-        type: "Performance",
-        resultStatus: "Success",
+        type: 'Performance',
+        resultStatus: 'Success',
         testCapabilities: []
       }
-    }
+    };
     component.detailData = detailData;
     expect(component.data).toEqual(detailData.data);
   });
 
   it('should return false if theres no data', () => {
-    expect(component.data).toBeFalsy;
+    expect(component.data).toBeFalsy();
   });
 
 });
