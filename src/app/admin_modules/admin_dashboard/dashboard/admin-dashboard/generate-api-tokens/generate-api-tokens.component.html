@@ -4,31 +4,32 @@
     </div>
     <div class="widget-modal-body">
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-md-12">
                 <div class="text-center" [hidden]="apitokens">Loading Api Tokens...</div>
                 <div [hidden]="!error">
                     {{error.data}}
                 </div>
-
-                <div class="row">
-                    <div class="col-xs-15">
-                        <div class="btn-block col-xs-15">
-                            <span class="col-xs-3"><h3>Api User</h3></span>
-                            <span class="col-xs-3"><h3>Expiration Date</h3></span>
-                            <span class="col-xs-6"><button type="button" class="btn btn-primary btn-wide pull-right" (click)="generateToken()">New</button>
+                <div>
+                    <div>
+                        <div class="btn-block1 row">
+                            <span class="col-md-3"><h3 >Api User</h3></span>
+                            <span class="col-md-3"><h3>Expiration Date</h3></span>
+                            <span class="col-md-6" style="margin-bottom: 10px;"><button type="button" class="btn btn-primary btn-wide pull-right" (click)="generateToken()">New</button>
                             </span>
                         </div>
 
                         <input type="text" class="form-control" id="tokenSearch" placeholder="Filter Api Users" [(ngModel)]="tokenSearch">
-                        <div class="dash-modal-row delete-dashboard-row clearfix"
-                            *ngFor="let apitoken of apitokens | adminfilter:{apiUser:tokenSearch} | orderBy:'apiUser' ">
-                            <div class="btn-block col-xs-15">
-                                <span class="col-xs-3">{{apitoken.apiUser}}</span>
-                                 <span>{{apitoken.expirationDt | date:'MM/dd/yyyy HH:mm:ss'}}</span> 
-                                <a  (click)="deleteToken(apitoken.id)">
+                        <div class="dash-modal-row delete-dashboard-row clearfix" style="font-size: 20px;"
+                            *ngFor="let apitoken of apitokens | adminfilter:{apiUser:tokenSearch} | orderBy:'apiUser'">
+                            <div class="btn-block1 row">
+                                <span class="col-md-3">{{apitoken.apiUser}}</span>
+                                 <span class="col-md-3">{{apitoken.expirationDt | date:'MM/dd/yyyy HH:mm:ss'}}</span> 
+                                 <div class="col-md-6">
+                                <a  (click)="deleteToken(apitoken)">
                                   <dash-trash class="clickable pull-right"></dash-trash>
                                 </a>
                                 <dash-edit class="clickable pull-right" (click)="editToken(apitoken)"></dash-edit> 
+                            </div>
                             </div>
                         </div>
                     </div>

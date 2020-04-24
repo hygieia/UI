@@ -1,6 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AdminDashboardComponent } from './admin-dashboard.component';
+import { GenerateApiTokensComponent } from './generate-api-tokens/generate-api-tokens.component';
+import { ManageAdminsComponent } from './manage-admins/manage-admins.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { OrderByPipe } from '../../pipes/order-by.pipe';
+import { AdminFilterPipe } from '../../pipes/filter.pipe';
+import { DashEditComponent } from './dash-edit/dash-edit.component';
+import { DashTrashComponent } from './dash-trash/dash-trash.component';
 
 describe('AdminDashboardComponent', () => {
   let component: AdminDashboardComponent;
@@ -8,7 +16,9 @@ describe('AdminDashboardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminDashboardComponent ]
+      declarations: [ AdminDashboardComponent, GenerateApiTokensComponent,ManageAdminsComponent,OrderByPipe,AdminFilterPipe,DashTrashComponent,DashEditComponent ],
+      imports:[FormsModule,CommonModule,ReactiveFormsModule]
+
     })
     .compileComponents();
   }));

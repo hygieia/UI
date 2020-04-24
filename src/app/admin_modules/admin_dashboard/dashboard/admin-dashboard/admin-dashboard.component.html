@@ -1,5 +1,5 @@
 <div id="admin" >
-        <div class="col-md-2">
+        <div class="col-md-2 dash" >
                 <ul class="nav nav-pills flex-column">
                         <li class="nav-item" ><a class="nav-link" [ngClass]="{active:tab === 'dashboards'}"
                                         (click)="navigateToTab('dashboards')">Edit
@@ -24,8 +24,8 @@
 
         </div>
 
-        <div class="container-fluid col-md-10 ">
-                <div>
+        <div class="container-fluid"  >
+                <div class="col-md-9 dashcon">
                         <div *ngIf="tab === 'dashboards'">
                         </div>
                         <div *ngIf="tab === 'templates'">
@@ -34,7 +34,7 @@
                                 <app-manage-admins></app-manage-admins>
                         </div>
                         <div *ngIf="tab === 'apitokens'">
-                                <app-generate-api-tokens></app-generate-api-tokens>
+                                <app-generate-tokens></app-generate-tokens>
                         </div>
                         <div *ngIf="tab === 'configurations'">
                         </div>

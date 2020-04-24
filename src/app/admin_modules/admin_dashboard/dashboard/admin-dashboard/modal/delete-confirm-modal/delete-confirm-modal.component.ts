@@ -9,8 +9,9 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class DeleteConfirmModalComponent implements OnInit {
 
   public title : string = ''
-  public bntName: string = 'Ok'
-
+  public bntName2: string = 'Ok'
+  public bntName1: string = 'Cancel'
+  public message: string = ''
   constructor(public activeModal: NgbActiveModal) { }
 
   ngOnInit() {

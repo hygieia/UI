@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DeleteConfirmModalComponent } from './delete-confirm-modal.component';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 describe('DeleteConfirmModalComponent', () => {
   let component: DeleteConfirmModalComponent;
@@ -8,7 +9,9 @@ describe('DeleteConfirmModalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DeleteConfirmModalComponent ]
+      declarations: [ DeleteConfirmModalComponent ],
+      providers: [NgbActiveModal],
+      imports:[NgbModule]
     })
     .compileComponents();
   }));

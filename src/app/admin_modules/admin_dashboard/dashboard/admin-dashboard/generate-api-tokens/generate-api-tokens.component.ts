@@ -4,11 +4,13 @@ import {NgbModal, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import { EditTokenModalComponent } from '../modal/edit-token-modal/edit-token-modal.component';
 import { GenerateApiTokenModalComponent } from '../modal/generate-api-token-modal/generate-api-token-modal.component';
 import { DeleteConfirmModalComponent } from '../modal/delete-confirm-modal/delete-confirm-modal.component';
+import {  ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'app-generate-api-tokens',
+  selector: 'app-generate-tokens',
   templateUrl: './generate-api-tokens.component.html',
-  styleUrls: ['./generate-api-tokens.component.scss']
+  styleUrls: ['./generate-api-tokens.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class GenerateApiTokensComponent implements OnInit {
 
@@ -24,44 +26,51 @@ export class GenerateApiTokensComponent implements OnInit {
   loadApiToken() {
     this.userData.apitokens().subscribe((response:any) => {
       this.apitokens = response;
-      console.log('api token ', response)
     })
   }
 
   editToken(apitoken){
-   console.log("edit", apitoken)
    this.openModal(apitoken);
   }
 
   generateToken(){
     const modalRef = this.modalService.open(GenerateApiTokenModalComponent);
-    //  modalRef.componentInstance.tokenItem = item 
-    //  modalRef.componentInstance.apiUser = item.apiUser 
-    //  modalRef.componentInstance.date = this.parseNgbDate(item.expirationDt)
-
+    modalRef.result.then((newConfig) => {
+    }).catch((error) => {
+      this.loadApiToken();
+    });
   }
 
-  deleteToken(id){
+  deleteToken(apiToken){
     const modalRef = this.modalService.open(DeleteConfirmModalComponent);
-     modalRef.componentInstance.title = 'Are you sure you want to delete?';
-     modalRef.componentInstance.bntName='Ok';
-
+     modalRef.componentInstance.message = `Are you sure you want to delete ${apiToken.apiUser}?`;
+     modalRef.componentInstance.title = 'Delete Api Token';
+     modalRef.componentInstance.bntName2='Confirm';
+     modalRef.result.then((newConfig) => {
+      this.userData.deleteToken(apiToken.id).subscribe(response => {
+        this.loadApiToken();
+      })
+    }).catch((error) => {
+      console.log('delete error newConfig :' + error)
+ 
+    });
   }
 
   openModal(item){
     const modalRef = this.modalService.open(EditTokenModalComponent);
-    
-   // modalRef.tokenItem = 
     modalRef.componentInstance.tokenItem = item 
     modalRef.componentInstance.apiUser = item.apiUser 
     modalRef.componentInstance.date = this.parseNgbDate(item.expirationDt)
-    //modalRef.componentInstance.modalType = ConfirmationModalComponent;
+    modalRef.result.then((newConfig) => {
+      this.loadApiToken();
+    }).catch((error) => {
+      this.loadApiToken();
+    });
   }
 
   parseNgbDate(value: string): NgbDateStruct | null {
     if (value) {
       let date = new Date(value);
-     // let date = value.split(this.DELIMITER);
       return {
         day : date.getDate(),
         month : date.getMonth()+1,
