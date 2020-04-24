@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Observable, of} from "rxjs";
-import {catchError, debounceTime, distinctUntilChanged, map, switchMap, take, tap} from "rxjs/operators";
-import {DashboardService} from "../../../shared/dashboard.service";
-import {CollectorService} from "../../../shared/collector.service";
-import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Observable, of} from 'rxjs';
+import {catchError, debounceTime, distinctUntilChanged, map, switchMap, take, tap} from 'rxjs/operators';
+import {DashboardService} from '../../../shared/dashboard.service';
+import {CollectorService} from '../../../shared/collector.service';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-oss-config-form',
@@ -28,7 +28,7 @@ export class OSSConfigFormComponent implements OnInit {
     }
     const description = (collectorItem.description as string);
     return description;
-  };
+  }
 
   @Input()
   set widgetConfig(widgetConfig: any) {

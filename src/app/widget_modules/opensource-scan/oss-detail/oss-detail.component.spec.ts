@@ -1,10 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { OSSDetailComponent } from './oss-detail.component';
-import {NgbActiveModal, NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {DashStatus} from "../../../shared/dash-status/DashStatus";
-import {ReactiveFormsModule} from "@angular/forms";
-import {SharedModule} from "../../../shared/shared.module";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {DashStatus} from '../../../shared/dash-status/DashStatus';
+import {ReactiveFormsModule} from '@angular/forms';
+import {SharedModule} from '../../../shared/shared.module';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('OSSDetailComponent', () => {
   let component: OSSDetailComponent;

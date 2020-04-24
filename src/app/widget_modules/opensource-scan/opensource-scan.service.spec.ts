@@ -1,7 +1,7 @@
 import {inject, TestBed} from '@angular/core/testing';
 
 import { OpensourceScanService } from './opensource-scan.service';
-import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 
 describe('OpensourceScanService', () => {
   beforeEach(() => TestBed.configureTestingModule({

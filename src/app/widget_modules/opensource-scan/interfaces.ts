@@ -17,7 +17,7 @@ export interface IOpensourceScan {
 
 export interface IThreat {
   level: string;
-  components : string[];
+  components: string[];
   count: number;
   dispositionCounts: {
     Open: number;

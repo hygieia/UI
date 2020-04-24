@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, Type} from '@angular/core';
-import {IClickListItemOSS} from "../../../shared/charts/click-list/click-list-interfaces";
-import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+import {IClickListItemOSS} from '../../../shared/charts/click-list/click-list-interfaces';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-oss-detail',

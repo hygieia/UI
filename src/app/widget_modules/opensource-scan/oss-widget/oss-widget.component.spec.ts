@@ -1,25 +1,49 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OSSWidgetComponent } from './oss-widget.component';
-import {Observable, of} from "rxjs";
-import {NgModule, NO_ERRORS_SCHEMA} from "@angular/core";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {SharedModule} from "../../../shared/shared.module";
-import {CommonModule} from "@angular/common";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {RouterModule} from "@angular/router";
-import {NgbModal, NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {OpensourceScanService} from "../opensource-scan.service";
-import {DashboardService} from "../../../shared/dashboard.service";
-import {DashStatus} from "../../../shared/dash-status/DashStatus";
-import {IOpensourceScan} from "../interfaces";
+import {Observable, of} from 'rxjs';
+import {NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {SharedModule} from '../../../shared/shared.module';
+import {CommonModule} from '@angular/common';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {RouterModule} from '@angular/router';
+import {NgbModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {OpensourceScanService} from '../opensource-scan.service';
+import {DashboardService} from '../../../shared/dashboard.service';
+import {DashStatus} from '../../../shared/dash-status/DashStatus';
+import {IOpensourceScan} from '../interfaces';
 
 @NgModule({
   declarations: [],
   imports: [HttpClientTestingModule, SharedModule, CommonModule, BrowserAnimationsModule, RouterModule.forRoot([]), NgbModule],
   entryComponents: []
 })
+
 class TestModule { }
+
+class MockOSSService {
+  mockOSSData = {
+    result: [
+      {
+        name : 'QA',
+        id: 'OSS_ID',
+        collectorItemId: 'coll_id',
+        timestamp: 1555590574399,
+        threats: {
+          License: [],
+          Security: []
+        },
+        reportUrl: 'https://www.w3schools.com/',
+        scanState: 'scan state'
+      }
+    ]
+  };
+
+  fetchDetails(componentId: string, maxCnt: number): Observable<IOpensourceScan[]> {
+    return of(this.mockOSSData.result);
+  }
+}
 
 describe('OSSWidgetComponent', () => {
   let component: OSSWidgetComponent;
@@ -80,7 +104,7 @@ describe('OSSWidgetComponent', () => {
             components : ['critical##closed'],
             count: 1,
             dispositionCounts: {
-              Open:0,
+              Open: 0,
               Closed: 1,
             },
             maxAge: 99
@@ -160,7 +184,7 @@ describe('OSSWidgetComponent', () => {
   it('should generateLicenseDetails', () => {
     component.generateLicenseDetails(null);
     component.generateLicenseDetails(ossTestData);
-    expect(component.charts[0].title).toEqual("License (3/4)");
+    expect(component.charts[0].title).toEqual('License (3/4)');
     expect(component.charts[0].data.items.length).toEqual(2);
     expect(component.charts[0].data.items[0].statusText).toEqual('high');
     expect(component.charts[0].data.items[0].status).toEqual(DashStatus.UNAUTH);
@@ -189,7 +213,7 @@ describe('OSSWidgetComponent', () => {
   it('should generateSecurityDetails', () => {
     component.generateSecurityDetails(null);
     component.generateSecurityDetails(ossTestData);
-    expect(component.charts[1].title).toEqual("Security (1/4)");
+    expect(component.charts[1].title).toEqual('Security (1/4)');
     expect(component.charts[1].data.items.length).toEqual(2);
     expect(component.charts[1].data.items[0].statusText).toEqual('critical');
     expect(component.charts[1].data.items[0].status).toEqual(DashStatus.CRITICAL);
@@ -221,25 +245,3 @@ describe('OSSWidgetComponent', () => {
 
 });
 
-class MockOSSService {
-  mockOSSData = {
-    result: [
-      {
-        name : 'QA',
-        id: 'OSS_ID',
-        collectorItemId: 'coll_id',
-        timestamp: 1555590574399,
-        threats: {
-          License: [],
-          Security: []
-        },
-        reportUrl: 'https://www.w3schools.com/',
-        scanState: 'scan state'
-      }
-    ]
-  };
-
-  fetchDetails(componentId: string, maxCnt: number): Observable<IOpensourceScan[]> {
-    return of(this.mockOSSData.result);
-  }
-}

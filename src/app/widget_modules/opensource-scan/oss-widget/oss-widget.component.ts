@@ -115,11 +115,11 @@ export class OSSWidgetComponent extends WidgetComponent implements OnInit, After
     }).reverse();
 
     const latestDetails = sorted.map(oss => {
-        let open = (oss.dispositionCounts.Open) ? oss.dispositionCounts.Open: 0;
-        let ossStatusTitle = oss.level + ' (' + open + '/' + oss.count + ')';
+        const ossStatus = this.getDashStatus(oss.level);
+        const open = (oss.dispositionCounts.Open) ? oss.dispositionCounts.Open : 0;
+        const ossStatusTitle = oss.level + ' (' + open + '/' + oss.count + ')';
         count += oss.count;
         openCount += open;
-        let ossStatus = this.getDashStatus(oss.level);
 
         return {
           status: ossStatus,
@@ -155,16 +155,16 @@ export class OSSWidgetComponent extends WidgetComponent implements OnInit, After
     }).reverse();
 
     const latestDetails = sorted.map(oss => {
-        let open = (oss.dispositionCounts.Open) ? oss.dispositionCounts.Open: 0;
-        let ossStatusText = oss.level + ' (' + open + '/' + oss.count + ')';
+        const ossStatus = this.getDashStatus(oss.level);
+        const open = (oss.dispositionCounts.Open) ? oss.dispositionCounts.Open : 0;
+        const ossStatusTitle = oss.level + ' (' + open + '/' + oss.count + ')';
         count += oss.count;
-      openCount += open;
-        let ossStatus = this.getDashStatus(oss.level);
+        openCount += open;
 
         return {
           status: ossStatus,
           statusText: oss.level,
-          title: ossStatusText,
+          title: ossStatusTitle,
           subtitles: [],
           url: result.reportUrl,
           components: oss.components,
@@ -181,7 +181,7 @@ export class OSSWidgetComponent extends WidgetComponent implements OnInit, After
     } as IClickListData;
   }
 
-  getDashStatus(level:String) {
+  getDashStatus(level: string) {
     switch (level.toLowerCase()) {
       case 'critical':
         return DashStatus.CRITICAL;
