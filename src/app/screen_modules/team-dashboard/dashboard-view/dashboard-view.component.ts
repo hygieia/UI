@@ -6,15 +6,21 @@ import { TemplatesDirective } from 'src/app/shared/templates/templates.directive
 import { PlaceholderWidgetComponent } from 'src/app/shared/widget/placeholder-widget/placeholder-widget.component';
 import { BuildWidgetComponent } from 'src/app/widget_modules/build/build-widget/build-widget.component';
 import { DeployWidgetComponent } from 'src/app/widget_modules/deploy/deploy-widget/deploy-widget.component';
+import {RepoWidgetComponent} from '../../../widget_modules/repo/repo-widget/repo-widget.component';
 import { CaponeTemplateComponent } from '../capone-template/capone-template.component';
 import { ITemplate } from './dashboard-view';
 import {Placeholder} from '@angular/compiler/src/i18n/i18n_ast';
 import {BuildConfigFormComponent} from '../../../widget_modules/build/build-config-form/build-config-form.component';
 import {DeployConfigFormComponent} from 'src/app/widget_modules/deploy/deploy-config-form/deploy-config-form.component';
 import {RepoConfigFormComponent} from '../../../widget_modules/repo/repo-config-form/repo-config-form.component';
-import {RepoWidgetComponent} from '../../../widget_modules/repo/repo-widget/repo-widget.component';
 import {FeatureWidgetComponent} from '../../../widget_modules/feature/feature-widget/feature-widget.component';
 import {FeatureConfigFormComponent} from '../../../widget_modules/feature/feature-config-form/feature-config-form.component';
+import {
+  StaticAnalysisWidgetComponent
+} from '../../../widget_modules/static-analysis/static-analysis-widget/static-analysis-widget.component';
+import {
+  StaticAnalysisConfigFormComponent
+} from '../../../widget_modules/static-analysis/static-anaylsis-config-form/static-analysis-config-form.component';
 
 @Component({
   selector: 'app-dashboard-view',
@@ -46,7 +52,7 @@ export class DashboardViewComponent extends DashboardComponent implements OnInit
         title: 'Feature',
         component: FeatureWidgetComponent,
         status: 'Success',
-        widgetSize: 'col-xl-3',
+        widgetSize: 'col-xl-4',
         configForm: FeatureConfigFormComponent
       },
       {
@@ -55,13 +61,12 @@ export class DashboardViewComponent extends DashboardComponent implements OnInit
         status: 'Success',
         widgetSize: 'col-xl-6',
         configForm: BuildConfigFormComponent
-      }
-      ,
+      },
       {
         title: 'Deploy',
         component: DeployWidgetComponent,
         status: 'Success',
-        widgetSize: 'col-xl-3',
+        widgetSize: 'col-xl-2',
         configForm: DeployConfigFormComponent
       },
       {
@@ -72,17 +77,17 @@ export class DashboardViewComponent extends DashboardComponent implements OnInit
         configForm: RepoConfigFormComponent
       },
       {
-        title: 'Placeholder',
-        component: PlaceholderWidgetComponent,
+        title: 'Static Code Analysis',
+        component: StaticAnalysisWidgetComponent,
         status: 'Success',
-        widgetSize: 'col-xl-4',
-        configForm: BuildConfigFormComponent
+        widgetSize: 'col-xl-6',
+        configForm: StaticAnalysisConfigFormComponent
       },
       {
         title: 'Placeholder',
         component: PlaceholderWidgetComponent,
         status: 'Success',
-        widgetSize: 'col-xl-4',
+        widgetSize: 'col-xl-2',
         configForm: BuildConfigFormComponent
       }
     ];

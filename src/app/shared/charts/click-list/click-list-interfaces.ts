@@ -47,6 +47,14 @@ export interface IClickListItemFeature extends IClickListItem {
   url: string;
   number: string;
   type: string;
+  date: string;
   time: string;
   changeDate: string;
+}
+
+export interface IClickListItemStaticAnalysis extends IClickListData {
+  url: string;
+  version?: string;
+  name?: string;
+  timestamp?: any;
 }
