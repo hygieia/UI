@@ -7,10 +7,10 @@ import {
   QueryList,
   ViewChildren
 } from '@angular/core';
-import {ChartDirective} from "../../charts/chart.directive";
-import {fromEvent, Observable, Subscription} from "rxjs";
-import {debounceTime} from "rxjs/operators";
-import {LayoutComponent} from "../layout/layout.component";
+import {ChartDirective} from '../../charts/chart.directive';
+import {fromEvent, Observable, Subscription} from 'rxjs';
+import {debounceTime} from 'rxjs/operators';
+import {LayoutComponent} from '../layout/layout.component';
 
 @Component({
   selector: 'app-two-by-one-layout',

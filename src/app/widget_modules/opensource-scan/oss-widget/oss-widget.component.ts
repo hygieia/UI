@@ -7,23 +7,23 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-import {WidgetComponent} from "../../../shared/widget/widget.component";
-import {DashboardService} from "../../../shared/dashboard.service";
-import {ActivatedRoute} from "@angular/router";
-import {OpensourceScanService} from "../opensource-scan.service";
-import {distinctUntilChanged, startWith, switchMap} from "rxjs/operators";
-import {of, Subscription} from "rxjs";
-import {LayoutDirective} from "../../../shared/layouts/layout.directive";
-import {OSS_CHARTS} from "./oss-charts";
-import {DashStatus} from "../../../shared/dash-status/DashStatus";
+import {WidgetComponent} from '../../../shared/widget/widget.component';
+import {DashboardService} from '../../../shared/dashboard.service';
+import {ActivatedRoute} from '@angular/router';
+import {OpensourceScanService} from '../opensource-scan.service';
+import {distinctUntilChanged, startWith, switchMap} from 'rxjs/operators';
+import {of, Subscription} from 'rxjs';
+import {LayoutDirective} from '../../../shared/layouts/layout.directive';
+import {OSS_CHARTS} from './oss-charts';
+import {DashStatus} from '../../../shared/dash-status/DashStatus';
 import {
   IClickListData,
   IClickListItemOSS
-} from "../../../shared/charts/click-list/click-list-interfaces";
-import {OSSDetailComponent} from "../oss-detail/oss-detail.component";
-import {TwoByOneLayoutComponent} from "../../../shared/layouts/two-by-one-layout/two-by-one-layout.component";
-import {IOpensourceScan, IThreat} from "../interfaces";
-import {OSSDetailAllComponent} from "../oss-detail-all/oss-detail-all.component";
+} from '../../../shared/charts/click-list/click-list-interfaces';
+import {OSSDetailComponent} from '../oss-detail/oss-detail.component';
+import {TwoByOneLayoutComponent} from '../../../shared/layouts/two-by-one-layout/two-by-one-layout.component';
+import {IOpensourceScan, IThreat} from '../interfaces';
+import {OSSDetailAllComponent} from '../oss-detail-all/oss-detail-all.component';
 
 @Component({
   selector: 'app-oss-widget',
@@ -116,7 +116,7 @@ export class OSSWidgetComponent extends WidgetComponent implements OnInit, After
 
     const latestDetails = sorted.map(oss => {
         let open = (oss.dispositionCounts.Open) ? oss.dispositionCounts.Open: 0;
-        let ossStatusTitle = oss.level + " (" + open + "/" + oss.count + ")";
+        let ossStatusTitle = oss.level + ' (' + open + '/' + oss.count + ')';
         count += oss.count;
         openCount += open;
         let ossStatus = this.getDashStatus(oss.level);
@@ -133,7 +133,7 @@ export class OSSWidgetComponent extends WidgetComponent implements OnInit, After
       }
     );
 
-    this.charts[0].title = "License (" + openCount + "/" + count + ")";
+    this.charts[0].title = 'License (' + openCount + '/' + count + ')';
     this.charts[0].data = {
       items: latestDetails,
       clickableContent: OSSDetailComponent,
@@ -156,7 +156,7 @@ export class OSSWidgetComponent extends WidgetComponent implements OnInit, After
 
     const latestDetails = sorted.map(oss => {
         let open = (oss.dispositionCounts.Open) ? oss.dispositionCounts.Open: 0;
-        let ossStatusText = oss.level + " (" + open + "/" + oss.count + ")";
+        let ossStatusText = oss.level + ' (' + open + '/' + oss.count + ')';
         count += oss.count;
       openCount += open;
         let ossStatus = this.getDashStatus(oss.level);
@@ -173,7 +173,7 @@ export class OSSWidgetComponent extends WidgetComponent implements OnInit, After
       }
     );
 
-    this.charts[1].title = "Security (" + openCount + "/" + count + ")";
+    this.charts[1].title = 'Security (' + openCount + '/' + count + ')';
     this.charts[1].data = {
       items: latestDetails,
       clickableContent: OSSDetailComponent,

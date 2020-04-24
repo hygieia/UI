@@ -61,6 +61,6 @@ export interface IClickListItemStaticAnalysis extends IClickListData {
 
 export interface IClickListItemOSS extends IClickListItem {
   url: string;
-  components: String[];
+  components: string[];
   lastUpdated: number;
 }

@@ -21,8 +21,8 @@ import {
   StaticAnalysisConfigFormComponent
 } from '../../../widget_modules/static-analysis/static-anaylsis-config-form/static-analysis-config-form.component';
 import {RepoWidgetComponent} from '../../../widget_modules/repo/repo-widget/repo-widget.component';
-import {OSSWidgetComponent} from "../../../widget_modules/opensource-scan/oss-widget/oss-widget.component";
-import {OSSConfigFormComponent} from "../../../widget_modules/opensource-scan/oss-config-form/oss-config-form.component";
+import {OSSWidgetComponent} from '../../../widget_modules/opensource-scan/oss-widget/oss-widget.component';
+import {OSSConfigFormComponent} from '../../../widget_modules/opensource-scan/oss-config-form/oss-config-form.component';
 
 @Component({
   selector: 'app-dashboard-view',
