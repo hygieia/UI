@@ -146,6 +146,12 @@ describe('TestWidgetComponent', () => {
     expect(component.charts[0]).toBeTruthy();
   });
 
+  it('should generate chart item', () => {
+    const clickItem = component.generateTestClickListChartItem(testResultData, 'title');
+    expect(clickItem.title).toBe('title');
+    expect(clickItem.subtitles[0]).toBe('100%');
+  });
+
   it('should format title correctly', () => {
     expect(component.formatTitle('123456', 6)).toBe('123...');
     expect(component.formatTitle('123456789', 8)).toBe('12345...');
