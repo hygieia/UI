@@ -8,9 +8,9 @@ import { UserDataService } from '../../../services/user-data.service';
 })
 export class ManageAdminsComponent implements OnInit {
 
-  error: any = {}
-  users: any[]=[]
-  userSearch: string = '';
+  error: any = {};
+  users: any[] = [];
+  userSearch = '';
 
   constructor(private userData: UserDataService) { }
 
@@ -19,16 +19,16 @@ export class ManageAdminsComponent implements OnInit {
   }
 
   loadUser() {
-    this.userData.users().subscribe((response:any) => {
+    this.userData.users().subscribe((response: any) => {
       this.users = response;
-      console.log('users ', response)
-    })
+      console.log('users ', response);
+    });
   }
-  promoteUserToAdmin(user){
+  promoteUserToAdmin(user) {
 
   }
 
-  demoteUserFromAdmin(user){
+  demoteUserFromAdmin(user) {
 
   }
 }

@@ -9,16 +9,16 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 describe('GenerateApiTokenModalComponent', () => {
   let component: GenerateApiTokenModalComponent;
   let fixture: ComponentFixture<GenerateApiTokenModalComponent>;
-  
+
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GenerateApiTokenModalComponent ],
-      providers: [UserDataService,FormBuilder,NgbActiveModal],
-      imports:[ReactiveFormsModule,NgbModule,HttpClientTestingModule]
+      declarations: [GenerateApiTokenModalComponent],
+      providers: [UserDataService, FormBuilder, NgbActiveModal],
+      imports: [ReactiveFormsModule, NgbModule, HttpClientTestingModule]
 
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

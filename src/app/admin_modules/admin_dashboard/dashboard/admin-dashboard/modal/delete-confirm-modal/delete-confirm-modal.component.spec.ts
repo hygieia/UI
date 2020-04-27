@@ -9,11 +9,11 @@ describe('DeleteConfirmModalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DeleteConfirmModalComponent ],
+      declarations: [DeleteConfirmModalComponent],
       providers: [NgbActiveModal],
-      imports:[NgbModule]
+      imports: [NgbModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -6,13 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-dashboard.component.scss']
 })
 export class AdminDashboardComponent implements OnInit {
-tab : String = 'dashboards';
+  tab = 'dashboards';
   constructor() { }
 
   ngOnInit() {
   }
 
-  navigateToTab(tab){
+  navigateToTab(tab: string) {
     this.tab = tab;
   }
 }

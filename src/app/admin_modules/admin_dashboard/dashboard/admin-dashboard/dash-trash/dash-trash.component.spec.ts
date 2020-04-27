@@ -8,9 +8,9 @@ describe('DashTrashComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DashTrashComponent ]
+      declarations: [DashTrashComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

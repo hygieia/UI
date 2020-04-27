@@ -11,25 +11,26 @@ import { DashEditComponent } from './dash-edit/dash-edit.component';
 import { DashTrashComponent } from './dash-trash/dash-trash.component';
 
 describe('AdminDashboardComponent', () => {
-  let component: AdminDashboardComponent;
-  let fixture: ComponentFixture<AdminDashboardComponent>;
+    let component: AdminDashboardComponent;
+    let fixture: ComponentFixture<AdminDashboardComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ AdminDashboardComponent, GenerateApiTokensComponent,ManageAdminsComponent,OrderByPipe,AdminFilterPipe,DashTrashComponent,DashEditComponent ],
-      imports:[FormsModule,CommonModule,ReactiveFormsModule]
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [AdminDashboardComponent, GenerateApiTokensComponent, ManageAdminsComponent,
+                OrderByPipe, AdminFilterPipe, DashTrashComponent, DashEditComponent],
+            imports: [FormsModule, CommonModule, ReactiveFormsModule]
 
-    })
-    .compileComponents();
-  }));
+        })
+            .compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(AdminDashboardComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(AdminDashboardComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

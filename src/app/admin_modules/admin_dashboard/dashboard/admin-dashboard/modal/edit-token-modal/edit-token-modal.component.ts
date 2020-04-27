@@ -13,7 +13,7 @@ import { UserDataService } from 'src/app/admin_modules/admin_dashboard/services/
 export class EditTokenModalComponent implements OnInit {
 
 
-  @Input() public apiUser: string = '';
+  @Input() public apiUser = '';
   public tokenItem: any;
   @Input() public date: NgbDateStruct;
   apiEditForm: FormGroup;
@@ -30,14 +30,15 @@ export class EditTokenModalComponent implements OnInit {
 
   ngOnInit() {
     this.apiEditForm = this.formBuilder.group({
-      apiUser: [{ value: '', disabled: true }, [Validators.required, Validators.minLength(6), Validators.maxLength(50), Validators.pattern(/^[a-zA-Z0-9 ]*$/)]],
+      apiUser: [{ value: '', disabled: true },
+      [Validators.required, Validators.minLength(6), Validators.maxLength(50), Validators.pattern(/^[a-zA-Z0-9 ]*$/)]],
       date: [{ value: '' }]
     });
     setTimeout(() => {
-      this.apiEditForm.get('apiUser').setValue(this.apiUser)
+      this.apiEditForm.get('apiUser').setValue(this.apiUser);
       this.apiEditForm.get('date').setValue(this.date);
-    }, 100)
-    console.log('api user , token item' + this.apiUser, ' item ', this.tokenItem, 'date' + this.date)
+    }, 100);
+    console.log('api user , token item' + this.apiUser, ' item ', this.tokenItem, 'date' + this.date);
   }
 
   get f() { return this.apiEditForm.controls; }
@@ -45,13 +46,13 @@ export class EditTokenModalComponent implements OnInit {
   submit() {
     this.apiTokenError = true;
     if (this.apiEditForm.valid) {
-      var id = this.tokenItem.id
-      var momentSelectedDt = moment(this.toDateModel(this.apiEditForm.get('date').value));
-      var timemsendOfDay = momentSelectedDt.endOf('day').valueOf();
+      const id = this.tokenItem.id;
+      const momentSelectedDt = moment(this.toDateModel(this.apiEditForm.get('date').value));
+      const timemsendOfDay = momentSelectedDt.endOf('day').valueOf();
 
-      var apitoken = {
-        "apiUser": this.apiEditForm.get('apiUser').value,
-        "expirationDt": timemsendOfDay
+      const apitoken = {
+        apiUser: this.apiEditForm.get('apiUser').value,
+        expirationDt: timemsendOfDay
       };
 
       this.userData
@@ -59,7 +60,7 @@ export class EditTokenModalComponent implements OnInit {
         .subscribe((response) => {
           console.log(response);
           this.apiTokenError = false;
-          this.activeModal.close('close')
+          this.activeModal.close('close');
         }, (error) => {
           console.log(error);
         });

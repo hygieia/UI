@@ -1,30 +1,30 @@
-<div id="admin" >
-        <div class="col-md-2 dash" >
+<div id="admin">
+        <div class="col-md-2 dash">
                 <ul class="nav nav-pills flex-column">
-                        <li class="nav-item" ><a class="nav-link" [ngClass]="{active:tab === 'dashboards'}"
+                        <li class="nav-item"><a class="nav-link" [ngClass]="{active:tab === 'dashboards'}"
                                         (click)="navigateToTab('dashboards')">Edit
                                         Dashboards</a></li>
-                        <li class="nav-item" ><a class="nav-link" [ngClass]="{active:tab === 'users'}"
+                        <li class="nav-item"><a class="nav-link" [ngClass]="{active:tab === 'users'}"
                                         (click)="navigateToTab('users')">Manage
                                         Admins</a></li>
                         <li class="nav-item"><a class="nav-link" [ngClass]="{active:tab === 'apitokens'}"
                                         (click)="navigateToTab('apitokens')">Generate
                                         ApiTokens</a></li>
-                        <li class="nav-item" ><a class="nav-link" [ngClass]="{active:tab === 'templates'}"
+                        <li class="nav-item"><a class="nav-link" [ngClass]="{active:tab === 'templates'}"
                                         (click)="navigateToTab('templates')">Manage
                                         Templates</a></li>
-                        <li class="nav-item" ><a class="nav-link" [ngClass]="{active:tab === 'configurations'}"
+                        <li class="nav-item"><a class="nav-link" [ngClass]="{active:tab === 'configurations'}"
                                         (click)="navigateToTab('configurations')">General Configurations</a></li>
-                        <li class="nav-item" ><a class="nav-link" [ngClass]="{active:tab === 'auditconfig'}"
+                        <li class="nav-item"><a class="nav-link" [ngClass]="{active:tab === 'auditconfig'}"
                                         (click)="navigateToTab('auditconfig')">Audit
                                         Configurations</a></li>
-                        <li class="nav-item" ><a class="nav-link" [ngClass]="{active:tab === 'featureflags'}"
+                        <li class="nav-item"><a class="nav-link" [ngClass]="{active:tab === 'featureflags'}"
                                         (click)="navigateToTab('featureflags')">Feature Flags</a></li>
                 </ul>
 
         </div>
 
-        <div class="container-fluid"  >
+        <div class="container-fluid">
                 <div class="col-md-9 dashcon">
                         <div *ngIf="tab === 'dashboards'">
                         </div>

@@ -10,28 +10,28 @@ import { API_TOKEN_LIST } from 'src/app/admin_modules/admin_dashboard/services/u
 describe('EditTokenModalComponent', () => {
   let component: EditTokenModalComponent;
   let fixture: ComponentFixture<EditTokenModalComponent>;
-  let apiToken = API_TOKEN_LIST[0]
+  const apiToken = API_TOKEN_LIST[0];
   const date = {
-    day : 20,
-    month : 4,
-    year : 2020
+    day: 20,
+    month: 4,
+    year: 2020
   };
-  
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditTokenModalComponent ],
-      providers:[UserDataService,FormBuilder,NgbActiveModal],
-      imports:[ReactiveFormsModule,NgbModule,FormsModule,CommonModule,HttpClientTestingModule]
+      declarations: [EditTokenModalComponent],
+      providers: [UserDataService, FormBuilder, NgbActiveModal],
+      imports: [ReactiveFormsModule, NgbModule, FormsModule, CommonModule, HttpClientTestingModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(EditTokenModalComponent);
     component = fixture.componentInstance;
-    component.apiUser=apiToken.apiUser;
-    component.date=date;
-    component.tokenItem=apiToken;
+    component.apiUser = apiToken.apiUser;
+    component.date = date;
+    component.tokenItem = apiToken;
     fixture.detectChanges();
   });
 
@@ -47,10 +47,10 @@ describe('EditTokenModalComponent', () => {
   it('should  submit edit from  when clicked on submit', () => {
     setTimeout(() => {
       component.apiEditForm.get('apiUser').setValue('testing1');
-      console.log('submit from :',component.apiEditForm);
+      console.log('submit from :', component.apiEditForm);
       component.submit();
       expect(component.apiEditForm.valid).toBeTruthy();
-    }, 500)
+    }, 500);
   });
 
 });

@@ -12,7 +12,7 @@ export class UserDataService {
   constructor(private http: HttpClient) { }
 
   apitokens() {
-    const route = this.adminRoute + "/apitokens";
+    const route = this.adminRoute + '/apitokens';
     return this.http.get(route);
   }
 
@@ -22,19 +22,19 @@ export class UserDataService {
 
 
   createToken(apitoken) {
-    var route = this.adminRoute + "/createToken";
+    const route = this.adminRoute + '/createToken';
     return this.http.post(route, apitoken);
   }
 
 
 
   deleteToken(id) {
-    var route = this.adminRoute + "/deleteToken";
-    return this.http.delete(route + '/' + id)
+    const route = this.adminRoute + '/deleteToken';
+    return this.http.delete(route + '/' + id);
   }
 
   updateToken(apiToken, id) {
-    var route = this.adminRoute + "/updateToken";
+    const route = this.adminRoute + '/updateToken';
     return this.http.post(route + '/' + id, apiToken);
   }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'dash-trash',
+  selector: 'app-dash-trash',
   templateUrl: './dash-trash.component.html',
   styleUrls: ['./dash-trash.component.scss']
 })

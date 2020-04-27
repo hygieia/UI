@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { CommonModule } from '@angular/common';  
+import { CommonModule } from '@angular/common';
 import { ManageAdminsComponent } from './manage-admins.component';
 import { UserDataService } from '../../../services/user-data.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -13,11 +13,11 @@ describe('ManageAdminsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ManageAdminsComponent, AdminFilterPipe,OrderByPipe ],
+      declarations: [ManageAdminsComponent, AdminFilterPipe, OrderByPipe],
       providers: [UserDataService],
-      imports:[FormsModule,CommonModule,ReactiveFormsModule,HttpClientTestingModule]
+      imports: [FormsModule, CommonModule, ReactiveFormsModule, HttpClientTestingModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

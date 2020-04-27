@@ -42,7 +42,6 @@ export class NavbarComponent implements OnInit {
   }
 
   admin() {
-    //this.myadmin = false;
     this.router.navigate(['/admin/dashboard']);
   }
 }

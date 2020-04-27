@@ -19,7 +19,8 @@ export class GenerateApiTokenModalComponent implements OnInit {
   apiForm: FormGroup;
   apiTokenError = false;
 
-  constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder, private userData: UserDataService, private calendar: NgbCalendar) { }
+  constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder,
+              private userData: UserDataService, private calendar: NgbCalendar) { }
 
   ngOnInit() {
     this.apiForm = this.formBuilder.group({
@@ -37,11 +38,11 @@ export class GenerateApiTokenModalComponent implements OnInit {
   submit() {
     this.apiTokenError = true;
     if (this.apiForm.valid) {
-      var momentSelectedDt = moment(this.toDateModel(this.apiForm.get('date').value));
-      var timemsendOfDay = momentSelectedDt.endOf('day').valueOf();
-      var apitoken = {
-        "apiUser": this.apiForm.get('apiUser').value,
-        "expirationDt": timemsendOfDay
+      const momentSelectedDt = moment(this.toDateModel(this.apiForm.get('date').value));
+      const timemsendOfDay = momentSelectedDt.endOf('day').valueOf();
+      const apitoken = {
+        apiUser: this.apiForm.get('apiUser').value,
+        expirationDt: timemsendOfDay
       };
       this.userData
         .createToken(apitoken)

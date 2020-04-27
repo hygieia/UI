@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'dash-edit',
+  selector: 'app-dash-edit',
   templateUrl: './dash-edit.component.html',
   styleUrls: ['./dash-edit.component.scss']
 })

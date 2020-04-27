@@ -12,12 +12,11 @@ import { DashEditComponent } from './dashboard/admin-dashboard/dash-edit/dash-ed
 import { ManageAdminsComponent } from './dashboard/admin-dashboard/manage-admins/manage-admins.component';
 import { EditTokenModalComponent } from './dashboard/admin-dashboard/modal/edit-token-modal/edit-token-modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { GenerateApiTokenModalComponent }
-  from './dashboard/admin-dashboard/modal/generate-api-token-modal/generate-api-token-modal.component';
+// tslint:disable-next-line:max-line-length
+import { GenerateApiTokenModalComponent } from './dashboard/admin-dashboard/modal/generate-api-token-modal/generate-api-token-modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DashTrashComponent } from './dashboard/admin-dashboard/dash-trash/dash-trash.component';
-import { DeleteConfirmModalComponent }
-  from './dashboard/admin-dashboard/modal/delete-confirm-modal/delete-confirm-modal.component';
+import { DeleteConfirmModalComponent } from './dashboard/admin-dashboard/modal/delete-confirm-modal/delete-confirm-modal.component';
 
 
 @NgModule({
