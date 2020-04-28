@@ -48,7 +48,9 @@ export class WidgetHeaderComponent implements OnInit {
       this.widgetComponent.status = status;
     }
     this.detectChanges();
-    this.findWidgetAuditStatus(this.widgetComponent.auditType);
+    if (this.widgetComponent) {
+      this.findWidgetAuditStatus(this.widgetComponent.auditType);
+    }
   }
 
   // Open the config modal and pass it necessary data. When it is closed pass the results to update them.
@@ -146,7 +148,7 @@ export class WidgetHeaderComponent implements OnInit {
       .subscribe((auditResults: IAuditResult[]) => {
         const auditResult: IAuditResult = auditResults.find(auditResult => auditResult.auditType === auditType);
         this.auditResult = auditResult;
-        this.auditStatus = auditResult ? auditResult.auditStatus: 'NA';
+        this.auditStatus = auditResult ? auditResult.auditStatus: '';
     });
   }
 }
