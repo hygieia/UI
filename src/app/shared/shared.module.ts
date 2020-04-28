@@ -63,6 +63,11 @@ import {BarHorizontalComponent} from './ngx-charts/bar-horizontal/bar-horizontal
 import {PieGridChartComponent} from './charts/pie-grid-chart/pie-grid-chart.component';
 import {PieGridComponent} from './ngx-charts/pie-grid/pie-grid.component';
 import { AuditModalComponent } from './modals/audit-modal/audit-modal.component';
+import {OSSWidgetComponent} from '../widget_modules/opensource-scan/oss-widget/oss-widget.component';
+import {OSSDetailComponent} from '../widget_modules/opensource-scan/oss-detail/oss-detail.component';
+import { TwoByOneLayoutComponent } from './layouts/two-by-one-layout/two-by-one-layout.component';
+import {OSSConfigFormComponent} from '../widget_modules/opensource-scan/oss-config-form/oss-config-form.component';
+import {OSSDetailAllComponent} from '../widget_modules/opensource-scan/oss-detail-all/oss-detail-all.component';
 
 @NgModule({
   declarations: [
@@ -112,6 +117,11 @@ import { AuditModalComponent } from './modals/audit-modal/audit-modal.component'
     PlainTextChartComponent,
     DeployDetailComponent,
     DeployWidgetComponent,
+    TwoByOneLayoutComponent,
+    OSSWidgetComponent,
+    OSSDetailComponent,
+    OSSDetailAllComponent,
+    OSSConfigFormComponent,
     OneChartLayoutComponent,
     GaugeChartComponent,
     StaticAnalysisConfigFormComponent,
@@ -119,7 +129,8 @@ import { AuditModalComponent } from './modals/audit-modal/audit-modal.component'
     StaticAnalysisWidgetComponent,
     SecurityScanConfigComponent,
     SecurityScanWidgetComponent,
-    AuditModalComponent
+    AuditModalComponent,
+    TwoByOneLayoutComponent
   ],
   entryComponents: [
     DeployDetailComponent,
@@ -149,6 +160,11 @@ import { AuditModalComponent } from './modals/audit-modal/audit-modal.component'
     PieGridChartComponent,
     PlaceholderWidgetComponent,
     PlainTextChartComponent,
+    TwoByOneLayoutComponent,
+    OSSWidgetComponent,
+    OSSDetailComponent,
+    OSSDetailAllComponent,
+    OSSConfigFormComponent,
     RepoDetailComponent,
     RepoWidgetComponent,
     RepoConfigFormComponent,
@@ -191,6 +207,7 @@ import { AuditModalComponent } from './modals/audit-modal/audit-modal.component'
     ReactiveFormsModule,
     TemplatesDirective,
     TwoByTwoLayoutComponent,
+    TwoByOneLayoutComponent,
     WidgetComponent,
     WidgetDirective,
     WidgetHeaderComponent,

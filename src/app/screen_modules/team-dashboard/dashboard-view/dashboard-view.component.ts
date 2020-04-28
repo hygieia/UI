@@ -6,7 +6,6 @@ import { TemplatesDirective } from 'src/app/shared/templates/templates.directive
 import { PlaceholderWidgetComponent } from 'src/app/shared/widget/placeholder-widget/placeholder-widget.component';
 import { BuildWidgetComponent } from 'src/app/widget_modules/build/build-widget/build-widget.component';
 import { DeployWidgetComponent } from 'src/app/widget_modules/deploy/deploy-widget/deploy-widget.component';
-import {RepoWidgetComponent} from '../../../widget_modules/repo/repo-widget/repo-widget.component';
 import { CaponeTemplateComponent } from '../capone-template/capone-template.component';
 import { ITemplate } from './dashboard-view';
 import {BuildConfigFormComponent} from '../../../widget_modules/build/build-config-form/build-config-form.component';
@@ -22,6 +21,9 @@ import {
 } from '../../../widget_modules/static-analysis/static-anaylsis-config-form/static-analysis-config-form.component';
 import {SecurityScanWidgetComponent} from '../../../widget_modules/security-scan/security-scan-widget/security-scan-widget.component';
 import {SecurityScanConfigComponent} from '../../../widget_modules/security-scan/security-scan-config/security-scan-config.component';
+import {RepoWidgetComponent} from '../../../widget_modules/repo/repo-widget/repo-widget.component';
+import {OSSWidgetComponent} from '../../../widget_modules/opensource-scan/oss-widget/oss-widget.component';
+import {OSSConfigFormComponent} from '../../../widget_modules/opensource-scan/oss-config-form/oss-config-form.component';
 
 @Component({
   selector: 'app-dashboard-view',
@@ -97,6 +99,13 @@ export class DashboardViewComponent extends DashboardComponent implements OnInit
         status: 'Success',
         widgetSize: 'col-xl-2',
         configForm: BuildConfigFormComponent
+      },
+      {
+        title: 'OSS',
+        component: OSSWidgetComponent,
+        status: 'Success',
+        widgetSize: 'col-xl-4',
+        configForm: OSSConfigFormComponent
       }
     ];
   }
