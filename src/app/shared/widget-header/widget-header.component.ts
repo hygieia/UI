@@ -9,7 +9,7 @@ import {FormModalComponent} from '../modals/form-modal/form-modal.component';
 import {WidgetComponent} from '../widget/widget.component';
 import {WidgetDirective} from '../widget/widget.directive';
 import {DashboardService} from '../dashboard.service';
-import {AuditModalComponent} from "../modals/audit-modal/audit-modal.component";
+import {AuditModalComponent} from '../modals/audit-modal/audit-modal.component';
 
 @Component({
   selector: 'app-widget-header',
@@ -146,9 +146,8 @@ export class WidgetHeaderComponent implements OnInit {
   private findWidgetAuditStatus(auditType: string) {
     this.dashboardService.dashboardAuditConfig$.pipe(map(result => result))
       .subscribe((auditResults: IAuditResult[]) => {
-        const auditResult: IAuditResult = auditResults.find(auditResult => auditResult.auditType === auditType);
-        this.auditResult = auditResult;
-        this.auditStatus = auditResult ? auditResult.auditStatus: '';
+        this.auditResult = auditResults.find(auditResult => auditResult.auditType === auditType);
+        this.auditStatus = this.auditResult ? this.auditResult.auditStatus : '';
     });
   }
 }

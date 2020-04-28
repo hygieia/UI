@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { cloneDeep, extend } from 'lodash';
 import { interval, Observable, ReplaySubject, Subject, Subscription } from 'rxjs';
 import { filter, map, startWith, take } from 'rxjs/operators';
-import {IAuditResult} from "./interfaces";
+import {IAuditResult} from './interfaces';
 
 @Injectable({
   providedIn: 'root'

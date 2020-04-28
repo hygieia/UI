@@ -3,14 +3,14 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SecurityScanConfigComponent } from './security-scan-config.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {NgbActiveModal, NgbModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {Observable, of} from "rxjs";
-import {CollectorService} from "../../../shared/collector.service";
-import {NgModule, NO_ERRORS_SCHEMA} from "@angular/core";
-import {SharedModule} from "../../../shared/shared.module";
-import {CommonModule} from "@angular/common";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {RouterModule} from "@angular/router";
-import {DashboardService} from "../../../shared/dashboard.service";
+import {Observable, of} from 'rxjs';
+import {CollectorService} from '../../../shared/collector.service';
+import {NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
+import {SharedModule} from '../../../shared/shared.module';
+import {CommonModule} from '@angular/common';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {RouterModule} from '@angular/router';
+import {DashboardService} from '../../../shared/dashboard.service';
 
 class MockCollectorService {
   mockCollectorData = {
@@ -20,9 +20,9 @@ class MockCollectorService {
     collector: {
       id: '1234',
       name: 'Scanner',
-      collectorType: "StaticSecurityScan"
+      collectorType: 'StaticSecurityScan'
     }
-  }
+  };
 
   getItemsById(id: string): Observable<any> {
     return of(this.mockCollectorData);
@@ -123,14 +123,14 @@ describe('SecurityScanConfigComponent', () => {
   });
 
   it('should assign selected job after submit', () => {
-    component.createForm()
+    component.createForm();
     expect(component.securityConfigForm.get('sJob').value).toEqual('');
     component.securityConfigForm = component.formBuilder.group({sJob: 'secJob1'});
     component.submitForm();
     expect(component.securityConfigForm.get('sJob').value).toEqual('secJob1'); 
   });
 
-  it('should load saved security scan job', function () {
+  it('should load saved security scan job', () => {
     component.loadSavedSecurityJob();
     collectorService.getItemsById('4321').subscribe(result => {
       expect(component.securityConfigForm.get('sJob').value).toEqual(result);

@@ -9,10 +9,10 @@ import {ISecurityScan, ISecurityScanResponse} from './security-scan-interfaces';
 })
 export class SecurityScanService {
 
-  securityScanDetailEndPoint = '/api/quality/security-analysis'
+  securityScanDetailEndPoint = '/api/quality/security-analysis';
   constructor(private http: HttpClient) {}
 
-  getSecurityScanDetails(componentId : string, max: number): Observable<ISecurityScan[]> {
+  getSecurityScanDetails(componentId: string, max: number): Observable<ISecurityScan[]> {
     return this.http.get<ISecurityScanResponse>(this.securityScanDetailEndPoint, this.getHttpParams(componentId, max))
       .pipe(map(response => response.result));
   }
