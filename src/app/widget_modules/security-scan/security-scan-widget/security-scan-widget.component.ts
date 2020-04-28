@@ -46,6 +46,7 @@ export class SecurityScanWidgetComponent extends WidgetComponent implements OnIn
     this.widgetId = 'codeanalysis0';
     this.layout = OneChartLayoutComponent;
     this.charts = SECURITY_SCAN_CHARTS;
+    this.auditType = 'STATIC_SECURITY_ANALYSIS';
     this.init();
   }
   ngAfterViewInit() {

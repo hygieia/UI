@@ -62,6 +62,7 @@ import { HorizontalBarChartComponent } from './charts/horizontal-bar-chart/horiz
 import {BarHorizontalComponent} from './ngx-charts/bar-horizontal/bar-horizontal.component';
 import {PieGridChartComponent} from './charts/pie-grid-chart/pie-grid-chart.component';
 import {PieGridComponent} from './ngx-charts/pie-grid/pie-grid.component';
+import { AuditModalComponent } from './modals/audit-modal/audit-modal.component';
 
 @NgModule({
   declarations: [
@@ -117,7 +118,8 @@ import {PieGridComponent} from './ngx-charts/pie-grid/pie-grid.component';
     StaticAnalysisDetailComponent,
     StaticAnalysisWidgetComponent,
     SecurityScanConfigComponent,
-    SecurityScanWidgetComponent
+    SecurityScanWidgetComponent,
+    AuditModalComponent
   ],
   entryComponents: [
     DeployDetailComponent,
@@ -155,7 +157,8 @@ import {PieGridComponent} from './ngx-charts/pie-grid/pie-grid.component';
     StaticAnalysisDetailComponent,
     StaticAnalysisWidgetComponent,
     SecurityScanConfigComponent,
-    SecurityScanWidgetComponent
+    SecurityScanWidgetComponent,
+    AuditModalComponent
   ],
   imports: [
     CommonModule,
