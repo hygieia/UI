@@ -20,6 +20,8 @@ import {
 } from '../../../widget_modules/static-analysis/static-anaylsis-config-form/static-analysis-config-form.component';
 import { TestWidgetComponent } from 'src/app/widget_modules/test/test-widget/test-widget.component';
 import { TestConfigFormComponent } from 'src/app/widget_modules/test/test-config-form/test-config-form.component';
+import {SecurityScanWidgetComponent} from '../../../widget_modules/security-scan/security-scan-widget/security-scan-widget.component';
+import {SecurityScanConfigComponent} from '../../../widget_modules/security-scan/security-scan-config/security-scan-config.component';
 import {RepoWidgetComponent} from '../../../widget_modules/repo/repo-widget/repo-widget.component';
 import {OSSWidgetComponent} from '../../../widget_modules/opensource-scan/oss-widget/oss-widget.component';
 import {OSSConfigFormComponent} from '../../../widget_modules/opensource-scan/oss-config-form/oss-config-form.component';
@@ -84,6 +86,20 @@ export class DashboardViewComponent extends DashboardComponent implements OnInit
         status: 'Success',
         widgetSize: 'col-xl-6',
         configForm: StaticAnalysisConfigFormComponent
+      },
+      {
+        title: 'Security Analysis',
+        component: SecurityScanWidgetComponent,
+        status: 'Success',
+        widgetSize: 'col-xl-4',
+        configForm: SecurityScanConfigComponent
+      },
+      {
+        title: 'Test',
+        component: TestWdigetComponent,
+        status: 'Success',
+        widgetSize: 'col-xl-2',
+        configForm: TestConfigComponent
       },
       {
         title: 'OSS',
