@@ -127,7 +127,7 @@ describe('SecurityScanConfigComponent', () => {
     expect(component.securityConfigForm.get('sJob').value).toEqual('');
     component.securityConfigForm = component.formBuilder.group({sJob: 'secJob1'});
     component.submitForm();
-    expect(component.securityConfigForm.get('sJob').value).toEqual('secJob1'); 
+    expect(component.securityConfigForm.get('sJob').value).toEqual('secJob1');
   });
 
   it('should load saved security scan job', () => {
