@@ -65,3 +65,9 @@ export interface IClickListItemTest extends IClickListItem {
   url: string;
   data: any;
 }
+
+export interface IClickListItemOSS extends IClickListItem {
+  url: string;
+  components: string[];
+  lastUpdated: number;
+}
