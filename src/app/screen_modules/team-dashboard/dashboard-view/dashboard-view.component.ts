@@ -99,7 +99,7 @@ export class DashboardViewComponent extends DashboardComponent implements OnInit
         component: TestWidgetComponent,
         status: 'Success',
         widgetSize: 'col-xl-2',
-        configForm: TestConfigComponent
+        configForm: TestConfigFormComponent
       },
       {
         title: 'OSS',
