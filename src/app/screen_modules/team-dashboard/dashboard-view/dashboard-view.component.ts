@@ -3,13 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { DashboardService } from 'src/app/shared/dashboard.service';
 import { DashboardComponent } from 'src/app/shared/dashboard/dashboard.component';
 import { TemplatesDirective } from 'src/app/shared/templates/templates.directive';
-import { PlaceholderWidgetComponent } from 'src/app/shared/widget/placeholder-widget/placeholder-widget.component';
 import { BuildWidgetComponent } from 'src/app/widget_modules/build/build-widget/build-widget.component';
 import { DeployWidgetComponent } from 'src/app/widget_modules/deploy/deploy-widget/deploy-widget.component';
-import {RepoWidgetComponent} from '../../../widget_modules/repo/repo-widget/repo-widget.component';
 import { CaponeTemplateComponent } from '../capone-template/capone-template.component';
 import { ITemplate } from './dashboard-view';
-import {Placeholder} from '@angular/compiler/src/i18n/i18n_ast';
 import {BuildConfigFormComponent} from '../../../widget_modules/build/build-config-form/build-config-form.component';
 import {DeployConfigFormComponent} from 'src/app/widget_modules/deploy/deploy-config-form/deploy-config-form.component';
 import {RepoConfigFormComponent} from '../../../widget_modules/repo/repo-config-form/repo-config-form.component';
@@ -21,6 +18,13 @@ import {
 import {
   StaticAnalysisConfigFormComponent
 } from '../../../widget_modules/static-analysis/static-anaylsis-config-form/static-analysis-config-form.component';
+import { TestWidgetComponent } from 'src/app/widget_modules/test/test-widget/test-widget.component';
+import { TestConfigFormComponent } from 'src/app/widget_modules/test/test-config-form/test-config-form.component';
+import {SecurityScanWidgetComponent} from '../../../widget_modules/security-scan/security-scan-widget/security-scan-widget.component';
+import {SecurityScanConfigComponent} from '../../../widget_modules/security-scan/security-scan-config/security-scan-config.component';
+import {RepoWidgetComponent} from '../../../widget_modules/repo/repo-widget/repo-widget.component';
+import {OSSWidgetComponent} from '../../../widget_modules/opensource-scan/oss-widget/oss-widget.component';
+import {OSSConfigFormComponent} from '../../../widget_modules/opensource-scan/oss-config-form/oss-config-form.component';
 
 @Component({
   selector: 'app-dashboard-view',
@@ -84,11 +88,25 @@ export class DashboardViewComponent extends DashboardComponent implements OnInit
         configForm: StaticAnalysisConfigFormComponent
       },
       {
-        title: 'Placeholder',
-        component: PlaceholderWidgetComponent,
+        title: 'Security Analysis',
+        component: SecurityScanWidgetComponent,
+        status: 'Success',
+        widgetSize: 'col-xl-4',
+        configForm: SecurityScanConfigComponent
+      },
+      {
+        title: 'Test',
+        component: TestWidgetComponent,
         status: 'Success',
         widgetSize: 'col-xl-2',
-        configForm: BuildConfigFormComponent
+        configForm: TestConfigFormComponent
+      },
+      {
+        title: 'OSS',
+        component: OSSWidgetComponent,
+        status: 'Success',
+        widgetSize: 'col-xl-4',
+        configForm: OSSConfigFormComponent
       }
     ];
   }

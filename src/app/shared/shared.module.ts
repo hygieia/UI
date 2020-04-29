@@ -56,10 +56,22 @@ import {
 } from '../widget_modules/static-analysis/static-anaylsis-config-form/static-analysis-config-form.component';
 import {StaticAnalysisDetailComponent} from '../widget_modules/static-analysis/static-analysis-detail/static-analysis-detail.component';
 import {StaticAnalysisWidgetComponent} from '../widget_modules/static-analysis/static-analysis-widget/static-analysis-widget.component';
+import {SecurityScanConfigComponent} from '../widget_modules/security-scan/security-scan-config/security-scan-config.component';
+import {SecurityScanWidgetComponent} from '../widget_modules/security-scan/security-scan-widget/security-scan-widget.component';
 import { HorizontalBarChartComponent } from './charts/horizontal-bar-chart/horizontal-bar-chart.component';
 import {BarHorizontalComponent} from './ngx-charts/bar-horizontal/bar-horizontal.component';
 import {PieGridChartComponent} from './charts/pie-grid-chart/pie-grid-chart.component';
 import {PieGridComponent} from './ngx-charts/pie-grid/pie-grid.component';
+import { AuditModalComponent } from './modals/audit-modal/audit-modal.component';
+import {OSSWidgetComponent} from '../widget_modules/opensource-scan/oss-widget/oss-widget.component';
+import {OSSDetailComponent} from '../widget_modules/opensource-scan/oss-detail/oss-detail.component';
+import { TwoByOneLayoutComponent } from './layouts/two-by-one-layout/two-by-one-layout.component';
+import {OSSConfigFormComponent} from '../widget_modules/opensource-scan/oss-config-form/oss-config-form.component';
+import {OSSDetailAllComponent} from '../widget_modules/opensource-scan/oss-detail-all/oss-detail-all.component';
+
+import { TestConfigFormComponent } from '../widget_modules/test/test-config-form/test-config-form.component';
+import { TestDetailComponent } from '../widget_modules/test/test-detail/test-detail.component';
+import { TestWidgetComponent } from '../widget_modules/test/test-widget/test-widget.component';
 
 @NgModule({
   declarations: [
@@ -109,11 +121,23 @@ import {PieGridComponent} from './ngx-charts/pie-grid/pie-grid.component';
     PlainTextChartComponent,
     DeployDetailComponent,
     DeployWidgetComponent,
+    TwoByOneLayoutComponent,
+    OSSWidgetComponent,
+    OSSDetailComponent,
+    OSSDetailAllComponent,
+    OSSConfigFormComponent,
     OneChartLayoutComponent,
     GaugeChartComponent,
     StaticAnalysisConfigFormComponent,
     StaticAnalysisDetailComponent,
-    StaticAnalysisWidgetComponent
+    StaticAnalysisWidgetComponent,
+    TestConfigFormComponent,
+    TestDetailComponent,
+    TestWidgetComponent,
+    SecurityScanConfigComponent,
+    SecurityScanWidgetComponent,
+    AuditModalComponent,
+    TwoByOneLayoutComponent
   ],
   entryComponents: [
     DeployDetailComponent,
@@ -143,13 +167,25 @@ import {PieGridComponent} from './ngx-charts/pie-grid/pie-grid.component';
     PieGridChartComponent,
     PlaceholderWidgetComponent,
     PlainTextChartComponent,
+    TwoByOneLayoutComponent,
+    OSSWidgetComponent,
+    OSSDetailComponent,
+    OSSDetailAllComponent,
+    OSSConfigFormComponent,
     RepoDetailComponent,
     RepoWidgetComponent,
     RepoConfigFormComponent,
     TwoByTwoLayoutComponent,
     StaticAnalysisConfigFormComponent,
     StaticAnalysisDetailComponent,
-    StaticAnalysisWidgetComponent
+    StaticAnalysisWidgetComponent,
+    TwoByTwoLayoutComponent,
+    TestConfigFormComponent,
+    TestDetailComponent,
+    TestWidgetComponent,
+    SecurityScanConfigComponent,
+    SecurityScanWidgetComponent,
+    AuditModalComponent
   ],
   imports: [
     CommonModule,
@@ -182,10 +218,13 @@ import {PieGridComponent} from './ngx-charts/pie-grid/pie-grid.component';
     ReactiveFormsModule,
     TemplatesDirective,
     TwoByTwoLayoutComponent,
+    TwoByOneLayoutComponent,
     WidgetComponent,
     WidgetDirective,
     WidgetHeaderComponent,
-    GaugeChartComponent
+    GaugeChartComponent,
+    SecurityScanConfigComponent,
+    SecurityScanWidgetComponent
   ]
 })
 export class SharedModule { }

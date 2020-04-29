@@ -58,3 +58,16 @@ export interface IClickListItemStaticAnalysis extends IClickListData {
   name?: string;
   timestamp?: any;
 }
+
+export interface IClickListItemTest extends IClickListItem {
+  timestamp: string;
+  description: string;
+  url: string;
+  data: any;
+}
+
+export interface IClickListItemOSS extends IClickListItem {
+  url: string;
+  components: string[];
+  lastUpdated: number;
+}
