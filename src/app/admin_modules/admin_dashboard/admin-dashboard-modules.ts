@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { UserDataService } from './services/user-data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminFilterPipe } from './pipes/filter.pipe';
-import { OrderByPipe } from './pipes/order-by.pipe';
+import { AdminOrderByPipe } from './pipes/order-by.pipe';
 import { DashEditComponent } from './dashboard/admin-dashboard/dash-edit/dash-edit.component';
 import { ManageAdminsComponent } from './dashboard/admin-dashboard/manage-admins/manage-admins.component';
 import { EditTokenModalComponent } from './dashboard/admin-dashboard/modal/edit-token-modal/edit-token-modal.component';
@@ -24,13 +24,13 @@ import { DeleteConfirmModalComponent } from './dashboard/admin-dashboard/modal/d
     AdminDashboardComponent,
     GenerateApiTokensComponent,
     AdminFilterPipe,
-    OrderByPipe,
+    AdminOrderByPipe,
     DashEditComponent,
     ManageAdminsComponent,
     EditTokenModalComponent,
     GenerateApiTokenModalComponent,
     DashTrashComponent,
-    DeleteConfirmModalComponent
+    DeleteConfirmModalComponent,
   ],
 
   providers: [UserDataService],

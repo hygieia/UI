@@ -10,14 +10,15 @@ import { UserDataService } from '../../../services/user-data.service';
 import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { OrderByPipe } from '../../../pipes/order-by.pipe';
 import { AdminFilterPipe } from '../../../pipes/filter.pipe';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { API_TOKEN_LIST } from '../../../services/user-data.service.mockdata';
 import { NgModule } from '@angular/core';
+import { AdminOrderByPipe } from '../../../pipes/order-by.pipe';
 
 @NgModule({
-  declarations: [GenerateApiTokensComponent, DashEditComponent, DashTrashComponent, AdminFilterPipe, OrderByPipe, EditTokenModalComponent,
+  declarations: [GenerateApiTokensComponent, DashEditComponent, DashTrashComponent, AdminFilterPipe,
+          AdminOrderByPipe, EditTokenModalComponent,
     GenerateApiTokenModalComponent,
     DeleteConfirmModalComponent],
   providers: [UserDataService, NgbModal],

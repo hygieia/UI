@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-dashboard.component.scss']
 })
 export class AdminDashboardComponent implements OnInit {
-  tab = 'dashboards';
+  tab = 'editDashboards';
   constructor() { }
 
   ngOnInit() {

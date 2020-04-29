@@ -5,21 +5,20 @@
     </div>
     <div class="widget-modal-body">
       <div class="row">
-        <div class="col-xs-12">
+        <div class="col-md-12">
           <div class="text-center" [hidden]="users">Loading Users...</div>
           <div [hidden]="error">
             {{error.data}}
           </div>
           <div class="row">
-            <div class="col-xs-5">
+            <div class="col-md-5">
               <h3>Users</h3>
               <input type="text" class="form-control" id="userSearch" placeholder="Filter Users"
                 [(ngModel)]="userSearch">
               <div class="dash-modal-row delete-dashboard-row clearfix"
-                *ngFor="let user of users | adminfilter:{username:userSearch, authorities:'!ROLE_ADMIN'} ">
-                <!-- filter:{username:userSearch, authorities:'!ROLE_ADMIN'} | orderBy:'username' -->
+                *ngFor="let user of users | adminfilter:{username:userSearch, authorities:'!ROLE_ADMIN'} | adminOrderBy:'username'">
                 <div class="btn-block">
-                  <!-- <span class="label label-primary" [hidden]="isActiveUser(user)">You</span> -->
+                  <span class="badge badge-primary" [hidden]="!(user.authType === authType && user.username === username)">You</span>
                   {{user.username}}
                   <span class="badge badge-secondary">{{user.authType}}</span>
                   <div title="Promote User" class="clickable pull-right" (click)="promoteUserToAdmin(user)">
@@ -31,16 +30,15 @@
                 </div>
               </div>
             </div>
-            <div class="col-xs-push-2 col-xs-5">
+            <div class="col-push col-md-5">
               <h3>Admins</h3>
               <div class="dash-modal-row delete-dashboard-row clearfix"
-                *ngFor="let user of users | adminfilter:{authorities:'ROLE_ADMIN'} as filteredAdmins ">
-                <!-- | orderBy:'username' | filter:{authorities:'ROLE_ADMIN'} as filteredAdmins" -->
+                *ngFor="let user of users | adminfilter:{authorities:'ROLE_ADMIN'} as filteredAdmins  ">
                 <div class="btn-block">
-                  <!-- <span class="label label-primary" [hidden]="isActiveUser(user)">You</span> -->
+                  <span class="badge badge-primary" [hidden]="!(user.authType === authType && user.username === username)">You</span>
                   {{user.username}}
-                  <span class="badge badge-secondary">{{user.authType}}</span>
-                  <div title="Demote User" [hidden]="filteredAdmins.length > 1" class="clickable pull-right"
+                  <span class="badge badge-secondary" >{{user.authType}}</span>
+                  <div title="Demote User"  class="clickable pull-right"
                     (click)="demoteUserFromAdmin(user)">
                     <span class="clickable fa fa-stack">
                       <span class="fa-circle-thin fa-stack-2x text-danger"></span>
