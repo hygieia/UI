@@ -88,18 +88,18 @@ export class DashboardViewComponent extends DashboardComponent implements OnInit
         configForm: StaticAnalysisConfigFormComponent
       },
       {
-        title: 'Security Analysis',
-        component: SecurityScanWidgetComponent,
-        status: 'Success',
-        widgetSize: 'col-xl-4',
-        configForm: SecurityScanConfigComponent
-      },
-      {
         title: 'Test',
         component: TestWidgetComponent,
         status: 'Success',
         widgetSize: 'col-xl-2',
         configForm: TestConfigFormComponent
+      },
+      {
+        title: 'Security Analysis',
+        component: SecurityScanWidgetComponent,
+        status: 'Success',
+        widgetSize: 'col-xl-4',
+        configForm: SecurityScanConfigComponent
       },
       {
         title: 'OSS',
