@@ -73,7 +73,7 @@ import { TestConfigFormComponent } from '../widget_modules/test/test-config-form
 import { TestDetailComponent } from '../widget_modules/test/test-detail/test-detail.component';
 import { TestWidgetComponent } from '../widget_modules/test/test-widget/test-widget.component';
 // tslint:disable-next-line:max-line-length
-import {DeleteConfirmModalComponent} from '../admin_modules/admin_dashboard/dashboard/admin-dashboard/modal/delete-confirm-modal/delete-confirm-modal.component';
+import {DeleteConfirmModalComponent} from './modals/delete-confirm-modal/delete-confirm-modal.component';
 
 @NgModule({
   declarations: [

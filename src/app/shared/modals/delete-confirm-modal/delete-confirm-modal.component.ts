@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -8,7 +8,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class DeleteConfirmModalComponent implements OnInit {
 
-  public title = 'Delete Api Token';
+  @Input() public title: string;
   public confirm = 'Confirm';
   public cancel = 'Cancel';
   public message = 'This item will be deleted immediately.  You cannot undo this action.';

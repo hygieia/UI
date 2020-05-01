@@ -21,6 +21,7 @@ import {CreateOrUpdateFeatureFlagsComponent} from './dashboard/admin-dashboard/m
 import {UpdateJsonComponent} from './dashboard/admin-dashboard/modal/update-json/update-json.component';
 import {ViewJsonComponent} from './dashboard/admin-dashboard/modal/view-json/view-json.component';
 import {FeatureFlagsComponent} from './dashboard/admin-dashboard/feature-flags/feature-flags.component';
+import {SharedModule} from '../../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import {FeatureFlagsComponent} from './dashboard/admin-dashboard/feature-flags/f
 
   imports: [
     AdminDashboardRoutingModule,
+    SharedModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

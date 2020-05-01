@@ -10,7 +10,7 @@ import {DashEditComponent} from '../dash-edit/dash-edit.component';
 import {CreateOrUpdateFeatureFlagsComponent} from '../modal/create-or-update-feature-flags/create-or-update-feature-flags.component';
 import {ViewJsonComponent} from '../modal/view-json/view-json.component';
 import {UpdateJsonComponent} from '../modal/update-json/update-json.component';
-import {DeleteConfirmModalComponent} from '../modal/delete-confirm-modal/delete-confirm-modal.component';
+import {DeleteConfirmModalComponent} from '../../../../../shared/modals/delete-confirm-modal/delete-confirm-modal.component';
 import {NgModule} from '@angular/core';
 
 @NgModule({
