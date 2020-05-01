@@ -52,22 +52,14 @@ export class FeatureFlagsComponent implements OnInit {
   addFile() {
     const modalRef = this.modalService.open(UpdateJsonComponent);
     modalRef.result.then((newConfig) => {
-      if (newConfig === 'close') {
         this.loadFeatureFlags();
-      }
-    }).catch((error) => {
-      console.log('add error newConfig: ' + error);
     });
   }
 
   addNewFeatureFlag() {
     const modalRef = this.modalService.open(CreateOrUpdateFeatureFlagsComponent);
     modalRef.result.then((newConfig) => {
-      if (newConfig === 'close') {
-        this.loadFeatureFlags();
-      }
-    }).catch((error) => {
-      console.log('add error newConfig: ' + error);
+      this.loadFeatureFlags();
     });
   }
 
@@ -78,11 +70,7 @@ export class FeatureFlagsComponent implements OnInit {
     modalRef.componentInstance.description = featureFlagObj.description;
     modalRef.componentInstance.flags = featureFlagObj.flags;
     modalRef.result.then((newConfig) => {
-      if (newConfig === 'close') {
         this.loadFeatureFlags();
-      }
-    }).catch((error) => {
-      console.log('edit error newConfig: ' + error);
     });
   }
 
@@ -90,14 +78,9 @@ export class FeatureFlagsComponent implements OnInit {
     const modalRef = this.modalService.open(DeleteConfirmModalComponent);
     modalRef.componentInstance.title = 'Are you sure you want to delete?';
     modalRef.result.then((newConfig) => {
-      if (newConfig === 'close') {
-        this.userData.deleteFeatureFlags(id).subscribe(response => {
-          console.log('response from deletion: ', response);
-          this.loadFeatureFlags();
-        });
-      }
-    }).catch((error) => {
-      console.log('delete error newConfig: ' + error);
+      this.userData.deleteFeatureFlags(id).subscribe(response => {
+        this.loadFeatureFlags();
+      });
     });
   }
 }

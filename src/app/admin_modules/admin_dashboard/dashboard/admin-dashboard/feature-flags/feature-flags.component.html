@@ -14,9 +14,9 @@
       <h6>Description: {{item?.description}}</h6>
       <div class="flags">
         <h6>Flags: </h6>
-        <div class="table-row" *ngFor="let k of flagKeys(item?.flags)">
+        <div class="table-row" *ngFor="let currFlag of flagKeys(item?.flags)">
           <div class="individual">
-            <p>{{k}}: {{item?.flags[k]}}</p>
+            <p>{{currFlag}}: {{item?.flags[currFlag]}}</p>
           </div>
         </div>
       </div>

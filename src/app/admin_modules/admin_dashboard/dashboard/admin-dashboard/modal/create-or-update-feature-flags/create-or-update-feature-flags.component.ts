@@ -38,42 +38,13 @@ export class CreateOrUpdateFeatureFlagsComponent implements OnInit {
     setTimeout(() => {
       this.featureFlagForm.get('name').setValue(this.name);
       this.featureFlagForm.get('description').setValue(this.description);
-
-      if (this.flags.agileTool) {
-        this.featureFlagForm.get('agileTool').setValue(true);
-      } else { this.featureFlagForm.get('agileTool').setValue(false); }
-
-      if (this.flags.artifact) {
-        this.featureFlagForm.get('artifact').setValue(true);
-      } else { this.featureFlagForm.get('artifact').setValue(false); }
-
-      if (this.flags.build) {
-        this.featureFlagForm.get('build').setValue(true);
-      } else { this.featureFlagForm.get('build').setValue(false); }
-
-      if (this.flags.codeQuality) {
-        this.featureFlagForm.get('codeQuality').setValue(true);
-      } else { this.featureFlagForm.get('codeQuality').setValue(false); }
-
-      if (this.flags.deployment) {
-        this.featureFlagForm.get('deployment').setValue(true);
-      } else { this.featureFlagForm.get('deployment').setValue(false); }
-
-      if (this.flags.libraryPolicy) {
-        this.featureFlagForm.get('libraryPolicy').setValue(true);
-      } else { this.featureFlagForm.get('libraryPolicy').setValue(false); }
-
-      if (this.flags.scm) {
-        this.featureFlagForm.get('scm').setValue(true);
-      } else { this.featureFlagForm.get('scm').setValue(false); }
-
-      if (this.flags.staticSecurityScan) {
-        this.featureFlagForm.get('staticSecurityScan').setValue(true);
-      } else { this.featureFlagForm.get('staticSecurityScan').setValue(false); }
-
-      if (this.flags.test) {
-        this.featureFlagForm.get('test').setValue(true);
-      } else { this.featureFlagForm.get('test').setValue(false); }
+      for (const [currFlag, value] of Object.entries(this.flags)) {
+        if (value) {
+          this.featureFlagForm.get(currFlag).setValue(true);
+        } else {
+          this.featureFlagForm.get(currFlag).setValue(false);
+        }
+      }
     });
   }
 
@@ -129,7 +100,6 @@ export class CreateOrUpdateFeatureFlagsComponent implements OnInit {
       this.userData
         .createOrUpdateFeatureFlags(JSON.stringify(featureFlagUpdateObj))
         .subscribe( (response) => {
-          console.log(response);
           this.activeModal.close('close');
         }, (error) => {
           console.log(error);
