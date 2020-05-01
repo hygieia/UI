@@ -1,7 +1,8 @@
 <div>
   <div class="modal-content">
     <div class="modal-header">
-      <h4 class="modal-title">Input Feature Flags</h4>
+      <h4 class="modal-title">Input Feature Flags <ng-template #tipContent><b>Input Feature Flags as an array (separated by ,)</b></ng-template>
+        <i class="fa fa-info-circle" aria-hidden="true" [ngbTooltip]="tipContent"></i>:</h4>
       <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>

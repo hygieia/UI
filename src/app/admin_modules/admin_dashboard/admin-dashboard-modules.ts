@@ -16,6 +16,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GenerateApiTokenModalComponent } from './dashboard/admin-dashboard/modal/generate-api-token-modal/generate-api-token-modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DashTrashComponent } from './dashboard/admin-dashboard/dash-trash/dash-trash.component';
+// tslint:disable-next-line:max-line-length
 import {CreateOrUpdateFeatureFlagsComponent} from './dashboard/admin-dashboard/modal/create-or-update-feature-flags/create-or-update-feature-flags.component';
 import {UpdateJsonComponent} from './dashboard/admin-dashboard/modal/update-json/update-json.component';
 import {ViewJsonComponent} from './dashboard/admin-dashboard/modal/view-json/view-json.component';
