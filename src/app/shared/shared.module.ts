@@ -92,6 +92,7 @@ import {TabsModule} from './ngx-ui/tabs/tabs.module';
     ComboSeriesVerticalComponent,
     ConfirmationModalComponent,
     DashboardComponent,
+    DeleteConfirmModalComponent,
     DetailModalComponent,
     DetailModalDirective,
     FeatureConfigFormComponent,
@@ -143,6 +144,7 @@ import {TabsModule} from './ngx-ui/tabs/tabs.module';
     TwoByOneLayoutComponent
   ],
   entryComponents: [
+    DeleteConfirmModalComponent,
     DeployDetailComponent,
     DeployWidgetComponent,
     DeployConfigFormComponent,
