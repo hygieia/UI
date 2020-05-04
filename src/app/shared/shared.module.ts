@@ -72,6 +72,8 @@ import {OSSDetailAllComponent} from '../widget_modules/opensource-scan/oss-detai
 import { TestConfigFormComponent } from '../widget_modules/test/test-config-form/test-config-form.component';
 import { TestDetailComponent } from '../widget_modules/test/test-detail/test-detail.component';
 import { TestWidgetComponent } from '../widget_modules/test/test-widget/test-widget.component';
+// tslint:disable-next-line:max-line-length
+import {DeleteConfirmModalComponent} from './modals/delete-confirm-modal/delete-confirm-modal.component';
 import {TabsModule} from "./ngx-ui/tabs/tabs.module";
 
 @NgModule({
@@ -90,6 +92,7 @@ import {TabsModule} from "./ngx-ui/tabs/tabs.module";
     ComboSeriesVerticalComponent,
     ConfirmationModalComponent,
     DashboardComponent,
+    DeleteConfirmModalComponent,
     DetailModalComponent,
     DetailModalDirective,
     FeatureConfigFormComponent,
@@ -141,6 +144,7 @@ import {TabsModule} from "./ngx-ui/tabs/tabs.module";
     TwoByOneLayoutComponent
   ],
   entryComponents: [
+    DeleteConfirmModalComponent,
     DeployDetailComponent,
     DeployWidgetComponent,
     DeployConfigFormComponent,
