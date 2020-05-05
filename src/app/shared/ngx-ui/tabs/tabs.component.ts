@@ -43,7 +43,7 @@ export class TabsComponent implements AfterContentInit, OnDestroy {
     return tabs.findIndex(tab => tab.active);
   }
 
-  private readonly _destroy$ = new Subject<void>();
+  private readonly destroy = new Subject<void>();
 
   constructor(readonly cdr: ChangeDetectorRef) {}
 
@@ -61,12 +61,12 @@ export class TabsComponent implements AfterContentInit, OnDestroy {
       });
     }
 
-    this.tabs.changes.pipe(takeUntil(this._destroy$)).subscribe(() => this.cdr.markForCheck());
+    this.tabs.changes.pipe(takeUntil(this.destroy)).subscribe(() => this.cdr.markForCheck());
   }
 
   ngOnDestroy() {
-    this._destroy$.next();
-    this._destroy$.complete();
+    this.destroy.next();
+    this.destroy.complete();
   }
 
   tabClicked(activeTab: TabComponent): void {

@@ -88,7 +88,7 @@ describe('TabsComponent', () => {
     });
 
     it('renders template content for tab label correctly', () => {
-      const el = document.getElementsByClassName('ngx-tab active')[0];
+      const el = document.getElementsByClassName('app-tab active')[0];
       expect(el.textContent).toContain('templated label');
     });
   });
