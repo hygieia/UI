@@ -9,7 +9,7 @@ import {
   AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  OnDestroy, HostBinding
+  OnDestroy
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';

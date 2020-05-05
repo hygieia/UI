@@ -8,7 +8,7 @@ import {
   OnInit,
   ViewChild,
   ChangeDetectionStrategy,
-  ChangeDetectorRef, HostBinding
+  ChangeDetectorRef
 } from '@angular/core';
 import { IfTabActiveDirective } from './if-tab-active.directive';
 
