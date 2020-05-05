@@ -13,7 +13,6 @@ import {
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-
 import { TabComponent } from './tab.component';
 
 // This component is based on the tabs component from ngx-ui
