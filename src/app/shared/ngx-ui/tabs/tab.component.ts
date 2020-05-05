@@ -8,7 +8,7 @@ import {
   OnInit,
   ViewChild,
   ChangeDetectionStrategy,
-  ChangeDetectorRef
+  ChangeDetectorRef, HostBinding
 } from '@angular/core';
 import { IfTabActiveDirective } from './if-tab-active.directive';
 
@@ -17,12 +17,11 @@ import { IfTabActiveDirective } from './if-tab-active.directive';
 @Component({
   selector: 'app-tab',
   templateUrl: './tab.component.html',
-  host: {
-    class: 'app-tab'
-  },
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TabComponent implements OnInit {
+  @HostBinding('class') class = 'app-tab';
+
   @Input() title = '';
   @Input() label: string | TemplateRef<any> = '';
   @Input() active = false;
