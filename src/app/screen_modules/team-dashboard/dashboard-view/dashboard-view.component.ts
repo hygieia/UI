@@ -25,7 +25,7 @@ import {SecurityScanWidgetComponent} from '../../../widget_modules/security-scan
 import {SecurityScanConfigComponent} from '../../../widget_modules/security-scan/security-scan-config/security-scan-config.component';
 import {OSSWidgetComponent} from '../../../widget_modules/opensource-scan/oss-widget/oss-widget.component';
 import {OSSConfigFormComponent} from '../../../widget_modules/opensource-scan/oss-config-form/oss-config-form.component';
-import {PlaceholderWidgetComponent} from "../../../shared/widget/placeholder-widget/placeholder-widget.component";
+import {PlaceholderWidgetComponent} from '../../../shared/widget/placeholder-widget/placeholder-widget.component';
 
 @Component({
   selector: 'app-dashboard-view',
