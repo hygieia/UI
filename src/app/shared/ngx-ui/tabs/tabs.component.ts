@@ -9,7 +9,7 @@ import {
   AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  OnDestroy, HostBinding
+  OnDestroy
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -22,15 +22,14 @@ import { TabComponent } from './tab.component';
   exportAs: 'appTabs',
   selector: 'app-tabs',
   templateUrl: './tabs.component.html',
-  // host: {
-  //   class: 'app-tabs'
-  // },
+  host: {
+    class: 'app-tabs'
+  },
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./tabs.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TabsComponent implements AfterContentInit, OnDestroy {
-  @HostBinding('class') 'app-tabs';
   @Input() vertical: boolean;
 
   @Output() selectTab = new EventEmitter();
