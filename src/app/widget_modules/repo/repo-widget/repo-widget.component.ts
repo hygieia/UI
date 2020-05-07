@@ -20,12 +20,6 @@ import {CollectorService} from '../../../shared/collector.service';
 // @ts-ignore
 import moment from 'moment';
 import * as _ from 'lodash';
-import {
-  IClickListData,
-  IClickListItem,
-} from '../../../shared/charts/click-list/click-list-interfaces';
-import {TwoByTwoLayoutComponent} from '../../../shared/layouts/two-by-two-layout/two-by-two-layout.component';
-import {OneChartLayoutComponent} from '../../../shared/layouts/one-chart-layout/one-chart-layout.component';
 import {OneByTwoLayoutComponent} from '../../../shared/layouts/one-by-two-layout/one-by-two-layout.component';
 
 @Component({
