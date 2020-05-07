@@ -20,6 +20,12 @@ import {CollectorService} from '../../../shared/collector.service';
 // @ts-ignore
 import moment from 'moment';
 import * as _ from 'lodash';
+import {
+  IClickListData,
+  IClickListItem,
+} from '../../../shared/charts/click-list/click-list-interfaces';
+import {TwoByTwoLayoutComponent} from '../../../shared/layouts/two-by-two-layout/two-by-two-layout.component';
+import {OneChartLayoutComponent} from '../../../shared/layouts/one-chart-layout/one-chart-layout.component';
 import {OneByTwoLayoutComponent} from '../../../shared/layouts/one-by-two-layout/one-by-two-layout.component';
 
 @Component({
@@ -34,6 +40,15 @@ export class RepoWidgetComponent extends WidgetComponent implements OnInit, Afte
   private intervalRefreshSubscription: Subscription;
   private params;
   @ViewChild(LayoutDirective, {static: false}) childLayoutTag: LayoutDirective;
+  public commitToday;
+  public commit7;
+  public commit14;
+  public pullToday;
+  public pull7;
+  public pull14;
+  public issueToday;
+  public issue7;
+  public issue14;
 
   constructor(componentFactoryResolver: ComponentFactoryResolver,
               cdr: ChangeDetectorRef,
@@ -174,27 +189,17 @@ export class RepoWidgetComponent extends WidgetComponent implements OnInit, Afte
     bucketOneStartDate.setDate(bucketOneStartDate.getDate() - this.TOTAL_REPO_COUNTS_TIME_RANGES[0] + 1);
     bucketTwoStartDate.setDate(bucketTwoStartDate.getDate() - this.TOTAL_REPO_COUNTS_TIME_RANGES[1] + 1);
 
-    const commitTodayCount = commitResult.filter(repo => this.checkRepoAfterDate(repo.scmCommitTimestamp, today)).length;
-    const commitBucketOneCount = commitResult.filter(repo => this.checkRepoAfterDate(repo.scmCommitTimestamp, bucketOneStartDate)).length;
-    const commitBucketTwoCount = commitResult.filter(repo => this.checkRepoAfterDate(repo.scmCommitTimestamp, bucketTwoStartDate)).length;
+    this.commitToday = commitResult.filter(repo => this.checkRepoAfterDate(repo.scmCommitTimestamp, today)).length;
+    this.commit7 = commitResult.filter(repo => this.checkRepoAfterDate(repo.scmCommitTimestamp, bucketOneStartDate)).length;
+    this.commit14 = commitResult.filter(repo => this.checkRepoAfterDate(repo.scmCommitTimestamp, bucketTwoStartDate)).length;
 
-    const pullTodayCount = pullResult.filter(repo => this.checkRepoAfterDate(repo.timestamp, today)).length;
-    const pullBucketOneCount = pullResult.filter(repo => this.checkRepoAfterDate(repo.timestamp, bucketOneStartDate)).length;
-    const pullBucketTwoCount = pullResult.filter(repo => this.checkRepoAfterDate(repo.timestamp, bucketTwoStartDate)).length;
+    this.pullToday = pullResult.filter(repo => this.checkRepoAfterDate(repo.timestamp, today)).length;
+    this.pull7 = pullResult.filter(repo => this.checkRepoAfterDate(repo.timestamp, bucketOneStartDate)).length;
+    this.pull14 = pullResult.filter(repo => this.checkRepoAfterDate(repo.timestamp, bucketTwoStartDate)).length;
 
-    const issueTodayCount = issueResult.filter(repo => this.checkRepoAfterDate(repo.timestamp, today)).length;
-    const issueBucketOneCount = issueResult.filter(repo => this.checkRepoAfterDate(repo.timestamp, bucketOneStartDate)).length;
-    const issueBucketTwoCount = issueResult.filter(repo => this.checkRepoAfterDate(repo.timestamp, bucketTwoStartDate)).length;
-
-    this.charts[1].data[0].value = commitTodayCount;
-    this.charts[1].data[1].value = commitBucketOneCount;
-    this.charts[1].data[2].value = commitBucketTwoCount;
-    this.charts[1].data[3].value = pullTodayCount;
-    this.charts[1].data[4].value = pullBucketOneCount;
-    this.charts[1].data[5].value = pullBucketTwoCount;
-    this.charts[1].data[6].value = issueTodayCount;
-    this.charts[1].data[7].value = issueBucketOneCount;
-    this.charts[1].data[8].value = issueBucketTwoCount;
+    this.issueToday = issueResult.filter(repo => this.checkRepoAfterDate(repo.timestamp, today)).length;
+    this.issue7 = issueResult.filter(repo => this.checkRepoAfterDate(repo.timestamp, bucketOneStartDate)).length;
+    this.issue14 = issueResult.filter(repo => this.checkRepoAfterDate(repo.timestamp, bucketTwoStartDate)).length;
   }
 
   //// *********************** HELPER UTILS *********************
