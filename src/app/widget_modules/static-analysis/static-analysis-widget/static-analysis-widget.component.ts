@@ -108,10 +108,10 @@ export class StaticAnalysisWidgetComponent extends WidgetComponent implements On
         return this.staticAnalysisService.fetchStaticAnalysis(widgetConfig.componentId, 1);
       })).subscribe(result => {
         if (result && result.length > 0) {
-          this.loadCharts(result[0]);
+          this.loadCharts(result[0], true);
         } else {
           // code quality item could not be found
-          this.loadEmptyChart();
+          this.loadCharts(null,false);
         }
       });
   }
@@ -123,23 +123,21 @@ export class StaticAnalysisWidgetComponent extends WidgetComponent implements On
     }
   }
 
-  loadCharts(result: IStaticAnalysis) {
-    this.generateProjectDetails(result);
-    this.generateViolations(result);
-    this.generateCoverage(result);
-    this.generateUnitTestMetrics(result);
-    super.loadComponent(this.childLayoutTag);
-  }
-
-  loadEmptyChart() {
+  loadCharts(result: IStaticAnalysis, found: boolean) {
+    this.generateProjectDetails(result, found);
+    this.generateViolations(result, found);
+    this.generateCoverage(result, found);
+    this.generateUnitTestMetrics(result, found);
     super.loadComponent(this.childLayoutTag);
   }
 
   // *********************** DETAILS/QUALITY *********************
 
-  generateProjectDetails(result: IStaticAnalysis) {
+  generateProjectDetails(result: IStaticAnalysis, found: boolean) {
 
-    if (!result) {
+    // collector item was not found, reset widget
+    if (!found) {
+      this.charts[0].data = [];
       return;
     }
 
@@ -187,9 +185,12 @@ export class StaticAnalysisWidgetComponent extends WidgetComponent implements On
 
   // *********************** COVERAGE (CODE) ****************************
 
-  generateCoverage(result: IStaticAnalysis) {
+  generateCoverage(result: IStaticAnalysis, found: boolean) {
 
-    if (!result) {
+    // collector item was not found, reset widget
+    if (!found) {
+      this.charts[1].data.results[0].value = 0;
+      this.charts[1].data.customLabelValue = 0;
       return;
     }
 
@@ -202,9 +203,14 @@ export class StaticAnalysisWidgetComponent extends WidgetComponent implements On
 
   // *********************** VIOLATIONS *****************************
 
-  generateViolations(result: IStaticAnalysis) {
+  generateViolations(result: IStaticAnalysis, found: boolean) {
 
-    if (!result) {
+    // collector item was not found, reset widget
+    if (!found) {
+      this.charts[2].data[0].value = 0;
+      this.charts[2].data[1].value = 0;
+      this.charts[2].data[2].value = 0;
+      this.charts[2].data[3].value = 0;
       return;
     }
 
@@ -222,9 +228,11 @@ export class StaticAnalysisWidgetComponent extends WidgetComponent implements On
 
   // *********************** UNIT TEST METRICS ****************************
 
-  generateUnitTestMetrics(result: IStaticAnalysis) {
+  generateUnitTestMetrics(result: IStaticAnalysis, found: boolean) {
 
-    if (!result) {
+    // collector item was not found, reset widget
+    if (!found) {
+      this.charts[3].data = [];
       return;
     }
 
