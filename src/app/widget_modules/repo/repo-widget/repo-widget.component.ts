@@ -20,12 +20,8 @@ import {CollectorService} from '../../../shared/collector.service';
 // @ts-ignore
 import moment from 'moment';
 import * as _ from 'lodash';
+// @ts-ignore
 import {OneByTwoLayoutTableChartComponent} from '../../../shared/layouts/one-by-two-layout-table-chart/one-by-two-layout-table-chart.component';
-import {
-  IClickListData,
-  IClickListItem,
-} from '../../../shared/charts/click-list/click-list-interfaces';
-import {PlainTextChartComponent} from '../../../shared/charts/plain-text-chart/plain-text-chart.component';
 
 @Component({
   selector: 'app-repo-widget',
