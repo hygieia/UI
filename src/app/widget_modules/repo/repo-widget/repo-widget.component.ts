@@ -20,7 +20,7 @@ import {CollectorService} from '../../../shared/collector.service';
 // @ts-ignore
 import moment from 'moment';
 import * as _ from 'lodash';
-// @ts-ignore
+// tslint:disable-next-line:max-line-length
 import {OneByTwoLayoutTableChartComponent} from '../../../shared/layouts/one-by-two-layout-table-chart/one-by-two-layout-table-chart.component';
 
 @Component({
