@@ -54,8 +54,8 @@ export let DASHBOARDDATA = [
                     id: 'repo0',
                     scm:
                     {
-                        name: 'GitHub',
-                        value: 'GitHub'
+                        name: 'test',
+                        value: 'test'
                     },
                     branch: 'develop',
                     url: 'https://example.com/'
@@ -112,7 +112,7 @@ export let DASHBOARDDATA = [
                 {
                     ScopeOwner: [{
                         id: '56d9ab057fab7c402ac9f730',
-                        description: 'Purple Rain',
+                        description: 'test',
                         enabled: true,
                         errors: [],
                         pushed: false,
@@ -124,8 +124,8 @@ export let DASHBOARDDATA = [
                             changeDate: '2015-11-06T12:52:08.2030000',
                             assetState: 'Active'
                         },
-                        name: 'Purple Rain',
-                        teamId: 'Team:17292934',
+                        name: 'test',
+                        teamId: 'Team:1729eee2934',
                         changeDate: '2015-11-06T12:52:08.2030000',
                         isDeleted: 'False',
                         assetState: 'Active',
@@ -141,22 +141,22 @@ export let DASHBOARDDATA = [
                         options: {
                             scm: 'Github',
                             branch: 'develop',
-                            url: 'https://github.kdc.capitalone.com/opensocisrm/gateway'
+                            url: 'https://example.com'
                         }
                         , errorCount: 0
                     }],
                     Deployment: [
                         {
                             id: '56d825c07fab7c76a1453312',
-                            description: 'PURPLERAIN',
+                            description: 'test',
                             enabled: true, errors: [],
                             pushed: false,
                             collectorId: '56d825ba7fab7c76a14530a8',
                             lastUpdated: 0,
                             options: {
                                 applicationId: '297e00af-f4cb-4815-9e4a-c26eb3e97de6',
-                                applicationName: 'PURPLERAIN',
-                                instanceUrl: 'https://udeploy.kdc.capitalone.com/'
+                                applicationName: 'test',
+                                instanceUrl: 'https://example.com/'
                             },
                             errorCount: 0
                         }
@@ -170,9 +170,9 @@ export let DASHBOARDDATA = [
                             collectorId: '589febd0a65ce715f0332d62',
                             lastUpdated: 0,
                             options: {
-                                teamName: 'LEGO Scrum',
+                                teamName: 'test122',
                                 featureTool: 'Jira',
-                                projectName: 'Shared Tools ART',
+                                projectName: 'test1',
                                 projectId: '42300',
                                 teamId: '14585'
                             },
@@ -182,11 +182,11 @@ export let DASHBOARDDATA = [
                     Audit: [
                         {
                             id: '5cf5ad80c809261e134f7f16',
-                            description: 'Purple Rain Test code_review audit process',
+                            description: 'test12',
                             enabled: true,
                             errors: [],
                             pushed: false,
-                            collectorId: '5bf19388797b7275fbd2bbae',
+                            collectorId: '5bf193887dd97b7275fbd2bbae',
                             lastUpdated: 1580895008852,
                             options: {
                                 dashboardId: '56d9cf6b7fab7c42f5918b84'
@@ -195,7 +195,7 @@ export let DASHBOARDDATA = [
                         },
                         {
                             id: '5cf5ad81c809261e134f7f17',
-                            description: 'Purple Rain Test code_quality audit process',
+                            description: 'test122',
                             enabled: true,
                             errors: [],
                             pushed: false,
@@ -207,7 +207,7 @@ export let DASHBOARDDATA = [
                             errorCount: 0
                         }, {
                             id: '5cf5ad81c809261e134f7f18',
-                            description: 'Purple Rain Test perf_test audit process',
+                            description: 'test123',
                             enabled: true,
                             errors: [],
                             pushed: false,
@@ -220,7 +220,7 @@ export let DASHBOARDDATA = [
                         },
                         {
                             id: '5cf5ad81c809261e134f7f19',
-                            description: 'Purple Rain Test library_policy audit process',
+                            description: 'test12',
                             enabled: true,
                             errors: [],
                             pushed: false,
@@ -233,7 +233,7 @@ export let DASHBOARDDATA = [
                         },
                         {
                             id: '5cf5ad81c809261e134f7f1a',
-                            description: 'Purple Rain Test test_result audit process',
+                            description: 'test12',
                             enabled: true,
                             errors: [],
                             pushed: false,
@@ -246,7 +246,7 @@ export let DASHBOARDDATA = [
                         },
                         {
                             id: '5cf5ad81c809261e134f7f1b',
-                            description: 'Purple Rain Test static_security_analysis audit process',
+                            description: 'testdashboard',
                             enabled: true,
                             errors: [],
                             pushed: false,
@@ -258,25 +258,25 @@ export let DASHBOARDDATA = [
                             errorCount: 0
                         }, {
                             id: '5d28a079f2cf96179ea14c1a',
-                            description: 'Purple Rain Test artifact audit process',
+                            description: 'test12',
                             enabled: true,
                             errors: [],
                             pushed: false,
-                            collectorId: '5bf19388797b7275fbd2bbae',
+                            collectorId: '5bf19388dd797b7275fbd2bbae',
                             lastUpdated: 1580895010832,
                             options: {
-                                dashboardId: '56d9cf6b7fab7c42f5918b84'
+                                dashboardId: '56d9cf6b7fab7ddc42f5918b84'
                             },
                             errorCount: 0
                         },
                         {
                             id: '5d546f56cc6955172824cba9',
-                            description: 'Purple Rain Test deploy audit process',
+                            description: 'test1',
                             enabled: true,
                             errors: [],
                             pushed: false,
-                            collectorId: '5bf19388797b7275fbd2bbae',
-                            lastUpdated: 1580895011192,
+                            collectorId: '5bf19ddd388797b7275fbd2bbae',
+                            lastUpdated: 158089ddd5011192,
                             options: {
                                 dashboardId: '56d9cf6b7fab7c42f5918b84'
                             },
