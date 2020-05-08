@@ -111,7 +111,7 @@ export class StaticAnalysisWidgetComponent extends WidgetComponent implements On
           this.loadCharts(result[0], true);
         } else {
           // code quality item could not be found
-          this.loadCharts(null,false);
+          this.loadCharts(null, false);
         }
       });
   }
