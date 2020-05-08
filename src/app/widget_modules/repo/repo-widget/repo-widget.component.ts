@@ -35,15 +35,6 @@ export class RepoWidgetComponent extends WidgetComponent implements OnInit, Afte
   private intervalRefreshSubscription: Subscription;
   private params;
   @ViewChild(LayoutDirective, {static: false}) childLayoutTag: LayoutDirective;
-  public commitToday;
-  public commit7;
-  public commit14;
-  public pullToday;
-  public pull7;
-  public pull14;
-  public issueToday;
-  public issue7;
-  public issue14;
 
   constructor(componentFactoryResolver: ComponentFactoryResolver,
               cdr: ChangeDetectorRef,
