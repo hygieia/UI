@@ -44,8 +44,8 @@ export class IACConfigFormComponent implements OnInit,  AfterViewInit {
   set widgetConfig(widgetConfig: any) {
 
     console.log(widgetConfig);
-   /* this.widgetConfigId = widgetConfig.options.id;
-    this.iacConfigForm.get('apiToken').setValue(widgetConfig.options.apiToken);*/
+    this.widgetConfigId = widgetConfig.options.id;
+    this.iacConfigForm.get('apiToken').setValue(widgetConfig.options.apiToken);
   }
 
   constructor(
@@ -82,7 +82,7 @@ ngAfterViewInit()
 	
 	var collectorItemRequest = {
     collectorId : this.collectorId,
-    id: this.collectorItemId,
+    id: this.widgetConfigId,
 		options: {
       apiToken: this.iacConfigForm.value.apiToken,
       description: this.iacConfigForm.value.description
@@ -116,11 +116,11 @@ ngAfterViewInit()
       collectorItemIds: [result.id]
     };
 
-    //this.activeModal.close(newConfig);
-    this.dashboardService.upsertWidget(newConfig).subscribe(result => {
+    this.activeModal.close(newConfig);
+/*    this.dashboardService.upsertWidget(newConfig).subscribe(result => {
       console.log(result);
     });
-				
+		*/		
 			}},
 			error: err => {},
 			complete: () => {}

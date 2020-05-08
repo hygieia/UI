@@ -18,7 +18,9 @@ import { WidgetComponent } from 'src/app/shared/widget/widget.component';
 import { CollectorService } from 'src/app/shared/collector.service';
 import {NgbProgressbarConfig} from '@ng-bootstrap/ng-bootstrap';
 import { IACService } from '../iac.service';
+import { IAC_CHARTS } from './iac-charts';
 import {OneChartLayoutComponent} from '../../../shared/layouts/one-chart-layout/one-chart-layout.component';
+
 
 @Component({
 	selector: 'app-iac-widget',
@@ -32,9 +34,10 @@ export class IACWidgetComponent extends WidgetComponent implements OnInit, After
   @ViewChild(LayoutDirective, {static: false}) childLayoutTag: LayoutDirective;
 
 ngOnInit(){
-	 this.widgetId = 'repo0';
+	 this.widgetId = 'iac0';
     this.layout = OneChartLayoutComponent;
     this.init();
+this.charts = IAC_CHARTS;
 }
 
 constructor(componentFactoryResolver: ComponentFactoryResolver,
@@ -84,10 +87,16 @@ ngAfterViewInit(){
 
 
 startRefreshInterval(){
-
+	this.populateNumberCardCharts();
 }
  
+populateNumberCardCharts(){
+this.charts[0].data[0].value = 1;
+this.charts[0].data[1].value = 2;
+    this.charts[0].data[2].value = 999;
 
+	
+}
 stopRefreshInterval(){
 	
 }
