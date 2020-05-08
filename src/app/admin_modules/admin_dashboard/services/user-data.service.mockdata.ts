@@ -3,7 +3,7 @@ export let API_TOKEN_LIST = [
         id: '12345678901234567890',
         apiUser: 'testing',
         apiKey: 'sha512:f216973c3e3a2e34b2d6595a17254a24c278f2051' +
-        +'9340d22248a143d4d5dc6b79399c099898adb8be94598d19c6520c6ea75996498860151de47b64e83c1dc75',
+            +'9340d22248a143d4d5dc6b79399c099898adb8be94598d19c6520c6ea75996498860151de47b64e83c1dc75',
         expirationDt: 1656475199999,
         hashed: true
     },
@@ -11,7 +11,7 @@ export let API_TOKEN_LIST = [
         id: '12345678901234567890',
         apiUser: 'testing1',
         apiKey: 'sha512:a316973c3e3a2e34b2d6595a17254a24c278' +
-        +'f20519340d22248a143d4d5dc6b79399c099898adb8be94598d19c6520c6ea75996498860151de47b64e83c1dc75',
+            +'f20519340d22248a143d4d5dc6b79399c099898adb8be94598d19c6520c6ea75996498860151de47b64e83c1dc75',
         expirationDt: 1656485199999,
         hashed: true
     }
@@ -38,3 +38,288 @@ export let USER_LIST = [
         emailAddress: 'test1@example.com'
     }
 ];
+
+export let DASHBOARDDATA = [
+    [{
+        id: '56d9cf6b7fab7c42f5918b84',
+        template: 'test',
+        title: 'test',
+        widgets: [
+            {
+                id: '56d9d0407fab7c42f5918b88',
+                name: 'test',
+                componentId: '56d9cf6b7fab7c42f5918b83',
+                options:
+                {
+                    id: 'repo0',
+                    scm:
+                    {
+                        name: 'GitHub',
+                        value: 'GitHub'
+                    },
+                    branch: 'develop',
+                    url: 'https://example.com/'
+                }
+            },
+            {
+                id: '56d9d2417fab7c42f5918b8c',
+                name: 'deploy',
+                componentId: '56d9cf6b7fab7c42f5918b83',
+                options: {
+                    id: 'deploy0'
+                }
+            },
+            {
+                id: '56d9d3047fab7c42f5918b8d',
+                name: 'test',
+                options:
+                {
+                    mappings:
+                    {
+                        dev: 'test1',
+                        qa: 'test1'
+                    },
+                    id: 'test1'
+                }
+            },
+            {
+                id: '5c39705940b65d70e849b6c9',
+                name: 'test',
+                componentId: '56d9cf6b7fab7c42f5918b83',
+                options: {
+                    id: 'test0',
+                    featureTool: 'Jira',
+                    teamName: 'test',
+                    teamId: '14585',
+                    projectName: 'test',
+                    projectId: '42300',
+                    showStatus:
+                        { kanban: false, scrum: true },
+                    estimateMetricType: 'test',
+                    sprintType: 'scrum',
+                    listType: 'epics'
+                }
+            }]
+        , owner: 'name',
+        owners: [{ username: 'admin', authType: 'STANDARD' }],
+        type: 'Team',
+        application: {
+            name: 'Test1',
+            components: [{
+                id: '56d9cf6b7fab7c42f5918b83',
+                name: 'Test1',
+                collectorItems:
+                {
+                    ScopeOwner: [{
+                        id: '56d9ab057fab7c402ac9f730',
+                        description: 'Purple Rain',
+                        enabled: true,
+                        errors: [],
+                        pushed: false,
+                        collectorId: '56d825dd7fab7c769f58f246',
+                        lastUpdated: 0,
+                        options: {
+                            isDeleted: 'False',
+                            teamId: 'Team:17292934',
+                            changeDate: '2015-11-06T12:52:08.2030000',
+                            assetState: 'Active'
+                        },
+                        name: 'Purple Rain',
+                        teamId: 'Team:17292934',
+                        changeDate: '2015-11-06T12:52:08.2030000',
+                        isDeleted: 'False',
+                        assetState: 'Active',
+                        errorCount: 0
+                    }],
+                    SCM: [{
+                        id: '56d9d0407fab7c42f5918b87',
+                        enabled: true,
+                        errors: [],
+                        pushed: false,
+                        collectorId: '56ca15297fab7c68bfdb420c',
+                        lastUpdated: 0,
+                        options: {
+                            scm: 'Github',
+                            branch: 'develop',
+                            url: 'https://github.kdc.capitalone.com/opensocisrm/gateway'
+                        }
+                        , errorCount: 0
+                    }],
+                    Deployment: [
+                        {
+                            id: '56d825c07fab7c76a1453312',
+                            description: 'PURPLERAIN',
+                            enabled: true, errors: [],
+                            pushed: false,
+                            collectorId: '56d825ba7fab7c76a14530a8',
+                            lastUpdated: 0,
+                            options: {
+                                applicationId: '297e00af-f4cb-4815-9e4a-c26eb3e97de6',
+                                applicationName: 'PURPLERAIN',
+                                instanceUrl: 'https://udeploy.kdc.capitalone.com/'
+                            },
+                            errorCount: 0
+                        }
+                    ],
+                    AgileTool: [
+                        {
+                            id: '5c39705940b65d70e849b6c7',
+                            enabled: true,
+                            errors: [],
+                            pushed: false,
+                            collectorId: '589febd0a65ce715f0332d62',
+                            lastUpdated: 0,
+                            options: {
+                                teamName: 'LEGO Scrum',
+                                featureTool: 'Jira',
+                                projectName: 'Shared Tools ART',
+                                projectId: '42300',
+                                teamId: '14585'
+                            },
+                            errorCount: 0
+                        }
+                    ],
+                    Audit: [
+                        {
+                            id: '5cf5ad80c809261e134f7f16',
+                            description: 'Purple Rain Test code_review audit process',
+                            enabled: true,
+                            errors: [],
+                            pushed: false,
+                            collectorId: '5bf19388797b7275fbd2bbae',
+                            lastUpdated: 1580895008852,
+                            options: {
+                                dashboardId: '56d9cf6b7fab7c42f5918b84'
+                            },
+                            errorCount: 0
+                        },
+                        {
+                            id: '5cf5ad81c809261e134f7f17',
+                            description: 'Purple Rain Test code_quality audit process',
+                            enabled: true,
+                            errors: [],
+                            pushed: false,
+                            collectorId: '5bf19388797b7275fbd2bbae',
+                            lastUpdated: 1580895009163,
+                            options: {
+                                dashboardId: '56d9cf6b7fab7c42f5918b84'
+                            },
+                            errorCount: 0
+                        }, {
+                            id: '5cf5ad81c809261e134f7f18',
+                            description: 'Purple Rain Test perf_test audit process',
+                            enabled: true,
+                            errors: [],
+                            pushed: false,
+                            collectorId: '5bf19388797b7275fbd2bbae',
+                            lastUpdated: 1580895009487,
+                            options: {
+                                dashboardId: '56d9cf6b7fab7c42f5918b84'
+                            },
+                            errorCount: 0
+                        },
+                        {
+                            id: '5cf5ad81c809261e134f7f19',
+                            description: 'Purple Rain Test library_policy audit process',
+                            enabled: true,
+                            errors: [],
+                            pushed: false,
+                            collectorId: '5bf19388797b7275fbd2bbae',
+                            lastUpdated: 1580895009801,
+                            options: {
+                                dashboardId: '56d9cf6b7fab7c42f5918b84'
+                            },
+                            errorCount: 0
+                        },
+                        {
+                            id: '5cf5ad81c809261e134f7f1a',
+                            description: 'Purple Rain Test test_result audit process',
+                            enabled: true,
+                            errors: [],
+                            pushed: false,
+                            collectorId: '5bf19388797b7275fbd2bbae',
+                            lastUpdated: 1580895010123,
+                            options: {
+                                dashboardId: '56d9cf6b7fab7c42f5918b84'
+                            },
+                            errorCount: 0
+                        },
+                        {
+                            id: '5cf5ad81c809261e134f7f1b',
+                            description: 'Purple Rain Test static_security_analysis audit process',
+                            enabled: true,
+                            errors: [],
+                            pushed: false,
+                            collectorId: '5bf19388797b7275fbd2bbae',
+                            lastUpdated: 1580895010467,
+                            options: {
+                                dashboardId: '56d9cf6b7fab7c42f5918b84'
+                            },
+                            errorCount: 0
+                        }, {
+                            id: '5d28a079f2cf96179ea14c1a',
+                            description: 'Purple Rain Test artifact audit process',
+                            enabled: true,
+                            errors: [],
+                            pushed: false,
+                            collectorId: '5bf19388797b7275fbd2bbae',
+                            lastUpdated: 1580895010832,
+                            options: {
+                                dashboardId: '56d9cf6b7fab7c42f5918b84'
+                            },
+                            errorCount: 0
+                        },
+                        {
+                            id: '5d546f56cc6955172824cba9',
+                            description: 'Purple Rain Test deploy audit process',
+                            enabled: true,
+                            errors: [],
+                            pushed: false,
+                            collectorId: '5bf19388797b7275fbd2bbae',
+                            lastUpdated: 1580895011192,
+                            options: {
+                                dashboardId: '56d9cf6b7fab7c42f5918b84'
+                            },
+                            errorCount: 0
+                        }
+                    ]
+                }
+            }]
+        },
+        configurationItemBusServName: '45386641',
+        configurationItemBusAppName: 'TEST',
+        validServiceName: true,
+        validAppName: false,
+        remoteCreated: false,
+        scoreEnabled: true,
+        scoreDisplay: 'HEADER',
+        createdAt: 0,
+        updatedAt: 1588646469622,
+        errorCode: 0
+    },
+    ],
+];
+
+export let DASHBOARDDATARESPONSE = [{
+    configurationItemBusAppName: 'TEST',
+    configurationItemBusServName: '12384541',
+    id: '56d9cf6b7fab7c42f5918b84',
+    isProduct: false,
+    name: 'TEST1',
+    scoreDisplay: 'HEADER',
+    scoreEnabled: true,
+    type: 'Team',
+    validAppName: false,
+    validServiceName: true,
+}];
+
+export let DASHBOARDITEM = {
+    id: '56e777b47fab7c2d52bf7049',
+    name: 'test-data',
+    type: 'Team',
+    validServiceName: false,
+    validAppName: false,
+    isProduct: false,
+    scoreEnabled: false,
+    scoreDisplay: 'HEADER'
+};
