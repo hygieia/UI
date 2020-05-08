@@ -110,7 +110,7 @@ export class StaticAnalysisWidgetComponent extends WidgetComponent implements On
         if (result && result.length > 0) {
           this.loadCharts(result[0], true);
         } else {
-          // code quality item could not be found
+          // code quality collector item could not be found
           this.loadCharts(null, false);
         }
       });
