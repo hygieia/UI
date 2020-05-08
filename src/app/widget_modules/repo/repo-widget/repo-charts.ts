@@ -2,6 +2,7 @@ import { ILineChartData } from 'src/app/shared/charts/line-chart/line-chart-inte
 import { LineChartComponent } from 'src/app/shared/charts/line-chart/line-chart.component';
 import { IChart } from 'src/app/shared/interfaces';
 import {RepoDetailComponent} from '../repo-detail/repo-detail.component';
+import {PlainTextChartComponent} from '../../../shared/charts/plain-text-chart/plain-text-chart.component';
 
 export let REPO_CHARTS: IChart[] = [
   {
@@ -29,5 +30,77 @@ export let REPO_CHARTS: IChart[] = [
     colorScheme: {
       domain: ['blue', 'green', 'red', 'grey', 'grey', 'grey']
     }
-  }
+  },
+  {
+    title: '',
+    component: PlainTextChartComponent,
+    data: [],
+    xAxisLabel: '',
+    yAxisLabel: '',
+    colorScheme: {}
+  },
+  {
+    title: '',
+    component: PlainTextChartComponent,
+    data: [],
+    xAxisLabel: '',
+    yAxisLabel: '',
+    colorScheme: {}
+  },
+  {
+    title: '',
+    component: PlainTextChartComponent,
+    data: [],
+    xAxisLabel: '',
+    yAxisLabel: '',
+    colorScheme: {}
+  },
+  {
+    title: '',
+    component: PlainTextChartComponent,
+    data: [],
+    xAxisLabel: '',
+    yAxisLabel: '',
+    colorScheme: {}
+  },
+  {
+    title: '',
+    component: PlainTextChartComponent,
+    data: [],
+    xAxisLabel: '',
+    yAxisLabel: '',
+    colorScheme: {}
+  },
+  {
+    title: '',
+    component: PlainTextChartComponent,
+    data: [],
+    xAxisLabel: '',
+    yAxisLabel: '',
+    colorScheme: {}
+  },
+  {
+    title: '',
+    component: PlainTextChartComponent,
+    data: [],
+    xAxisLabel: '',
+    yAxisLabel: '',
+    colorScheme: {}
+  },
+  {
+    title: '',
+    component: PlainTextChartComponent,
+    data: [],
+    xAxisLabel: '',
+    yAxisLabel: '',
+    colorScheme: {}
+  },
+  {
+    title: '',
+    component: PlainTextChartComponent,
+    data: [],
+    xAxisLabel: '',
+    yAxisLabel: '',
+    colorScheme: {}
+  },
 ];
