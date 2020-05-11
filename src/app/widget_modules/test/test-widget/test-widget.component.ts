@@ -100,7 +100,7 @@ export class TestWidgetComponent extends WidgetComponent implements OnInit, Afte
     // Generate chart item for each TEST collector item
     this.dashboardService.dashboardConfig$.pipe(take(1)).subscribe(dashboard => {
       const testCollectorItems = dashboard.application.components[0].collectorItems.Test;
-      if (!testCollectorItems) { return }
+      if (!testCollectorItems) { return; }
       for (const testCollectorItem of testCollectorItems) {
         const type = testCollectorItem.options.testType;
         const tmp = tests.filter(test => test.collectorItemId === testCollectorItem.id);

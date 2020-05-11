@@ -153,7 +153,7 @@ export class WidgetHeaderComponent implements OnInit {
 
   private findWidgetAuditStatus(auditType: any) {
     if (!auditType) {
-      return
+      return;
     }
     let auditTypePrimary = auditType;
     let auditTypeOptional;

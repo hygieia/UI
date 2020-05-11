@@ -1,6 +1,6 @@
-import {Component, ComponentFactoryResolver, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {IAuditResult} from "../../interfaces";
+import {IAuditResult} from '../../interfaces';
 
 @Component({
   selector: 'app-audit-modal',
