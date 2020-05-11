@@ -33,6 +33,7 @@ export class DashboardDataService {
   dashboardGenconfigRoute = '/api/dashboard/generalConfig';
   updateDashboardScoreSettingsRoute = '/api/dashboard/updateScoreSettings';
   myComponentRoute = '/api/dashboard/myComponent';
+  mywigets = '/api/dashboard/template';
 
   constructor(private http: HttpClient) {
   }
@@ -116,6 +117,10 @@ export class DashboardDataService {
       }
     ];
 
+  }
+
+  getMyWidget(template) {
+    return this.http.get(this.mywigets + '/' + template);
   }
 
   // can be used to add a new widget or update an existing one

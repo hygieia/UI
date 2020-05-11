@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { EditDashboardModalComponent } from './edit-dashboard-modal.component';
 import { FormBuilder, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -12,7 +11,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AdminFilterPipe } from 'src/app/admin_modules/admin_dashboard/pipes/filter.pipe';
 import { AdminOrderByPipe } from 'src/app/admin_modules/admin_dashboard/pipes/order-by.pipe';
 import { UserDataService } from 'src/app/admin_modules/admin_dashboard/services/user-data.service';
-import { DASHBOARDDATA, USER_LIST } from 'src/app/admin_modules/admin_dashboard/services/user-data.service.mockdata';
+import { USER_LIST  } from 'src/app/admin_modules/admin_dashboard/services/user-data.service.mockdata';
 
 describe('EditDashboardModalComponent', () => {
   let component: EditDashboardModalComponent;
@@ -31,7 +30,6 @@ describe('EditDashboardModalComponent', () => {
       .compileComponents();
   }));
 
-  // { provide: DashboardDataService, useClass: MockDashboardDataService }
   beforeEach(() => {
     fixture = TestBed.createComponent(EditDashboardModalComponent);
     component = fixture.componentInstance;
@@ -99,5 +97,24 @@ describe('EditDashboardModalComponent', () => {
   });
 
 
+
+  it('should isActiveUser ', () => {
+    const user = USER_LIST[0];
+    expect(component.isActiveUser(user)).toBeFalsy();
+    component.authType = user.authType;
+    component.username = user.username;
+    expect(component.isActiveUser(user)).toBeTruthy();
+  });
+
+  it('should get BusApp Tool Text ', () => {
+    expect('A Business Application (BAP) CI is a CI Subtype in the application which supports business function (Top level).')
+    .toEqual(component.getBusAppToolText());
+  });
+
+
+  it('should get Bus Ser Tool Text ', () => {
+    expect('A top level name which support Business function.')
+    .toEqual(component.getBusSerToolText());
+  });
 
 });

@@ -52,8 +52,6 @@
                                 <ng-template #rt let-r="result" let-t="term">
                                     <span>{{r.configurationItem}}-({{r.commonName}})</span>
                                 </ng-template>
-                                <!-- <form-group  input="configurationItemBusServ" errors="{dupBusServError: 'Existing Dashboard found for this Business Service/ Business Application combination', invalid: 'Invalid Business Service'}"> -->
-                                <!-- <label [ngClass]="{'text-danger':validBusServName == false}" class="modal-label">Business Service <i class="fa fa-info-circle" uib-tooltip = "{{getBusSerToolText()}}" tooltip-trigger="focus" tooltip-placement="top" aria-hidden="true"></i></label> -->
                                 <label class="modal-label">Business Service<i class="fa fa-info-circle"
                                         ngbTooltip="{{getBusSerToolText()}}"></i></label>
                                 <input type="text" name="configurationItemBusServ"
@@ -160,14 +158,18 @@
                             <label class="modal-label">Add/Remove Widgets</label>
                             <form name="editForm">
                                 <ul *ngIf="widgetSelections" class="list-animate list-group text-left">
-                                    <li class="list-group-item" *ngFor="let title of Object.keys(widgetSelections)">
-                                        <span *ngIf="title!='product' && title!='monitor2' && title!='undefined'">
-                                            <span class="fa fa-lg left-icon"></span>
-                                            <input type="checkbox" name="widgetSelections"
-                                                [disabled]="selectWidgetsDisabled"
-                                                [(ngModel)]="widgetSelections[title]">
-                                            <span>{{title | uppercase}}</span></span>
-                                    </li>
+                                    <ng-container *ngFor="let title of Object.keys(widgetSelections);let i=index">
+                                        <ng-container
+                                            *ngIf="title!='product' && title!='monitor2' && title!='undefined'">
+                                            <li class="list-group-item">
+                                                <span class="fa fa-lg left-icon"></span>
+                                                <input type="checkbox" name="widgetSelections{{i}}"
+                                                    [disabled]="selectWidgetsDisabled"
+                                                    [(ngModel)]="widgetSelections[title]">
+                                                <span> {{ title | uppercase}}</span>
+                                            </li>
+                                        </ng-container>
+                                    </ng-container>
                                 </ul>
                             </form>
                         </div>

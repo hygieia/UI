@@ -3,9 +3,9 @@ import { PaginationWrapperService } from '../../../services/pagination-wrapper.s
 import { DashboardDataService } from '../../../services/dashboard-data.service';
 import { IPaginationParams } from 'src/app/shared/interfaces';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { EditDashboardModalComponent } from '../modal/edit-dashboard-modal/edit-dashboard-modal.component';
 import { DashboardItem } from '../model/dashboard-item';
 import { DeleteConfirmModalComponent } from '../../../../../shared/modals/delete-confirm-modal/delete-confirm-modal.component';
+import { EditDashboardModalComponent } from '../modal/edit-dashboard-modal /edit-dashboard-modal.component';
 
 @Component({
   selector: 'app-edit-dashboard',
@@ -62,6 +62,7 @@ export class EditDashboardComponent implements OnInit {
     const modalRef = this.modalService.open(EditDashboardModalComponent);
     modalRef.componentInstance.dashboardItem = item;
     modalRef.result.then((newConfig) => {
+      this.loadData();
     });
 
   }

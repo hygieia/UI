@@ -276,7 +276,7 @@ export let DASHBOARDDATA = [
                             errors: [],
                             pushed: false,
                             collectorId: '5bf19ddd388797b7275fbd2bbae',
-                            lastUpdated: 158089ddd5011192,
+                            lastUpdated: 1580895008852,
                             options: {
                                 dashboardId: '56d9cf6b7fab7c42f5918b84'
                             },
@@ -323,3 +323,25 @@ export let DASHBOARDITEM = {
     scoreEnabled: false,
     scoreDisplay: 'HEADER'
 };
+
+
+
+export let BUSSERVDATA = [{
+    appServiceOwner: 'Test',
+    assignmentGroup: 'test',
+    businessOwner: 'user',
+    collectorItemId: '5be9a3a0e4b0389bb364f5ab',
+    commonName: 'test',
+    components: ['12397840', '12385100', '1212647767'],
+    configurationItem: '34384541',
+    configurationItemSubType: 'Service',
+    configurationItemType: 'test',
+    developmentOwner: 'test ',
+    id: '5be9a3a0e4b0389bb364f5ac',
+    itemType: 'app',
+    ownerDept: 'test',
+    ownerSubDept: 'test',
+    timestamp: 1580512800701,
+    validConfigItem: true,
+    }
+    ];

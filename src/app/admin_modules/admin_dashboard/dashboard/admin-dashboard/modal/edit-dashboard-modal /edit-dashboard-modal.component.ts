@@ -2,12 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { DashboardDataService } from 'src/app/admin_modules/admin_dashboard/services/dashboard-data.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { WidgetManagerService } from 'src/app/admin_modules/admin_dashboard/services/widget-manager.service';
-// import { extend } from 'lodash';
 import * as _ from 'lodash';
 import { UserDataService } from 'src/app/admin_modules/admin_dashboard/services/user-data.service';
 import { CmdbDataService } from 'src/app/admin_modules/admin_dashboard/services/cmdb-data.service';
 import { AdminDashboardService } from 'src/app/admin_modules/admin_dashboard/services/dashboard.service';
-import { map, catchError, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardItem } from '../../model/dashboard-item';
@@ -32,7 +31,7 @@ export class EditDashboardModalComponent implements OnInit {
     configurationItemBusServ: any;
     selectWidgetsDisabled: boolean;
     widgets: {};
-    widgetSelections: any;
+    widgetSelections: any = {};
     users: any;
     owners: any;
     error: any;
@@ -89,7 +88,7 @@ export class EditDashboardModalComponent implements OnInit {
         this.getConfigItem('app', '');
         setTimeout(() => {
             console.log('dashboardItem' + JSON.stringify(this.dashboardItem));
-            this.cdfForm.get('dashboardTitle').setValue(this.dashboardItem.name);
+            this.cdfForm.get('dashboardTitle').setValue(this.getDashboardTitle());
         }, 100);
 
     }
@@ -126,36 +125,34 @@ export class EditDashboardModalComponent implements OnInit {
 
 
     processDashboardDetail = (response) => {
-        const data = response;
-        this.activeWidgets = [];
-        this.widgets = this.widgetManager.getWidgets();
-        if (response.template === 'widgets') {
-            this.selectWidgetsDisabled = false;
-            this.activeWidgets = response.activeWidgets;
-        } else {
-            this.selectWidgetsDisabled = true;
-            _.map(this.widgets, (value, key) => {
-                this.activeWidgets.push(key);
-            });
-        }
-        // collection to hold selected widgets
-        const widgetSelections = {};
-        // iterate through widgets and add existing widgets for dashboard
-        console.log('widgets', this.widgets);
-        _.map(this.widgets, (value, key) => {
-            if (key !== '') {
-                if (this.activeWidgets.indexOf(key) > -1) {
-                    this.widgetSelections[key] = true;
-                } else {
-                    this.widgetSelections[key] = false;
-                }
+            this.activeWidgets = [];
+            this.widgets = this.widgetManager.getWidgets();
+            if (response.template === 'widgets') {
+                this.selectWidgetsDisabled = false;
+                this.activeWidgets = response.activeWidgets;
+            } else {
+                this.selectWidgetsDisabled = true;
+                _.map(this.widgets, (value, key) => {
+                    this.activeWidgets.push(key);
+                });
             }
-        });
-
-        Object.entries(this.widgets).map((widget: any) => {
-            console.log('widget', widget);
-            this.widgetSelections[widget[1].title] = false;
-        });
+            // collection to hold selected widgets
+            // iterate through widgets and add existing widgets for dashboard
+            console.log('widgets', this.widgets);
+            _.map(this.widgets, (value, key) => {
+                console.log('widgets1', this.widgets);
+                if (key !== '') {
+                    if (this.activeWidgets.indexOf(key) > -1) {
+                        this.widgetSelections[key] = true;
+                    } else {
+                        this.widgetSelections[key] = false;
+                    }
+                }
+            });
+            Object.entries(this.widgets).map((widget: any) => {
+                console.log('widget', widget);
+                this.widgetSelections[widget[1].title] = false;
+            });
     }
 
     processUserResponse = (response) => {
@@ -329,31 +326,31 @@ export class EditDashboardModalComponent implements OnInit {
     // Save template - after edit
     saveWidgets(form) {
         this.findSelectedWidgets();
-        if (form.$valid) {
-            const submitData = {
-                activeWidgets: this.selectedWidgets
-            };
-            this.dashboardData
-                .updateDashboardWidgets(this.dashboardItem.id, submitData)
-                .subscribe((data) => {
-                    // $uibModalInstance.close();
-                }
-                    , (error: any) => {
-                        const msg = 'An error occurred while editing dashboard';
-                        this.swal(msg);
-                    });
-        }
+        const submitData = {
+            activeWidgets: this.selectedWidgets
+        };
+        console.log('this.selectedWidgets 337', this.selectedWidgets);
+        this.dashboardData
+            .updateDashboardWidgets(this.dashboardItem.id, submitData)
+            .subscribe((data) => {
+            }
+                , (error: any) => {
+                    const msg = 'An error occurred while editing dashboard';
+                    this.swal(msg);
+                });
     }
 
     // find selected widgets and add it to collection
     findSelectedWidgets() {
         this.selectedWidgets = [];
-        for (const selectedWidget in this.widgetSelections) {
-            let s = this.widgetSelections[selectedWidget];
+        console.log('widgetSelections 360', this.widgetSelections);
+
+        Object.entries(this.widgetSelections).map((items: any) => {
+            const s = this.widgetSelections[items[0]];
             if (s) {
-                this.selectedWidgets.push(selectedWidget);
+                this.selectedWidgets.push(items[0]);
             }
-        }
+        });
     }
 
     onConfigurationItemBusAppSelect(value) {

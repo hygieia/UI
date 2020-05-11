@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { GenerateApiTokensComponent } from './dashboard/admin-dashboard/generate-api-tokens/generate-api-tokens.component';
 import { FormsModule } from '@angular/forms';
 import { UserDataService } from './services/user-data.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AdminFilterPipe } from './pipes/filter.pipe';
 import { AdminOrderByPipe } from './pipes/order-by.pipe';
 import { DashEditComponent } from './dashboard/admin-dashboard/dash-edit/dash-edit.component';
@@ -28,8 +28,10 @@ import {CreateOrUpdateServiceAccountComponent} from './dashboard/admin-dashboard
 import { DashboardDataService } from './services/dashboard-data.service';
 import { PaginationWrapperService } from './services/pagination-wrapper.service';
 import { AdminDashboardService } from './services/dashboard.service';
-import { EditDashboardModalComponent } from './dashboard/admin-dashboard/modal/edit-dashboard-modal/edit-dashboard-modal.component';
 import { EditDashboardComponent } from './dashboard/admin-dashboard/edit-dashboard/edit-dashboard.component';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { AuthInterceptor } from 'src/app/core/interceptors/auth.interceptor';
+import { EditDashboardModalComponent } from './dashboard/admin-dashboard/modal/edit-dashboard-modal /edit-dashboard-modal.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,13 @@ import { EditDashboardComponent } from './dashboard/admin-dashboard/edit-dashboa
 
   ],
 
-  providers: [UserDataService, DashboardDataService, PaginationWrapperService, AdminDashboardService],
+  providers: [UserDataService, DashboardDataService, PaginationWrapperService, AdminDashboardService,
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    }],
 
   imports: [
     AdminDashboardRoutingModule,

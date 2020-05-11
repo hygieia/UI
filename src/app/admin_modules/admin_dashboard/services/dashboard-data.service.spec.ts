@@ -1,9 +1,8 @@
 import { TestBed, inject } from '@angular/core/testing';
-
 import { DashboardDataService } from './dashboard-data.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HttpClientModule } from '@angular/common/http';
-import { DASHBOARDDATA, DASHBOARDITEM } from './user-data.service.mockdata';
+import { DASHBOARDDATA } from './user-data.service.mockdata';
 
 describe('DashboardDataService', () => {
   beforeEach(() => TestBed.configureTestingModule({
