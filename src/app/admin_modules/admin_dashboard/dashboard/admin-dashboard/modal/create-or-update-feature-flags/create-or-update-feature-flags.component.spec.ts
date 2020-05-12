@@ -9,7 +9,6 @@ import {HttpClientTestingModule} from '@angular/common/http/testing';
 describe('CreateOrUpdateFeatureFlagsComponent', () => {
   let component: CreateOrUpdateFeatureFlagsComponent;
   let fixture: ComponentFixture<CreateOrUpdateFeatureFlagsComponent>;
-  // const id = '123';
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ CreateOrUpdateFeatureFlagsComponent ],
@@ -21,7 +20,6 @@ describe('CreateOrUpdateFeatureFlagsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CreateOrUpdateFeatureFlagsComponent);
     component = fixture.componentInstance;
-    //component.id = id;
     fixture.detectChanges();
   });
   it('should create', () => {
