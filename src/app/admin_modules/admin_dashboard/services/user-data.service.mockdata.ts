@@ -314,6 +314,8 @@ export let DASHBOARDDATARESPONSE = [{
 }];
 
 export let DASHBOARDITEM = {
+    configurationItemBusAppName: 'test',
+    configurationItemBusServName: 'test',
     id: '56e777b47fab7c2d52bf7049',
     name: 'test-data',
     type: 'Team',

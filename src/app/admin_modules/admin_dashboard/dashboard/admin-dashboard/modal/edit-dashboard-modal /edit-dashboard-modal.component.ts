@@ -48,6 +48,7 @@ export class EditDashboardModalComponent implements OnInit {
     };
     selectHeaderOrWidgetToolTip = 'Dashboard score can either be displayed in header or as a widget.';
     searchconfigItemBus: any;
+    allWidgets: unknown[];
 
 
 
@@ -125,6 +126,19 @@ export class EditDashboardModalComponent implements OnInit {
 
 
     processDashboardDetail = (response) => {
+        this.dashboardData.getMyWidget(response.template).subscribe((result: any) => {
+            const widgetsSet = new Set();
+            result.forEach(ele => {
+                console.log('template', ele.template);
+                if (ele.widgets) {
+                    ele.widgets.forEach(widget => {
+                        if (widget.name && widget.options.id) {
+                            widgetsSet.add(widget.name);
+                        }
+                    });
+                }
+            });
+            this.allWidgets = [...widgetsSet];
             this.activeWidgets = [];
             this.widgets = this.widgetManager.getWidgets();
             if (response.template === 'widgets') {
@@ -132,27 +146,14 @@ export class EditDashboardModalComponent implements OnInit {
                 this.activeWidgets = response.activeWidgets;
             } else {
                 this.selectWidgetsDisabled = true;
-                _.map(this.widgets, (value, key) => {
-                    this.activeWidgets.push(key);
+                this.allWidgets.forEach( widgetName => {
+                    this.activeWidgets.push(widgetName);
                 });
             }
-            // collection to hold selected widgets
-            // iterate through widgets and add existing widgets for dashboard
-            console.log('widgets', this.widgets);
-            _.map(this.widgets, (value, key) => {
-                console.log('widgets1', this.widgets);
-                if (key !== '') {
-                    if (this.activeWidgets.indexOf(key) > -1) {
-                        this.widgetSelections[key] = true;
-                    } else {
-                        this.widgetSelections[key] = false;
-                    }
-                }
+            this.allWidgets.forEach((widget: any) => {
+                this.widgetSelections[widget] = true;
             });
-            Object.entries(this.widgets).map((widget: any) => {
-                console.log('widget', widget);
-                this.widgetSelections[widget[1].title] = false;
-            });
+        });
     }
 
     processUserResponse = (response) => {

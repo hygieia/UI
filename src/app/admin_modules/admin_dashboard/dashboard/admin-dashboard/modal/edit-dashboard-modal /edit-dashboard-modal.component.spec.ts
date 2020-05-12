@@ -11,7 +11,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AdminFilterPipe } from 'src/app/admin_modules/admin_dashboard/pipes/filter.pipe';
 import { AdminOrderByPipe } from 'src/app/admin_modules/admin_dashboard/pipes/order-by.pipe';
 import { UserDataService } from 'src/app/admin_modules/admin_dashboard/services/user-data.service';
-import { USER_LIST  } from 'src/app/admin_modules/admin_dashboard/services/user-data.service.mockdata';
+import { USER_LIST, DASHBOARDITEM  } from 'src/app/admin_modules/admin_dashboard/services/user-data.service.mockdata';
 
 describe('EditDashboardModalComponent', () => {
   let component: EditDashboardModalComponent;
@@ -77,6 +77,16 @@ describe('EditDashboardModalComponent', () => {
     expect(1).toEqual(component.owners.length);
   });
 
+  it('should is ValidBusServName', () => {
+    component.dashboardItem = DASHBOARDITEM;
+    expect(component.isValidBusServName()).toBeFalsy();
+  });
+
+  it('should is ValidBusAppName', () => {
+    component.dashboardItem = DASHBOARDITEM;
+    expect(component.isValidBusAppName()).toBeFalsy();
+  });
+
 
   it('should  Owner Information edit from  when clicked on submit', () => {
     component.owners = [USER_LIST[0]];
@@ -92,6 +102,13 @@ describe('EditDashboardModalComponent', () => {
     component.scoreSettings.scoreDisplay = 'test';
     component.error = null;
     component.tabView = 'Score';
+    component.saveForm();
+    expect(null).toEqual(component.error);
+  });
+
+  it('should  save Widgets edit from  when clicked on submit', () => {
+    component.error = null;
+    component.tabView = 'Widget Management';
     component.saveForm();
     expect(null).toEqual(component.error);
   });

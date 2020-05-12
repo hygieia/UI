@@ -28,6 +28,7 @@
     "@swimlane/ngx-ui": "^26.0.1",
     "@types/jest": "^25.2.1",
     "@types/lodash": "^4.14.135",
+    "@types/mocha": "^7.0.2",
     "bootstrap": "^4.2.1",
     "codemirror": "^5.48.0",
     "core-js": "^2.6.9",

@@ -63,6 +63,8 @@ export class EditDashboardComponent implements OnInit {
     modalRef.componentInstance.dashboardItem = item;
     modalRef.result.then((newConfig) => {
       this.loadData();
+    }).catch((error) => {
+      console.log('edit error newConfig :' + error);
     });
 
   }
