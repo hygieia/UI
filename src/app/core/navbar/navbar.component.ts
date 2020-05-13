@@ -46,6 +46,7 @@ export class NavbarComponent implements OnInit {
   }
 
   admin() {
+
     this.isAdminLoad = false;
     this.router.navigate(['/admin/dashboard']);
   }
