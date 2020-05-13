@@ -13,24 +13,11 @@ export let FEATURE_CHARTS: IChart[] = [
   },
   {
     title: 'Iteration Summary',
-    component: NumberCardChartComponent,
-    data: [
-      {
-        name: 'OPEN',
-        value: 0
-      },
-      {
-        name: 'WIP',
-        value: 0
-      },
-      {
-        name: 'DONE',
-        value: 0
-      },
-    ],
+    component: ClickListComponent,
+    data: [],
     xAxisLabel: '',
     yAxisLabel: '',
-    colorScheme: 'vivid'
+    colorScheme: {}
   },
   {
     title: 'Epics/Issues in Progress and Points',
