@@ -29,4 +29,7 @@ export let IAC_CHARTS: IChart[] = [
     yAxisLabel: '',
     colorScheme: 'vivid'
   },
+
+	
+
 ];
