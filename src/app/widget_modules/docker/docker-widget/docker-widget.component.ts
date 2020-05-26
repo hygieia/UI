@@ -1,34 +1,35 @@
 import {
-	AfterViewInit,
-	ChangeDetectorRef,
-	Component,
-	ComponentFactoryResolver,
-	OnDestroy,
-	OnInit,
-	ViewChild,
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ComponentFactoryResolver,
+  OnDestroy,
+  OnInit,
+  ViewChild,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription} from 'rxjs';
+import { of, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FormBuilder} from '@angular/forms';
+import { distinctUntilChanged, startWith, switchMap } from 'rxjs/operators';
+import { IClickListData, IClickListItem } from 'src/app/shared/charts/click-list/click-list-interfaces';
+import { DashStatus } from 'src/app/shared/dash-status/DashStatus';
 import { DashboardService } from 'src/app/shared/dashboard.service';
 import { LayoutDirective } from 'src/app/shared/layouts/layout.directive';
+import { TwoByTwoLayoutComponent } from 'src/app/shared/layouts/two-by-two-layout/two-by-two-layout.component';
 import { WidgetComponent } from 'src/app/shared/widget/widget.component';
-
-import { CollectorService } from 'src/app/shared/collector.service';
-import {NgbProgressbarConfig} from '@ng-bootstrap/ng-bootstrap';
-import { IACService } from '../iac.service';
-import { IAC_CHARTS } from './iac-charts';
+import { DockerDetailComponent } from '../docker-detail/docker-detail.component';
+import { DockerService } from '../docker.service';
+import { DOCKER_CHARTS } from './docker-charts';
 import {OneChartLayoutComponent} from '../../../shared/layouts/one-chart-layout/one-chart-layout.component';
 
-
 @Component({
-	selector: 'app-iac-widget',
-	templateUrl: './iac-widget.component.html',
-	styleUrls: ['./iac-widget.component.scss']
+  selector: 'app-docker-widget',
+  templateUrl: './docker-widget.component.html',
+  styleUrls: ['./docker-widget.component.sass']
 })
-export class IACWidgetComponent extends WidgetComponent implements OnInit, AfterViewInit, OnDestroy {
+export class DockerWidgetComponent extends WidgetComponent implements OnInit, AfterViewInit, OnDestroy{
 
+ 
   // Reference to the subscription used to refresh the widget
   // private intervalRefreshSubscription: Subscription;
   @ViewChild(LayoutDirective, {static: false}) childLayoutTag: LayoutDirective;
@@ -38,23 +39,16 @@ export class IACWidgetComponent extends WidgetComponent implements OnInit, After
               cdr: ChangeDetectorRef,
               dashboardService: DashboardService,
               route: ActivatedRoute,
-              private formBuilder: FormBuilder,
-              public collectorService: CollectorService,
-              private iacService : IACService,
-              config: NgbProgressbarConfig
+              private dockerService : DockerService
   ) {
     super(componentFactoryResolver, cdr, dashboardService, route);
-
-    config.striped = true;
-    config.animated = true;
-    config.type = 'success';
-    config.height = '20px';
+ 
   }
 
   ngOnInit() {
-    this.widgetId = 'iac0';
+    this.widgetId = 'docker0';
     this.layout = OneChartLayoutComponent;
-    this.charts = IAC_CHARTS;
+    this.charts = DOCKER_CHARTS;
     this.init();
   }
 
@@ -84,9 +78,15 @@ export class IACWidgetComponent extends WidgetComponent implements OnInit, After
   }
 
   populateNumberCardCharts() {
+	this.dockerService._GetDockerMetaCount().subscribe((result => {
+		console.log(result);
     this.charts[0].data[0].value = 1;
     this.charts[0].data[1].value = 2;
     this.charts[0].data[2].value = 999;
+		
+	}));
+	
+	
   }
 
   stopRefreshInterval() {
@@ -96,5 +96,3 @@ export class IACWidgetComponent extends WidgetComponent implements OnInit, After
   }
 
 }
-
-

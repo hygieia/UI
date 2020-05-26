@@ -23,6 +23,8 @@ import {
 } from '../../../widget_modules/static-analysis/static-anaylsis-config-form/static-analysis-config-form.component';
 import {IACConfigFormComponent} from '../../../widget_modules/infrastructure-as-code/iac-config-form/iac-config-form.component';
 import {IACWidgetComponent} from '../../../widget_modules/infrastructure-as-code/iac-widget/iac-widget.component';
+import {DockerConfigFormComponent} from '../../../widget_modules/docker/docker-config-form/docker-config-form.component';
+import {DockerWidgetComponent} from '../../../widget_modules/docker/docker-widget/docker-widget.component';
 
 @Component({
   selector: 'app-dashboard-view',
@@ -86,13 +88,20 @@ export class DashboardViewComponent extends DashboardComponent implements OnInit
         configForm: StaticAnalysisConfigFormComponent
       },
       {
+        title: 'Docker',
+        component: DockerWidgetComponent,
+        status: 'Success',
+        widgetSize: 'col-xl-6',
+        configForm: DockerConfigFormComponent
+      },
+/*      {
         title: 'Infrastructure As Code',
         component: IACWidgetComponent,
         status: 'Success',
         widgetSize: 'col-xl-2',
         configForm: IACConfigFormComponent
       }
-    ];
+*/    ];
   }
 
   ngAfterViewInit() {
