@@ -23,4 +23,17 @@ describe('BuildDetailComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should set detailData', () => {
+    const detailData = [{
+      title: 'build1',
+      timestamp: 1552590574305,
+      description: 'sample',
+    }];
+    component.detailData = detailData;
+    expect(component.data).toEqual(detailData);
+
+    component.detailData = null;
+    expect(component.data).toEqual(null);
+  });
 });
