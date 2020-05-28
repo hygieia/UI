@@ -129,7 +129,6 @@ export class DashboardService {
   }
 
   // Take updated component sans deleted widget and config returned by the API, and update the data locally.
-  // Push this new version to subscribers.
   deleteLocally(responseComponent: any, configToDelete: any) {
     // Find and update component
     let tempDashboard$ = this.dashboardConfig$.pipe(take(1), map(dashboard => {
@@ -155,7 +154,6 @@ export class DashboardService {
       const filteredWidgets = dashboard.widgets.filter((config: any) => config.options.id === configToDelete.options.id);
       filteredWidgets.forEach((config: any, index: number) => {
         delete dashboard.widgets[index];
-        // dashboard.widgets[index] = extend(config, configToDelete);
       });
 
       return dashboard;
