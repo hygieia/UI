@@ -59,4 +59,8 @@ describe('TestDeleteFormComponent', () => {
     expect(component.performanceTests.controls.length).toBe(2);
   });
 
+  it('should load saved security scan job', () => {
+    component.getSavedTestResults();
+  });
+
 });
