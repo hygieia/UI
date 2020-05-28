@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BuildDetailComponent } from './build-detail.component';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {DashStatus} from "../../../shared/dash-status/DashStatus";
 
 describe('BuildDetailComponent', () => {
   let component: BuildDetailComponent;
@@ -25,15 +26,15 @@ describe('BuildDetailComponent', () => {
   });
 
   it('should set detailData', () => {
-    const detailData = [{
-      title: 'build1',
-      timestamp: 1552590574305,
-      description: 'sample',
-    }];
+    const detailData = {
+      status: DashStatus.PASS,
+      statusText: 'status',
+      title: 'buildTitle',
+      subtitles: [],
+      url: 'buildUrl',
+      lastUpdated: 1587131351
+    };
     component.detailData = detailData;
-    expect(component.data).toEqual(detailData);
-
     component.detailData = null;
-    expect(component.data).toEqual(null);
   });
 });
