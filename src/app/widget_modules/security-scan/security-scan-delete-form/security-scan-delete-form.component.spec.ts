@@ -82,12 +82,7 @@ describe('SecurityScanDeleteFormComponent', () => {
       schemas: [NO_ERRORS_SCHEMA]
     })
       .compileComponents();
-    //
-    // fixture = TestBed.createComponent(SecurityScanDeleteFormComponent);
-    // component = fixture.componentInstance;
-    // dashboardService = TestBed.get(DashboardService);
-    // collectorService = TestBed.get(CollectorService);
-    // modalService = TestBed.get(NgbModal);
+
   }));
 
   beforeEach(() => {

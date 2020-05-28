@@ -72,11 +72,6 @@ describe('DeployDeleteFormComponent', () => {
     })
       .compileComponents();
 
-    // fixture = TestBed.createComponent(DeployDeleteFormComponent);
-    // component = fixture.componentInstance;
-    // dashboardService = TestBed.get(DashboardService);
-    // collectorService = TestBed.get(CollectorService);
-    // modalService = TestBed.get(NgbModal);
   }));
 
   beforeEach(() => {

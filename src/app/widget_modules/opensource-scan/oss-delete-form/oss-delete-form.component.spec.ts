@@ -83,11 +83,6 @@ describe('OSSDeleteFormComponent', () => {
     })
       .compileComponents();
 
-    // fixture = TestBed.createComponent(OSSDeleteFormComponent);
-    // component = fixture.componentInstance;
-    // dashboardService = TestBed.get(DashboardService);
-    // collectorService = TestBed.get(CollectorService);
-    // modalService = TestBed.get(NgbModal);
   }));
 
   beforeEach(() => {

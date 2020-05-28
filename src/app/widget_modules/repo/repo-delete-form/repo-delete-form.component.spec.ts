@@ -83,11 +83,6 @@ describe('RepoDeleteFormComponent', () => {
     })
       .compileComponents();
 
-    // fixture = TestBed.createComponent(RepoDeleteFormComponent);
-    // component = fixture.componentInstance;
-    // dashboardService = TestBed.get(DashboardService);
-    // collectorService = TestBed.get(CollectorService);
-    // modalService = TestBed.get(NgbModal);
   }));
 
   beforeEach(() => {
