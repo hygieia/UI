@@ -81,12 +81,21 @@ describe('SecurityScanWidgetComponent', () => {
     })
       .compileComponents();
 
+    // fixture = TestBed.createComponent(SecurityScanWidgetComponent);
+    // component = fixture.componentInstance;
+    // securityScanService = TestBed.get(SecurityScanService);
+    // dashboardService = TestBed.get(DashboardService);
+    // modalService = TestBed.get(NgbModal);
+  }));
+
+  beforeEach(() => {
     fixture = TestBed.createComponent(SecurityScanWidgetComponent);
     component = fixture.componentInstance;
     securityScanService = TestBed.get(SecurityScanService);
     dashboardService = TestBed.get(DashboardService);
     modalService = TestBed.get(NgbModal);
-  }));
+    fixture.detectChanges();
+  });
 
   it('should create', () => {
     fixture.detectChanges();

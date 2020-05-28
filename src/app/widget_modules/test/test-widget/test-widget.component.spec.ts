@@ -53,11 +53,11 @@ describe('TestWidgetComponent', () => {
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(TestWidgetComponent);
-    component = fixture.componentInstance;
-    testService = TestBed.get(TestService);
-    dashboardService = TestBed.get(DashboardService);
-    modalService = TestBed.get(NgbModal);
+    // fixture = TestBed.createComponent(TestWidgetComponent);
+    // component = fixture.componentInstance;
+    // testService = TestBed.get(TestService);
+    // dashboardService = TestBed.get(DashboardService);
+    // modalService = TestBed.get(NgbModal);
 
     testResultData = [{
       result: {},
@@ -96,9 +96,10 @@ describe('TestWidgetComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TestWidgetComponent);
     component = fixture.componentInstance;
+    testService = TestBed.get(TestService);
+    dashboardService = TestBed.get(DashboardService);
+    modalService = TestBed.get(NgbModal);
     fixture.detectChanges();
-
-
   });
 
   it('should create', () => {

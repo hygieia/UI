@@ -65,11 +65,11 @@ describe('OSSWidgetComponent', () => {
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(OSSWidgetComponent);
-    component = fixture.componentInstance;
-    ossService = TestBed.get(OpensourceScanService);
-    dashboardService = TestBed.get(DashboardService);
-    modalService = TestBed.get(NgbModal);
+    // fixture = TestBed.createComponent(OSSWidgetComponent);
+    // component = fixture.componentInstance;
+    // ossService = TestBed.get(OpensourceScanService);
+    // dashboardService = TestBed.get(DashboardService);
+    // modalService = TestBed.get(NgbModal);
 
     ossTestData = {
       id: 'OSS_ID',
@@ -129,6 +129,9 @@ describe('OSSWidgetComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(OSSWidgetComponent);
     component = fixture.componentInstance;
+    ossService = TestBed.get(OpensourceScanService);
+    dashboardService = TestBed.get(DashboardService);
+    modalService = TestBed.get(NgbModal);
     fixture.detectChanges();
   });
 
@@ -175,10 +178,6 @@ describe('OSSWidgetComponent', () => {
   it('should loadCharts', () => {
     component.loadCharts(ossTestData);
     component.loadCharts(null);
-  });
-
-  it('should loadEmptyChart', () => {
-    component.loadEmptyChart();
   });
 
   it('should generateLicenseDetails', () => {
