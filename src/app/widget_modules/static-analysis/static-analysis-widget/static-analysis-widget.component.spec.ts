@@ -64,12 +64,6 @@ describe('StaticAnalysisWidgetComponent', () => {
     })
       .compileComponents();
 
-    // fixture = TestBed.createComponent(StaticAnalysisWidgetComponent);
-    // component = fixture.componentInstance;
-    // staticAnalysisService = TestBed.get(StaticAnalysisService);
-    // dashboardService = TestBed.get(DashboardService);
-    // modalService = TestBed.get(NgbModal);
-
     staticAnalysisTestData = {
       id: '123',
       collectorItemId: '123',

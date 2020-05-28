@@ -110,11 +110,6 @@ describe('DeployWidgetComponent', () => {
     })
       .compileComponents();
 
-    // fixture = TestBed.createComponent(DeployWidgetComponent);
-    // component = fixture.componentInstance;
-    // deployService = TestBed.get(DeployService);
-    // dashboardService = TestBed.get(DashboardService);
-    // modalService = TestBed.get(NgbModal);
   }));
 
   beforeEach(() => {
