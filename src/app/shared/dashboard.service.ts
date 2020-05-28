@@ -154,6 +154,10 @@ export class DashboardService {
       const filteredWidgets = dashboard.widgets.filter((config: any) => config.options.id === configToDelete.options.id);
       filteredWidgets.forEach((config: any, index: number) => {
         delete dashboard.widgets[index];
+<<<<<<< HEAD
+=======
+        // dashboard.widgets[index] = extend(config, configToDelete);
+>>>>>>> delete widget functionality and tests
       });
 
       return dashboard;
