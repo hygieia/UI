@@ -26,15 +26,28 @@ describe('BuildDetailComponent', () => {
   });
 
   it('should set detailData', () => {
-    const detailData = {
+    const detailData = [{
       status: DashStatus.PASS,
       statusText: 'status',
       title: 'buildTitle',
-      subtitles: [],
       url: 'buildUrl',
-      lastUpdated: 1587131351
-    };
+      lastUpdated: 1587131351,
+      data: [{
+        name: 'name',
+        items: [],
+      }],
+    }];
+
     component.detailData = detailData;
-    component.detailData = null;
+    expect(component.data.length).toEqual(1);
+
+    const noData = [{
+      title: 'buildTitle',
+      url: 'buildUrl',
+      lastUpdated: 1587131351,
+    }];
+
+    component.detailData = noData;
+    expect(component.data[0]).toEqual(noData);
   });
 });
