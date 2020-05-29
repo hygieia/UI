@@ -77,6 +77,7 @@ import {DeleteConfirmModalComponent} from './modals/delete-confirm-modal/delete-
 import {TabsModule} from './ngx-ui/tabs/tabs.module';
 import {OneByTwoLayoutTableChartComponent} from './layouts/one-by-two-layout-table-chart/one-by-two-layout-table-chart.component';
 import { NavbarComponent } from '../core/navbar/navbar.component';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -205,7 +206,8 @@ import { NavbarComponent } from '../core/navbar/navbar.component';
     NgxChartsModule,
     NgxUIModule,
     ReactiveFormsModule,
-    TabsModule
+    TabsModule,
+    RouterModule,
   ],
   exports: [
     BarHorizontalComponent,

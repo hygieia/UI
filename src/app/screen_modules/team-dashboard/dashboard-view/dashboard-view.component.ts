@@ -93,13 +93,13 @@ export class DashboardViewComponent extends DashboardComponent implements OnInit
         widgetSize: 'col-xl-6',
         configForm: [StaticAnalysisConfigFormComponent, SecurityScanConfigComponent, OSSConfigFormComponent, TestConfigFormComponent]
       },
-      {
+      /*{
         title: ['Placeholder'],
         component: [PlaceholderWidgetComponent],
         status: 'Success',
         widgetSize: 'col-xl-2',
         configForm: [BuildConfigFormComponent]
-      },
+      },*/
     ];
   }
 
