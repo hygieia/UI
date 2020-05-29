@@ -66,7 +66,7 @@ export class NfrrViewComponent implements OnInit, OnDestroy {
     lob === 'All' ? this.getAuditMetricsAll() : this.getAuditMetricsByLob(lob);
   }
 
-  private getAuditMetricsAll() {
+  getAuditMetricsAll() {
     this.nfrrService.getAuditMetricsAll().pipe(takeUntil(this.destroyed$)).subscribe(result => {
       this.lastAudited = new Date(result[0].timestamp);
       result.forEach(r => {
@@ -78,7 +78,7 @@ export class NfrrViewComponent implements OnInit, OnDestroy {
     });
   }
 
-  private getAuditMetricsByLob(lob: string) {
+  getAuditMetricsByLob(lob: string) {
     this.nfrrService.getAuditMetricsByLob(lob).pipe(takeUntil(this.destroyed$)).subscribe(result => {
       this.transformToChartData(result as IAudit[]);
     });
