@@ -280,11 +280,11 @@ export class StaticAnalysisWidgetComponent extends WidgetComponent implements On
 
   setDefaultIfNoData() {
     if (!this.hasData) {
-      this.charts[0].data = { items: [{ title: 'No Data' }]};
+      this.charts[0].data = { items: [{ title: 'No Data Found' }]};
       this.charts[1].data.results[0].value = 0;
       this.charts[1].data.customLabelValue = 0;
       this.charts[2].data[1].value = 0;
-      this.charts[3].data = { items: [{ title: 'No Data' }]};
+      this.charts[3].data = { items: [{ title: 'No Data Found' }]};
     }
     super.loadComponent(this.childLayoutTag);
   }

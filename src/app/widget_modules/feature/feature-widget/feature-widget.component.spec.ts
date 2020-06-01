@@ -155,7 +155,7 @@ describe('FeatureWidgetComponent', () => {
   it('should assign default if no data', () => {
     component.hasData = false;
     component.setDefaultIfNoData();
-    expect(component.charts[0].data.items[0].title).toEqual('No Data');
+    expect(component.charts[0].data.items[0].title).toEqual('No Data Found');
   });
 });
 

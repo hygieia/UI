@@ -292,10 +292,10 @@ export class BuildWidgetComponent extends WidgetComponent implements OnInit, Aft
     if (!this.hasData) {
       this.charts[0].data.dataPoints[0].series = [{name: new Date(), value: 0, data: 'All Builds'}];
       this.charts[0].data.dataPoints[1].series = [{name: new Date(), value: 0, data: 'Failed Builds'}];
-      this.charts[1].data = { items: [{ title: 'No Data' }]};
+      this.charts[1].data = { items: [{ title: 'No Data Found' }]};
       this.charts[2].data[0] = [{name: new Date(), value: 0}];
       this.charts[2].colorScheme.domain = ['red'];
-      this.charts[2].data[1][0].series = [{name: 'No Data', value: 0}];
+      this.charts[2].data[1][0].series = [{name: 'No Data Found', value: 0}];
       this.charts[3].data[0].value = 0;
       this.charts[3].data[1].value = 0;
       this.charts[3].data[2].value = 0;

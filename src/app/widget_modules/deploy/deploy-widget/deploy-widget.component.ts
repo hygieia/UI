@@ -133,7 +133,7 @@ export class DeployWidgetComponent extends WidgetComponent implements OnInit {
 
   setDefaultIfNoData() {
     if (!this.hasData) {
-      this.charts[0].data = { items: [{ title: 'No Data' }]};
+      this.charts[0].data = { items: [{ title: 'No Data Found' }]};
     }
     super.loadComponent(this.childLayoutTag);
   }

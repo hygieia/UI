@@ -115,7 +115,7 @@ export class SecurityScanWidgetComponent extends WidgetComponent implements OnIn
 
   setDefaultIfNoData() {
     if (!this.hasData) {
-      this.charts[0].data = { items: [{ title: 'No Data' }]};
+      this.charts[0].data = { items: [{ title: 'No Data Found' }]};
     }
     super.loadComponent(this.childLayoutTag);
   }

@@ -196,8 +196,8 @@ export class OSSWidgetComponent extends WidgetComponent implements OnInit, After
 
   setDefaultIfNoData() {
     if (!this.hasData) {
-      this.charts[0].data = { items: [{ title: 'No Data' }]};
-      this.charts[1].data = { items: [{ title: 'No Data' }]};
+      this.charts[0].data = { items: [{ title: 'No Data Found' }]};
+      this.charts[1].data = { items: [{ title: 'No Data Found' }]};
     }
     super.loadComponent(this.childLayoutTag);
   }
