@@ -9,7 +9,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import { CaponeTemplateComponent } from '../capone-template/capone-template.component';
 import { DashboardViewComponent } from './dashboard-view.component';
 import { DasboardNavbarComponent } from 'src/app/core/dasboard-navbar/dasboard-navbar.component';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app-test-widget',
