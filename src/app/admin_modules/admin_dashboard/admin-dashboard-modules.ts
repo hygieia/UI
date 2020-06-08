@@ -18,8 +18,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DashTrashComponent } from './dashboard/admin-dashboard/dash-trash/dash-trash.component';
 // tslint:disable-next-line:max-line-length
 import {CreateOrUpdateFeatureFlagsComponent} from './dashboard/admin-dashboard/modal/create-or-update-feature-flags/create-or-update-feature-flags.component';
-import {UpdateJsonComponent} from './dashboard/admin-dashboard/modal/update-json/update-json.component';
-import {ViewJsonComponent} from './dashboard/admin-dashboard/modal/view-json/view-json.component';
 import {FeatureFlagsComponent} from './dashboard/admin-dashboard/feature-flags/feature-flags.component';
 import {SharedModule} from '../../shared/shared.module';
 import {ServiceAccountsComponent} from './dashboard/admin-dashboard/service-accounts/service-accounts.component';
@@ -32,6 +30,7 @@ import { EditDashboardComponent } from './dashboard/admin-dashboard/edit-dashboa
 import { AuthService } from 'src/app/core/services/auth.service';
 import { AuthInterceptor } from 'src/app/core/interceptors/auth.interceptor';
 import { EditDashboardModalComponent } from './dashboard/admin-dashboard/modal/edit-dashboard-modal /edit-dashboard-modal.component';
+import {DeleteConfirmModalComponent} from '../../shared/modals/delete-confirm-modal/delete-confirm-modal.component';
 
 @NgModule({
   declarations: [
@@ -48,8 +47,6 @@ import { EditDashboardModalComponent } from './dashboard/admin-dashboard/modal/e
     DashTrashComponent,
     FeatureFlagsComponent,
     ServiceAccountsComponent,
-    UpdateJsonComponent,
-    ViewJsonComponent,
     EditDashboardComponent,
     EditDashboardModalComponent
   ],
@@ -77,10 +74,7 @@ import { EditDashboardModalComponent } from './dashboard/admin-dashboard/modal/e
     CreateOrUpdateServiceAccountComponent,
     EditTokenModalComponent,
     GenerateApiTokenModalComponent,
-    UpdateJsonComponent,
-    ViewJsonComponent,
-    EditDashboardModalComponent
-
+    EditDashboardModalComponent,
   ]
 })
 
