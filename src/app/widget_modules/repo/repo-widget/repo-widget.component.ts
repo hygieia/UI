@@ -100,16 +100,64 @@ export class RepoWidgetComponent extends WidgetComponent implements OnInit, Afte
     if (!commitResult || !pullResult || !issueResult) {
       return;
     }
-
     const startDate = this.toMidnight(new Date());
     startDate.setDate(startDate.getDate() - this.REPO_PER_DAY_TIME_RANGE + 1);
-    const allCommits = commitResult.filter(repo => this.checkRepoAfterDate(repo.scmCommitTimestamp, startDate));
-    const allPulls = pullResult.filter(repo => this.checkRepoAfterDate(repo.timestamp, startDate));
-    const allIssues = issueResult.filter(repo => this.checkRepoAfterDate(repo.timestamp, startDate));
+
+    let allCommits = commitResult.filter(repo => this.checkRepoAfterDate(repo.scmCommitTimestamp, startDate));
+    let allPulls = pullResult.filter(repo => this.checkRepoAfterDate(repo.timestamp, startDate));
+    let allIssues = issueResult.filter(repo => this.checkRepoAfterDate(repo.timestamp, startDate));
 
     this.charts[0].data.dataPoints[0].series = this.collectDataArray(this.collectRepoCommits(allCommits));
     this.charts[0].data.dataPoints[1].series = this.collectDataArray(this.collectRepoPulls(allPulls));
     this.charts[0].data.dataPoints[2].series = this.collectDataArray(this.collectRepoIssues(allIssues));
+  }
+
+  collectContributorCount(allResults: IRepo[], type: string) {
+    let lastDayCount = 0;
+    let lastSevenDayCount = 0;
+    let lastFourteenDayCount = 0;
+    let lastDayContributors = [];
+    let lastSevenDayContributors = [];
+    let lastFourteenDayContributors = [];
+
+    let today = this.toMidnight(new Date());
+    let sevenDays = this.toMidnight(new Date());
+    let fourteenDays = this.toMidnight(new Date());
+    sevenDays.setDate(sevenDays.getDate() - 7);
+    fourteenDays.setDate(fourteenDays.getDate() - 14);
+
+    let timestamp;
+    let user;
+
+    // Setting values for commuters, contributors, and ideators
+    allResults.forEach(currResult => {
+      if (type === 'commit') {
+        timestamp = currResult.scmCommitTimestamp;
+        user = currResult.scmAuthor;
+      } else {
+        timestamp = currResult.timestamp;
+        user = currResult.userId
+      }
+      if (this.checkRepoAfterDate(timestamp, today)) {
+        lastDayCount++;
+        if(lastDayContributors.indexOf(user) == -1) {
+          lastDayContributors.push(user);
+        }
+      }
+      if(this.checkRepoAfterDate(timestamp, sevenDays)) {
+        lastSevenDayCount++;
+        if(lastSevenDayContributors.indexOf(user) == -1) {
+          lastSevenDayContributors.push(user);
+        }
+      }
+      if(this.checkRepoAfterDate(timestamp, fourteenDays)) {
+        lastFourteenDayCount++;
+        if(lastFourteenDayContributors.indexOf(user) == -1) {
+          lastFourteenDayContributors.push(user);
+        }
+      }
+    });
+    return [lastDayContributors.length, lastSevenDayContributors.length, lastFourteenDayContributors.length];
   }
 
   collectRepoCommits(commitRepo: IRepo[]): any[] {
@@ -187,6 +235,10 @@ export class RepoWidgetComponent extends WidgetComponent implements OnInit, Afte
     const issue7 = issueResult.filter(repo => this.checkRepoAfterDate(repo.timestamp, bucketOneStartDate)).length;
     const issue14 = issueResult.filter(repo => this.checkRepoAfterDate(repo.timestamp, bucketTwoStartDate)).length;
 
+    let commuters = this.collectContributorCount(commitResult, 'commit');
+    let contributors = this.collectContributorCount(pullResult, 'pull');
+    let ideators = this.collectContributorCount(issueResult, 'issue');
+
     this.charts[1].data = commitToday.toString();
     this.charts[2].data = commit7.toString();
     this.charts[3].data = commit14.toString();
@@ -196,6 +248,16 @@ export class RepoWidgetComponent extends WidgetComponent implements OnInit, Afte
     this.charts[7].data = issueToday.toString();
     this.charts[8].data = issue7.toString();
     this.charts[9].data = issue14.toString();
+    this.charts[10].data = commuters[0].toString();
+    this.charts[11].data = commuters[1].toString();
+    this.charts[12].data = commuters[2].toString();
+    this.charts[13].data = contributors[0].toString();
+    this.charts[14].data = contributors[1].toString();
+    this.charts[15].data = contributors[2].toString();
+    this.charts[16].data = ideators[0].toString();
+    this.charts[17].data = ideators[1].toString();
+    this.charts[18].data = ideators[2].toString();
+
   }
 
   //// *********************** HELPER UTILS *********************
