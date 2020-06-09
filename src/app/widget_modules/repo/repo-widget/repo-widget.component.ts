@@ -103,9 +103,9 @@ export class RepoWidgetComponent extends WidgetComponent implements OnInit, Afte
     const startDate = this.toMidnight(new Date());
     startDate.setDate(startDate.getDate() - this.REPO_PER_DAY_TIME_RANGE + 1);
 
-    let allCommits = commitResult.filter(repo => this.checkRepoAfterDate(repo.scmCommitTimestamp, startDate));
-    let allPulls = pullResult.filter(repo => this.checkRepoAfterDate(repo.timestamp, startDate));
-    let allIssues = issueResult.filter(repo => this.checkRepoAfterDate(repo.timestamp, startDate));
+    const allCommits = commitResult.filter(repo => this.checkRepoAfterDate(repo.scmCommitTimestamp, startDate));
+    const allPulls = pullResult.filter(repo => this.checkRepoAfterDate(repo.timestamp, startDate));
+    const allIssues = issueResult.filter(repo => this.checkRepoAfterDate(repo.timestamp, startDate));
 
     this.charts[0].data.dataPoints[0].series = this.collectDataArray(this.collectRepoCommits(allCommits));
     this.charts[0].data.dataPoints[1].series = this.collectDataArray(this.collectRepoPulls(allPulls));
@@ -116,13 +116,13 @@ export class RepoWidgetComponent extends WidgetComponent implements OnInit, Afte
     let lastDayCount = 0;
     let lastSevenDayCount = 0;
     let lastFourteenDayCount = 0;
-    let lastDayContributors = [];
-    let lastSevenDayContributors = [];
-    let lastFourteenDayContributors = [];
+    const lastDayContributors = [];
+    const lastSevenDayContributors = [];
+    const lastFourteenDayContributors = [];
 
-    let today = this.toMidnight(new Date());
-    let sevenDays = this.toMidnight(new Date());
-    let fourteenDays = this.toMidnight(new Date());
+    const today = this.toMidnight(new Date());
+    const sevenDays = this.toMidnight(new Date());
+    const fourteenDays = this.toMidnight(new Date());
     sevenDays.setDate(sevenDays.getDate() - 7);
     fourteenDays.setDate(fourteenDays.getDate() - 14);
 
@@ -136,23 +136,23 @@ export class RepoWidgetComponent extends WidgetComponent implements OnInit, Afte
         user = currResult.scmAuthor;
       } else {
         timestamp = currResult.timestamp;
-        user = currResult.userId
+        user = currResult.userId;
       }
       if (this.checkRepoAfterDate(timestamp, today)) {
         lastDayCount++;
-        if(lastDayContributors.indexOf(user) == -1) {
+        if (lastDayContributors.indexOf(user) === -1) {
           lastDayContributors.push(user);
         }
       }
-      if(this.checkRepoAfterDate(timestamp, sevenDays)) {
+      if (this.checkRepoAfterDate(timestamp, sevenDays)) {
         lastSevenDayCount++;
-        if(lastSevenDayContributors.indexOf(user) == -1) {
+        if (lastSevenDayContributors.indexOf(user) === -1) {
           lastSevenDayContributors.push(user);
         }
       }
-      if(this.checkRepoAfterDate(timestamp, fourteenDays)) {
+      if (this.checkRepoAfterDate(timestamp, fourteenDays)) {
         lastFourteenDayCount++;
-        if(lastFourteenDayContributors.indexOf(user) == -1) {
+        if (lastFourteenDayContributors.indexOf(user) === -1) {
           lastFourteenDayContributors.push(user);
         }
       }
@@ -235,13 +235,13 @@ export class RepoWidgetComponent extends WidgetComponent implements OnInit, Afte
     const issue7 = issueResult.filter(repo => this.checkRepoAfterDate(repo.timestamp, bucketOneStartDate)).length;
     const issue14 = issueResult.filter(repo => this.checkRepoAfterDate(repo.timestamp, bucketTwoStartDate)).length;
 
-    let commuters = this.collectContributorCount(commitResult, 'commit');
-    let contributors = this.collectContributorCount(pullResult, 'pull');
-    let ideators = this.collectContributorCount(issueResult, 'issue');
+    const commuters = this.collectContributorCount(commitResult, 'commit');
+    const contributors = this.collectContributorCount(pullResult, 'pull');
+    const ideators = this.collectContributorCount(issueResult, 'issue');
 
-    this.charts[1].data = commitToday.toString();
-    this.charts[2].data = commit7.toString();
-    this.charts[3].data = commit14.toString();
+    this.charts[1].data = commitToday;
+    this.charts[2].data = commit7;
+    this.charts[3].data = commit14;
     this.charts[4].data = pullToday.toString();
     this.charts[5].data = pull7.toString();
     this.charts[6].data = pull14.toString();
@@ -257,7 +257,6 @@ export class RepoWidgetComponent extends WidgetComponent implements OnInit, Afte
     this.charts[16].data = ideators[0].toString();
     this.charts[17].data = ideators[1].toString();
     this.charts[18].data = ideators[2].toString();
-
   }
 
   //// *********************** HELPER UTILS *********************
