@@ -30,7 +30,6 @@ import { EditDashboardComponent } from './dashboard/admin-dashboard/edit-dashboa
 import { AuthService } from 'src/app/core/services/auth.service';
 import { AuthInterceptor } from 'src/app/core/interceptors/auth.interceptor';
 import { EditDashboardModalComponent } from './dashboard/admin-dashboard/modal/edit-dashboard-modal /edit-dashboard-modal.component';
-import {DeleteConfirmModalComponent} from '../../shared/modals/delete-confirm-modal/delete-confirm-modal.component';
 
 @NgModule({
   declarations: [
