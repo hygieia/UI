@@ -16,6 +16,7 @@ export class RepoConfigFormComponent implements OnInit {
   private componentId: string;
 
   repoConfigForm: FormGroup;
+  scm = [];
 
   @Input()
   set widgetConfig(widgetConfig: any) {
@@ -46,13 +47,18 @@ export class RepoConfigFormComponent implements OnInit {
 
   private createForm() {
     this.repoConfigForm = this.formBuilder.group({
-      scm: '',
+      scm: [''],
       url: '',
       branch: '',
       userID: '',
       password: '',
       personalAccessToken: ''
     });
+    this.scm = this.getSCM();
+  }
+
+  public getSCM() {
+    return [{type: "GitHub", value: "GitHub"}, {type: "Subversion", value: "Subversion"}];
   }
 
   private submitForm() {

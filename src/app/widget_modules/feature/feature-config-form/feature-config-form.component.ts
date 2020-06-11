@@ -17,7 +17,13 @@ export class FeatureConfigFormComponent implements OnInit {
   private componentId: string;
   private teamId: string;
   private projectId: string;
+  private dashboard: any;
+  featureTool = [];
+  estimateMetricType = [];
+  sprintType = [];
+  listType = [];
 
+  submitted = false;
   featureConfigForm: FormGroup;
   searching = false;
   searchFailed = false;
@@ -100,16 +106,24 @@ export class FeatureConfigFormComponent implements OnInit {
 
   private createForm() {
     this.featureConfigForm = this.formBuilder.group({
-      featureTool: '',
+      featureTool: [''],
       projectName: '',
       teamName: '',
-      sprintType: '',
-      listType: '',
-      estimateMetricType: '',
+      sprintType: [''],
+      listType: [''],
+      estimateMetricType: [''],
     });
+    this.featureTool = this.getFeatureTools();
+    this.estimateMetricType = this.getEstimateMetricTypes();
+    this.listType = this.getListTypes();
+    this.sprintType = this.getSprintTypes();
   }
 
   private submitForm() {
+    this.submitted = true;
+    if (this.featureConfigForm.invalid) {
+      return;
+    }
     const newConfig = {
       name: 'feature',
       options: {
@@ -127,6 +141,25 @@ export class FeatureConfigFormComponent implements OnInit {
       collectorItemId: this.featureConfigForm.value.projectName.id
     };
     this.activeModal.close(newConfig);
+  }
+
+  public getEstimateMetricTypes() {
+    return [
+      {type: "hours", value: "Hours"},
+      {type: "storypoints", value: "Story Points" },
+      {type: "count", value: "Issue Count" }];
+  }
+
+  public getListTypes() {
+    return [{type: "epics", value: "Epics"}, {type: "issues", value: "Issues"}];
+  }
+
+  public getFeatureTools() {
+    return [{type: "Jira", value: "Jira"}, {type: "VersionOne", value: "VersionOne"}];
+  }
+
+  public getSprintTypes() {
+    return [{type: "scrum", value: "Scrum"}, {type: "kanban", value: "Kanban"}, {type: "scrumkanban", value:"Both"}];
   }
 
   private loadSavedFeatures() {
@@ -156,6 +189,7 @@ export class FeatureConfigFormComponent implements OnInit {
   private getDashboardComponent() {
     this.dashboardService.dashboardConfig$.pipe(take(1),
       map(dashboard => {
+        this.dashboard = dashboard;
         return dashboard.application.components[0].id;
       })).subscribe(componentId => this.componentId = componentId);
   }
