@@ -5,7 +5,7 @@ import { IPaginationParams } from 'src/app/shared/interfaces';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardItem } from '../model/dashboard-item';
 import { DeleteConfirmModalComponent } from '../../../../../shared/modals/delete-confirm-modal/delete-confirm-modal.component';
-import { EditDashboardModalComponent } from '../modal/edit-dashboard-modal /edit-dashboard-modal.component';
+import { EditDashboardModalComponent } from '../modal/edit-dashboard-modal/edit-dashboard-modal.component';
 
 @Component({
   selector: 'app-edit-dashboard',
