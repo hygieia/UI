@@ -85,7 +85,7 @@ export class DeployConfigFormComponent implements OnInit {
     const newConfig = {
       name: 'deploy',
       options: {
-        id: this.widgetConfigId,
+        id: this.widgetConfigId ? this.widgetConfigId : 'deploy0',
         deployRegex: this.deployConfigForm.value.deployRegex,
         deployAggregateServer: this.deployConfigForm.value.deployAggregateServer
       },

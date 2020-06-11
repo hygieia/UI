@@ -113,7 +113,7 @@ export class FeatureConfigFormComponent implements OnInit {
     const newConfig = {
       name: 'feature',
       options: {
-        id: this.widgetConfigId,
+        id: this.widgetConfigId ? this.widgetConfigId : 'feature0',
         featureTool: this.featureConfigForm.value.featureTool,
         teamName: this.featureConfigForm.value.teamName.options.teamName,
         teamId: this.teamId,

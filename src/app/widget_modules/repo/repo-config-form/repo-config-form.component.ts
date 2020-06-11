@@ -60,7 +60,7 @@ export class RepoConfigFormComponent implements OnInit {
       name: 'repo',
       componentId: this.componentId,
       options: {
-        id: this.widgetConfigId,
+        id: this.widgetConfigId ? this.widgetConfigId : 'repo0',
         scm: {
           name: this.repoConfigForm.value.scm,
           value: this.repoConfigForm.value.scm,

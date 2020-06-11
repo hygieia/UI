@@ -82,7 +82,7 @@ export class BuildConfigFormComponent implements OnInit {
     const newConfig = {
       name: 'build',
       options: {
-        id: this.widgetConfigId,
+        id: this.widgetConfigId ? this.widgetConfigId : 'build0',
         buildDurationThreshold: +this.buildConfigForm.value.buildDurationThreshold,
         consecutiveFailureThreshold: +this.buildConfigForm.value.consecutiveFailureThreshold
       },
