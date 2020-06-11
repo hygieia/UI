@@ -43,13 +43,6 @@ describe('FeatureWidgetComponent', () => {
   let modalService: NgbModal;
   let fixture: ComponentFixture<FeatureWidgetComponent>;
 
-  const IFeatureTest = {
-    id: '123',
-    openEstimate: 1,
-    inProgressEstimate: 2,
-    completeEstimate: 3
-  } as IFeature;
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       providers: [
@@ -84,7 +77,6 @@ describe('FeatureWidgetComponent', () => {
   });
 
   it('should generateIterationSummary', () => {
-    component.generateIterationSummary(IFeatureTest);
     component.generateIterationSummary(null);
   });
 

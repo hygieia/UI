@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, of } from 'rxjs';
 import { catchError, debounceTime, distinctUntilChanged, map, switchMap, take, tap } from 'rxjs/operators';
@@ -106,12 +106,12 @@ export class FeatureConfigFormComponent implements OnInit {
 
   private createForm() {
     this.featureConfigForm = this.formBuilder.group({
-      featureTool: [''],
-      projectName: '',
-      teamName: '',
-      sprintType: [''],
-      listType: [''],
-      estimateMetricType: [''],
+      featureTool: ['', Validators.required],
+      projectName: ['', Validators.required],
+      teamName: ['', Validators.required],
+      sprintType: ['', Validators.required],
+      listType: ['', Validators.required],
+      estimateMetricType: ['', Validators.required],
     });
     this.featureTool = this.getFeatureTools();
     this.estimateMetricType = this.getEstimateMetricTypes();
@@ -145,21 +145,21 @@ export class FeatureConfigFormComponent implements OnInit {
 
   public getEstimateMetricTypes() {
     return [
-      {type: "hours", value: "Hours"},
-      {type: "storypoints", value: "Story Points" },
-      {type: "count", value: "Issue Count" }];
+      {type: 'hours', value: 'Hours'},
+      {type: 'storypoints', value: 'Story Points' },
+      {type: 'count', value: 'Issue Count' }];
   }
 
   public getListTypes() {
-    return [{type: "epics", value: "Epics"}, {type: "issues", value: "Issues"}];
+    return [{type: 'epics', value: 'Epics'}, {type: 'issues', value: 'Issues'}];
   }
 
   public getFeatureTools() {
-    return [{type: "Jira", value: "Jira"}, {type: "VersionOne", value: "VersionOne"}];
+    return [{type: 'Jira', value: 'Jira'}, {type: 'VersionOne', value: 'VersionOne'}];
   }
 
   public getSprintTypes() {
-    return [{type: "scrum", value: "Scrum"}, {type: "kanban", value: "Kanban"}, {type: "scrumkanban", value:"Both"}];
+    return [{type: 'scrum', value: 'Scrum'}, {type: 'kanban', value: 'Kanban'}, {type: 'scrumkanban', value: 'Both'}];
   }
 
   private loadSavedFeatures() {

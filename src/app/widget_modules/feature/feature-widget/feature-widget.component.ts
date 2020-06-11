@@ -91,19 +91,19 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
           this.featureService.fetchFeatureWip(this.params.component, this.params.teamId, this.params.projectId,
             this.params.sprintType).pipe(catchError(err => of(err))),
           this.featureService.fetchAggregateSprintEstimates(this.params.component, this.params.teamId,
-            this.params.projectId, this.params.agileType).pipe(catchError(err => of(err))),
+            this.params.projectId, this.params.sprintType).pipe(catchError(err => of(err))),
           this.featureService.fetchIterations(this.params.component, this.params.teamId, this.params.projectId,
-            this.params.agileType).pipe(catchError(err => of(err))));
+            this.params.sprintType).pipe(catchError(err => of(err))));
       })).subscribe(([wip, estimates, iterations]) => {
-        this.hasData = ((wip as []).length > 0 || (estimates as []).length > 0 || (iterations as []).length > 0);
-        if (this.params.listType === 'epics') {
-          this.generateFeatureSummary(wip, this.params);
-        } else {
-          this.generateFeatureSummary(iterations, this.params);
-        }
-        this.generateIterationSummary(estimates);
-        super.loadComponent(this.childLayoutTag);
-      });
+      this.hasData = ((wip as []).length > 0 || (estimates as []).length > 0 || (iterations as []).length > 0);
+      if (this.params.listType === 'epics') {
+        this.generateFeatureSummary(wip, this.params);
+      } else {
+        this.generateFeatureSummary(iterations, this.params);
+      }
+      this.generateIterationSummary(estimates);
+      super.loadComponent(this.childLayoutTag);
+    });
   }
 
   // Unsubscribe from the widget refresh observable, which stops widget updating.

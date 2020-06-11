@@ -58,7 +58,7 @@ export class RepoConfigFormComponent implements OnInit {
   }
 
   public getSCM() {
-    return [{type: "GitHub", value: "GitHub"}, {type: "Subversion", value: "Subversion"}];
+    return [{type: 'GitHub', value: 'GitHub'}, {type: 'Subversion', value: 'Subversion'}];
   }
 
   private submitForm() {
