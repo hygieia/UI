@@ -126,25 +126,24 @@ export class FeatureConfigFormComponent implements OnInit {
     if (this.featureConfigForm.invalid) {
       return;
     }
-  public submitForm() {
-      const newConfig = {
-        name: 'feature',
-        options: {
-          id: this.widgetConfigId ? this.widgetConfigId : 'feature0',
-          featureTool: this.featureConfigForm.value.featureTool,
-          teamName: this.featureConfigForm.value.teamName.options.teamName,
-          teamId: this.teamId,
-          projectName: this.featureConfigForm.value.projectName.options.projectName,
-          projectId: this.projectId,
-          estimateMetricType: this.featureConfigForm.value.estimateMetricType,
-          sprintType: this.featureConfigForm.value.sprintType,
-          listType: this.featureConfigForm.value.listType,
-        },
-        componentId: this.componentId,
-        collectorItemId: this.featureConfigForm.value.projectName.id
-      };
-      this.activeModal.close(newConfig);
-    }
+    const newConfig = {
+      name: 'feature',
+      options: {
+        id: this.widgetConfigId ? this.widgetConfigId : 'feature0',
+        featureTool: this.featureConfigForm.value.featureTool,
+        teamName: this.featureConfigForm.value.teamName.options.teamName,
+        teamId: this.teamId,
+        projectName: this.featureConfigForm.value.projectName.options.projectName,
+        projectId: this.projectId,
+        estimateMetricType: this.featureConfigForm.value.estimateMetricType,
+        sprintType: this.featureConfigForm.value.sprintType,
+        listType: this.featureConfigForm.value.listType,
+      },
+      componentId: this.componentId,
+      collectorItemId: this.featureConfigForm.value.projectName.id
+    };
+    this.activeModal.close(newConfig);
+  }
 
   public getEstimateMetricTypes() {
       return [
