@@ -22,6 +22,8 @@ export class FeatureConfigFormComponent implements OnInit {
   estimateMetricType = [];
   sprintType = [];
   listType = [];
+  public teamId: string;
+  public projectId: string;
 
   submitted = false;
   featureConfigForm: FormGroup;
@@ -60,7 +62,7 @@ export class FeatureConfigFormComponent implements OnInit {
 
   constructor(
     public activeModal: NgbActiveModal,
-    private formBuilder: FormBuilder,
+    public formBuilder: FormBuilder,
     private collectorService: CollectorService,
     private dashboardService: DashboardService
   ) {
@@ -104,7 +106,7 @@ export class FeatureConfigFormComponent implements OnInit {
     this.getDashboardComponent();
   }
 
-  private createForm() {
+  public createForm() {
     this.featureConfigForm = this.formBuilder.group({
       featureTool: ['', Validators.required],
       projectName: ['', Validators.required],
@@ -124,10 +126,11 @@ export class FeatureConfigFormComponent implements OnInit {
     if (this.featureConfigForm.invalid) {
       return;
     }
+  public submitForm() {
     const newConfig = {
       name: 'feature',
       options: {
-        id: this.widgetConfigId,
+        id: this.widgetConfigId ? this.widgetConfigId : 'feature0',
         featureTool: this.featureConfigForm.value.featureTool,
         teamName: this.featureConfigForm.value.teamName.options.teamName,
         teamId: this.teamId,
@@ -162,7 +165,7 @@ export class FeatureConfigFormComponent implements OnInit {
     return [{type: 'scrum', value: 'Scrum'}, {type: 'kanban', value: 'Kanban'}, {type: 'scrumkanban', value: 'Both'}];
   }
 
-  private loadSavedFeatures() {
+  public loadSavedFeatures() {
     this.dashboardService.dashboardConfig$.pipe(take(1),
       map(dashboard => {
         const featureCollector = dashboard.application.components[0].collectorItems.AgileTool;
