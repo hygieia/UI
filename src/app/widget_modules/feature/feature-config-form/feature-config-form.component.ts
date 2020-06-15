@@ -187,7 +187,6 @@ export class FeatureConfigFormComponent implements OnInit {
         this.featureConfigForm.get('teamName').setValue(collectorData);
       });
     }
-
   private getDashboardComponent() {
       this.dashboardService.dashboardConfig$.pipe(take(1),
         map(dashboard => {
