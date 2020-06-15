@@ -94,8 +94,7 @@
   // when widget hasn't yet been configured
   .widget-body-config {
     background: $dash-widget-section-highlight;
-    border: .2em dashed $dash-state-config-text;
-    //border: .5em dashed $dash-state-config-text;
+    border: .2em $dash-state-config-text;
     border-radius: 1em;
     color: $dash-state-config-text;
     display: none;
