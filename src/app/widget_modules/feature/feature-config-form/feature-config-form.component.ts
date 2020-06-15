@@ -22,6 +22,8 @@ export class FeatureConfigFormComponent implements OnInit {
   estimateMetricType = [];
   sprintType = [];
   listType = [];
+  public teamId: string;
+  public projectId: string;
 
   submitted = false;
   featureConfigForm: FormGroup;
@@ -60,7 +62,7 @@ export class FeatureConfigFormComponent implements OnInit {
 
   constructor(
     public activeModal: NgbActiveModal,
-    private formBuilder: FormBuilder,
+    public formBuilder: FormBuilder,
     private collectorService: CollectorService,
     private dashboardService: DashboardService
   ) {
@@ -104,7 +106,7 @@ export class FeatureConfigFormComponent implements OnInit {
     this.getDashboardComponent();
   }
 
-  private createForm() {
+  public createForm() {
     this.featureConfigForm = this.formBuilder.group({
       featureTool: ['', Validators.required],
       projectName: ['', Validators.required],
@@ -124,73 +126,74 @@ export class FeatureConfigFormComponent implements OnInit {
     if (this.featureConfigForm.invalid) {
       return;
     }
-    const newConfig = {
-      name: 'feature',
-      options: {
-        id: this.widgetConfigId,
-        featureTool: this.featureConfigForm.value.featureTool,
-        teamName: this.featureConfigForm.value.teamName.options.teamName,
-        teamId: this.teamId,
-        projectName: this.featureConfigForm.value.projectName.options.projectName,
-        projectId: this.projectId,
-        estimateMetricType: this.featureConfigForm.value.estimateMetricType,
-        sprintType: this.featureConfigForm.value.sprintType,
-        listType: this.featureConfigForm.value.listType,
-      },
-      componentId: this.componentId,
-      collectorItemId: this.featureConfigForm.value.projectName.id
-    };
-    this.activeModal.close(newConfig);
-  }
+  public submitForm() {
+      const newConfig = {
+        name: 'feature',
+        options: {
+          id: this.widgetConfigId ? this.widgetConfigId : 'feature0',
+          featureTool: this.featureConfigForm.value.featureTool,
+          teamName: this.featureConfigForm.value.teamName.options.teamName,
+          teamId: this.teamId,
+          projectName: this.featureConfigForm.value.projectName.options.projectName,
+          projectId: this.projectId,
+          estimateMetricType: this.featureConfigForm.value.estimateMetricType,
+          sprintType: this.featureConfigForm.value.sprintType,
+          listType: this.featureConfigForm.value.listType,
+        },
+        componentId: this.componentId,
+        collectorItemId: this.featureConfigForm.value.projectName.id
+      };
+      this.activeModal.close(newConfig);
+    }
 
   public getEstimateMetricTypes() {
-    return [
-      {type: 'hours', value: 'Hours'},
-      {type: 'storypoints', value: 'Story Points' },
-      {type: 'count', value: 'Issue Count' }];
-  }
+      return [
+        {type: 'hours', value: 'Hours'},
+        {type: 'storypoints', value: 'Story Points' },
+        {type: 'count', value: 'Issue Count' }];
+    }
 
   public getListTypes() {
-    return [{type: 'epics', value: 'Epics'}, {type: 'issues', value: 'Issues'}];
-  }
+      return [{type: 'epics', value: 'Epics'}, {type: 'issues', value: 'Issues'}];
+    }
 
   public getFeatureTools() {
-    return [{type: 'Jira', value: 'Jira'}, {type: 'VersionOne', value: 'VersionOne'}];
-  }
+      return [{type: 'Jira', value: 'Jira'}, {type: 'VersionOne', value: 'VersionOne'}];
+    }
 
   public getSprintTypes() {
-    return [{type: 'scrum', value: 'Scrum'}, {type: 'kanban', value: 'Kanban'}, {type: 'scrumkanban', value: 'Both'}];
-  }
+      return [{type: 'scrum', value: 'Scrum'}, {type: 'kanban', value: 'Kanban'}, {type: 'scrumkanban', value: 'Both'}];
+    }
 
-  private loadSavedFeatures() {
-    this.dashboardService.dashboardConfig$.pipe(take(1),
-      map(dashboard => {
-        const featureCollector = dashboard.application.components[0].collectorItems.AgileTool;
+  public loadSavedFeatures() {
+      this.dashboardService.dashboardConfig$.pipe(take(1),
+        map(dashboard => {
+          const featureCollector = dashboard.application.components[0].collectorItems.AgileTool;
 
-        if (featureCollector[0].id) {
-          const featureId = featureCollector[0].id;
-          return featureId;
-        }
-        return null;
-      }),
-      switchMap(featureId => {
-        if (featureId) {
-          return this.collectorService.getItemsById(featureId);
-        }
-        return of(null);
-      })).subscribe(collectorData => {
-      this.teamId = collectorData.options.teamId;
-      this.projectId = collectorData.options.projectId;
-      this.featureConfigForm.get('projectName').setValue(collectorData);
-      this.featureConfigForm.get('teamName').setValue(collectorData);
-    });
-  }
+          if (featureCollector[0].id) {
+            const featureId = featureCollector[0].id;
+            return featureId;
+          }
+          return null;
+        }),
+        switchMap(featureId => {
+          if (featureId) {
+            return this.collectorService.getItemsById(featureId);
+          }
+          return of(null);
+        })).subscribe(collectorData => {
+        this.teamId = collectorData.options.teamId;
+        this.projectId = collectorData.options.projectId;
+        this.featureConfigForm.get('projectName').setValue(collectorData);
+        this.featureConfigForm.get('teamName').setValue(collectorData);
+      });
+    }
 
   private getDashboardComponent() {
-    this.dashboardService.dashboardConfig$.pipe(take(1),
-      map(dashboard => {
-        this.dashboard = dashboard;
-        return dashboard.application.components[0].id;
-      })).subscribe(componentId => this.componentId = componentId);
+      this.dashboardService.dashboardConfig$.pipe(take(1),
+        map(dashboard => {
+          this.dashboard = dashboard;
+          return dashboard.application.components[0].id;
+        })).subscribe(componentId => this.componentId = componentId);
+    }
   }
-}
