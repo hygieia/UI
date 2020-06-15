@@ -4,13 +4,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {NgbActiveModal, NgbModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from 'src/app/shared/shared.module';
 import {RepoConfigFormComponent} from './repo-config-form.component';
-import {Observable, of} from "rxjs";
-import {NgModule} from "@angular/core";
-import {CommonModule} from "@angular/common";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {RouterModule} from "@angular/router";
-import {DashboardService} from "../../../shared/dashboard.service";
-import {CollectorService} from "../../../shared/collector.service";
+import {Observable, of} from 'rxjs';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {RouterModule} from '@angular/router';
+import {DashboardService} from '../../../shared/dashboard.service';
+import {CollectorService} from '../../../shared/collector.service';
 
 class MockCollectorService {
   mockCollectorData = {

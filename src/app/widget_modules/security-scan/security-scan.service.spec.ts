@@ -1,6 +1,6 @@
 import {inject, TestBed} from '@angular/core/testing';
 
-import { SecurityScanService } from "./security-scan.service";
+import { SecurityScanService } from './security-scan.service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 
 describe('SecurityScanService', () => {

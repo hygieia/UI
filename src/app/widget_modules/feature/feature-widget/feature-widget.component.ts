@@ -96,7 +96,9 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
           this.featureService.fetchIterations(this.params.component, this.params.teamId, this.params.projectId,
             this.params.agileType).pipe(catchError(err => of(err))));
       })).subscribe(([wip, estimates, iterations]) => {
-        this.hasData = ((wip as []).length > 0 || (estimates as []).length > 0 || (iterations as []).length > 0);
+        this.hasData = ((wip && (wip as []).length > 0) ||
+          (estimates && (estimates as []).length > 0) ||
+          (iterations && (iterations as []).length > 0));
         if (this.hasData) {
           this.loadCharts(wip, estimates, iterations);
         } else {

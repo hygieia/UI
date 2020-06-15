@@ -77,7 +77,8 @@ class MockFeatureService {
     return of(this.mockFeatureDataWip.result);
   }
 
-  fetchIterations(): Observable<{ sName: string; changeDate: string; sUrl: string; sNumber: string; sEstimateTime: string; sStatus: string;}[]> {
+  fetchIterations(): Observable<{
+    sName: string; changeDate: string; sUrl: string; sNumber: string; sEstimateTime: string; sStatus: string}[]> {
     return of(this.mockFeatureDataIterations.result);
   }
 }

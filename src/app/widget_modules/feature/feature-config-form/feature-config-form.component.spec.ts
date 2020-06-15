@@ -17,11 +17,11 @@ class MockCollectorService {
     id: '4321',
     collectorId: '1234',
     options : {
-      teamName : "team",
-      featureTool : "feature",
-      projectName : "someProject",
-      projectId : "5678",
-      teamId : "1111"
+      teamName : 'team',
+      featureTool : 'feature',
+      projectName : 'someProject',
+      projectId : '5678',
+      teamId : '1111'
     }
   };
 
@@ -39,11 +39,11 @@ class MockDashboardService {
           AgileTool: [{
             id: '1234',
             options : {
-              teamName : "team",
-              featureTool : "feature",
-              projectName : "someProject",
-              projectId : "5678",
-              teamId : "1111"
+              teamName : 'team',
+              featureTool : 'feature',
+              projectName : 'someProject',
+              projectId : '5678',
+              teamId : '1111'
             }
           }]
         }
@@ -70,11 +70,11 @@ describe('FeatureConfigFormComponent', () => {
   const featureCollectorItem = {
     id: '1234',
     options : {
-      teamName : "team",
-      featureTool : "feature",
-      projectName : "someProject",
-      projectId : "5678",
-      teamId : "1111"
+      teamName : 'team',
+      featureTool : 'feature',
+      projectName : 'someProject',
+      projectId : '5678',
+      teamId : '1111'
     }
   };
 
