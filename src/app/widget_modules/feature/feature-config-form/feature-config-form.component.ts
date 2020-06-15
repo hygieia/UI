@@ -15,8 +15,6 @@ export class FeatureConfigFormComponent implements OnInit {
 
   private widgetConfigId: string;
   private componentId: string;
-  private teamId: string;
-  private projectId: string;
   private dashboard: any;
   featureTool = [];
   estimateMetricType = [];
@@ -121,7 +119,7 @@ export class FeatureConfigFormComponent implements OnInit {
     this.sprintType = this.getSprintTypes();
   }
 
-  private submitForm() {
+  public submitForm() {
     this.submitted = true;
     if (this.featureConfigForm.invalid) {
       return;
@@ -163,31 +161,6 @@ export class FeatureConfigFormComponent implements OnInit {
   public getSprintTypes() {
       return [{type: 'scrum', value: 'Scrum'}, {type: 'kanban', value: 'Kanban'}, {type: 'scrumkanban', value: 'Both'}];
     }
-
-  public loadSavedFeatures() {
-      this.dashboardService.dashboardConfig$.pipe(take(1),
-        map(dashboard => {
-          const featureCollector = dashboard.application.components[0].collectorItems.AgileTool;
-
-          if (featureCollector[0].id) {
-            const featureId = featureCollector[0].id;
-            return featureId;
-          }
-          return null;
-        }),
-        switchMap(featureId => {
-          if (featureId) {
-            return this.collectorService.getItemsById(featureId);
-          }
-          return of(null);
-        })).subscribe(collectorData => {
-        this.teamId = collectorData.options.teamId;
-        this.projectId = collectorData.options.projectId;
-        this.featureConfigForm.get('projectName').setValue(collectorData);
-        this.featureConfigForm.get('teamName').setValue(collectorData);
-      });
-    }
-  
   public loadSavedFeatures() {
     this.dashboardService.dashboardConfig$.pipe(take(1),
       map(dashboard => {
@@ -211,7 +184,6 @@ export class FeatureConfigFormComponent implements OnInit {
       this.featureConfigForm.get('teamName').setValue(collectorData);
     });
   }
-
   private getDashboardComponent() {
       this.dashboardService.dashboardConfig$.pipe(take(1),
         map(dashboard => {
