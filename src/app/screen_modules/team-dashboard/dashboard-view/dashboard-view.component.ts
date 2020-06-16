@@ -52,7 +52,7 @@ export class DashboardViewComponent extends DashboardComponent implements OnInit
     this.baseTemplate = CaponeTemplateComponent;
 
     this.widgets = [
-      {
+    /*  {
         title: 'Feature',
         component: FeatureWidgetComponent,
         status: 'Success',
@@ -86,22 +86,22 @@ export class DashboardViewComponent extends DashboardComponent implements OnInit
         status: 'Success',
         widgetSize: 'col-xl-6',
         configForm: StaticAnalysisConfigFormComponent
-      },
+      },*/
       {
-        title: 'Docker',
+        title: '',
         component: DockerWidgetComponent,
         status: 'Success',
-        widgetSize: 'col-xl-6',
+        widgetSize: 'col-xl-12',
         configForm: DockerConfigFormComponent
-      },
-/*      {
+      }/*,
+      {
         title: 'Infrastructure As Code',
         component: IACWidgetComponent,
         status: 'Success',
         widgetSize: 'col-xl-2',
         configForm: IACConfigFormComponent
-      }
-*/    ];
+      }*/
+    ];
   }
 
   ngAfterViewInit() {
