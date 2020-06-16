@@ -68,6 +68,7 @@ import { IACStatusBarChartComponent } from '../widget_modules/infrastructure-as-
 import { IACStatusLineChartComponent } from '../widget_modules/infrastructure-as-code/iac-status-line-chart/iac-status-line-chart.component';
 import {DockerConfigFormComponent} from '../widget_modules/docker/docker-config-form/docker-config-form.component';
 import {DockerWidgetComponent} from '../widget_modules/docker/docker-widget/docker-widget.component';
+import {DockerDetailComponent} from '../widget_modules/docker/docker-detail/docker-detail.component';
 @NgModule({
   declarations: [
     DeployConfigFormComponent,
@@ -125,6 +126,7 @@ import {DockerWidgetComponent} from '../widget_modules/docker/docker-widget/dock
     IACWidgetComponent,
     	DockerConfigFormComponent,
     DockerWidgetComponent,
+DockerDetailComponent,
     IACMasterComponent,
     IACCardComponent,
     IACStatusBarChartComponent,
@@ -168,6 +170,7 @@ import {DockerWidgetComponent} from '../widget_modules/docker/docker-widget/dock
     	IACConfigFormComponent,
     IACWidgetComponent,
     	DockerConfigFormComponent,
+DockerDetailComponent,
     DockerWidgetComponent,
     IACMasterComponent,
     IACCardComponent,
