@@ -10,7 +10,7 @@ export class DockerDetailComponent implements OnInit {
 
   @Input() detailView: Type<any>;
 
-  public data: IClickListDockerVolumeItem;
+  public data: Type<any>;
 
   constructor(
     public activeModal: NgbActiveModal,

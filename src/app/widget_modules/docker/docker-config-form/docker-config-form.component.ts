@@ -73,7 +73,7 @@ ngAfterViewInit()
         apiToken: this.dockerConfigForm.value.apiToken,
       },
       componentId: this.componentId,
-      //collectorItemId: [result.id]
+      collectorItemId: this.collectorItemId
     };
 
     this.activeModal.close(newConfig);

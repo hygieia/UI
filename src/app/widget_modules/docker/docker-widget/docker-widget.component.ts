@@ -206,7 +206,7 @@ export class DockerWidgetComponent extends WidgetComponent implements OnInit, Af
 							let obj = 	{
 						status: DashStatus.PASS,
 						statusText: data['name'],
-						title: 'Process@ (' + data['containerId'] + ')',
+						title: 'Process@ ( Container-1)',
 						subtitles: [],
 						url: '',
 						'containerId': data['containerId'] ,

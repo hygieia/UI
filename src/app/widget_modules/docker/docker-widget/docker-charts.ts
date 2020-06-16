@@ -12,24 +12,7 @@ import { IChart } from 'src/app/shared/interfaces';
 
 
 export let DOCKER_CHARTS: IChart[] = [
-  {
-  title: 'CPU Usges',
-  component: GaugeChartComponent,
-  data:{},
-
-    xAxisLabel: '',
-    yAxisLabel: '',
-    colorScheme: 'vivid'
-  },
-
-{
-    title: 'Docker MetaData Count',
-    component: NumberCardChartComponent,
-    data: [],
-    xAxisLabel: '',
-    yAxisLabel: '',
-    colorScheme: 'vivid'
-  },
+ 
  {
   title: 'Container Details',
   component: ClickListComponent,

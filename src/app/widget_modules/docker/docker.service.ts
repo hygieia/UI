@@ -8,7 +8,6 @@ import { map } from 'rxjs/operators';
 })
 export class DockerService {
 	
-
 	dockerMetaCountRoute : string = "/api/collector/docker/meta/count";
 	
 	metaDataRoute : string = "/api/collector/docker/meta/data";
