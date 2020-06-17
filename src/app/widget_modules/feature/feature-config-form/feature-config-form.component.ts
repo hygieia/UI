@@ -15,8 +15,6 @@ export class FeatureConfigFormComponent implements OnInit {
 
   private widgetConfigId: string;
   private componentId: string;
-  private teamId: string;
-  private projectId: string;
   private dashboard: any;
   featureTool = [];
   estimateMetricType = [];
@@ -38,7 +36,7 @@ export class FeatureConfigFormComponent implements OnInit {
     }
     const projectName = (collectorItem.options.projectName as string);
     return projectName;
-  }
+  };
 
   getTeamName = (collectorItem) => {
     if (!collectorItem) {
@@ -46,7 +44,7 @@ export class FeatureConfigFormComponent implements OnInit {
     }
     const teamName = (collectorItem.options.teamName as string);
     return teamName;
-  }
+  };
 
   @Input()
   set widgetConfig(widgetConfig: any) {
@@ -115,13 +113,13 @@ export class FeatureConfigFormComponent implements OnInit {
       listType: ['', Validators.required],
       estimateMetricType: ['', Validators.required],
     });
-    this.featureTool = this.getFeatureTools();
+    this.featureTool = this.loadAgileTools();
     this.estimateMetricType = this.getEstimateMetricTypes();
     this.listType = this.getListTypes();
     this.sprintType = this.getSprintTypes();
   }
 
-  private submitForm() {
+  public submitForm() {
     this.submitted = true;
     if (this.featureConfigForm.invalid) {
       return;
@@ -156,37 +154,44 @@ export class FeatureConfigFormComponent implements OnInit {
       return [{type: 'epics', value: 'Epics'}, {type: 'issues', value: 'Issues'}];
     }
 
-  public getFeatureTools() {
-      return [{type: 'Jira', value: 'Jira'}, {type: 'VersionOne', value: 'VersionOne'}];
-    }
-
   public getSprintTypes() {
       return [{type: 'scrum', value: 'Scrum'}, {type: 'kanban', value: 'Kanban'}, {type: 'scrumkanban', value: 'Both'}];
     }
-
   public loadSavedFeatures() {
-      this.dashboardService.dashboardConfig$.pipe(take(1),
-        map(dashboard => {
-          const featureCollector = dashboard.application.components[0].collectorItems.AgileTool;
+    this.dashboardService.dashboardConfig$.pipe(take(1),
+      map(dashboard => {
+        const featureCollector = dashboard.application.components[0].collectorItems.AgileTool;
 
-          if (featureCollector[0].id) {
-            const featureId = featureCollector[0].id;
-            return featureId;
-          }
-          return null;
-        }),
-        switchMap(featureId => {
-          if (featureId) {
-            return this.collectorService.getItemsById(featureId);
-          }
-          return of(null);
-        })).subscribe(collectorData => {
-        this.teamId = collectorData.options.teamId;
-        this.projectId = collectorData.options.projectId;
-        this.featureConfigForm.get('projectName').setValue(collectorData);
-        this.featureConfigForm.get('teamName').setValue(collectorData);
-      });
-    }
+        if (featureCollector[0].id) {
+          const featureId = featureCollector[0].id;
+          return featureId;
+        }
+        return null;
+      }),
+      switchMap(featureId => {
+        if (featureId) {
+          return this.collectorService.getItemsById(featureId);
+        }
+        return of(null);
+      })).subscribe(collectorData => {
+      this.teamId = collectorData.options.teamId;
+      this.projectId = collectorData.options.projectId;
+      this.featureConfigForm.get('projectName').setValue(collectorData);
+      this.featureConfigForm.get('teamName').setValue(collectorData);
+    });
+  }
+
+  public loadAgileTools() {
+    const agileCollectors = this.collectorService.collectorsByType('AgileTool').pipe(catchError(err => of(err)));
+    //const agileCollectors = [{"id":"589febd0a65ce715e611a02d","name":"VersionOne","collectorType":"AgileTool","enabled":true,"online":false,"errors":[],"uniqueFields":{},"allFields":{},"lastExecuted":1534892426363,"searchFields":["description"],"properties":{},"appProperties":{}},{"id":"589febd0a65ce715f0332d62","name":"Jira","collectorType":"AgileTool","enabled":true,"online":true,"errors":[],"uniqueFields":{"teamName":"","teamId":"","featureTool":"","projectName":"","projectId":""},"allFields":{"teamName":"","sprintType":"","teamId":"","featureTool":"","showStatus":"","projectName":"","projectId":"","estimateMetricType":"","listType":""},"lastExecuted":1578331273503,"searchFields":["description"],"properties":{"mode":"Board","issueTypesMap":{"Epic":"6","Bug":"1","Test Execution":"10702","Story":"7"}},"appProperties":{}}];
+    //const featureTools = agileCollectors.map(currAgileTool => currAgileTool.name);
+    let result = [];
+    // for (let currTool of featureTools) {
+    //   result.push({type: currTool, value: currTool});
+    // }
+    return result;
+  }
+
   private getDashboardComponent() {
       this.dashboardService.dashboardConfig$.pipe(take(1),
         map(dashboard => {
