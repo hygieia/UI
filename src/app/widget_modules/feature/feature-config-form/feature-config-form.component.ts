@@ -180,6 +180,7 @@ export class FeatureConfigFormComponent implements OnInit {
       this.featureConfigForm.get('teamName').setValue(collectorData);
     });
   }
+<<<<<<< HEAD
 
   public loadAgileTools() {
     const agileCollectors = this.collectorService.collectorsByType('AgileTool').pipe(catchError(err => of(err)));
@@ -192,6 +193,8 @@ export class FeatureConfigFormComponent implements OnInit {
     return result;
   }
 
+=======
+>>>>>>> e6a18f197a6997e290300db1ee0bb44d46e62b61
   private getDashboardComponent() {
       this.dashboardService.dashboardConfig$.pipe(take(1),
         map(dashboard => {
