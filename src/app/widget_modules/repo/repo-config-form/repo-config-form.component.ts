@@ -59,7 +59,7 @@ export class RepoConfigFormComponent implements OnInit {
       const scmTools = scmCollectors.map(currSCMTool => currSCMTool.name);
       const result = [];
       for (const currTool of scmTools) {
-        result.push({type: currTool, value: currTool});
+        result.push({type: currTool});
       }
       this.scm = result;
     });

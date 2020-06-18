@@ -121,7 +121,7 @@ export class FeatureConfigFormComponent implements OnInit {
       const featureTools = agileCollectors.map(currAgileTool => currAgileTool.name);
       const result = [];
       for (const currTool of featureTools) {
-        result.push({type: currTool, value: currTool});
+        result.push({type: currTool});
       }
       this.featureTool = result;
     });

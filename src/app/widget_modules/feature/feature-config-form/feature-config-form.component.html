@@ -6,7 +6,7 @@
         <label for="featureTool">Feature Tool: </label>
         <br><select formControlName="featureTool" id="featureTool">
           <option *ngFor="let currFeature of featureTool" [value]="currFeature.type">
-            {{currFeature.value}}
+            {{currFeature.type}}
           </option>
         </select>
       </div>

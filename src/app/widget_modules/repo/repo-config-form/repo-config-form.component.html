@@ -5,7 +5,7 @@
         <label for="scm">Repo Type: </label>
         <br><select formControlName="scm" id="scm">
           <option *ngFor="let currSCM of scm" [value]="currSCM.type">
-            {{currSCM.value}}
+            {{currSCM.type}}
           </option>
         </select>
       </div>
