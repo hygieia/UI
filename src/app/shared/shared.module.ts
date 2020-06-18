@@ -188,7 +188,6 @@ DockerDetailComponent,
   ],
   exports: [
     BarHorizontalComponent,
-    BuildWidgetComponent,
     CaponeTemplateComponent,
     ChartComponent,
     ChartDirective,

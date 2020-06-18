@@ -59,3 +59,28 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
+
+
+Collector Item (Git): JSON
+
+{
+    "_id" : ObjectId("5e949fa5b66e582d2c0fb995"),
+    "_class" : "com.capitalone.dashboard.model.CollectorItem",
+    "enabled" : true,
+    "errors" : [ 
+
+    ],
+    "pushed" : false,
+    "collectorId" : ObjectId("5ee87822964c3b1cf812bf39"),
+    "lastUpdated" : NumberLong(1586795310233),
+    "options" : {
+       "url": "https://github.com/prash897/questions-java-core",
+"branch":  "master",
+"userID":    "",                           
+"password":    "",                        
+"lastUpdate":    "",              
+"personalAccessToken": "cd28abb3ffa6e457d775f77dc4bc42025453fb44"    
+                                                    }
+}
