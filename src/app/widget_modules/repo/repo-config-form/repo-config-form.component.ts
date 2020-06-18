@@ -54,7 +54,15 @@ export class RepoConfigFormComponent implements OnInit {
       password: '',
       personalAccessToken: ''
     });
-    this.scm = this.loadSCM();
+
+    this.collectorService.collectorsByType('SCM').subscribe(scmCollectors => {
+      const scmTools = scmCollectors.map(currSCMTool => currSCMTool.name);
+      const result = [];
+      for (const currTool of scmTools) {
+        result.push({type: currTool, value: currTool});
+      }
+      this.scm = result;
+    });
   }
 
   public submitForm() {
@@ -75,17 +83,6 @@ export class RepoConfigFormComponent implements OnInit {
       },
     };
     this.activeModal.close(newConfig);
-  }
-
-  public loadSCM() {
-    //const scmCollectors = this.collectorService.collectorsByType('SCM');
-    const scmCollectors = [{"id":"56ca15297fab7c68bfdb420c","name":"GitHub","collectorType":"SCM","enabled":true,"online":true,"errors":[],"uniqueFields":{"branch":"","url":""},"allFields":{"password":"","personalAccessToken":"","branch":"","userID":"","url":""},"lastExecuted":1592404945639,"searchFields":["description"],"properties":{}},{"id":"56dd055d7fab7c10b396241b","name":"Subversion","collectorType":"SCM","enabled":true,"online":true,"errors":[],"uniqueFields":{},"allFields":{},"lastExecuted":1483575825061,"searchFields":["description"],"properties":{}}];
-    const scm = scmCollectors.map(currSCMTool => currSCMTool.name);
-    let result = [];
-    for (let currTool of scm) {
-      result.push({type: currTool, value: currTool});
-    }
-    return result;
   }
 
   private getDashboardComponent() {

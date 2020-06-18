@@ -38,7 +38,7 @@ export class CollectorService {
     return this.http.get(this.itemRoute + id);
   }
 
-  collectorsByType(collectorType) {
+  collectorsByType(collectorType): Observable<any> {
     return this.http.get(this.collectorsByTypeRoute + collectorType);
   }
 }
