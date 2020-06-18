@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, ComponentFactoryResolver, Input, OnInit, Type, ViewChild} from '@angular/core';
-import {map, switchMap} from 'rxjs/operators';
+import {map, switchMap, take} from 'rxjs/operators';
 import {Observable, zip} from 'rxjs';
 import { extend } from 'lodash';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -11,6 +11,7 @@ import {DashboardService} from '../dashboard.service';
 import {AuditModalComponent} from '../modals/audit-modal/audit-modal.component';
 import {DeleteConfirmModalComponent} from '../modals/delete-confirm-modal/delete-confirm-modal.component';
 import {WidgetState} from './widget-state';
+import moment from 'moment';
 
 @Component({
   selector: 'app-widget-header',
@@ -28,6 +29,7 @@ export class WidgetHeaderComponent implements OnInit {
   @ViewChild(WidgetDirective, {static: true}) appWidget: WidgetDirective;
   public widgetComponent;
   auditStatus: string;
+  lastUpdated: any;
   private auditResult: IAuditResult;
 
   // This only applies for test widget since it has both func & perf tests at once
@@ -55,6 +57,7 @@ export class WidgetHeaderComponent implements OnInit {
     this.detectChanges();
     if (this.widgetComponent) {
       this.findWidgetAuditStatus(this.widgetComponent.auditType);
+      this.findLastUpdatedTime(this.getCollectorType(this.title));
     }
   }
 
@@ -132,6 +135,11 @@ export class WidgetHeaderComponent implements OnInit {
       // will trigger whatever is subscribed to
       // widgetConfig$
       this.widgetComponent.widgetConfigSubject.next(result.widgetConfig);
+      // if quality widget, send widget config to other quality components to update widgetConfigExists
+      if (this.widgetComponent.widgetId === 'codeanalysis0') {
+        this.dashboardService.dashboardQualitySubject.next(result.widgetConfig);
+      }
+      // if quality widget, startRefreshInterval for other quality components to update widgetConfigExists
       this.widgetComponent.startRefreshInterval();
     });
   }
@@ -199,11 +207,23 @@ export class WidgetHeaderComponent implements OnInit {
 
       this.dashboardService.deleteLocally(result.deleteWidgetResponse.component, result.widgetConfig);
       this.widgetComponent.state = WidgetState.CONFIGURE;
-      this.widgetComponent.widgetConfigExists = false;
+      // set widgetConfigExists to false for quality only if no other quality collector item exists
+      if (this.widgetComponent.widgetId !== 'codeanalysis0' ||
+        (!this.dashboardService.checkCollectorItemTypeExist('CodeQuality') &&
+        !this.dashboardService.checkCollectorItemTypeExist('StaticSecurityScan') &&
+        !this.dashboardService.checkCollectorItemTypeExist('LibraryPolicy') &&
+        !this.dashboardService.checkCollectorItemTypeExist('Test'))
+      ) {
+        this.widgetComponent.widgetConfigExists = false;
+      }
       // Push the new config to the widget, which
       // will trigger whatever is subscribed to
       // widgetConfig$
       this.widgetComponent.widgetConfigSubject.next();
+      // if quality widget, send empty widget config to other quality components to update widgetConfigExists
+      if (this.widgetComponent.widgetId === 'codeanalysis0') {
+        this.dashboardService.dashboardQualitySubject.next();
+      }
       this.widgetComponent.startRefreshInterval();
     });
   }
@@ -259,6 +279,32 @@ export class WidgetHeaderComponent implements OnInit {
 
   widgetState() {
     return WidgetState;
+  }
+
+  getCollectorType(title: string): string {
+    let collectorType;
+    switch (title) {
+      case 'Feature': { collectorType = 'CodeQuality'; break; }
+      case 'Build': { collectorType = 'Build'; break; }
+      case 'Deploy': { collectorType = 'Deployment'; break; }
+      case 'Repo': { collectorType = 'SCM'; break; }
+      case 'Static Code Analysis': { collectorType = 'CodeQuality'; break; }
+      case 'Security Analysis': { collectorType = 'StaticSecurityScan'; break; }
+      case 'Open Source': { collectorType = 'LibraryPolicy'; break; }
+      case 'Test': { collectorType = 'Test'; break; }
+      default: { collectorType = ''; break; }
+    }
+    return collectorType;
+  }
+
+  findLastUpdatedTime(collectorType: string) {
+    this.dashboardService.dashboardConfig$.pipe(take(1),
+      map(dashboard => {
+        const collectorItems = dashboard.application.components[0].collectorItems[collectorType];
+        if (collectorItems && collectorItems[0] && ((collectorItems[0].lastUpdated % 1000) > 0)) {
+          return moment(collectorItems[0].lastUpdated).fromNow(true);
+        }
+      })).subscribe(data => this.lastUpdated = data);
   }
 }
 
