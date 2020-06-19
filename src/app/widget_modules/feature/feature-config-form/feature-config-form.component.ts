@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, NgModule, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {Observable, of} from 'rxjs';
@@ -9,14 +9,14 @@ import { DashboardService } from 'src/app/shared/dashboard.service';
 @Component({
   selector: 'app-feature-config-form',
   templateUrl: './feature-config-form.component.html',
-  styleUrls: ['./feature-config-form.component.scss']
+  styleUrls: ['./feature-config-form.component.scss'],
 })
+
 export class FeatureConfigFormComponent implements OnInit {
 
   private widgetConfigId: string;
   private componentId: string;
   private dashboard: any;
-  private test;
   featureTool = [];
   estimateMetricType = [];
   sprintType = [];
@@ -114,9 +114,13 @@ export class FeatureConfigFormComponent implements OnInit {
       listType: ['', Validators.required],
       estimateMetricType: ['', Validators.required],
     });
+    this.getAgileTools();
     this.estimateMetricType = this.getEstimateMetricTypes();
     this.listType = this.getListTypes();
     this.sprintType = this.getSprintTypes();
+  }
+
+  private getAgileTools() {
     this.collectorService.collectorsByType('AgileTool').subscribe(agileCollectors => {
       const featureTools = agileCollectors.map(currAgileTool => currAgileTool.name);
       const result = [];
