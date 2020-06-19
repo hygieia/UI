@@ -1,4 +1,4 @@
-import {Component, Input, NgModule, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {Observable, of} from 'rxjs';
