@@ -20,6 +20,8 @@ export class DashboardService {
 
   private dashboardAuditSubject = new ReplaySubject<any>(1);
 
+  public dashboardQualitySubject = new ReplaySubject<any>(1);
+
   private dashboardRefreshSubject = new Subject<any>();
 
   private dashboardRefreshSubscription: Subscription;
@@ -31,6 +33,8 @@ export class DashboardService {
   public dashboardConfig$ = this.dashboardSubject.asObservable().pipe(filter(result => result));
 
   public dashboardAuditConfig$ = this.dashboardAuditSubject.asObservable().pipe(filter(result => result));
+
+  public dashboardQualityConfig$ = this.dashboardQualitySubject.asObservable().pipe(filter(result => result));
 
   public dashboardRefresh$ = this.dashboardRefreshSubject.asObservable();
 
@@ -45,11 +49,6 @@ export class DashboardService {
     });
     this.dashboardRefreshSubscription = interval(1000 * this.REFRESH_INTERVAL_SECONDS).pipe(
       startWith(-1)).subscribe(res => this.dashboardRefreshSubject.next(res));
-  }
-
-  loadDashboardTitle(dashboardId: string) {
-    this.dashboardId = dashboardId;
-    return this.http.get(this.dashboardRoute + dashboardId);
   }
 
   clearDashboard() {
