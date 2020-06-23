@@ -375,8 +375,8 @@ describe('CollectorItemService', () => {
           return (request.url === '/api/commit/' ||
             request.url === '/api/gitrequests/type/pull/state/all/' ||
             request.url === '/api/gitrequests/type/issue/state/all/');
-        })
-        expect(calls.length === 3)
+        });
+        expect(calls.length === 3);
         calls.forEach( call => call.flush( {
             result: [ ],
             lastUpdated: 1590603518297

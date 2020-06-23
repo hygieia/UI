@@ -12,6 +12,7 @@ import {DeploymentEvidenceComponent} from './collector-item-viewer/deployment-ev
 import {CodeQualityEvidenceComponent} from './collector-item-viewer/code-quality-evidence/code-quality-evidence.component';
 import {BuildEvidenceComponent} from './collector-item-viewer/build-evidence/build-evidence.component';
 import {AuditEvidenceComponent} from './collector-item-viewer/audit-evidence/audit-evidence.component';
+// tslint:disable-next-line:max-line-length
 import {StaticSecurityScanEvidenceComponent} from './collector-item-viewer/static-security-scan-evidence/static-security-scan-evidence.component';
 
 const routes: Routes = [

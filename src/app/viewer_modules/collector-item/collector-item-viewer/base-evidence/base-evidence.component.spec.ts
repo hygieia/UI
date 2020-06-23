@@ -9,7 +9,7 @@ import {CollectorItemModule} from '../../collector-item.module';
 import {CollectorItemService} from '../../collector-item.service';
 import {ActivatedRoute} from '@angular/router';
 import {ICollItem} from '../../interfaces';
-import {RouterTestingModule} from "@angular/router/testing";
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('BaseEvidenceComponent', () => {
   let component: BaseEvidenceComponent;

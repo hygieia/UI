@@ -15,6 +15,7 @@ import { LibraryPolicyEvidenceComponent } from './collector-item-viewer/library-
 import { SCMEvidenceComponent } from './collector-item-viewer/scm-evidence/scm-evidence.component';
 import {MatFormFieldModule, MatInputModule, MatPaginatorModule, MatSortModule} from '@angular/material';
 import {MatTableModule} from '@angular/material';
+// tslint:disable-next-line:max-line-length
 import { StaticSecurityScanEvidenceComponent } from './collector-item-viewer/static-security-scan-evidence/static-security-scan-evidence.component';
 import { BaseEvidenceComponent } from './collector-item-viewer/base-evidence/base-evidence.component';
 import {CollectorItemService} from './collector-item.service';

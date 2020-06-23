@@ -8,7 +8,7 @@ import {SharedModule} from '../../../shared/shared.module';
 import {CollectorItemService} from '../collector-item.service';
 import {CollectorItemModule} from '../collector-item.module';
 import {ICollItem} from '../interfaces';
-import {RouterTestingModule} from "@angular/router/testing";
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('CollectorItemComponent', () => {
   let component: CollectorItemViewerComponent;

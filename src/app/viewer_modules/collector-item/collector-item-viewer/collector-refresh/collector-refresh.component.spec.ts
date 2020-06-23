@@ -6,7 +6,7 @@ import {NgbActiveModal, NgbModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {SharedModule} from '../../../../shared/shared.module';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {CollectorItemModule} from '../../collector-item.module';
-import {RouterTestingModule} from "@angular/router/testing";
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('CollectorRefreshComponent', () => {
   let component: CollectorRefreshComponent;

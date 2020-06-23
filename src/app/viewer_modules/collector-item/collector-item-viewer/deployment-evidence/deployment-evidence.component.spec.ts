@@ -8,7 +8,7 @@ import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {CollectorItemModule} from '../../collector-item.module';
 import {CollectorItemService} from '../../collector-item.service';
 import {ActivatedRoute} from '@angular/router';
-import {RouterTestingModule} from "@angular/router/testing";
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('DeploymentEvidenceComponent', () => {
   let component: DeploymentEvidenceComponent;
