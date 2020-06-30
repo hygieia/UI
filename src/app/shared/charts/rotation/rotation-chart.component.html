@@ -1,0 +1,20 @@
+<div [ngClass]="{'clickable-title': data?.clickableHeader, 'chart-heading': !data?.clickableHeader}">
+  {{title}}
+</div>
+
+<ngb-tabset [destroyOnHide]="false">
+  <li *ngFor="let indivItem of data?.items">
+    <ngb-tab title="{{indivItem[0]?.type}}">
+      <ng-template ngbTabContent>
+        <tr class="dash-row clickable" *ngFor="let item of indivItem" [ngClass]="{'clickable': data?.clickableContent}">
+          <td><span class="list-item-title">{{item.title}}</span></td>
+          <ng-container *ngFor="let subtitle of item.subtitles">
+            <td>
+              {{subtitle}}
+            </td>
+          </ng-container>
+        </tr>
+      </ng-template>
+    </ngb-tab>
+  </li>
+</ngb-tabset>

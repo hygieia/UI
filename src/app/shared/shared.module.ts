@@ -91,6 +91,7 @@ import {
   StaticAnalysisDeleteFormComponent
 } from '../widget_modules/static-analysis/static-analysis-delete-form/static-analysis-delete-form.component';
 import {TestDeleteFormComponent} from '../widget_modules/test/test-delete-form/test-delete-form.component';
+import {RotationChartComponent} from './charts/rotation/rotation-chart.component';
 
 @NgModule({
   declarations: [
@@ -137,6 +138,7 @@ import {TestDeleteFormComponent} from '../widget_modules/test/test-delete-form/t
     RepoDeleteFormComponent,
     RepoDetailComponent,
     RepoWidgetComponent,
+    RotationChartComponent,
     TemplatesDirective,
     TimeAgoPipe,
     TwoByTwoLayoutComponent,
@@ -214,6 +216,7 @@ import {TestDeleteFormComponent} from '../widget_modules/test/test-delete-form/t
     RepoWidgetComponent,
     RepoConfigFormComponent,
     RepoDeleteFormComponent,
+    RotationChartComponent,
     TwoByTwoLayoutComponent,
     StaticAnalysisConfigFormComponent,
     StaticAnalysisDeleteFormComponent,
@@ -261,6 +264,7 @@ import {TestDeleteFormComponent} from '../widget_modules/test/test-delete-form/t
     PieGridComponent,
     PieGridChartComponent,
     ReactiveFormsModule,
+    RotationChartComponent,
     TemplatesDirective,
     TwoByTwoLayoutComponent,
     TwoByOneLayoutComponent,

@@ -23,6 +23,7 @@ import {IFeature} from '../interfaces';
 import {FEATURE_CHARTS} from './feature-charts';
 import {FeatureDetailComponent} from '../feature-detail/feature-detail.component';
 import {WidgetState} from '../../../shared/widget-header/widget-state';
+import {IRotationData, IFeatureRotationItem} from '../../../shared/charts/rotation/rotation-chart-interfaces';
 
 @Component({
   selector: 'app-feature-widget',
@@ -34,6 +35,11 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
   private params;
   // Reference to the subscription used to refresh the widget
   private intervalRefreshSubscription: Subscription;
+  private numberOfSprintTypes;
+  private showStatus: {
+    kanban: true;
+    scrum: false;
+  };
 
   @ViewChild(LayoutDirective, {static: false}) childLayoutTag: LayoutDirective;
 
@@ -88,20 +94,23 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
           sprintType: widgetConfig.options.sprintType,
           listType: widgetConfig.options.listType,
         };
+        this.numberOfSprintTypes = this.params.sprintType === 'scrumkanban' ? 2 : 1;
 
         return forkJoin(
           this.featureService.fetchFeatureWip(this.params.component, this.params.teamId, this.params.projectId,
             this.params.sprintType).pipe(catchError(err => of(err))),
           this.featureService.fetchAggregateSprintEstimates(this.params.component, this.params.teamId,
-            this.params.projectId, this.params.sprintType).pipe(catchError(err => of(err))),
+            this.params.projectId, 'scrum').pipe(catchError(err => of(err))),
+          this.featureService.fetchAggregateSprintEstimates(this.params.component, this.params.teamId,
+            this.params.projectId, 'kanban').pipe(catchError(err => of(err))),
           this.featureService.fetchIterations(this.params.component, this.params.teamId, this.params.projectId,
             this.params.sprintType).pipe(catchError(err => of(err))));
-      })).subscribe(([wip, estimates, iterations]) => {
-        this.loadCharts(wip, estimates, iterations);
-      });
+        })).subscribe(([wip, estimatesScrum, estimatesKanban, iterations]) => {
+          this.loadCharts(wip, [estimatesScrum, estimatesKanban], iterations);
+        });
   }
 
-  loadCharts(wip, estimates: IFeature, iterations) {
+  loadCharts(wip, estimates: IFeature[], iterations) {
     if (this.params.listType === 'epics') {
       this.generateFeatureSummary(wip, this.params);
     } else {
@@ -180,55 +189,55 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
   // *********************** ITERATION SUMMARY ************************
 
   // Displays Sprint information for Open, WIP, Done
-  generateIterationSummary(result: IFeature) {
-    let items;
+  generateIterationSummary(result: IFeature[]) {
+    let scrumItems;
+    let kanbanItems;
+
     if (!result) {
       return;
     }
 
-    if (this.params.sprintType === 'scrum' || this.params.sprintType === 'scrumkanban') {
-      items = [
-        {
-          status: null,
-          statusText: '',
-          title: 'OPEN',
-          subtitles: [result.openEstimate],
-        },
-        {
-          status: null,
-          statusText: '',
-          title: 'WIP',
-          subtitles: [result.inProgressEstimate],
-        },
-        {
-          status: null,
-          statusText: '',
-          title: 'DONE',
-          subtitles: [result.completeEstimate],
-        },
-      ] as IClickListItem[];
-    } else if (this.params.sprintType === 'kanban') {
-      items = [
-        {
-          status: null,
-          statusText: '',
-          title: 'OPEN',
-          subtitles: [result.openEstimate],
-        },
-        {
-          status: null,
-          statusText: '',
-          title: 'WIP',
-          subtitles: [result.inProgressEstimate],
-        }
-      ] as IClickListItem[];
-    }
+    scrumItems = [
+      {
+        agileType: this.params.sprintType,
+        type: 'Scrum',
+        title: 'OPEN',
+        subtitles: [result[0].openEstimate],
+      },
+      {
+        agileType: this.params.sprintType,
+        type: 'Scrum',
+        title: 'WIP',
+        subtitles: [result[0].inProgressEstimate],
+      },
+      {
+        agileType: this.params.sprintType,
+        type: 'Scrum',
+        title: 'DONE',
+        subtitles: [result[0].completeEstimate],
+      },
+    ] as IFeatureRotationItem[];
+
+    kanbanItems = [
+      {
+        agileType: this.params.sprintType,
+        type: 'Kanban',
+        title: 'OPEN',
+        subtitles: [result[1].openEstimate],
+      },
+      {
+        agileType: this.params.sprintType,
+        type: 'Kanban',
+        title: 'WIP',
+        subtitles: [result[1].inProgressEstimate],
+      }
+    ] as IFeatureRotationItem[];
 
     this.charts[1].data = {
-      items,
+      items: [scrumItems, kanbanItems],
       clickableContent: null,
       clickableHeader: null
-    } as IClickListData;
+    } as IRotationData;
   }
 
   // **************************** EPICS/ISSUES *******************************
