@@ -10,7 +10,7 @@
           <td><span class="list-item-title">{{item.title}}: </span></td>
           <ng-container *ngFor="let subtitle of item.subtitles">
             <td>
-              <ng-container><span class="list-item-subtitle">{{subtitle}}</span></ng-container>
+              <ng-container><span class="list-item-chevron pull-right fa fa-lg">{{subtitle}}</span></ng-container>
             </td>
           </ng-container>
         </tr>
