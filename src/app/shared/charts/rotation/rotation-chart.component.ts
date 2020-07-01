@@ -1,6 +1,5 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import { ChartComponent } from '../chart/chart.component';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { DashStatus } from '../../dash-status/DashStatus';
 
 @Component({
@@ -17,7 +16,7 @@ export class RotationChartComponent extends ChartComponent {
     super();
   }
 
-  unlockTabs (targetAgileType: string, currAgileType: string) {
+  unlockTabs(targetAgileType: string, currAgileType: string) {
     if ((targetAgileType === 'scrumkanban') || (targetAgileType === 'scrum' && currAgileType === 'Scrum' ||
       (targetAgileType === 'kanban' && currAgileType === 'Kanban'))) {
       return true;
