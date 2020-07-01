@@ -224,10 +224,8 @@ describe('FeatureWidgetComponent', () => {
   it('should call startRefreshInterval', () => {
     spyOn(component, 'getCurrentWidgetConfig').and.returnValues(of(mockConfigEpics), of(mockConfigIssues), of(mockConfigIssues), of(null));
     spyOn(featureService, 'fetchFeatureWip').and.returnValues(of(wip), of(wip), of([]));
-    spyOn(featureService, 'fetchAggregateSprintEstimates').and.returnValues(of(estimates), of(estimates), of([]));
     spyOn(featureService, 'fetchIterations').and.returnValues(of(iterations), of(iterations), of([]));
 
-    component.startRefreshInterval();
     component.startRefreshInterval();
     component.startRefreshInterval();
     component.startRefreshInterval();

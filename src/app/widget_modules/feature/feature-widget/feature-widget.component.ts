@@ -36,10 +36,6 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
   // Reference to the subscription used to refresh the widget
   private intervalRefreshSubscription: Subscription;
   private numberOfSprintTypes;
-  private showStatus: {
-    kanban: true;
-    scrum: false;
-  };
 
   @ViewChild(LayoutDirective, {static: false}) childLayoutTag: LayoutDirective;
 
@@ -94,8 +90,6 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
           sprintType: widgetConfig.options.sprintType,
           listType: widgetConfig.options.listType,
         };
-        this.numberOfSprintTypes = this.params.sprintType === 'scrumkanban' ? 2 : 1;
-
         return forkJoin(
           this.featureService.fetchFeatureWip(this.params.component, this.params.teamId, this.params.projectId,
             this.params.sprintType).pipe(catchError(err => of(err))),
