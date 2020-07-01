@@ -233,11 +233,25 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
       }
     ] as IFeatureRotationItem[];
 
-    this.charts[1].data = {
-      items: [scrumItems, kanbanItems],
-      clickableContent: null,
-      clickableHeader: null
-    } as IRotationData;
+    if (this.params.sprintType === 'scrumkanban') {
+      this.charts[1].data = {
+        items: [scrumItems, kanbanItems],
+        clickableContent: null,
+        clickableHeader: null
+      } as IRotationData;
+    } else if (this.params.sprintType === 'scrum') {
+      this.charts[1].data = {
+        items: [scrumItems],
+        clickableContent: null,
+        clickableHeader: null
+      } as IRotationData;
+    } else {
+      this.charts[1].data = {
+        items: [kanbanItems],
+        clickableContent: null,
+        clickableHeader: null
+      } as IRotationData;
+    }
   }
 
   // **************************** EPICS/ISSUES *******************************

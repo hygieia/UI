@@ -13,7 +13,16 @@ import { DashStatus } from '../../dash-status/DashStatus';
 export class RotationChartComponent extends ChartComponent {
   DashStatus: typeof DashStatus = DashStatus;
 
-  constructor(private modalService: NgbModal) {
+  constructor() {
     super();
+  }
+
+  unlockTabs (targetAgileType: string, currAgileType: string) {
+    if ((targetAgileType === 'scrumkanban') || (targetAgileType === 'scrum' && currAgileType === 'Scrum' ||
+      (targetAgileType === 'kanban' && currAgileType === 'Kanban'))) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
