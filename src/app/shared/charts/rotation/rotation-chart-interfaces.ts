@@ -1,5 +1,4 @@
 import { Type } from '@angular/core';
-import {IClickListItem} from '../click-list/click-list-interfaces';
 
 export interface IRotationData {
   items: IRotationItem[][];
@@ -11,11 +10,11 @@ export interface IRotationItem {
   type: string;
   title: string;
   subtitles: any[];
+  rotationData: any[];
 }
 
-export interface IFeatureRotationItem extends  IRotationItem {
+export interface IFeatureRotationItem extends IRotationItem {
   agileType: string;
-  titleOfProgressAndPoints: string;
   sEpicName: string;
   sEpicUrl: string;
   sEstimate: string;
@@ -29,7 +28,7 @@ export interface IFeatureRotationItem extends  IRotationItem {
   name: string;
   url: string;
   number: string;
-  type: string;
+  collectionType: string;
   date: string;
   time: string;
   changeDate: string;
