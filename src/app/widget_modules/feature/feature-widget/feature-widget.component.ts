@@ -23,6 +23,7 @@ import {IFeature} from '../interfaces';
 import {FEATURE_CHARTS} from './feature-charts';
 import {FeatureDetailComponent} from '../feature-detail/feature-detail.component';
 import {WidgetState} from '../../../shared/widget-header/widget-state';
+import {IRotationData, IFeatureRotationItem} from '../../../shared/charts/rotation/rotation-chart-interfaces';
 
 @Component({
   selector: 'app-feature-widget',
@@ -88,26 +89,31 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
           sprintType: widgetConfig.options.sprintType,
           listType: widgetConfig.options.listType,
         };
-
         return forkJoin(
           this.featureService.fetchFeatureWip(this.params.component, this.params.teamId, this.params.projectId,
-            this.params.sprintType).pipe(catchError(err => of(err))),
+            'scrum').pipe(catchError(err => of(err))),
+          this.featureService.fetchFeatureWip(this.params.component, this.params.teamId, this.params.projectId,
+            'kanban').pipe(catchError(err => of(err))),
           this.featureService.fetchAggregateSprintEstimates(this.params.component, this.params.teamId,
-            this.params.projectId, this.params.sprintType).pipe(catchError(err => of(err))),
+            this.params.projectId, 'scrum').pipe(catchError(err => of(err))),
+          this.featureService.fetchAggregateSprintEstimates(this.params.component, this.params.teamId,
+            this.params.projectId, 'kanban').pipe(catchError(err => of(err))),
           this.featureService.fetchIterations(this.params.component, this.params.teamId, this.params.projectId,
-            this.params.sprintType).pipe(catchError(err => of(err))));
-      })).subscribe(([wip, estimates, iterations]) => {
-        this.loadCharts(wip, estimates, iterations);
-      });
+            'scrum').pipe(catchError(err => of(err))),
+          this.featureService.fetchIterations(this.params.component, this.params.teamId, this.params.projectId,
+            'kanban').pipe(catchError(err => of(err))));
+      })).subscribe(([wipScrum, wipKanban, estimatesScrum, estimatesKanban, iterationsScrum, iterationsKanban]) => {
+      this.loadCharts([wipScrum, wipKanban], [estimatesScrum, estimatesKanban], [iterationsScrum, iterationsKanban]);
+    });
   }
 
-  loadCharts(wip, estimates: IFeature, iterations) {
+  loadCharts(wipArray, estimatesArray: IFeature[], iterationsArray) {
     if (this.params.listType === 'epics') {
-      this.generateFeatureSummary(wip, this.params);
+      this.generateFeatureSummary(wipArray, this.params);
     } else {
-      this.generateFeatureSummary(iterations, this.params);
+      this.generateFeatureSummary(iterationsArray, this.params);
     }
-    this.generateIterationSummary(estimates);
+    this.generateIterationSummary(estimatesArray);
     super.loadComponent(this.childLayoutTag);
   }
 
@@ -121,8 +127,18 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
   // ********************** FEATURE SUMMARY ***************************
 
   generateFeatureSummary(content, params) {
+    let useContent;
+
     if (!content) {
       return;
+    }
+
+    if (params.sprintType === 'scrum') {
+      useContent = content[0];
+    } else if (params.sprintType === 'kanban') {
+      useContent = content[1];
+    } else {
+      useContent = content;
     }
 
     const items = [
@@ -147,29 +163,45 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
     ] as IClickListItem[];
 
     if (params.listType === 'issues') {
+      let backlog;
+      let inProg;
+      let done;
+
+      if (params.sprintType === 'scrumkanban') {
+        useContent.forEach(currSprintType => {
+          backlog.push(currSprintType.filter(curr => curr.sStatus === 'Backlog').length);
+          inProg.push(currSprintType.filter(curr => curr.sStatus === 'In Progress').length);
+          done.push(currSprintType.filter(curr => curr.sStatus === 'Done').length);
+        });
+      } else {
+        backlog = [useContent.filter(curr => curr.sStatus === 'Backlog').length];
+        inProg = [useContent.filter(curr => curr.sStatus === 'In Progress').length];
+        done = [useContent.filter(curr => curr.sStatus === 'Done').length];
+      }
+
       items[3] = {
         status: null,
         statusText: '',
         title: 'Backlog items',
-        subtitles: [content.filter(curr => curr.sStatus === 'Backlog').length]
+        subtitles: backlog
       } as IClickListItem;
 
       items[4] = {
         status: null,
         statusText: '',
         title: 'In Progress items',
-        subtitles: [content.filter(curr => curr.sStatus === 'In Progress').length]
+        subtitles: inProg
       } as IClickListItem;
 
       items[5] = {
         status: null,
         statusText: '',
         title: 'Done items',
-        subtitles: [content.filter(curr => curr.sStatus === 'Done').length]
+        subtitles: done
       } as IClickListItem;
     }
 
-    this.processFeatureWipResponse(content as IClickListItemFeature, params.listType);
+    this.processFeatureWipResponse(useContent as IClickListItemFeature, params.listType);
     this.charts[0].data = {
       items,
       clickableContent: null,
@@ -180,55 +212,69 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
   // *********************** ITERATION SUMMARY ************************
 
   // Displays Sprint information for Open, WIP, Done
-  generateIterationSummary(result: IFeature) {
-    let items;
+  generateIterationSummary(result: IFeature[]) {
+    let scrumItems;
+    let kanbanItems;
+
     if (!result) {
       return;
     }
 
-    if (this.params.sprintType === 'scrum' || this.params.sprintType === 'scrumkanban') {
-      items = [
-        {
-          status: null,
-          statusText: '',
-          title: 'OPEN',
-          subtitles: [result.openEstimate],
-        },
-        {
-          status: null,
-          statusText: '',
-          title: 'WIP',
-          subtitles: [result.inProgressEstimate],
-        },
-        {
-          status: null,
-          statusText: '',
-          title: 'DONE',
-          subtitles: [result.completeEstimate],
-        },
-      ] as IClickListItem[];
-    } else if (this.params.sprintType === 'kanban') {
-      items = [
-        {
-          status: null,
-          statusText: '',
-          title: 'OPEN',
-          subtitles: [result.openEstimate],
-        },
-        {
-          status: null,
-          statusText: '',
-          title: 'WIP',
-          subtitles: [result.inProgressEstimate],
-        }
-      ] as IClickListItem[];
-    }
+    scrumItems = [
+      {
+        agileType: this.params.sprintType,
+        type: 'Scrum',
+        title: 'OPEN',
+        subtitles: [result[0].openEstimate],
+      },
+      {
+        agileType: this.params.sprintType,
+        type: 'Scrum',
+        title: 'WIP',
+        subtitles: [result[0].inProgressEstimate],
+      },
+      {
+        agileType: this.params.sprintType,
+        type: 'Scrum',
+        title: 'DONE',
+        subtitles: [result[0].completeEstimate],
+      },
+    ] as IFeatureRotationItem[];
 
-    this.charts[1].data = {
-      items,
-      clickableContent: null,
-      clickableHeader: null
-    } as IClickListData;
+    kanbanItems = [
+      {
+        agileType: this.params.sprintType,
+        type: 'Kanban',
+        title: 'OPEN',
+        subtitles: [result[1].openEstimate],
+      },
+      {
+        agileType: this.params.sprintType,
+        type: 'Kanban',
+        title: 'WIP',
+        subtitles: [result[1].inProgressEstimate],
+      }
+    ] as IFeatureRotationItem[];
+
+    if (this.params.sprintType === 'scrumkanban') {
+      this.charts[1].data = {
+        items: [scrumItems, kanbanItems],
+        clickableContent: null,
+        clickableHeader: null
+      } as IRotationData;
+    } else if (this.params.sprintType === 'scrum') {
+      this.charts[1].data = {
+        items: [scrumItems],
+        clickableContent: null,
+        clickableHeader: null
+      } as IRotationData;
+    } else {
+      this.charts[1].data = {
+        items: [kanbanItems],
+        clickableContent: null,
+        clickableHeader: null
+      } as IRotationData;
+    }
   }
 
   // **************************** EPICS/ISSUES *******************************
