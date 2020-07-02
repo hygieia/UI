@@ -12,7 +12,7 @@ import {forkJoin, of, Subscription} from 'rxjs';
 import {catchError, distinctUntilChanged, startWith, switchMap} from 'rxjs/operators';
 import {
   IClickListData,
-  IClickListItem, IClickListItemFeature
+  IClickListItem
 } from 'src/app/shared/charts/click-list/click-list-interfaces';
 import {DashboardService} from 'src/app/shared/dashboard.service';
 import {LayoutDirective} from 'src/app/shared/layouts/layout.directive';
@@ -24,6 +24,8 @@ import {FEATURE_CHARTS} from './feature-charts';
 import {FeatureDetailComponent} from '../feature-detail/feature-detail.component';
 import {WidgetState} from '../../../shared/widget-header/widget-state';
 import {IRotationData, IFeatureRotationItem} from '../../../shared/charts/rotation/rotation-chart-interfaces';
+import {OneByTwoLayoutComponent} from '../../../shared/layouts/one-by-two-layout/one-by-two-layout.component';
+import {OneByTwoLayoutTableChartComponent} from '../../../shared/layouts/one-by-two-layout-table-chart/one-by-two-layout-table-chart.component';
 
 @Component({
   selector: 'app-feature-widget',
@@ -35,6 +37,9 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
   private params;
   // Reference to the subscription used to refresh the widget
   private intervalRefreshSubscription: Subscription;
+  private backlog = [];
+  private inProg = [];
+  private done = [];
 
   @ViewChild(LayoutDirective, {static: false}) childLayoutTag: LayoutDirective;
 
@@ -49,7 +54,7 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
   // Initialize the widget and set layout and charts.
   ngOnInit() {
     this.widgetId = 'feature0';
-    this.layout = TwoByTwoLayoutComponent;
+    this.layout = OneByTwoLayoutComponent;
     // Chart configuration moved to external file
     this.charts = FEATURE_CHARTS;
     this.auditType = '';
@@ -163,45 +168,41 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
     ] as IClickListItem[];
 
     if (params.listType === 'issues') {
-      let backlog;
-      let inProg;
-      let done;
-
       if (params.sprintType === 'scrumkanban') {
         useContent.forEach(currSprintType => {
-          backlog.push(currSprintType.filter(curr => curr.sStatus === 'Backlog').length);
-          inProg.push(currSprintType.filter(curr => curr.sStatus === 'In Progress').length);
-          done.push(currSprintType.filter(curr => curr.sStatus === 'Done').length);
+          this.backlog.push(currSprintType.filter(curr => curr.sStatus === 'Backlog').length);
+          this.inProg.push(currSprintType.filter(curr => curr.sStatus === 'In Progress').length);
+          this.done.push(currSprintType.filter(curr => curr.sStatus === 'Done').length);
         });
       } else {
-        backlog = [useContent.filter(curr => curr.sStatus === 'Backlog').length];
-        inProg = [useContent.filter(curr => curr.sStatus === 'In Progress').length];
-        done = [useContent.filter(curr => curr.sStatus === 'Done').length];
+        this.backlog = [useContent.filter(curr => curr.sStatus === 'Backlog').length];
+        this.inProg = [useContent.filter(curr => curr.sStatus === 'In Progress').length];
+        this.done = [useContent.filter(curr => curr.sStatus === 'Done').length];
       }
 
-      items[3] = {
-        status: null,
-        statusText: '',
-        title: 'Backlog items',
-        subtitles: backlog
-      } as IClickListItem;
-
-      items[4] = {
-        status: null,
-        statusText: '',
-        title: 'In Progress items',
-        subtitles: inProg
-      } as IClickListItem;
-
-      items[5] = {
-        status: null,
-        statusText: '',
-        title: 'Done items',
-        subtitles: done
-      } as IClickListItem;
+      // items[3] = {
+      //   status: null,
+      //   statusText: '',
+      //   title: 'Backlog items',
+      //   subtitles: backlog
+      // } as IClickListItem;
+      //
+      // items[4] = {
+      //   status: null,
+      //   statusText: '',
+      //   title: 'In Progress items',
+      //   subtitles: inProg
+      // } as IClickListItem;
+      //
+      // items[5] = {
+      //   status: null,
+      //   statusText: '',
+      //   title: 'Done items',
+      //   subtitles: done
+      // } as IClickListItem;
     }
 
-    this.processFeatureWipResponse(useContent as IClickListItemFeature, params.listType);
+    this.processFeatureWipResponse(useContent as IFeatureRotationItem, params.listType);
     this.charts[0].data = {
       items,
       clickableContent: null,
@@ -281,10 +282,10 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
 
   // Displays epics or issues
   private processFeatureWipResponse(data, issueOrEpic: string) {
-    let issueOrEpicCollection: IClickListItemFeature[] = [];
+    let issueOrEpicCollection: IFeatureRotationItem[] = [];
 
     if (issueOrEpic === 'issues') {
-      issueOrEpicCollection = data.sort((a: IClickListItemFeature, b: IClickListItemFeature): number => {
+      issueOrEpicCollection = data.sort((a: IFeatureRotationItem, b: IFeatureRotationItem): number => {
         return a.changeDate > b.changeDate ? 1 : -1;
       }).reverse().slice(0, 10);
     } else {
@@ -293,37 +294,42 @@ export class FeatureWidgetComponent extends WidgetComponent implements OnInit, A
       });
     }
 
-    const items = issueOrEpicCollection.map(curr => {
-      if (issueOrEpic === 'epics') {
-        return {
-          title: curr.sEpicName,
-          name: curr.sEpicName,
-          url: curr.sEpicUrl,
-          number: curr.sEpicNumber,
-          progressStatus: '-',
-          type: 'Epic',
-          date: '-',
-          time: curr.sEstimate
-        } as IClickListItemFeature;
-      } else {
-        const regexText = curr.changeDate.match(new RegExp('^([^T]*);*'))[0];
-        return {
-          title: curr.sName,
-          name: curr.sName,
-          url: curr.sUrl,
-          number: curr.sNumber,
-          progressStatus: curr.sStatus,
-          type: 'Issue',
-          date: regexText,
-          time: curr.sEstimateTime
-        } as IClickListItemFeature;
-      }
-    });
+    let items = [];
+    items.push(data.forEach(currCollection => {
+      issueOrEpicCollection.forEach(collection => {
+        collection.map(curr => {
+          if (issueOrEpic === 'epics') {
+            return {
+              title: curr.sEpicName,
+              name: curr.sEpicName,
+              url: curr.sEpicUrl,
+              number: curr.sEpicNumber,
+              progressStatus: '-',
+              type: 'Epic',
+              date: '-',
+              time: curr.sEstimate
+            } as IFeatureRotationItem;
+          } else {
+            const regexText = curr.changeDate.match(new RegExp('^([^T]*);*'))[0];
+            return {
+              title: curr.sName,
+              name: curr.sName,
+              url: curr.sUrl,
+              number: curr.sNumber,
+              progressStatus: curr.sStatus,
+              type: 'Issue',
+              date: regexText,
+              time: curr.sEstimateTime
+            } as IFeatureRotationItem;
+          }
+        });
+      })
+    }));
 
     if (items.length === 0) {
-      this.charts[2].data = { items: [{ title: 'No Data Found' }]};
+      this.charts[1].data = { items: [{ title: 'No Data Found' }]};
     } else {
-      this.charts[2].data = {
+      this.charts[1].data = {
         items,
         clickableContent: FeatureDetailComponent,
         clickableHeader: null

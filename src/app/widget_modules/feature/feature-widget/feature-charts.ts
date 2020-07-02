@@ -18,13 +18,13 @@ export let FEATURE_CHARTS: IChart[] = [
     xAxisLabel: '',
     yAxisLabel: '',
     colorScheme: {}
-  },
-  {
-    title: 'Epics/Issues in Progress and Points',
-    component: ClickListComponent,
-    data: [],
-    xAxisLabel: '',
-    yAxisLabel: '',
-    colorScheme: {}
-  },
+  }
+  // {
+  //   title: 'Epics/Issues in Progress and Points',
+  //   component: ClickListComponent,
+  //   data: [],
+  //   xAxisLabel: '',
+  //   yAxisLabel: '',
+  //   colorScheme: {}
+  // },
 ];
