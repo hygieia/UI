@@ -6,9 +6,9 @@ import { UserDataService } from '../../../services/user-data.service';
 import {NgbActiveModal, NgbModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { AdminFilterPipe } from '../../../pipes/filter.pipe';
+import { AdminFilterPipe } from '../../../../../shared/pipes/filter.pipe';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { AdminOrderByPipe } from '../../../pipes/order-by.pipe';
+import { AdminOrderByPipe } from '../../../../../shared/pipes/order-by.pipe';
 import {ServiceAccountsComponent} from './service-accounts.component';
 import {NgModule} from '@angular/core';
 // tslint:disable-next-line:max-line-length

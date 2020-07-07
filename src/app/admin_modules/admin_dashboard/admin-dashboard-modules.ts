@@ -6,8 +6,6 @@ import { GenerateApiTokensComponent } from './dashboard/admin-dashboard/generate
 import { FormsModule } from '@angular/forms';
 import { UserDataService } from './services/user-data.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AdminFilterPipe } from './pipes/filter.pipe';
-import { AdminOrderByPipe } from './pipes/order-by.pipe';
 import { DashEditComponent } from './dashboard/admin-dashboard/dash-edit/dash-edit.component';
 import { ManageAdminsComponent } from './dashboard/admin-dashboard/manage-admins/manage-admins.component';
 import { EditTokenModalComponent } from './dashboard/admin-dashboard/modal/edit-token-modal/edit-token-modal.component';
@@ -29,15 +27,13 @@ import { AdminDashboardService } from './services/dashboard.service';
 import { EditDashboardComponent } from './dashboard/admin-dashboard/edit-dashboard/edit-dashboard.component';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { AuthInterceptor } from 'src/app/core/interceptors/auth.interceptor';
-import { EditDashboardModalComponent } from './dashboard/admin-dashboard/modal/edit-dashboard-modal/edit-dashboard-modal.component';
 import { AdminDeleteComponent } from './dashboard/admin-dashboard/modal/admin-delete/admin-delete.component';
+import {AdminFilterPipe} from '../../shared/pipes/filter.pipe';
 
 @NgModule({
   declarations: [
     AdminDashboardComponent,
     GenerateApiTokensComponent,
-    AdminFilterPipe,
-    AdminOrderByPipe,
     CreateOrUpdateFeatureFlagsComponent,
     CreateOrUpdateServiceAccountComponent,
     DashEditComponent,
@@ -48,8 +44,7 @@ import { AdminDeleteComponent } from './dashboard/admin-dashboard/modal/admin-de
     FeatureFlagsComponent,
     ServiceAccountsComponent,
     EditDashboardComponent,
-    EditDashboardModalComponent,
-    AdminDeleteComponent
+    AdminDeleteComponent,
   ],
 
   providers: [UserDataService, DashboardDataService, PaginationWrapperService, AdminDashboardService,
@@ -75,7 +70,6 @@ import { AdminDeleteComponent } from './dashboard/admin-dashboard/modal/admin-de
     CreateOrUpdateServiceAccountComponent,
     EditTokenModalComponent,
     GenerateApiTokenModalComponent,
-    EditDashboardModalComponent,
     AdminDeleteComponent
   ]
 })

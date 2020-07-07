@@ -9,11 +9,11 @@ import { UserDataService } from '../../../services/user-data.service';
 import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { AdminFilterPipe } from '../../../pipes/filter.pipe';
+import { AdminFilterPipe } from '../../../../../shared/pipes/filter.pipe';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { API_TOKEN_LIST } from '../../../services/user-data.service.mockdata';
 import { NgModule } from '@angular/core';
-import { AdminOrderByPipe } from '../../../pipes/order-by.pipe';
+import { AdminOrderByPipe } from '../../../../../shared/pipes/order-by.pipe';
 import { AdminDeleteComponent } from '../modal/admin-delete/admin-delete.component';
 
 @NgModule({

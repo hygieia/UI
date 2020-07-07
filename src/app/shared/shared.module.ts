@@ -93,9 +93,14 @@ import {
 import {TestDeleteFormComponent} from '../widget_modules/test/test-delete-form/test-delete-form.component';
 import {RotationChartComponent} from './charts/rotation/rotation-chart.component';
 import {NbActionsModule, NbCardModule, NbSearchModule, NbTabsetModule, NbUserModule} from '@nebular/theme';
+import {EditDashboardModalComponent} from './modals/edit-dashboard-modal/edit-dashboard-modal.component';
+import {AdminFilterPipe} from './pipes/filter.pipe';
+import {AdminOrderByPipe} from './pipes/order-by.pipe';
 
 @NgModule({
   declarations: [
+    AdminFilterPipe,
+    AdminOrderByPipe,
     DeployConfigFormComponent,
     DeployDeleteFormComponent,
     BarHorizontalComponent,
@@ -116,6 +121,7 @@ import {NbActionsModule, NbCardModule, NbSearchModule, NbTabsetModule, NbUserMod
     DeleteConfirmModalDirective,
     DetailModalComponent,
     DetailModalDirective,
+    EditDashboardModalComponent,
     FeatureConfigFormComponent,
     FeatureDeleteFormComponent,
     FeatureDetailComponent,
@@ -190,6 +196,7 @@ import {NbActionsModule, NbCardModule, NbSearchModule, NbTabsetModule, NbUserMod
     ConfirmationModalComponent,
     DeleteConfirmModalComponent,
     DetailModalComponent,
+    EditDashboardModalComponent,
     FeatureConfigFormComponent,
     FeatureDeleteFormComponent,
     FeatureDetailComponent,
@@ -250,6 +257,8 @@ import {NbActionsModule, NbCardModule, NbSearchModule, NbTabsetModule, NbUserMod
     NbTabsetModule,
   ],
   exports: [
+    AdminFilterPipe,
+    AdminOrderByPipe,
     BarHorizontalComponent,
     BuildWidgetComponent,
     CaponeTemplateComponent,
