@@ -98,6 +98,7 @@ import {AdminFilterPipe} from './pipes/filter.pipe';
 import {AdminOrderByPipe} from './pipes/order-by.pipe';
 import {DashEditComponent} from './dash-edit/dash-edit.component';
 import {DashTrashComponent} from './dash-trash/dash-trash.component';
+import {GeneralDeleteComponent} from './modals/general-delete/general-delete.component';
 
 @NgModule({
   declarations: [
@@ -132,6 +133,7 @@ import {DashTrashComponent} from './dash-trash/dash-trash.component';
     FeatureWidgetComponent,
     FormModalComponent,
     FormModalDirective,
+    GeneralDeleteComponent,
     HorizontalBarChartComponent,
     LayoutComponent,
     LayoutDirective,
@@ -207,6 +209,7 @@ import {DashTrashComponent} from './dash-trash/dash-trash.component';
     FeatureWidgetComponent,
     FormModalComponent,
     GaugeChartComponent,
+    GeneralDeleteComponent,
     HorizontalBarChartComponent,
     LineAndBarChartComponent,
     LineChartComponent,
@@ -273,6 +276,7 @@ import {DashTrashComponent} from './dash-trash/dash-trash.component';
     CommonModule,
     DashEditComponent,
     DashTrashComponent,
+    GeneralDeleteComponent,
     HorizontalBarChartComponent,
     LayoutComponent,
     LayoutDirective,

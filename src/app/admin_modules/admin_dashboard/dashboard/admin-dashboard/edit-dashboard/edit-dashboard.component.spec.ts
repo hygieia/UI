@@ -21,17 +21,17 @@ import { UserDataService } from '../../../services/user-data.service';
 import { MockDashboardDataService } from '../../../services/mock-dashboard-data.service';
 import { MockPaginationWrapperService } from '../../../services/mock-pagination-wrapper.service';
 import { EditDashboardModalComponent } from '../../../../../shared/modals/edit-dashboard-modal/edit-dashboard-modal.component';
-import { AdminDeleteComponent } from '../modal/admin-delete/admin-delete.component';
+import {GeneralDeleteComponent} from '../../../../../shared/modals/general-delete/general-delete.component';
 
 @NgModule({
   declarations: [EditDashboardComponent, AdminFilterPipe, AdminOrderByPipe,
-    EditDashboardModalComponent, DashTrashComponent, DashEditComponent, AdminDeleteComponent ],
+    EditDashboardModalComponent, DashTrashComponent, DashEditComponent, GeneralDeleteComponent],
   providers: [{ provide: DashboardDataService, useClass: MockDashboardDataService },
     CmdbDataService, UserDataService, AdminDashboardService, { provide: PaginationWrapperService, useClass: MockPaginationWrapperService }],
   imports: [FormsModule, CommonModule, NgbModule, ReactiveFormsModule, HttpClientTestingModule, SharedModule, HttpClientModule],
   entryComponents: [
     EditDashboardModalComponent,
-    AdminDeleteComponent]
+    GeneralDeleteComponent]
 })
 class TestModule { }
 

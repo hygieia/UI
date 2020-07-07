@@ -14,19 +14,19 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { API_TOKEN_LIST } from '../../../services/user-data.service.mockdata';
 import { NgModule } from '@angular/core';
 import { AdminOrderByPipe } from '../../../../../shared/pipes/order-by.pipe';
-import { AdminDeleteComponent } from '../modal/admin-delete/admin-delete.component';
+import {GeneralDeleteComponent} from '../../../../../shared/modals/general-delete/general-delete.component';
 
 @NgModule({
   declarations: [GenerateApiTokensComponent, DashEditComponent, DashTrashComponent, AdminFilterPipe,
           AdminOrderByPipe, EditTokenModalComponent,
     GenerateApiTokenModalComponent,
-    AdminDeleteComponent],
+    GeneralDeleteComponent],
   providers: [UserDataService, NgbModal],
   imports: [FormsModule, CommonModule, ReactiveFormsModule, NgbModule, HttpClientTestingModule],
   entryComponents: [
     EditTokenModalComponent,
     GenerateApiTokenModalComponent,
-    AdminDeleteComponent
+    GeneralDeleteComponent
   ]
 })
 class TestModule { }

@@ -13,12 +13,12 @@ import {ServiceAccountsComponent} from './service-accounts.component';
 import {NgModule} from '@angular/core';
 // tslint:disable-next-line:max-line-length
 import {CreateOrUpdateServiceAccountComponent} from '../modal/create-or-update-service-account/create-or-update-service-account.component';
-import { AdminDeleteComponent } from '../modal/admin-delete/admin-delete.component';
+import {GeneralDeleteComponent} from '../../../../../shared/modals/general-delete/general-delete.component';
 
 @NgModule({
   declarations: [ServiceAccountsComponent, DashEditComponent, DashTrashComponent, AdminFilterPipe,
     AdminOrderByPipe, CreateOrUpdateServiceAccountComponent,
-    AdminDeleteComponent],
+    GeneralDeleteComponent],
   providers: [UserDataService, NgbModal],
   imports: [FormsModule, CommonModule, ReactiveFormsModule, NgbModule, HttpClientTestingModule],
   exports: [
@@ -28,7 +28,7 @@ import { AdminDeleteComponent } from '../modal/admin-delete/admin-delete.compone
   entryComponents: [
     ServiceAccountsComponent,
     CreateOrUpdateServiceAccountComponent,
-    AdminDeleteComponent
+    GeneralDeleteComponent
   ]
 })
 class TestModule { }
@@ -46,7 +46,7 @@ describe('ServiceAccountsComponent', () => {
         CreateOrUpdateServiceAccountComponent,
         AdminFilterPipe,
         AdminOrderByPipe,
-        AdminDeleteComponent],
+        GeneralDeleteComponent],
       providers: [UserDataService, FormBuilder, NgbActiveModal],
       imports: [FormsModule, NgbModule, CommonModule, ReactiveFormsModule, HttpClientTestingModule]
     })

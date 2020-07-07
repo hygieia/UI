@@ -25,7 +25,6 @@ import { AdminDashboardService } from './services/dashboard.service';
 import { EditDashboardComponent } from './dashboard/admin-dashboard/edit-dashboard/edit-dashboard.component';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { AuthInterceptor } from 'src/app/core/interceptors/auth.interceptor';
-import { AdminDeleteComponent } from './dashboard/admin-dashboard/modal/admin-delete/admin-delete.component';
 
 @NgModule({
   declarations: [
@@ -38,8 +37,7 @@ import { AdminDeleteComponent } from './dashboard/admin-dashboard/modal/admin-de
     GenerateApiTokenModalComponent,
     FeatureFlagsComponent,
     ServiceAccountsComponent,
-    EditDashboardComponent,
-    AdminDeleteComponent,
+    EditDashboardComponent
   ],
 
   providers: [UserDataService, DashboardDataService, PaginationWrapperService, AdminDashboardService,
@@ -64,8 +62,7 @@ import { AdminDeleteComponent } from './dashboard/admin-dashboard/modal/admin-de
     CreateOrUpdateFeatureFlagsComponent,
     CreateOrUpdateServiceAccountComponent,
     EditTokenModalComponent,
-    GenerateApiTokenModalComponent,
-    AdminDeleteComponent
+    GenerateApiTokenModalComponent
   ]
 })
 
