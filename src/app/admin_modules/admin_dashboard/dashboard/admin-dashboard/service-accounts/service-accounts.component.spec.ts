@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 // tslint:disable-next-line:max-line-length
-import { DashEditComponent } from '../dash-edit/dash-edit.component';
-import { DashTrashComponent } from '../dash-trash/dash-trash.component';
+import { DashEditComponent } from '../../../../../shared/dash-edit/dash-edit.component';
+import { DashTrashComponent } from '../../../../../shared/dash-trash/dash-trash.component';
 import { UserDataService } from '../../../services/user-data.service';
 import {NgbActiveModal, NgbModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';

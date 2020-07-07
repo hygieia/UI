@@ -6,14 +6,12 @@ import { GenerateApiTokensComponent } from './dashboard/admin-dashboard/generate
 import { FormsModule } from '@angular/forms';
 import { UserDataService } from './services/user-data.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { DashEditComponent } from './dashboard/admin-dashboard/dash-edit/dash-edit.component';
 import { ManageAdminsComponent } from './dashboard/admin-dashboard/manage-admins/manage-admins.component';
 import { EditTokenModalComponent } from './dashboard/admin-dashboard/modal/edit-token-modal/edit-token-modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // tslint:disable-next-line:max-line-length
 import { GenerateApiTokenModalComponent } from './dashboard/admin-dashboard/modal/generate-api-token-modal/generate-api-token-modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { DashTrashComponent } from './dashboard/admin-dashboard/dash-trash/dash-trash.component';
 // tslint:disable-next-line:max-line-length
 import {CreateOrUpdateFeatureFlagsComponent} from './dashboard/admin-dashboard/modal/create-or-update-feature-flags/create-or-update-feature-flags.component';
 import {FeatureFlagsComponent} from './dashboard/admin-dashboard/feature-flags/feature-flags.component';
@@ -28,7 +26,6 @@ import { EditDashboardComponent } from './dashboard/admin-dashboard/edit-dashboa
 import { AuthService } from 'src/app/core/services/auth.service';
 import { AuthInterceptor } from 'src/app/core/interceptors/auth.interceptor';
 import { AdminDeleteComponent } from './dashboard/admin-dashboard/modal/admin-delete/admin-delete.component';
-import {AdminFilterPipe} from '../../shared/pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -36,11 +33,9 @@ import {AdminFilterPipe} from '../../shared/pipes/filter.pipe';
     GenerateApiTokensComponent,
     CreateOrUpdateFeatureFlagsComponent,
     CreateOrUpdateServiceAccountComponent,
-    DashEditComponent,
     ManageAdminsComponent,
     EditTokenModalComponent,
     GenerateApiTokenModalComponent,
-    DashTrashComponent,
     FeatureFlagsComponent,
     ServiceAccountsComponent,
     EditDashboardComponent,

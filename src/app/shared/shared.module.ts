@@ -96,6 +96,8 @@ import {NbActionsModule, NbCardModule, NbSearchModule, NbTabsetModule, NbUserMod
 import {EditDashboardModalComponent} from './modals/edit-dashboard-modal/edit-dashboard-modal.component';
 import {AdminFilterPipe} from './pipes/filter.pipe';
 import {AdminOrderByPipe} from './pipes/order-by.pipe';
+import {DashEditComponent} from './dash-edit/dash-edit.component';
+import {DashTrashComponent} from './dash-trash/dash-trash.component';
 
 @NgModule({
   declarations: [
@@ -117,6 +119,8 @@ import {AdminOrderByPipe} from './pipes/order-by.pipe';
     ComboSeriesVerticalComponent,
     ConfirmationModalComponent,
     DashboardComponent,
+    DashEditComponent,
+    DashTrashComponent,
     DeleteConfirmModalComponent,
     DeleteConfirmModalDirective,
     DetailModalComponent,
@@ -267,6 +271,8 @@ import {AdminOrderByPipe} from './pipes/order-by.pipe';
     ComboChartComponent,
     ComboSeriesVerticalComponent,
     CommonModule,
+    DashEditComponent,
+    DashTrashComponent,
     HorizontalBarChartComponent,
     LayoutComponent,
     LayoutDirective,
