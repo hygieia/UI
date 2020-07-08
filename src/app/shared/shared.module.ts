@@ -99,6 +99,7 @@ import {AdminOrderByPipe} from './pipes/order-by.pipe';
 import {DashEditComponent} from './dash-edit/dash-edit.component';
 import {DashTrashComponent} from './dash-trash/dash-trash.component';
 import {GeneralDeleteComponent} from './modals/general-delete/general-delete.component';
+import {UserDataService} from './services/user-data.service';
 
 @NgModule({
   declarations: [
@@ -246,6 +247,9 @@ import {GeneralDeleteComponent} from './modals/general-delete/general-delete.com
     SecurityScanDeleteFormComponent,
     SecurityScanWidgetComponent,
     AuditModalComponent
+  ],
+  providers: [
+    UserDataService
   ],
   imports: [
     CommonModule,

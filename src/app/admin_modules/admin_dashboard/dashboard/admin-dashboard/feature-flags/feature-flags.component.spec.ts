@@ -4,7 +4,7 @@ import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {FeatureFlagsComponent} from './feature-flags.component';
-import {UserDataService} from '../../../services/user-data.service';
+import {UserDataService} from '../../../../../shared/services/user-data.service';
 import {DashTrashComponent} from '../../../../../shared/dash-trash/dash-trash.component';
 import {DashEditComponent} from '../../../../../shared/dash-edit/dash-edit.component';
 import {CreateOrUpdateFeatureFlagsComponent} from '../modal/create-or-update-feature-flags/create-or-update-feature-flags.component';

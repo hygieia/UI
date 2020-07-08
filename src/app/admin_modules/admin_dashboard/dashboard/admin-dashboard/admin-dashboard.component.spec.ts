@@ -10,7 +10,7 @@ import { DashTrashComponent } from '../../../../shared/dash-trash/dash-trash.com
 import { AdminOrderByPipe } from '../../../../shared/pipes/order-by.pipe';
 import {FeatureFlagsComponent} from './feature-flags/feature-flags.component';
 import {ServiceAccountsComponent} from './service-accounts/service-accounts.component';
-import {UserDataService} from '../../services/user-data.service';
+import {UserDataService} from '../../../../shared/services/user-data.service';
 import { NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import { EditDashboardComponent } from './edit-dashboard/edit-dashboard.component';
 import { DashboardDataService } from '../../services/dashboard-data.service';

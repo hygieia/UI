@@ -1,15 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DashboardDataService } from 'src/app/admin_modules/admin_dashboard/services/dashboard-data.service';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { WidgetManagerService } from 'src/app/admin_modules/admin_dashboard/services/widget-manager.service';
-import { UserDataService } from 'src/app/admin_modules/admin_dashboard/services/user-data.service';
+import { WidgetManagerService } from 'src/app/shared/services/widget-manager.service';
+import { UserDataService } from 'src/app/shared/services/user-data.service';
 import { CmdbDataService } from 'src/app/admin_modules/admin_dashboard/services/cmdb-data.service';
 import { AdminDashboardService } from 'src/app/admin_modules/admin_dashboard/services/dashboard.service';
 import { map, debounceTime, distinctUntilChanged, switchMap, catchError, tap } from 'rxjs/operators';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { DashboardItem } from '../../../admin_modules/admin_dashboard/dashboard/admin-dashboard/model/dashboard-item';
+import { DashboardItem } from '../../model/dashboard-item';
 import { Observable, of } from 'rxjs';
+import {DashboardService} from '../../dashboard.service';
 
 @Component({
     selector: 'app-edit-dashboard-modal',
@@ -54,7 +55,7 @@ export class EditDashboardModalComponent implements OnInit {
 
     constructor(private dashboardData: DashboardDataService, private authService: AuthService,
                 private widgetManager: WidgetManagerService, private userData: UserDataService,
-                private cmdbData: CmdbDataService, private dashboardService: AdminDashboardService,
+                private cmdbData: CmdbDataService, private dashboardService: DashboardService,
                 private fromBulider: FormBuilder, public activeModal: NgbActiveModal) { }
 
     ngOnInit() {
@@ -316,6 +317,7 @@ export class EditDashboardModalComponent implements OnInit {
                 this.searchconfigItemBusComponent = response;
             });
     }
+
     getDashboardTitle() {
         return this.dashboardService.getDashboardTitleOrig(this.dashboardItem);
     }
@@ -327,6 +329,7 @@ export class EditDashboardModalComponent implements OnInit {
     getBusSerToolText() {
         return this.dashboardService.getBusSerToolTipText();
     }
+
     tabToggleView(index) {
         this.dupErroMessage = '';
         this.tabView = typeof this.tabs[index] === 'undefined' ? this.tabs[0].name : this.tabs[index].name;

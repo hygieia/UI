@@ -5,13 +5,13 @@ import { EditTokenModalComponent } from '../modal/edit-token-modal/edit-token-mo
 import { DashEditComponent } from '../../../../../shared/dash-edit/dash-edit.component';
 import { DashTrashComponent } from '../../../../../shared/dash-trash/dash-trash.component';
 import { GenerateApiTokenModalComponent } from '../modal/generate-api-token-modal/generate-api-token-modal.component';
-import { UserDataService } from '../../../services/user-data.service';
+import { UserDataService } from '../../../../../shared/services/user-data.service';
 import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AdminFilterPipe } from '../../../../../shared/pipes/filter.pipe';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { API_TOKEN_LIST } from '../../../services/user-data.service.mockdata';
+import { API_TOKEN_LIST } from '../../../../../shared/services/user-data.service.mockdata';
 import { NgModule } from '@angular/core';
 import { AdminOrderByPipe } from '../../../../../shared/pipes/order-by.pipe';
 import {GeneralDeleteComponent} from '../../../../../shared/modals/general-delete/general-delete.component';

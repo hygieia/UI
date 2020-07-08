@@ -15,9 +15,9 @@ import { DashTrashComponent } from '../../../../../shared/dash-trash/dash-trash.
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
-import { DASHBOARDITEM } from '../../../services/user-data.service.mockdata';
-import { DashboardItem } from '../model/dashboard-item';
-import { UserDataService } from '../../../services/user-data.service';
+import { DASHBOARDITEM } from '../../../../../shared/services/user-data.service.mockdata';
+import { DashboardItem } from '../../../../../shared/model/dashboard-item';
+import { UserDataService } from '../../../../../shared/services/user-data.service';
 import { MockDashboardDataService } from '../../../services/mock-dashboard-data.service';
 import { MockPaginationWrapperService } from '../../../services/mock-pagination-wrapper.service';
 import { EditDashboardModalComponent } from '../../../../../shared/modals/edit-dashboard-modal/edit-dashboard-modal.component';

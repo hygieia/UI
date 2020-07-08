@@ -4,7 +4,6 @@ import { AdminDashboardComponent } from './dashboard/admin-dashboard/admin-dashb
 import { CommonModule } from '@angular/common';
 import { GenerateApiTokensComponent } from './dashboard/admin-dashboard/generate-api-tokens/generate-api-tokens.component';
 import { FormsModule } from '@angular/forms';
-import { UserDataService } from './services/user-data.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ManageAdminsComponent } from './dashboard/admin-dashboard/manage-admins/manage-admins.component';
 import { EditTokenModalComponent } from './dashboard/admin-dashboard/modal/edit-token-modal/edit-token-modal.component';
@@ -40,7 +39,7 @@ import { AuthInterceptor } from 'src/app/core/interceptors/auth.interceptor';
     EditDashboardComponent
   ],
 
-  providers: [UserDataService, DashboardDataService, PaginationWrapperService, AdminDashboardService,
+  providers: [DashboardDataService, PaginationWrapperService, AdminDashboardService,
     AuthService,
     {
       provide: HTTP_INTERCEPTORS,

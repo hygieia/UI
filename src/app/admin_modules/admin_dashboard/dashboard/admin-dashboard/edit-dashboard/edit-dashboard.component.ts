@@ -3,7 +3,7 @@ import { PaginationWrapperService } from '../../../services/pagination-wrapper.s
 import { DashboardDataService } from '../../../services/dashboard-data.service';
 import { IPaginationParams } from 'src/app/shared/interfaces';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DashboardItem } from '../model/dashboard-item';
+import { DashboardItem } from '../../../../../shared/model/dashboard-item';
 import { EditDashboardModalComponent } from '../../../../../shared/modals/edit-dashboard-modal/edit-dashboard-modal.component';
 import { forkJoin } from 'rxjs';
 import {GeneralDeleteComponent} from '../../../../../shared/modals/general-delete/general-delete.component';
@@ -59,6 +59,7 @@ export class EditDashboardComponent implements OnInit {
   }
 
   editDashboard(item: DashboardItem) {
+    console.log(item);
     const modalRef = this.modalService.open(EditDashboardModalComponent);
     modalRef.componentInstance.dashboardItem = item;
     modalRef.result.then((newConfig) => {

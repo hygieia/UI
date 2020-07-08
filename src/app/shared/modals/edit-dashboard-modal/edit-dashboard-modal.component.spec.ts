@@ -10,8 +10,8 @@ import { CommonModule } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AdminFilterPipe } from 'src/app/shared/pipes/filter.pipe';
 import { AdminOrderByPipe } from 'src/app/shared/pipes/order-by.pipe';
-import { UserDataService } from 'src/app/admin_modules/admin_dashboard/services/user-data.service';
-import { USER_LIST, DASHBOARDITEM  } from 'src/app/admin_modules/admin_dashboard/services/user-data.service.mockdata';
+import { UserDataService } from 'src/app/shared/services/user-data.service';
+import { USER_LIST, DASHBOARDITEM  } from 'src/app/shared/services/user-data.service.mockdata';
 
 describe('EditDashboardModalComponent', () => {
   let component: EditDashboardModalComponent;

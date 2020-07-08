@@ -11,7 +11,7 @@ import {DashboardCreateComponent} from '../dashboard-create/dashboard-create.com
 import {EditDashboardModalComponent} from '../../shared/modals/edit-dashboard-modal/edit-dashboard-modal.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DashboardDataService} from '../../admin_modules/admin_dashboard/services/dashboard-data.service';
-import {DeleteConfirmModalComponent} from '../../shared/modals/delete-confirm-modal/delete-confirm-modal.component';
+import { DashboardItem} from '../../shared/model/dashboard-item';
 import {GeneralDeleteComponent} from '../../shared/modals/general-delete/general-delete.component';
 
 @Component({
@@ -32,8 +32,7 @@ export class DashboardListComponent implements OnInit {
   defaultPageSize = '10';
 
   ngOnInit() {
-    this.findMyDashboards(this.paramBuilder(0, this.defaultPageSize));
-    this.findAllDashboards(this.paramBuilder(0, this.defaultPageSize));
+    this.refreshDash();
     // Query for pull filtered owner dashboards
     this.queryField.valueChanges.pipe(
       debounceTime(500),
@@ -55,6 +54,11 @@ export class DashboardListComponent implements OnInit {
         this.allDashboards = response.data;
         this.dashboardCollectionSize = response.total;
       });
+  }
+
+  refreshDash(){
+    this.findMyDashboards(this.paramBuilder(0, this.defaultPageSize));
+    this.findAllDashboards(this.paramBuilder(0, this.defaultPageSize));
   }
 
   // Default function call for pulling users dashboards
@@ -118,22 +122,24 @@ export class DashboardListComponent implements OnInit {
   }
 
   deleteDashboard(dashboard) {
-    const modalRef = this.modalService.open(DeleteConfirmModalComponent);
-    modalRef.componentInstance.message = `Are you sure you want to delete ${dashboard}?`;
+    const modalRef = this.modalService.open(GeneralDeleteComponent);
+    const dashName = this.dashboardName(dashboard);
+    modalRef.componentInstance.title = `Are you sure you want to delete ${dashName}?`;
     modalRef.result.then((newConfig) => {
       this.dashboardData.deleteDashboard(dashboard.id).subscribe(response => {
+        this.refreshDash();
       });
     }).catch((error) => {
-      console.log('delete error newConfig :' + error);
+      console.log('delete error deleteDashboard :' + error);
     });
   }
 
-  editDashboard(item) {
+  editDashboard(item: DashboardItem) {
     console.log(item);
-    const modalRef = this.modalService.open(GeneralDeleteComponent);
-    modalRef.componentInstance.title = `Are you sure you want to delete ${item.name}?`;
+    const modalRef = this.modalService.open(EditDashboardModalComponent);
     modalRef.componentInstance.dashboardItem = item;
     modalRef.result.then((newConfig) => {
+      this.refreshDash();
     }).catch((error) => {
       console.log('edit error newConfig :' + error);
     });
