@@ -52,8 +52,6 @@ export class DockerWidgetComponent extends WidgetComponent implements OnInit, Af
 		this.layout = TwoByTwoLayoutComponent;
 		this.charts = DOCKER_CHARTS;
 		this.init();
-		this.refresh = interval(this.frequency);
-		this.observer = this.refresh.pipe();
 	}
 
 	ngAfterViewInit() {
@@ -182,7 +180,7 @@ export class DockerWidgetComponent extends WidgetComponent implements OnInit, Af
 					'driver': data['driver']
 				} as IClickListDockerNetworkItem;;
 				netitems.push(obj);
-			})'
+			})
 		
 			this.charts[5].data = {'items' : netitems, clickableContent: DockerDetailComponent,  clickableHeader: null} as IClickListData;
 			// Networks End 
@@ -191,9 +189,7 @@ export class DockerWidgetComponent extends WidgetComponent implements OnInit, Af
 			);
 	}
 
-
 	populateCPUStats() {
-
 		this.dockerService._GetDockerCPUStats().subscribe((result => {
 			result = result.data;
 			let dataPoints = [result[1], result[2]]
