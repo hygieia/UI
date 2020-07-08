@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 import { PaginationWrapperService } from './pagination-wrapper.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HttpClientModule } from '@angular/common/http';
-import { DashboardDataService } from './dashboard-data.service';
+import { DashboardDataService } from '../../../shared/services/dashboard-data.service';
 import { AdminDashboardService } from './dashboard.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { MockDashboardDataService } from './mock-dashboard-data.service';

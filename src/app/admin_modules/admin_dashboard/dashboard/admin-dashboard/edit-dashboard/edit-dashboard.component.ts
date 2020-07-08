@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PaginationWrapperService } from '../../../services/pagination-wrapper.service';
-import { DashboardDataService } from '../../../services/dashboard-data.service';
+import { DashboardDataService } from '../../../../../shared/services/dashboard-data.service';
 import { IPaginationParams } from 'src/app/shared/interfaces';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardItem } from '../../../../../shared/model/dashboard-item';

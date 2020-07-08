@@ -10,7 +10,7 @@ import {NbDialogService} from '@nebular/theme';
 import {DashboardCreateComponent} from '../dashboard-create/dashboard-create.component';
 import {EditDashboardModalComponent} from '../../shared/modals/edit-dashboard-modal/edit-dashboard-modal.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {DashboardDataService} from '../../admin_modules/admin_dashboard/services/dashboard-data.service';
+import {DashboardDataService} from '../../shared/services/dashboard-data.service';
 import { DashboardItem} from '../../shared/model/dashboard-item';
 import {GeneralDeleteComponent} from '../../shared/modals/general-delete/general-delete.component';
 
@@ -32,7 +32,7 @@ export class DashboardListComponent implements OnInit {
   defaultPageSize = '10';
 
   ngOnInit() {
-    this.refreshDash();
+    this.loadDash();
     // Query for pull filtered owner dashboards
     this.queryField.valueChanges.pipe(
       debounceTime(500),
@@ -56,7 +56,7 @@ export class DashboardListComponent implements OnInit {
       });
   }
 
-  refreshDash(){
+  loadDash() {
     this.findMyDashboards(this.paramBuilder(0, this.defaultPageSize));
     this.findAllDashboards(this.paramBuilder(0, this.defaultPageSize));
   }
@@ -127,18 +127,18 @@ export class DashboardListComponent implements OnInit {
     modalRef.componentInstance.title = `Are you sure you want to delete ${dashName}?`;
     modalRef.result.then((newConfig) => {
       this.dashboardData.deleteDashboard(dashboard.id).subscribe(response => {
-        this.refreshDash();
+        this.loadDash();
       });
     }).catch((error) => {
       console.log('delete error deleteDashboard :' + error);
     });
   }
 
-  editDashboard(item: DashboardItem) {
+  editDashboard(item) {
     const modalRef = this.modalService.open(EditDashboardModalComponent);
     modalRef.componentInstance.dashboardItem = item;
     modalRef.result.then((newConfig) => {
-      this.refreshDash();
+      this.router.navigate(['']);
     }).catch((error) => {
       console.log('edit error newConfig :' + error);
     });

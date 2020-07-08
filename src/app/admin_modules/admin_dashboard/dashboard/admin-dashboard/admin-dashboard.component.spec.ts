@@ -13,8 +13,8 @@ import {ServiceAccountsComponent} from './service-accounts/service-accounts.comp
 import {UserDataService} from '../../../../shared/services/user-data.service';
 import { NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import { EditDashboardComponent } from './edit-dashboard/edit-dashboard.component';
-import { DashboardDataService } from '../../services/dashboard-data.service';
-import { CmdbDataService } from '../../services/cmdb-data.service';
+import { DashboardDataService } from '../../../../shared/services/dashboard-data.service';
+import { CmdbDataService } from '../../../../shared/services/cmdb-data.service';
 import { AdminDashboardService } from '../../services/dashboard.service';
 import { PaginationWrapperService } from '../../services/pagination-wrapper.service';
 import { SharedModule } from 'src/app/shared/shared.module';

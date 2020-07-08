@@ -1,10 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DashboardDataService } from 'src/app/admin_modules/admin_dashboard/services/dashboard-data.service';
+import { DashboardDataService } from 'src/app/shared/services/dashboard-data.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { WidgetManagerService } from 'src/app/shared/services/widget-manager.service';
 import { UserDataService } from 'src/app/shared/services/user-data.service';
-import { CmdbDataService } from 'src/app/admin_modules/admin_dashboard/services/cmdb-data.service';
-import { AdminDashboardService } from 'src/app/admin_modules/admin_dashboard/services/dashboard.service';
+import { CmdbDataService } from 'src/app/shared/services/cmdb-data.service';
 import { map, debounceTime, distinctUntilChanged, switchMap, catchError, tap } from 'rxjs/operators';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -56,7 +55,7 @@ export class EditDashboardModalComponent implements OnInit {
     constructor(private dashboardData: DashboardDataService, private authService: AuthService,
                 private widgetManager: WidgetManagerService, private userData: UserDataService,
                 private cmdbData: CmdbDataService, private dashboardService: DashboardService,
-                private fromBulider: FormBuilder, public activeModal: NgbActiveModal) { }
+                private formBulider: FormBuilder, public activeModal: NgbActiveModal) { }
 
     ngOnInit() {
         this.username = this.authService.getUserName();
@@ -78,11 +77,11 @@ export class EditDashboardModalComponent implements OnInit {
             scoreEnabled: !!this.dashboardItem.scoreEnabled,
             scoreDisplay: this.dashboardItem.scoreDisplay
         };
-        this.cdfForm = this.fromBulider.group({
+        this.cdfForm = this.formBulider.group({
             dashboardTitle: ['',
                 [Validators.required, Validators.minLength(6), Validators.maxLength(50), Validators.pattern(/^[a-zA-Z0-9 ]*$/)]]
         });
-        this.formBusinessService = this.fromBulider.group({
+        this.formBusinessService = this.formBulider.group({
             configurationItemBusServ: [''],
             configurationItemBusApp: ['']
         });
@@ -95,7 +94,6 @@ export class EditDashboardModalComponent implements OnInit {
         }, 100);
 
     }
-
 
         searchconfigItemBusServ = (text$: Observable<string>) =>
         text$.pipe(

@@ -100,6 +100,7 @@ import {DashEditComponent} from './dash-edit/dash-edit.component';
 import {DashTrashComponent} from './dash-trash/dash-trash.component';
 import {GeneralDeleteComponent} from './modals/general-delete/general-delete.component';
 import {UserDataService} from './services/user-data.service';
+import {DashboardDataService} from './services/dashboard-data.service';
 
 @NgModule({
   declarations: [
@@ -249,7 +250,8 @@ import {UserDataService} from './services/user-data.service';
     AuditModalComponent
   ],
   providers: [
-    UserDataService
+    UserDataService,
+    DashboardDataService
   ],
   imports: [
     CommonModule,

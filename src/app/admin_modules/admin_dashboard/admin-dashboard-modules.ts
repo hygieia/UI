@@ -18,7 +18,7 @@ import {SharedModule} from '../../shared/shared.module';
 import {ServiceAccountsComponent} from './dashboard/admin-dashboard/service-accounts/service-accounts.component';
 // tslint:disable-next-line:max-line-length
 import {CreateOrUpdateServiceAccountComponent} from './dashboard/admin-dashboard/modal/create-or-update-service-account/create-or-update-service-account.component';
-import { DashboardDataService } from './services/dashboard-data.service';
+import { DashboardDataService } from '../../shared/services/dashboard-data.service';
 import { PaginationWrapperService } from './services/pagination-wrapper.service';
 import { AdminDashboardService } from './services/dashboard.service';
 import { EditDashboardComponent } from './dashboard/admin-dashboard/edit-dashboard/edit-dashboard.component';
@@ -39,7 +39,7 @@ import { AuthInterceptor } from 'src/app/core/interceptors/auth.interceptor';
     EditDashboardComponent
   ],
 
-  providers: [DashboardDataService, PaginationWrapperService, AdminDashboardService,
+  providers: [PaginationWrapperService, AdminDashboardService,
     AuthService,
     {
       provide: HTTP_INTERCEPTORS,
