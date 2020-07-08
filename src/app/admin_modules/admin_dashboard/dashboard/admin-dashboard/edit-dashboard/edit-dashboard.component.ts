@@ -59,7 +59,6 @@ export class EditDashboardComponent implements OnInit {
   }
 
   editDashboard(item: DashboardItem) {
-    console.log(item);
     const modalRef = this.modalService.open(EditDashboardModalComponent);
     modalRef.componentInstance.dashboardItem = item;
     modalRef.result.then((newConfig) => {

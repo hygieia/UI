@@ -85,8 +85,10 @@ export class DashboardService {
   }
 
   getDashboardTitleOrig(data) {
+    if (!data.name) {
+      return data.title;
+    }
     const subName = data.name.substring(0, data.name.indexOf('-'));
-
     return subName ? subName : data.name;
   }
 
