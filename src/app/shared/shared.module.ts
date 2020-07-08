@@ -177,7 +177,7 @@ import {DockerDetailComponent} from '../widget_modules/docker/docker-detail/dock
     NavbarComponent,
     DockerConfigFormComponent,
     DockerWidgetComponent,
-    DockerDetailComponent,
+    DockerDetailComponent
   ],
   entryComponents: [
     DeleteConfirmModalComponent,
@@ -240,7 +240,7 @@ import {DockerDetailComponent} from '../widget_modules/docker/docker-detail/dock
     AuditModalComponent,
     DockerConfigFormComponent,
     DockerWidgetComponent,
-    DockerDetailComponent,
+    DockerDetailComponent
   ],
   imports: [
     CommonModule,

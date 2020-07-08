@@ -1,4 +1,4 @@
-import {Component, NgModule} from '@angular/core';
+import {Component, NgModule, ViewRef} from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TimeAgoPipe } from 'time-ago-pipe';
@@ -38,7 +38,9 @@ describe('ClickListComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ClickListComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    if (!(fixture.changeDetectorRef as ViewRef).destroyed) {
+      fixture.detectChanges();
+    }
   });
 
   it('should create', () => {
@@ -64,7 +66,7 @@ describe('ClickListComponent', () => {
     } as IClickListData;
 
     component.openDetailView(null);
-    component.openHeaderView(null);
+    component.openHeaderView(null, null);
   });
 
   it('should open detail view and set values', () => {

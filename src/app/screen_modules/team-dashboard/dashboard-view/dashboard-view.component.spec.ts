@@ -3,11 +3,13 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Component, NgModule } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
+import {Router, RouterModule} from '@angular/router';
 
 import { SharedModule } from '../../../shared/shared.module';
 import { CaponeTemplateComponent } from '../capone-template/capone-template.component';
 import { DashboardViewComponent } from './dashboard-view.component';
+import { DasboardNavbarComponent } from 'src/app/core/dasboard-navbar/dasboard-navbar.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app-test-widget',
@@ -22,15 +24,22 @@ class TestWidgetComponent {}
 })
 class TestFormComponent {}
 
+@Component({
+  selector: 'app-test-delete-form',
+  template: '<form></form>'
+})
+class TestDeleteFormComponent {}
 
 @NgModule({
   declarations: [
     TestWidgetComponent,
-    TestFormComponent
+    TestFormComponent,
+    TestDeleteFormComponent,
   ],
   entryComponents: [
     TestWidgetComponent,
-    TestFormComponent
+    TestFormComponent,
+    TestDeleteFormComponent,
   ]
 })
 class TestModule { }
@@ -38,13 +47,12 @@ class TestModule { }
 describe('DashboardViewComponent', () => {
   let component: DashboardViewComponent;
   let fixture: ComponentFixture<DashboardViewComponent>;
-
-
+  let router: Router;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [  DashboardViewComponent ],
-      imports: [TestModule, HttpClientTestingModule, SharedModule, CommonModule, RouterModule.forRoot([])]
+      declarations: [  DashboardViewComponent, DasboardNavbarComponent ],
+      imports: [TestModule, BrowserAnimationsModule, HttpClientTestingModule, SharedModule, CommonModule, RouterModule.forRoot([])]
     })
     .compileComponents();
   }));
@@ -52,7 +60,7 @@ describe('DashboardViewComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(DashboardViewComponent);
     component = fixture.componentInstance;
-
+    router = TestBed.get(Router);
     fixture.detectChanges();
   });
 
@@ -62,18 +70,20 @@ describe('DashboardViewComponent', () => {
 
   it('should create template', () => {
     component.widgets = [{
-      title: 'Test Title',
-      component: TestWidgetComponent,
+      title: ['Test Title'],
+      component: [TestWidgetComponent],
       status: 'Success',
       widgetSize: 'col-lg-6',
-      configForm: TestFormComponent
+      configForm: [TestFormComponent],
+      deleteForm: [TestDeleteFormComponent]
     }];
     component.ngOnInit();
     component.ngAfterViewInit();
     const childDebugElement = fixture.debugElement.query(By.directive(CaponeTemplateComponent));
-    expect(childDebugElement).toBeTruthy();
+    if (childDebugElement) {
+      expect(childDebugElement).toBeTruthy();
+    }
   });
-
 });
 
 

@@ -1,14 +1,17 @@
 import {ChangeDetectorRef, Component, ComponentFactoryResolver, Input, OnInit, Type, ViewChild} from '@angular/core';
-import {map, switchMap} from 'rxjs/operators';
-import {zip} from 'rxjs';
+import {map, switchMap, take} from 'rxjs/operators';
+import {Observable, zip} from 'rxjs';
 import { extend } from 'lodash';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {IWidgetConfigResponse} from '../interfaces';
-import {ConfirmationModalComponent} from '../modals/confirmation-modal/confirmation-modal.component';
+import {IAuditResult, IWidgetConfigResponse} from '../interfaces';
 import {FormModalComponent} from '../modals/form-modal/form-modal.component';
 import {WidgetComponent} from '../widget/widget.component';
 import {WidgetDirective} from '../widget/widget.directive';
 import {DashboardService} from '../dashboard.service';
+import {AuditModalComponent} from '../modals/audit-modal/audit-modal.component';
+import {DeleteConfirmModalComponent} from '../modals/delete-confirm-modal/delete-confirm-modal.component';
+import {WidgetState} from './widget-state';
+import moment from 'moment';
 
 @Component({
   selector: 'app-widget-header',
@@ -22,8 +25,15 @@ export class WidgetHeaderComponent implements OnInit {
   @Input() title;
   @Input() status;
   @Input() configForm: Type<any>;
+  @Input() deleteForm: Type<any>;
   @ViewChild(WidgetDirective, {static: true}) appWidget: WidgetDirective;
-  private widgetComponent;
+  public widgetComponent;
+  auditStatus: string;
+  lastUpdated: any;
+  private auditResult: IAuditResult;
+
+  // This only applies for test widget since it has both func & perf tests at once
+  private auditResultOptional: IAuditResult;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
               private cdr: ChangeDetectorRef,
@@ -45,6 +55,10 @@ export class WidgetHeaderComponent implements OnInit {
       this.widgetComponent.status = status;
     }
     this.detectChanges();
+    if (this.widgetComponent) {
+      this.findWidgetAuditStatus(this.widgetComponent.auditType);
+      this.findLastUpdatedTime(this.getCollectorType(this.title));
+    }
   }
 
   // Open the config modal and pass it necessary data. When it is closed pass the results to update them.
@@ -66,9 +80,15 @@ export class WidgetHeaderComponent implements OnInit {
         if (!newConfig) {
           return;
         }
+        // if widget config doesn't exist, set with new config
+        if (!this.widgetComponent.widgetConfigExists) {
+          this.widgetComponent.widgetConfigSubject.next(newConfig);
+        }
+
         this.widgetComponent.stopRefreshInterval();
         this.updateWidgetConfig(newConfig);
       }).catch((error) => {
+        console.log(error);
       });
     }
   }
@@ -92,7 +112,6 @@ export class WidgetHeaderComponent implements OnInit {
         return widgetConfig;
       })
     );
-
     // Take the modified widgetConfig and upsert it.
     const upsertDashboardResult$ = newWidgetConfig$.pipe(
       switchMap(widgetConfig => {
@@ -110,19 +129,112 @@ export class WidgetHeaderComponent implements OnInit {
       }
 
       this.dashboardService.upsertLocally(result.upsertWidgetResponse.component, result.widgetConfig);
-
+      this.widgetComponent.state = WidgetState.READY;
       // Push the new config to the widget, which
       // will trigger whatever is subscribed to
       // widgetConfig$
       this.widgetComponent.widgetConfigSubject.next(result.widgetConfig);
+      // if quality widget, send widget config to other quality components to update widgetConfigExists
+      if (this.widgetComponent.widgetId === 'codeanalysis0') {
+        this.dashboardService.dashboardQualitySubject.next(result.widgetConfig);
+      }
+      // if quality widget, startRefreshInterval for other quality components to update widgetConfigExists
       this.widgetComponent.startRefreshInterval();
     });
   }
 
-  openConfirm() {
-    const modalRef = this.modalService.open(ConfirmationModalComponent);
+  openDeleteConfirm() {
+    const modalRef = this.modalService.open(DeleteConfirmModalComponent);
+    if (!modalRef) {
+      return;
+    }
     modalRef.componentInstance.title = 'Are you sure want to delete this widget from your dashboard?';
-    modalRef.componentInstance.modalType = ConfirmationModalComponent;
+    modalRef.componentInstance.modalType = DeleteConfirmModalComponent;
+
+    // copy from openConfig()
+    modalRef.componentInstance.form = this.deleteForm;
+    modalRef.componentInstance.id = 2;
+
+    if (this.widgetComponent !== undefined) {
+      this.widgetComponent.getCurrentWidgetConfig().subscribe(result => {
+        modalRef.componentInstance.widgetConfig = result;
+      });
+      // Take form data, combine with widget config, and pass to update function
+      modalRef.result.then((deleteConfig) => {
+        if (!deleteConfig) {
+          return;
+        }
+        this.widgetComponent.stopRefreshInterval();
+        this.deleteWidgetConfig(deleteConfig);
+      }).catch((error) => {
+      });
+    }
+  }
+
+  deleteWidgetConfig(widgetConfigToDelete: any): void {
+    // Take the current config and prepare it for deleting
+    const currWidgetConfig$ = this.widgetComponent.getCurrentWidgetConfig().pipe(
+      map( widgetConfig => {
+        extend(widgetConfig, widgetConfigToDelete);
+        return widgetConfig;
+      }),
+      map((widgetConfig: any) => {
+        if (widgetConfig.collectorItemId) {
+          widgetConfig.collectorItemIds = [widgetConfig.collectorItemId];
+          delete widgetConfig.collectorItemId;
+        }
+        return widgetConfig;
+      })
+    );
+
+    // Take the widgetConfig and delete it.
+    const deleteDashboardResult$ = currWidgetConfig$.pipe(
+      switchMap(widgetConfig => {
+        // response returned is component with collectorItems (including ones associated with widget that is being deleted)
+        return this.dashboardService.deleteWidget(widgetConfig);
+      }));
+
+    // Take the new widget and the results from the API call
+    // and have the dashboard service take this data to
+    // publish the new config.
+    zip(currWidgetConfig$, deleteDashboardResult$).pipe(
+      map(([widgetConfig, deleteWidgetResponse]) => ({ widgetConfig, deleteWidgetResponse }))
+    ).subscribe((result: IWidgetConfigResponse) => {
+      if (result.widgetConfig !== null && typeof result.widgetConfig === 'object') {
+        extend(result.widgetConfig, result.deleteWidgetResponse.widget);
+      }
+
+      this.dashboardService.deleteLocally(result.deleteWidgetResponse.component, result.widgetConfig);
+      this.widgetComponent.state = WidgetState.CONFIGURE;
+      // set widgetConfigExists to false for quality only if no other quality collector item exists
+      if (this.widgetComponent.widgetId !== 'codeanalysis0' ||
+        (!this.dashboardService.checkCollectorItemTypeExist('CodeQuality') &&
+        !this.dashboardService.checkCollectorItemTypeExist('StaticSecurityScan') &&
+        !this.dashboardService.checkCollectorItemTypeExist('LibraryPolicy') &&
+        !this.dashboardService.checkCollectorItemTypeExist('Test'))
+      ) {
+        this.widgetComponent.widgetConfigExists = false;
+      }
+      // Push the new config to the widget, which
+      // will trigger whatever is subscribed to
+      // widgetConfig$
+      this.widgetComponent.widgetConfigSubject.next();
+      // if quality widget, send empty widget config to other quality components to update widgetConfigExists
+      if (this.widgetComponent.widgetId === 'codeanalysis0') {
+        this.dashboardService.dashboardQualitySubject.next();
+      }
+      this.widgetComponent.startRefreshInterval();
+    });
+  }
+
+  openAudit() {
+    const modalRef = this.modalService.open(AuditModalComponent);
+    const auditResults: IAuditResult[] = [];
+    auditResults.push(this.auditResult);
+    if (this.auditResultOptional) {
+      auditResults.push(this.auditResultOptional);
+    }
+    modalRef.componentInstance.auditResults = auditResults;
   }
 
   private detectChanges(): void {
@@ -132,5 +244,66 @@ export class WidgetHeaderComponent implements OnInit {
     }
   }
 
+  findWidgetAuditStatus(auditType: any) {
+    if (!auditType) {
+      return;
+    }
+    let auditTypePrimary = auditType;
+    let auditTypeOptional;
+    if (auditType instanceof Array && Array.from(auditType).length > 1) {
+      auditTypePrimary = auditType[0];
+      auditTypeOptional = auditType[1];
+    }
+    this.dashboardService.dashboardAuditConfig$.pipe(map(result => result))
+      .subscribe((auditResults: IAuditResult[]) => {
+        this.auditResult = auditResults.find(auditResult => auditResult.auditType === auditTypePrimary);
+        if (auditTypeOptional) {
+          this.auditResultOptional = auditResults.find(auditResult => auditResult.auditType === auditTypeOptional);
+        }
+        const auditResultOpt: IAuditResult = this.auditResultOptional;
+        if (this.auditResult) {
+          if (this.auditResult.auditStatus === 'OK' && (!auditResultOpt || auditResultOpt.auditStatus === 'OK')) {
+            this.auditStatus = 'OK';
+          } else if (this.auditResult.auditStatus === 'FAIL' || (auditResultOpt && auditResultOpt.auditStatus === 'FAIL')) {
+            this.auditStatus = 'FAIL';
+          } else {
+            this.auditStatus = this.auditResult.auditStatus;
+          }
+        }
+    });
+  }
+  setAuditData(data: Observable<any>) {
+    this.dashboardService.dashboardAuditConfig$ = data;
+  }
+
+  widgetState() {
+    return WidgetState;
+  }
+
+  getCollectorType(title: string): string {
+    let collectorType;
+    switch (title) {
+      case 'Feature': { collectorType = 'CodeQuality'; break; }
+      case 'Build': { collectorType = 'Build'; break; }
+      case 'Deploy': { collectorType = 'Deployment'; break; }
+      case 'Repo': { collectorType = 'SCM'; break; }
+      case 'Static Code Analysis': { collectorType = 'CodeQuality'; break; }
+      case 'Security Analysis': { collectorType = 'StaticSecurityScan'; break; }
+      case 'Open Source': { collectorType = 'LibraryPolicy'; break; }
+      case 'Test': { collectorType = 'Test'; break; }
+      default: { collectorType = ''; break; }
+    }
+    return collectorType;
+  }
+
+  findLastUpdatedTime(collectorType: string) {
+    this.dashboardService.dashboardConfig$.pipe(take(1),
+      map(dashboard => {
+        const collectorItems = dashboard.application.components[0].collectorItems[collectorType];
+        if (collectorItems && collectorItems[0] && ((collectorItems[0].lastUpdated % 1000) > 0)) {
+          return moment(collectorItems[0].lastUpdated).fromNow(true);
+        }
+      })).subscribe(data => this.lastUpdated = data);
+  }
 }
 

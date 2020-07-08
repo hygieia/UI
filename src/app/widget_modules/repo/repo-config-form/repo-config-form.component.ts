@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { map, take } from 'rxjs/operators';
+import {map, take} from 'rxjs/operators';
 import { CollectorService } from 'src/app/shared/collector.service';
 import { DashboardService } from 'src/app/shared/dashboard.service';
 
@@ -16,6 +16,7 @@ export class RepoConfigFormComponent implements OnInit {
   private componentId: string;
 
   repoConfigForm: FormGroup;
+  scm = [];
 
   @Input()
   set widgetConfig(widgetConfig: any) {
@@ -23,7 +24,7 @@ export class RepoConfigFormComponent implements OnInit {
       return;
     }
     this.widgetConfigId = widgetConfig.options.id;
-    this.repoConfigForm.get('scm').setValue(widgetConfig.options.scm);
+    this.repoConfigForm.get('scm').setValue(widgetConfig.options.scm.name);
     this.repoConfigForm.get('url').setValue(widgetConfig.options.url);
     this.repoConfigForm.get('branch').setValue(widgetConfig.options.branch);
     this.repoConfigForm.get('userID').setValue(widgetConfig.options.userID);
@@ -33,7 +34,7 @@ export class RepoConfigFormComponent implements OnInit {
 
   constructor(
     public activeModal: NgbActiveModal,
-    private formBuilder: FormBuilder,
+    public formBuilder: FormBuilder,
     private collectorService: CollectorService,
     private dashboardService: DashboardService
   ) {
@@ -44,24 +45,36 @@ export class RepoConfigFormComponent implements OnInit {
     this.getDashboardComponent();
   }
 
-  private createForm() {
+  public createForm() {
     this.repoConfigForm = this.formBuilder.group({
-      scm: '',
-      url: '',
-      branch: '',
+      scm: ['', Validators.required],
+      url: ['', Validators.required],
+      branch: ['', Validators.required],
       userID: '',
       password: '',
       personalAccessToken: ''
     });
+
+    this.collectorService.collectorsByType('SCM').subscribe(scmCollectors => {
+      const scmTools = scmCollectors.map(currSCMTool => currSCMTool.name);
+      const result = [];
+      for (const currTool of scmTools) {
+        result.push({type: currTool});
+      }
+      this.scm = result;
+    });
   }
 
-  private submitForm() {
+  public submitForm() {
     const newConfig = {
       name: 'repo',
       componentId: this.componentId,
       options: {
-        id: this.widgetConfigId,
-        scm: this.repoConfigForm.value.scm,
+        id: this.widgetConfigId ? this.widgetConfigId : 'repo0',
+        scm: {
+          name: this.repoConfigForm.value.scm,
+          value: this.repoConfigForm.value.scm,
+        },
         url: this.repoConfigForm.value.url,
         branch: this.repoConfigForm.value.branch,
         userID: this.repoConfigForm.value.userID,
@@ -78,4 +91,7 @@ export class RepoConfigFormComponent implements OnInit {
         return dashboard.application.components[0].id;
       })).subscribe(componentId => this.componentId = componentId);
   }
+
+  // convenience getter for easy access to form fields
+  get configForm() { return this.repoConfigForm.controls; }
 }

@@ -32,29 +32,22 @@ export interface IClickListItemDeploy extends IClickListItem {
   regex: string;
 }
 
-export interface IClickListItemFeature extends IClickListItem {
-  sEpicName: string;
-  sEpicUrl: string;
-  sEstimate: string;
-  sEpicNumber: string;
-  sNumber: string;
-  sEstimateTime: string;
-  sName: string;
-  sStatus: string;
-  sUrl: string;
-  progressStatus: string;
-  name: string;
-  url: string;
-  number: string;
-  type: string;
-  date: string;
-  time: string;
-  changeDate: string;
-}
-
 export interface IClickListItemStaticAnalysis extends IClickListData {
   url: string;
   version?: string;
   name?: string;
   timestamp?: any;
+}
+
+export interface IClickListItemTest extends IClickListItem {
+  timestamp: string;
+  description: string;
+  url: string;
+  data: any;
+}
+
+export interface IClickListItemOSS extends IClickListItem {
+  url: string;
+  components: string[];
+  lastUpdated: number;
 }

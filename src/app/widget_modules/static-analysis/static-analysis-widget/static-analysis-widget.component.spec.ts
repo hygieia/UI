@@ -12,7 +12,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { StaticAnalysisService } from '../static-analysis.service';
 import { IStaticAnalysis } from '../interfaces';
 import { StaticAnalysisWidgetComponent} from './static-analysis-widget.component';
-import {GET_DASHBOARD_MOCK} from '../../../shared/dashboard.service.mockdata';
 
 class MockStaticAnalysisService {
 
@@ -31,7 +30,7 @@ class MockStaticAnalysisService {
     lastUpdated: 1553613455230
   };
 
-  fetchDetails(): Observable<IStaticAnalysis[]> {
+  fetchStaticAnalysis(): Observable<IStaticAnalysis[]> {
     return of(this.mockStaticAnalysisData.result);
   }
 }
@@ -49,7 +48,87 @@ describe('StaticAnalysisWidgetComponent', () => {
   let dashboardService: DashboardService;
   let modalService: NgbModal;
   let fixture: ComponentFixture<StaticAnalysisWidgetComponent>;
-  let staticAnalysisTestData: IStaticAnalysis;
+
+  const staticAnalysisTestData = {
+    id: '123',
+    collectorItemId: '123',
+    timestamp: 1552590574305,
+    name: 'sonar-project-1',
+    url: 'https://sonar.com',
+    version: '0.0.1',
+    metrics: [
+      {
+        name: 'blocker_violations',
+        value: '1',
+        formattedValue: '1',
+      },
+      {
+        name: 'critical_violations',
+        value: '1',
+        formattedValue: '1',
+      },
+      {
+        name: 'major_violations',
+        value: '1',
+        formattedValue: '1',
+      },
+      {
+        name: 'violations',
+        value: '3',
+        formattedValue: '3',
+      },
+      {
+        name: 'coverage',
+        value: '55.5',
+        formattedValue: '55.5%',
+      },
+      {
+        name : 'ncloc',
+        value : '123',
+        formattedValue : '123',
+      },
+      {
+        name : 'alert_status',
+        value : 'OK',
+        formattedValue : 'OK',
+      },
+      {
+        name : 'sqale_index',
+        value : '60',
+        formattedValue : '60min'
+      },
+      {
+        name : 'tests',
+        value : '10',
+        formattedValue : '10'
+      },
+      {
+        name : 'test_success_density',
+        value : '10',
+        formattedValue : '10'
+      },
+      {
+        name : 'test_failures',
+        value : '0',
+        formattedValue : '0'
+      },
+      {
+        name : 'test_errors',
+        value : '0',
+        formattedValue : '0'
+      },
+    ],
+  } as IStaticAnalysis;
+
+  const staticAnalysisTestDataMissingMetrics = {
+    id: '123',
+    collectorItemId: '123',
+    timestamp: 1552590574305,
+    name: 'sonar-project-1',
+    url: 'https://sonar.com',
+    version: '0.0.1',
+    metrics: [],
+  } as IStaticAnalysis;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -63,87 +142,18 @@ describe('StaticAnalysisWidgetComponent', () => {
       schemas: [NO_ERRORS_SCHEMA]
     })
       .compileComponents();
+  }));
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(StaticAnalysisWidgetComponent);
     component = fixture.componentInstance;
     staticAnalysisService = TestBed.get(StaticAnalysisService);
     dashboardService = TestBed.get(DashboardService);
     modalService = TestBed.get(NgbModal);
-
-    staticAnalysisTestData = {
-      id: '123',
-      collectorItemId: '123',
-      timestamp: 1552590574305,
-      name: 'sonar-project-1',
-      url: 'https://sonar.com',
-      version: '0.0.1',
-      metrics: [
-        {
-          name: component.staticAnalysisMetrics.blockerViolations,
-          value: '1',
-          formattedValue: '1',
-        },
-        {
-          name: component.staticAnalysisMetrics.criticalViolations,
-          value: '1',
-          formattedValue: '1',
-        },
-        {
-          name: component.staticAnalysisMetrics.majorViolations,
-          value: '1',
-          formattedValue: '1',
-        },
-        {
-          name: component.staticAnalysisMetrics.totalIssues,
-          value: '3',
-          formattedValue: '3',
-        },
-        {
-          name: component.staticAnalysisMetrics.codeCoverage,
-          value: '55.5',
-          formattedValue: '55.5%',
-        },
-        {
-          name : component.staticAnalysisMetrics.numCodeLines,
-          value : '123',
-          formattedValue : '123',
-        },
-        {
-          name : component.staticAnalysisMetrics.alertStatus,
-          value : 'OK',
-          formattedValue : 'OK',
-        },
-        {
-          name : component.staticAnalysisMetrics.techDebt,
-          value : '60',
-          formattedValue : '60min'
-        },
-        {
-          name : component.staticAnalysisMetrics.totalTests,
-          value : '10',
-          formattedValue : '10'
-        },
-        {
-          name : component.staticAnalysisMetrics.testSuccesses,
-          value : '10',
-          formattedValue : '10'
-        },
-        {
-          name : component.staticAnalysisMetrics.testFailures,
-          value : '0',
-          formattedValue : '0'
-        },
-        {
-          name : component.staticAnalysisMetrics.testErrors,
-          value : '0',
-          formattedValue : '0'
-        },
-      ],
-    } as IStaticAnalysis;
-  }));
+    fixture.detectChanges();
+  });
 
   it('should create', () => {
-    fixture.detectChanges();
     expect(component).toBeTruthy();
     expect(staticAnalysisService).toBeTruthy();
     expect(dashboardService).toBeTruthy();
@@ -184,38 +194,22 @@ describe('StaticAnalysisWidgetComponent', () => {
     component.ngAfterViewInit();
   });
 
-  it('should hit startRefreshInterval with results', () => {
-    inject([HttpTestingController, StaticAnalysisWidgetComponent],
-      (httpMock: HttpTestingController, staticComponent: StaticAnalysisWidgetComponent) => {
-        const widgetConfig = {
-          name: 'codeAnalysis',
-          options: {
-            id: this.widgetConfigId,
-          },
-          componentId: this.componentId,
-          collectorItemId: this.staticAnalysisConfigForm.value.staticAnalysisJob.id
-        };
-        staticComponent.ngOnInit();
-        staticComponent.startRefreshInterval();
+  it('should hit startRefreshInterval', () => {
+    const mockConfig = {
+      name: 'codeanalysis',
+      options: {
+        id: 'codeanalysis0',
+      },
+      componentId: '1234',
+      collectorItemId: '5678'
+    };
 
-        const request = httpMock.expectOne(req => req.method === 'GET');
-        request.flush(GET_DASHBOARD_MOCK);
-
-        dashboardService.dashboardConfig$.subscribe(dashboard => {
-          expect(dashboard).toBeTruthy();
-        });
-      });
-
-  });
-
-  it('should loadEmptyChart', () => {
-    component.loadEmptyChart();
-  });
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(StaticAnalysisWidgetComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    spyOn(component, 'getCurrentWidgetConfig').and.returnValues(of(mockConfig), of(mockConfig), of(null));
+    spyOn(staticAnalysisService, 'fetchStaticAnalysis').and.returnValues(of([staticAnalysisTestData]), of([]));
+    spyOn(dashboardService, 'checkCollectorItemTypeExist').and.returnValues(true, false);
+    component.startRefreshInterval();
+    component.startRefreshInterval();
+    component.startRefreshInterval();
   });
 
   it('should generateProjectDetails', () => {
@@ -226,8 +220,8 @@ describe('StaticAnalysisWidgetComponent', () => {
     expect(component.charts[0].data.name).toEqual('sonar-project-1');
     expect(component.charts[0].data.timestamp).toEqual(new Date(1552590574305));
 
-    // data is null
-    component.generateProjectDetails(null);
+    // missing project detail metrics
+    component.generateProjectDetails(staticAnalysisTestDataMissingMetrics);
   });
 
   it('should generateCoverage', () => {
@@ -235,8 +229,8 @@ describe('StaticAnalysisWidgetComponent', () => {
     expect(component.charts[1].data.results[0].value).toEqual(55.5);
     expect(component.charts[1].data.customLabelValue).toEqual(123);
 
-    // data is null
-    component.generateCoverage(null);
+    // missing coverage metrics
+    component.generateCoverage(staticAnalysisTestDataMissingMetrics);
   });
 
   it('should generateViolations', () => {
@@ -246,16 +240,29 @@ describe('StaticAnalysisWidgetComponent', () => {
     expect(component.charts[2].data[2].value).toEqual(1);
     expect(component.charts[2].data[3].value).toEqual(3);
 
-    // data is null
-    component.generateViolations(null);
+    // missing violation metrics
+    component.generateViolations(staticAnalysisTestDataMissingMetrics);
   });
 
   it('should generateUnitTestMetrics', () => {
     component.generateUnitTestMetrics(staticAnalysisTestData);
     expect(component.charts[3].data.items.length).toEqual(4);
 
-    // data is null
-    component.generateUnitTestMetrics(null);
+    // missing unit test metrics
+    component.generateUnitTestMetrics(staticAnalysisTestDataMissingMetrics);
+  });
+
+  it('should assign default if no data', () => {
+    component.hasData = false;
+    component.setDefaultIfNoData();
+    expect(component.charts[0].data.items[0].title).toEqual('No Data Found');
+    expect(component.charts[1].data.results[0].value).toEqual(0);
+    expect(component.charts[1].data.customLabelValue).toEqual(0);
+    expect(component.charts[2].data[0].value).toEqual(0);
+    expect(component.charts[2].data[1].value).toEqual(0);
+    expect(component.charts[2].data[2].value).toEqual(0);
+    expect(component.charts[2].data[3].value).toEqual(0);
+    expect(component.charts[3].data.items[0].title).toEqual('No Data Found');
   });
 
 });

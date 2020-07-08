@@ -31,9 +31,18 @@ class MockRepoService {
     ]
   };
 
-  fetchDetails(): Observable<IRepo[]> {
+  fetchCommits(): Observable<IRepo[]> {
     return of(this.mockRepoData.result);
   }
+
+  fetchPullRequests(): Observable<IRepo[]> {
+    return of(this.mockRepoData.result);
+  }
+
+  fetchIssues(): Observable<IRepo[]> {
+    return of(this.mockRepoData.result);
+  }
+
 }
 
 @NgModule({
@@ -49,6 +58,22 @@ describe('RepoWidgetComponent', () => {
   let dashboardService: DashboardService;
   let modalService: NgbModal;
   let fixture: ComponentFixture<RepoWidgetComponent>;
+
+  const mockConfig = {
+    name: 'repo',
+    componentId: '1234',
+    options: {
+      options: {
+        id: 'testId',
+        scm: 'testScm',
+        url: 'testUrl',
+        branch: 'testBranch',
+        userID: 'testUser',
+        password: 'testPass',
+        personalAccessToken: 'testPersonalAccess',
+      }
+    },
+  };
 
   const IRepo1 = {
     id: 'testId',
@@ -105,12 +130,16 @@ describe('RepoWidgetComponent', () => {
     })
       .compileComponents();
 
+  }));
+
+  beforeEach(() => {
     fixture = TestBed.createComponent(RepoWidgetComponent);
     component = fixture.componentInstance;
     repoService = TestBed.get(RepoService);
     dashboardService = TestBed.get(DashboardService);
     modalService = TestBed.get(NgbModal);
-  }));
+    fixture.detectChanges();
+  });
 
   it('should hit generateRepoPerDay', () => {
     component.generateRepoPerDay([IRepo1], [IRepo2], [IRepo3]);
@@ -144,9 +173,73 @@ describe('RepoWidgetComponent', () => {
     expect(fixture).toBeTruthy();
   });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(RepoWidgetComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  it('should call ngOnInit', () => {
+    component.ngOnInit();
   });
+
+  it('should call ngAfterViewInit', () => {
+    component.ngAfterViewInit();
+  });
+
+  it('should call startRefreshInterval', () => {
+    spyOn(component, 'getCurrentWidgetConfig').and.returnValues(
+      of(mockConfig),
+      of(mockConfig),
+      of(mockConfig),
+      of(mockConfig),
+      of(null));
+    spyOn(repoService, 'fetchCommits').and.returnValues(
+      of([IRepo1]),
+      of([IRepo1]),
+      of([]),
+      of([]),
+    );
+    spyOn(repoService, 'fetchPullRequests').and.returnValues(
+      of([IRepo2]),
+      of([]),
+      of([IRepo2]),
+      of([]),
+    );
+    spyOn(repoService, 'fetchIssues').and.returnValues(
+      of([IRepo3]),
+      of([]),
+      of([]),
+      of([IRepo3]),
+    );
+
+    component.startRefreshInterval();
+    component.startRefreshInterval();
+    component.startRefreshInterval();
+    component.startRefreshInterval();
+    component.startRefreshInterval();
+  });
+
+  it('should hit stopRefreshInterval', () => {
+    component.stopRefreshInterval();
+  });
+
+  it('should assign default if no data', () => {
+    component.hasData = false;
+    component.setDefaultIfNoData();
+    expect(component.charts[0].data.dataPoints[0].series).toEqual([{name: new Date(), value: 0, data: 'Commits'}]);
+    expect(component.charts[0].data.dataPoints[1].series).toEqual([{name: new Date(), value: 0, data: 'Pulls'}]);
+    expect(component.charts[0].data.dataPoints[2].series).toEqual([{name: new Date(), value: 0, data: 'Issues'}]);
+    expect(component.charts[1].data).toEqual('0');
+    expect(component.charts[2].data).toEqual('0');
+    expect(component.charts[3].data).toEqual('0');
+    expect(component.charts[4].data).toEqual('0');
+    expect(component.charts[5].data).toEqual('0');
+    expect(component.charts[6].data).toEqual('0');
+    expect(component.charts[7].data).toEqual('0');
+    expect(component.charts[8].data).toEqual('0');
+    expect(component.charts[9].data).toEqual('0');
+    expect(component.charts[10].data).toEqual('0');
+    expect(component.charts[11].data).toEqual('0');
+    expect(component.charts[12].data).toEqual('0');
+    expect(component.charts[13].data).toEqual('0');
+    expect(component.charts[14].data).toEqual('0');
+    expect(component.charts[15].data).toEqual('0');
+    expect(component.charts[16].data).toEqual('0');
+    expect(component.charts[17].data).toEqual('0');
+    expect(component.charts[18].data).toEqual('0');  });
 });

@@ -1,0 +1,34 @@
+.chartParent {
+  padding: 5px;
+  width: 400px;
+}
+
+.divTable{
+  display: table;
+  width: 100%;
+}
+
+.divTableRow {
+  display: table-row;
+}
+
+.divTableCell {
+  display: table-cell;
+  padding: 10px;
+}
+
+.divTableBody {
+  display: table-row-group;
+}
+
+#commits {
+  color: #04eeff
+}
+
+#pull {
+  color: #04eb0f
+}
+
+#issues {
+  color: red
+}

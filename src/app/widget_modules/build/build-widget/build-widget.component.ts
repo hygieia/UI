@@ -7,22 +7,23 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { of, Subscription } from 'rxjs';
-import { distinctUntilChanged, startWith, switchMap } from 'rxjs/operators';
-import { IClickListData, IClickListItem } from 'src/app/shared/charts/click-list/click-list-interfaces';
-import { DashStatus } from 'src/app/shared/dash-status/DashStatus';
-import { DashboardService } from 'src/app/shared/dashboard.service';
-import { LayoutDirective } from 'src/app/shared/layouts/layout.directive';
-import { TwoByTwoLayoutComponent } from 'src/app/shared/layouts/two-by-two-layout/two-by-two-layout.component';
-import { WidgetComponent } from 'src/app/shared/widget/widget.component';
-import { BuildDetailComponent } from '../build-detail/build-detail.component';
-import { BuildService } from '../build.service';
-import { IBuild } from '../interfaces';
-import { BUILD_CHARTS } from './build-charts';
+import {ActivatedRoute} from '@angular/router';
+import {of, Subscription} from 'rxjs';
+import {distinctUntilChanged, startWith, switchMap} from 'rxjs/operators';
+import {IClickListData, IClickListItem} from 'src/app/shared/charts/click-list/click-list-interfaces';
+import {DashStatus} from 'src/app/shared/dash-status/DashStatus';
+import {DashboardService} from 'src/app/shared/dashboard.service';
+import {LayoutDirective} from 'src/app/shared/layouts/layout.directive';
+import {TwoByTwoLayoutComponent} from 'src/app/shared/layouts/two-by-two-layout/two-by-two-layout.component';
+import {WidgetComponent} from 'src/app/shared/widget/widget.component';
+import {BuildDetailComponent} from '../build-detail/build-detail.component';
+import {BuildService} from '../build.service';
+import {IBuild} from '../interfaces';
+import {BUILD_CHARTS} from './build-charts';
 // @ts-ignore
 import moment from 'moment';
 import * as __ from 'lodash';
+import {WidgetState} from '../../../shared/widget-header/widget-state';
 
 @Component({
   selector: 'app-build-widget',
@@ -58,6 +59,7 @@ export class BuildWidgetComponent extends WidgetComponent implements OnInit, Aft
     this.layout = TwoByTwoLayoutComponent;
     // Chart configuration moved to external file
     this.charts = BUILD_CHARTS;
+    this.auditType = '';
     this.init();
   }
 
@@ -74,18 +76,23 @@ export class BuildWidgetComponent extends WidgetComponent implements OnInit, Aft
   // cycle.
   startRefreshInterval() {
     this.intervalRefreshSubscription = this.dashboardService.dashboardRefresh$.pipe(
-      startWith(-1), // Refresh this widget seperate from dashboard (ex. config is updated)
+      startWith(-1), // Refresh this widget separate from dashboard (ex. config is updated)
       distinctUntilChanged(), // If dashboard is loaded the first time, ignore widget double refresh
       switchMap(_ => this.getCurrentWidgetConfig()),
       switchMap(widgetConfig => {
         if (!widgetConfig) {
           return of([]);
         }
+        this.widgetConfigExists = true;
+        this.state = WidgetState.READY;
         this.buildTimeThreshold = 1000 * 60 * widgetConfig.options.buildDurationThreshold;
         return this.buildService.fetchDetails(widgetConfig.componentId, this.BUILDS_PER_DAY_TIME_RANGE);
       })).subscribe(result => {
-        if (result) {
+        this.hasData = (result && result.length > 0);
+        if (this.hasData) {
           this.loadCharts(result);
+        } else {
+          this.setDefaultIfNoData();
         }
       });
   }
@@ -283,5 +290,20 @@ export class BuildWidgetComponent extends WidgetComponent implements OnInit, Aft
 
   private checkBuildStatus(build: IBuild, status: string): boolean {
     return build.buildStatus === status;
+  }
+
+  setDefaultIfNoData() {
+    if (!this.hasData) {
+      this.charts[0].data.dataPoints[0].series = [{name: new Date(), value: 0, data: 'All Builds'}];
+      this.charts[0].data.dataPoints[1].series = [{name: new Date(), value: 0, data: 'Failed Builds'}];
+      this.charts[1].data = { items: [{ title: 'No Data Found' }]};
+      this.charts[2].data[0] = [{name: new Date(), value: 0}];
+      this.charts[2].colorScheme.domain = ['red'];
+      this.charts[2].data[1][0].series = [{name: 'No Data Found', value: 0}];
+      this.charts[3].data[0].value = 0;
+      this.charts[3].data[1].value = 0;
+      this.charts[3].data[2].value = 0;
+    }
+    super.loadComponent(this.childLayoutTag);
   }
 }

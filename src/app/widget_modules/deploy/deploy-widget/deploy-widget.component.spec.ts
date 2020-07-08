@@ -42,6 +42,7 @@ class MockDeployService {
   fetchDetails(): Observable<{ lastUpdated: number; name: string; units: { lastUpdated: number; servers: { name: string; online: boolean }[]; name: string; jobURL: string; deployed: boolean; version: string }[]; url: string }[]> {
     return of(this.mockDeployData.result);
   }
+
 }
 
 @NgModule({
@@ -98,6 +99,31 @@ describe('DeployWidgetComponent', () => {
     ],
   } as IDeploy;
 
+  const mockDeployData = {
+    result: [
+      {
+        name : 'QA',
+        url : 'mydeployurl.com/something/something',
+        units : [
+          {
+            name : 'api.jar',
+            version : '2.0.5',
+            jobURL: 'mydeployurl.com/something/something',
+            deployed : true,
+            lastUpdated : 1529001705028,
+            servers : [
+              {
+                name : 'msp_tetris_dws_04',
+                online : false,
+              }
+            ],
+          }
+        ],
+        lastUpdated : 1560280286912
+      }
+    ]
+  };
+
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -110,12 +136,42 @@ describe('DeployWidgetComponent', () => {
     })
       .compileComponents();
 
+  }));
+
+  beforeEach(() => {
     fixture = TestBed.createComponent(DeployWidgetComponent);
     component = fixture.componentInstance;
     deployService = TestBed.get(DeployService);
     dashboardService = TestBed.get(DashboardService);
     modalService = TestBed.get(NgbModal);
-  }));
+    fixture.detectChanges();
+  });
+
+  it('should call ngOnInit', () => {
+    component.ngOnInit();
+  });
+
+  it('should call ngAfterViewInit', () => {
+    component.ngAfterViewInit();
+  });
+
+  it('should call startRefreshInterval', () => {
+    const mockConfig = {
+      name: 'deploy',
+      options: {
+        id: 'deploy0',
+        deployRegex: '',
+        deployAggregateServer: ''
+      },
+      componentId: '1234',
+      collectorItemId: '5678'
+    };
+
+    spyOn(component, 'getCurrentWidgetConfig').and.returnValues(of(mockConfig), of(null));
+    spyOn(deployService, 'fetchDetails').and.returnValues(of(mockDeployData.result), of([]));
+    component.startRefreshInterval();
+    component.startRefreshInterval();
+  });
 
   it('should hit stopRefreshInterval', () => {
     component.stopRefreshInterval();
@@ -128,8 +184,7 @@ describe('DeployWidgetComponent', () => {
   it('should hit generateLatestDeployData and startRefreshInterval', () => {
     component.generateLatestDeployData([IDeploy1, IDeploy2]);
     component.startRefreshInterval();
-
-    component.generateLatestDeployData(null);
+    component.generateLatestDeployData([IDeploy1]);
   });
 
   it('should create', () => {
@@ -140,9 +195,9 @@ describe('DeployWidgetComponent', () => {
     expect(fixture).toBeTruthy();
   });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(DeployWidgetComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  it('should assign default if no data', () => {
+    component.hasData = false;
+    component.setDefaultIfNoData();
+    expect(component.charts[0].data.items[0].title).toEqual('No Data Found');
   });
 });

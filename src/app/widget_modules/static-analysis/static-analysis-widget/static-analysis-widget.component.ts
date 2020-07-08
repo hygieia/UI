@@ -24,6 +24,7 @@ import {STATICANALYSIS_CHARTS} from './static-analysis-charts';
 import {IStaticAnalysis} from '../interfaces';
 import {StaticAnalysisDetailComponent} from '../static-analysis-detail/static-analysis-detail.component';
 import {isUndefined} from 'util';
+import {WidgetState} from '../../../shared/widget-header/widget-state';
 
 @Component({
   selector: 'app-static-analysis-widget',
@@ -81,6 +82,7 @@ export class StaticAnalysisWidgetComponent extends WidgetComponent implements On
     this.widgetId = 'codeanalysis0';
     this.layout = TwoByTwoLayoutComponent;
     this.charts = STATICANALYSIS_CHARTS;
+    this.auditType = 'CODE_QUALITY';
     this.init();
   }
 
@@ -102,17 +104,34 @@ export class StaticAnalysisWidgetComponent extends WidgetComponent implements On
       switchMap(_ => this.getCurrentWidgetConfig()),
       switchMap(widgetConfig => {
         if (!widgetConfig) {
+          this.widgetConfigExists = false;
           return of([]);
+        }
+        this.widgetConfigExists = true;
+        // check if collector item type is tied to dashboard
+        // if true, set state to READY, otherwise keep at default CONFIGURE
+        if (this.dashboardService.checkCollectorItemTypeExist('CodeQuality')) {
+          this.state = WidgetState.READY;
         }
         return this.staticAnalysisService.fetchStaticAnalysis(widgetConfig.componentId, 1);
       })).subscribe(result => {
-        if (result && result.length > 0) {
+        this.hasData = result && result.length > 0;
+        if (this.hasData) {
           this.loadCharts(result[0]);
         } else {
-          // code quality item could not be found
-          this.loadEmptyChart();
+          // code quality collector item could not be found
+          this.setDefaultIfNoData();
         }
       });
+
+    // for quality widget, subscribe to updates from other quality components
+    this.dashboardService.dashboardQualityConfig$.subscribe(result => {
+      if (result) {
+        this.widgetConfigSubject.next(result);
+      } else {
+        this.widgetConfigSubject.next();
+      }
+    });
   }
 
   // Unsubscribe from the widget refresh observable, which stops widget updating.
@@ -130,17 +149,12 @@ export class StaticAnalysisWidgetComponent extends WidgetComponent implements On
     super.loadComponent(this.childLayoutTag);
   }
 
-  loadEmptyChart() {
-    super.loadComponent(this.childLayoutTag);
-  }
-
   // *********************** DETAILS/QUALITY *********************
 
   generateProjectDetails(result: IStaticAnalysis) {
 
-    if (!result) {
-      return;
-    }
+    const qualityGate = result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.alertStatus);
+    const techDebt = result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.techDebt);
 
     const latestDetails = [
       {
@@ -159,13 +173,13 @@ export class StaticAnalysisWidgetComponent extends WidgetComponent implements On
         status: null,
         statusText: '',
         title: 'Quality Gate',
-        subtitles: [result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.alertStatus).value],
+        subtitles: [isUndefined(qualityGate) ? '' : qualityGate.value],
       },
       {
         status: null,
         statusText: '',
         title: 'Technical Debt',
-        subtitles: [result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.techDebt).formattedValue],
+        subtitles: [isUndefined(techDebt) ? '' : techDebt.formattedValue],
       },
     ] as IClickListItem[];
 
@@ -185,45 +199,32 @@ export class StaticAnalysisWidgetComponent extends WidgetComponent implements On
 
   generateCoverage(result: IStaticAnalysis) {
 
-    if (!result) {
-      return;
-    }
+    const coverage = result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.codeCoverage);
+    const loc = result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.numCodeLines);
 
-    const coverage = parseFloat(result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.codeCoverage).value);
-    const loc = parseFloat(result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.numCodeLines).value);
-
-    this.charts[1].data.results[0].value = coverage;
-    this.charts[1].data.customLabelValue = loc;
-
+    this.charts[1].data.results[0].value = isUndefined(coverage) ? 0 : parseFloat(coverage.value);
+    this.charts[1].data.customLabelValue = isUndefined(loc) ? 0 : parseFloat(loc.value);
   }
 
   // *********************** VIOLATIONS *****************************
 
   generateViolations(result: IStaticAnalysis) {
 
-    if (!result) {
-      return;
-    }
+    const blocker = result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.blockerViolations);
+    const critical = result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.criticalViolations);
+    const major = result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.majorViolations);
+    const total = result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.totalIssues);
 
-    const blocker = parseFloat(result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.blockerViolations).value);
-    const critical = parseFloat(result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.criticalViolations).value);
-    const major = parseFloat(result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.majorViolations).value);
-    const total = parseFloat(result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.totalIssues).value);
-
-    this.charts[2].data[0].value = blocker;
-    this.charts[2].data[1].value = critical;
-    this.charts[2].data[2].value = major;
-    this.charts[2].data[3].value = total;
+    this.charts[2].data[0].value = isUndefined(blocker) ? 0 : parseFloat(blocker.value);
+    this.charts[2].data[1].value = isUndefined(critical) ? 0 : parseFloat(critical.value);
+    this.charts[2].data[2].value = isUndefined(major) ? 0 : parseFloat(major.value);
+    this.charts[2].data[3].value = isUndefined(total) ? 0 : parseFloat(total.value);
 
   }
 
   // *********************** UNIT TEST METRICS ****************************
 
   generateUnitTestMetrics(result: IStaticAnalysis) {
-
-    if (!result) {
-      return;
-    }
 
     const testSuccesses = result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.testSuccesses);
     const testFailures = result.metrics.find(metric => metric.name === this.staticAnalysisMetrics.testFailures);
@@ -263,6 +264,20 @@ export class StaticAnalysisWidgetComponent extends WidgetComponent implements On
       clickableHeader: null,
     } as IClickListData;
 
+  }
+
+  setDefaultIfNoData() {
+    if (!this.hasData) {
+      this.charts[0].data = { items: [{ title: 'No Data Found' }]};
+      this.charts[1].data.results[0].value = 0;
+      this.charts[1].data.customLabelValue = 0;
+      this.charts[2].data[0].value = 0;
+      this.charts[2].data[1].value = 0;
+      this.charts[2].data[2].value = 0;
+      this.charts[2].data[3].value = 0;
+      this.charts[3].data = { items: [{ title: 'No Data Found' }]};
+    }
+    super.loadComponent(this.childLayoutTag);
   }
 
 }
