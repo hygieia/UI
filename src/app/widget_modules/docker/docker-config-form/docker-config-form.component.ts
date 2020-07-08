@@ -22,10 +22,8 @@ export class DockerConfigFormComponent implements OnInit {
   dashboard: any;	 
   dockerConfigForm: FormGroup;
 
-
   @Input()
   set widgetConfig(widgetConfig: any) {
-
     this.widgetConfigId = widgetConfig.options.id;
     this.dockerConfigForm.get('instanceURL').setValue(widgetConfig.options.instanceURL);
     this.dockerConfigForm.get('instancePort').setValue(widgetConfig.options.instancePort);
@@ -38,26 +36,23 @@ export class DockerConfigFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private collectorService: CollectorService,
     private dashboardService: DashboardService,
-    private dockerService: DockerService 
-  ) {
+    private dockerService: DockerService) {
     this.createForm();
-  }
+  	}
 
   ngOnInit() {
     this.loadSavedDockerJob();
   }
 
-ngAfterViewInit() 
-{
-	
-	  this.getDashboardComponent();
-}
+  ngAfterViewInit() {
+	this.getDashboardComponent();
+  }
 
   private createForm() {
     this.dockerConfigForm = this.formBuilder.group({
       instanceURL: ['', Validators.required],
       instancePort: ['', Validators.required],
-      apiToken: ['', ],
+      apiToken: [''],
 	  description: [''],
     });
   }
@@ -79,13 +74,10 @@ ngAfterViewInit()
     this.activeModal.close(newConfig);
   }
 
-
-
   private loadSavedDockerJob() {
     this.dashboardService.dashboardConfig$.pipe(take(1),
       map(dashboard => {
         const dockerCollector = dashboard.application.components[0].collectorItems.Docker;
-
         if (dockerCollector) {
           const dockerId = dockerCollector[0].id;
           return dockerId;
@@ -98,7 +90,6 @@ ngAfterViewInit()
         }
         return of(null);
       })).subscribe(collectorData => {
-        console.log(collectorData)
         this.collectorItemId = collectorData.id;
       });
   }

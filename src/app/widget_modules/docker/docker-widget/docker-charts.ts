@@ -12,30 +12,36 @@ import { IChart } from 'src/app/shared/interfaces';
 
 
 export let DOCKER_CHARTS: IChart[] = [
- 
- {
-  title: 'Container Details',
-  component: ClickListComponent,
+  {
+  title: 'CPU Usges',
+  component: GaugeChartComponent,
   data:{},
 
     xAxisLabel: '',
     yAxisLabel: '',
-    colorScheme: {}
+    colorScheme: 'vivid'
+  },
+
+ {
+    title: 'Docker MetaData Count',
+    component: NumberCardChartComponent,
+    data: [],
+    xAxisLabel: '',
+    yAxisLabel: '',
+    colorScheme: 'vivid'
   },
  {
   title: 'Volume Details',
   component: ClickListComponent,
   data:{},
-
-    xAxisLabel: '',
-    yAxisLabel: '',
-    colorScheme: {}
+  xAxisLabel: '',
+  yAxisLabel: '',
+  colorScheme: {}
   },
  {
-  title: 'Networks Details',
+  title: 'Container Details',
   component: ClickListComponent,
   data:{},
-
     xAxisLabel: '',
     yAxisLabel: '',
     colorScheme: {}
@@ -44,14 +50,16 @@ export let DOCKER_CHARTS: IChart[] = [
   title: 'Process Details',
   component: ClickListComponent,
   data:{},
-
-    xAxisLabel: '',
-    yAxisLabel: '',
-    colorScheme: {}
+  xAxisLabel: '',
+  yAxisLabel: '',
+  colorScheme: {}
+  },
+ {
+  title: 'Networks Details',
+  component: ClickListComponent,
+  data:{},
+  xAxisLabel: '',
+  yAxisLabel: '',
+  colorScheme: {}
   }
-
-
- 
-  	
-  
 ];
