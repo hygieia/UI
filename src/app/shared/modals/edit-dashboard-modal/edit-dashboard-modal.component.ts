@@ -10,11 +10,13 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardItem } from '../../model/dashboard-item';
 import { Observable, of } from 'rxjs';
 import {DashboardService} from '../../dashboard.service';
+import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 @Component({
     selector: 'app-edit-dashboard-modal',
     templateUrl: './edit-dashboard-modal.component.html',
-    styleUrls: ['./edit-dashboard-modal.component.scss']
+    styleUrls: ['./edit-dashboard-modal.component.scss'],
+    providers: [Location, {provide: LocationStrategy, useClass: PathLocationStrategy}]
 })
 export class EditDashboardModalComponent implements OnInit {
 
@@ -55,7 +57,7 @@ export class EditDashboardModalComponent implements OnInit {
     constructor(private dashboardData: DashboardDataService, private authService: AuthService,
                 private widgetManager: WidgetManagerService, private userData: UserDataService,
                 private cmdbData: CmdbDataService, private dashboardService: DashboardService,
-                private formBulider: FormBuilder, public activeModal: NgbActiveModal) { }
+                private formBulider: FormBuilder, public activeModal: NgbActiveModal, private location: Location) { }
 
     ngOnInit() {
         this.username = this.authService.getUserName();
@@ -86,13 +88,12 @@ export class EditDashboardModalComponent implements OnInit {
             configurationItemBusApp: ['']
         });
 
-        this.getConfigItem('app', '');
+      this.getConfigItem('app', '');
         this.getConfigItemComponent('', '');
         setTimeout(() => {
             console.log('dashboardItem' + JSON.stringify(this.dashboardItem));
             this.cdfForm.get('dashboardTitle').setValue(this.getDashboardTitle());
         }, 100);
-
     }
 
         searchconfigItemBusServ = (text$: Observable<string>) =>
@@ -226,6 +227,8 @@ export class EditDashboardModalComponent implements OnInit {
                 this.submitScoreSettings('');
                 break;
         }
+        this.activeModal.close();
+        window.location.reload();
     }
 
     submit(form) {
