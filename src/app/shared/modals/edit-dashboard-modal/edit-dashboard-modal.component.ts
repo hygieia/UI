@@ -87,8 +87,7 @@ export class EditDashboardModalComponent implements OnInit {
             configurationItemBusServ: [''],
             configurationItemBusApp: ['']
         });
-
-      this.getConfigItem('app', '');
+        this.getConfigItem('app', '');
         this.getConfigItemComponent('', '');
         setTimeout(() => {
             console.log('dashboardItem' + JSON.stringify(this.dashboardItem));
