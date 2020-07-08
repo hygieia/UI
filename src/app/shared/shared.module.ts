@@ -93,9 +93,19 @@ import {
 import {TestDeleteFormComponent} from '../widget_modules/test/test-delete-form/test-delete-form.component';
 import {RotationChartComponent} from './charts/rotation/rotation-chart.component';
 import {NbActionsModule, NbCardModule, NbSearchModule, NbTabsetModule, NbUserModule} from '@nebular/theme';
+import {EditDashboardModalComponent} from './modals/edit-dashboard-modal/edit-dashboard-modal.component';
+import {AdminFilterPipe} from './pipes/filter.pipe';
+import {AdminOrderByPipe} from './pipes/order-by.pipe';
+import {DashEditComponent} from './dash-edit/dash-edit.component';
+import {DashTrashComponent} from './dash-trash/dash-trash.component';
+import {GeneralDeleteComponent} from './modals/general-delete/general-delete.component';
+import {UserDataService} from './services/user-data.service';
+import {DashboardDataService} from './services/dashboard-data.service';
 
 @NgModule({
   declarations: [
+    AdminFilterPipe,
+    AdminOrderByPipe,
     DeployConfigFormComponent,
     DeployDeleteFormComponent,
     BarHorizontalComponent,
@@ -112,16 +122,20 @@ import {NbActionsModule, NbCardModule, NbSearchModule, NbTabsetModule, NbUserMod
     ComboSeriesVerticalComponent,
     ConfirmationModalComponent,
     DashboardComponent,
+    DashEditComponent,
+    DashTrashComponent,
     DeleteConfirmModalComponent,
     DeleteConfirmModalDirective,
     DetailModalComponent,
     DetailModalDirective,
+    EditDashboardModalComponent,
     FeatureConfigFormComponent,
     FeatureDeleteFormComponent,
     FeatureDetailComponent,
     FeatureWidgetComponent,
     FormModalComponent,
     FormModalDirective,
+    GeneralDeleteComponent,
     HorizontalBarChartComponent,
     LayoutComponent,
     LayoutDirective,
@@ -190,12 +204,14 @@ import {NbActionsModule, NbCardModule, NbSearchModule, NbTabsetModule, NbUserMod
     ConfirmationModalComponent,
     DeleteConfirmModalComponent,
     DetailModalComponent,
+    EditDashboardModalComponent,
     FeatureConfigFormComponent,
     FeatureDeleteFormComponent,
     FeatureDetailComponent,
     FeatureWidgetComponent,
     FormModalComponent,
     GaugeChartComponent,
+    GeneralDeleteComponent,
     HorizontalBarChartComponent,
     LineAndBarChartComponent,
     LineChartComponent,
@@ -233,6 +249,10 @@ import {NbActionsModule, NbCardModule, NbSearchModule, NbTabsetModule, NbUserMod
     SecurityScanWidgetComponent,
     AuditModalComponent
   ],
+  providers: [
+    UserDataService,
+    DashboardDataService
+  ],
   imports: [
     CommonModule,
     DragDropModule,
@@ -250,6 +270,8 @@ import {NbActionsModule, NbCardModule, NbSearchModule, NbTabsetModule, NbUserMod
     NbTabsetModule,
   ],
   exports: [
+    AdminFilterPipe,
+    AdminOrderByPipe,
     BarHorizontalComponent,
     BuildWidgetComponent,
     CaponeTemplateComponent,
@@ -258,6 +280,9 @@ import {NbActionsModule, NbCardModule, NbSearchModule, NbTabsetModule, NbUserMod
     ComboChartComponent,
     ComboSeriesVerticalComponent,
     CommonModule,
+    DashEditComponent,
+    DashTrashComponent,
+    GeneralDeleteComponent,
     HorizontalBarChartComponent,
     LayoutComponent,
     LayoutDirective,

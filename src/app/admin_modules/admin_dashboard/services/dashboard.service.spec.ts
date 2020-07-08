@@ -3,7 +3,7 @@ import { TestBed, inject } from '@angular/core/testing';
 import { AdminDashboardService } from './dashboard.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HttpClientModule } from '@angular/common/http';
-import { DASHBOARDDATA, DASHBOARDITEM } from './user-data.service.mockdata';
+import { DASHBOARDDATA, DASHBOARDITEM } from '../../../shared/services/user-data.service.mockdata';
 
 describe('AdminDashboardService', () => {
   beforeEach(() => TestBed.configureTestingModule({

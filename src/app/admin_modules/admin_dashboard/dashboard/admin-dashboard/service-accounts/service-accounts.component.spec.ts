@@ -1,24 +1,24 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 // tslint:disable-next-line:max-line-length
-import { DashEditComponent } from '../dash-edit/dash-edit.component';
-import { DashTrashComponent } from '../dash-trash/dash-trash.component';
-import { UserDataService } from '../../../services/user-data.service';
+import { DashEditComponent } from '../../../../../shared/dash-edit/dash-edit.component';
+import { DashTrashComponent } from '../../../../../shared/dash-trash/dash-trash.component';
+import { UserDataService } from '../../../../../shared/services/user-data.service';
 import {NgbActiveModal, NgbModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { AdminFilterPipe } from '../../../pipes/filter.pipe';
+import { AdminFilterPipe } from '../../../../../shared/pipes/filter.pipe';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { AdminOrderByPipe } from '../../../pipes/order-by.pipe';
+import { AdminOrderByPipe } from '../../../../../shared/pipes/order-by.pipe';
 import {ServiceAccountsComponent} from './service-accounts.component';
 import {NgModule} from '@angular/core';
 // tslint:disable-next-line:max-line-length
 import {CreateOrUpdateServiceAccountComponent} from '../modal/create-or-update-service-account/create-or-update-service-account.component';
-import { AdminDeleteComponent } from '../modal/admin-delete/admin-delete.component';
+import {GeneralDeleteComponent} from '../../../../../shared/modals/general-delete/general-delete.component';
 
 @NgModule({
   declarations: [ServiceAccountsComponent, DashEditComponent, DashTrashComponent, AdminFilterPipe,
     AdminOrderByPipe, CreateOrUpdateServiceAccountComponent,
-    AdminDeleteComponent],
+    GeneralDeleteComponent],
   providers: [UserDataService, NgbModal],
   imports: [FormsModule, CommonModule, ReactiveFormsModule, NgbModule, HttpClientTestingModule],
   exports: [
@@ -28,7 +28,7 @@ import { AdminDeleteComponent } from '../modal/admin-delete/admin-delete.compone
   entryComponents: [
     ServiceAccountsComponent,
     CreateOrUpdateServiceAccountComponent,
-    AdminDeleteComponent
+    GeneralDeleteComponent
   ]
 })
 class TestModule { }
@@ -46,7 +46,7 @@ describe('ServiceAccountsComponent', () => {
         CreateOrUpdateServiceAccountComponent,
         AdminFilterPipe,
         AdminOrderByPipe,
-        AdminDeleteComponent],
+        GeneralDeleteComponent],
       providers: [UserDataService, FormBuilder, NgbActiveModal],
       imports: [FormsModule, NgbModule, CommonModule, ReactiveFormsModule, HttpClientTestingModule]
     })

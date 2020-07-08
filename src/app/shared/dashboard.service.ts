@@ -1,10 +1,9 @@
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { cloneDeep, extend } from 'lodash';
 import {interval, Observable, of, ReplaySubject, Subject, Subscription} from 'rxjs';
 import {catchError, filter, map, startWith, take} from 'rxjs/operators';
 import {IAuditResult} from './interfaces';
-import {IDashboards} from '../landing_page/dashboard-list/dashboard-list';
 
 @Injectable({
   providedIn: 'root'
@@ -74,6 +73,22 @@ export class DashboardService {
       this.http.post(this.dashboardV2Route + this.dashboardId + '/widget', widgetConfig);
 
     return apiCall;
+  }
+
+  getBusSerToolTipText() {
+    return 'A top level name which support Business function.';
+  }
+
+  getBusAppToolTipText() {
+    return 'A Business Application (BAP) CI is a CI Subtype in the application which supports business function (Top level).';
+  }
+
+  getDashboardTitleOrig(data) {
+    if (!data.name) {
+      return data.title;
+    }
+    const subName = data.name.substring(0, data.name.indexOf('-'));
+    return subName ? subName : data.name;
   }
 
   // Take a new component and config returned by the API, and update the data locally.

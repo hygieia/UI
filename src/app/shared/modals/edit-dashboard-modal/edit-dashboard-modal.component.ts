@@ -1,21 +1,22 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DashboardDataService } from 'src/app/admin_modules/admin_dashboard/services/dashboard-data.service';
+import { DashboardDataService } from 'src/app/shared/services/dashboard-data.service';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { WidgetManagerService } from 'src/app/admin_modules/admin_dashboard/services/widget-manager.service';
-import * as _ from 'lodash';
-import { UserDataService } from 'src/app/admin_modules/admin_dashboard/services/user-data.service';
-import { CmdbDataService } from 'src/app/admin_modules/admin_dashboard/services/cmdb-data.service';
-import { AdminDashboardService } from 'src/app/admin_modules/admin_dashboard/services/dashboard.service';
+import { WidgetManagerService } from 'src/app/shared/services/widget-manager.service';
+import { UserDataService } from 'src/app/shared/services/user-data.service';
+import { CmdbDataService } from 'src/app/shared/services/cmdb-data.service';
 import { map, debounceTime, distinctUntilChanged, switchMap, catchError, tap } from 'rxjs/operators';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardItem } from '../../model/dashboard-item';
 import { Observable, of } from 'rxjs';
+import {DashboardService} from '../../dashboard.service';
+import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 @Component({
     selector: 'app-edit-dashboard-modal',
     templateUrl: './edit-dashboard-modal.component.html',
-    styleUrls: ['./edit-dashboard-modal.component.scss']
+    styleUrls: ['./edit-dashboard-modal.component.scss'],
+    providers: [Location, {provide: LocationStrategy, useClass: PathLocationStrategy}]
 })
 export class EditDashboardModalComponent implements OnInit {
 
@@ -55,8 +56,8 @@ export class EditDashboardModalComponent implements OnInit {
 
     constructor(private dashboardData: DashboardDataService, private authService: AuthService,
                 private widgetManager: WidgetManagerService, private userData: UserDataService,
-                private cmdbData: CmdbDataService, private dashboardService: AdminDashboardService,
-                private fromBulider: FormBuilder, public activeModal: NgbActiveModal) { }
+                private cmdbData: CmdbDataService, private dashboardService: DashboardService,
+                private formBulider: FormBuilder, public activeModal: NgbActiveModal, private location: Location) { }
 
     ngOnInit() {
         this.username = this.authService.getUserName();
@@ -78,24 +79,21 @@ export class EditDashboardModalComponent implements OnInit {
             scoreEnabled: !!this.dashboardItem.scoreEnabled,
             scoreDisplay: this.dashboardItem.scoreDisplay
         };
-        this.cdfForm = this.fromBulider.group({
+        this.cdfForm = this.formBulider.group({
             dashboardTitle: ['',
                 [Validators.required, Validators.minLength(6), Validators.maxLength(50), Validators.pattern(/^[a-zA-Z0-9 ]*$/)]]
         });
-        this.formBusinessService = this.fromBulider.group({
+        this.formBusinessService = this.formBulider.group({
             configurationItemBusServ: [''],
             configurationItemBusApp: ['']
         });
-
         this.getConfigItem('app', '');
         this.getConfigItemComponent('', '');
         setTimeout(() => {
             console.log('dashboardItem' + JSON.stringify(this.dashboardItem));
             this.cdfForm.get('dashboardTitle').setValue(this.getDashboardTitle());
         }, 100);
-
     }
-
 
         searchconfigItemBusServ = (text$: Observable<string>) =>
         text$.pipe(
@@ -228,6 +226,8 @@ export class EditDashboardModalComponent implements OnInit {
                 this.submitScoreSettings('');
                 break;
         }
+        this.activeModal.close();
+        window.location.reload();
     }
 
     submit(form) {
@@ -317,6 +317,7 @@ export class EditDashboardModalComponent implements OnInit {
                 this.searchconfigItemBusComponent = response;
             });
     }
+
     getDashboardTitle() {
         return this.dashboardService.getDashboardTitleOrig(this.dashboardItem);
     }
@@ -328,6 +329,7 @@ export class EditDashboardModalComponent implements OnInit {
     getBusSerToolText() {
         return this.dashboardService.getBusSerToolTipText();
     }
+
     tabToggleView(index) {
         this.dupErroMessage = '';
         this.tabView = typeof this.tabs[index] === 'undefined' ? this.tabs[0].name : this.tabs[index].name;
@@ -405,5 +407,4 @@ export class EditDashboardModalComponent implements OnInit {
     swal(info: any) {
         console.log('swal', 'info', info);
     }
-
 }
