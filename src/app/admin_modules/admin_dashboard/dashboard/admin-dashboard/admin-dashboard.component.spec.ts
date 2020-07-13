@@ -4,8 +4,6 @@ import { GenerateApiTokensComponent } from './generate-api-tokens/generate-api-t
 import { ManageAdminsComponent } from './manage-admins/manage-admins.component';
 import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { DashEditComponent } from '../../../../shared/dash-edit/dash-edit.component';
-import { DashTrashComponent } from '../../../../shared/dash-trash/dash-trash.component';
 import {FeatureFlagsComponent} from './feature-flags/feature-flags.component';
 import {ServiceAccountsComponent} from './service-accounts/service-accounts.component';
 import {UserDataService} from '../../services/user-data.service';
