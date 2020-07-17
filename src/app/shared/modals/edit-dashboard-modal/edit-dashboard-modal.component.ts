@@ -213,6 +213,7 @@ export class EditDashboardModalComponent implements OnInit {
                 this.submitScoreSettings('');
                 break;
         }
+      document.location.reload();
     }
 
     submit(form) {
@@ -222,7 +223,6 @@ export class EditDashboardModalComponent implements OnInit {
                 .subscribe(() => {
                     this.activeModal.dismiss();
                     this.isSubmit = false;
-                    document.location.reload();
                 }, (error: any) => {
                     this.isSubmit = false;
                     this.activeModal.close();
