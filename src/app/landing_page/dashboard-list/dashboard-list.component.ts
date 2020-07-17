@@ -133,10 +133,6 @@ export class DashboardListComponent implements OnInit {
   editDashboard(item) {
     const modalRef = this.modalService.open(EditDashboardModalComponent);
     modalRef.componentInstance.dashboardItem = item;
-    modalRef.result.then((newConfig) => {
-    }).catch((error) => {
-      console.log('edit error newConfig :' + error);
-    });
   }
 
   createDashboard() {

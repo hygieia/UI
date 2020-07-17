@@ -222,6 +222,7 @@ export class EditDashboardModalComponent implements OnInit {
                 .subscribe(() => {
                     this.activeModal.dismiss();
                     this.isSubmit = false;
+                    document.location.reload();
                 }, (error: any) => {
                     this.isSubmit = false;
                     this.activeModal.close();

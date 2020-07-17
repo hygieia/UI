@@ -207,7 +207,8 @@ import {GeneralDashboardDeleteComponent} from './modals/general-dashboard-delete
     GeneralOrderByPipe
   ],
   providers: [
-    UserDataService
+    UserDataService,
+    RouterModule
   ]
 })
 export class SharedModule { }
