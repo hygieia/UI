@@ -213,7 +213,7 @@ export class EditDashboardModalComponent implements OnInit {
                 this.submitScoreSettings('');
                 break;
         }
-      document.location.reload();
+        document.location.reload();
     }
 
     submit(form) {
