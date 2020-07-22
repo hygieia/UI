@@ -18,36 +18,42 @@ import {
 } from '@nebular/theme';
 import { DashboardCreateComponent } from './dashboard-create/dashboard-create.component';
 import {FormsModule} from '@angular/forms';
+import {NgbTypeaheadModule} from '@ng-bootstrap/ng-bootstrap';
+import { DashboardCountComponent } from './dashboard-list/dashboard-count/dashboard-count.component';
+import {PieChartModule} from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
     LandingPageRoutingModule.components,
     DashboardListComponent,
     DashboardCreateComponent,
+    DashboardCountComponent,
 
   ],
-  imports: [
-    SharedModule,
-    LandingPageRoutingModule,
-    NbTabsetModule,
-    NbSearchModule,
-    NbCardModule,
-    NbIconModule,
-    NbListModule,
-    NbUserModule,
-    NbTableModule,
-    NbTreeGridModule,
-    NbMenuModule,
-    NbInputModule,
-    NbButtonModule,
-    NbActionsModule,
-    NbSelectModule,
-    NbRadioModule,
-    NbDialogModule.forRoot(),
-    NbStepperModule,
-    NbCheckboxModule,
-    FormsModule,
-  ],
+    imports: [
+        SharedModule,
+        LandingPageRoutingModule,
+        NbTabsetModule,
+        NbSearchModule,
+        NbCardModule,
+        NbIconModule,
+        NbListModule,
+        NbUserModule,
+        NbTableModule,
+        NbTreeGridModule,
+        NbMenuModule,
+        NbInputModule,
+        NbButtonModule,
+        NbActionsModule,
+        NbSelectModule,
+        NbRadioModule,
+        NbDialogModule.forRoot(),
+        NbStepperModule,
+        NbCheckboxModule,
+        FormsModule,
+        NgbTypeaheadModule,
+        PieChartModule,
+    ],
   entryComponents: [DashboardCreateComponent],
   providers: [ DashboardListService ]
 })

@@ -53,11 +53,27 @@ import { NavbarComponent } from '../core/navbar/navbar.component';
 import {RouterModule} from '@angular/router';
 import {DeleteConfirmModalDirective} from './modals/delete-confirm-modal/delete-confirm-modal.directive';
 import {RotationChartComponent} from './charts/rotation/rotation-chart.component';
-import {NbActionsModule, NbCardModule, NbSearchModule, NbTabsetModule, NbUserModule} from '@nebular/theme';
+import {
+    NbActionsModule,
+    NbCardModule,
+    NbIconModule,
+    NbSearchModule,
+    NbTabsetModule,
+    NbUserModule
+} from '@nebular/theme';
 import {ConfirmationModalDirective} from './modals/confirmation-modal/confirmation-modal.directive';
+import {DashTrashComponent} from './dash-trash/dash-trash.component';
+import {DashEditComponent} from './dash-edit/dash-edit.component';
+import {EditDashboardModalComponent} from './modals/edit-dashboard-modal/edit-dashboard-modal.component';
+import {GeneralFilterPipe} from './pipes/filter.pipe';
+import {GeneralOrderByPipe} from './pipes/order-by.pipe';
+import {UserDataService} from '../admin_modules/admin_dashboard/services/user-data.service';
+import {GeneralDashboardDeleteComponent} from './modals/general-dashboard-delete/general-dashboard-delete.component';
+import {TabsFixturesModule} from './ngx-ui/tabs/fixtures/tabs-fixtures.module';
 
 @NgModule({
   declarations: [
+    GeneralDashboardDeleteComponent,
     BarHorizontalComponent,
     BaseTemplateComponent,
     CaponeTemplateComponent,
@@ -103,8 +119,14 @@ import {ConfirmationModalDirective} from './modals/confirmation-modal/confirmati
     TwoByOneLayoutComponent,
     NavbarComponent,
     ConfirmationModalDirective,
+    DashTrashComponent,
+    DashEditComponent,
+    EditDashboardModalComponent,
+    GeneralFilterPipe,
+    GeneralOrderByPipe
   ],
   entryComponents: [
+    GeneralDashboardDeleteComponent,
     DeleteConfirmModalComponent,
     BarHorizontalComponent,
     CaponeTemplateComponent,
@@ -130,24 +152,29 @@ import {ConfirmationModalDirective} from './modals/confirmation-modal/confirmati
     RotationChartComponent,
     TwoByTwoLayoutComponent,
     TwoByTwoLayoutComponent,
-    AuditModalComponent
+    AuditModalComponent,
+    DashTrashComponent,
+    DashEditComponent,
+    EditDashboardModalComponent
   ],
   imports: [
-    CommonModule,
-    DragDropModule,
-    FlexLayoutModule,
-    NgbModule,
-    NgxChartsModule,
-    NgxUIModule,
-    ReactiveFormsModule,
-    TabsModule,
-    RouterModule,
-    NbActionsModule,
-    NbUserModule,
-    NbSearchModule,
-    NbCardModule,
-    NbTabsetModule,
-  ],
+        CommonModule,
+        DragDropModule,
+        FlexLayoutModule,
+        NgbModule,
+        NgxChartsModule,
+        NgxUIModule,
+        ReactiveFormsModule,
+        TabsModule,
+        RouterModule,
+        NbActionsModule,
+        NbUserModule,
+        NbSearchModule,
+        NbCardModule,
+        NbTabsetModule,
+        NbIconModule,
+        TabsFixturesModule,
+    ],
   exports: [
     BarHorizontalComponent,
     CaponeTemplateComponent,
@@ -176,7 +203,16 @@ import {ConfirmationModalDirective} from './modals/confirmation-modal/confirmati
     WidgetDirective,
     WidgetHeaderComponent,
     GaugeChartComponent,
-    NavbarComponent
+    NavbarComponent,
+    GeneralDashboardDeleteComponent,
+    DashTrashComponent,
+    DashEditComponent,
+    GeneralFilterPipe,
+    GeneralOrderByPipe
+  ],
+  providers: [
+    UserDataService,
+    RouterModule
   ]
 })
 export class SharedModule { }

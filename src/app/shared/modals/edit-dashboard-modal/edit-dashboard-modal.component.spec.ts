@@ -8,19 +8,18 @@ import { AdminDashboardService } from 'src/app/admin_modules/admin_dashboard/ser
 import { PaginationWrapperService } from 'src/app/admin_modules/admin_dashboard/services/pagination-wrapper.service';
 import { CommonModule } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { AdminFilterPipe } from 'src/app/admin_modules/admin_dashboard/pipes/filter.pipe';
-import { AdminOrderByPipe } from 'src/app/admin_modules/admin_dashboard/pipes/order-by.pipe';
 import { UserDataService } from 'src/app/admin_modules/admin_dashboard/services/user-data.service';
 import { USER_LIST, DASHBOARDITEM  } from 'src/app/admin_modules/admin_dashboard/services/user-data.service.mockdata';
+import {GeneralFilterPipe} from '../../pipes/filter.pipe';
+import {GeneralOrderByPipe} from '../../pipes/order-by.pipe';
 
 describe('EditDashboardModalComponent', () => {
   let component: EditDashboardModalComponent;
   let fixture: ComponentFixture<EditDashboardModalComponent>;
 
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [EditDashboardModalComponent, AdminFilterPipe, AdminOrderByPipe],
+      declarations: [EditDashboardModalComponent, GeneralFilterPipe, GeneralOrderByPipe],
       providers: [DashboardDataService,
         CmdbDataService,
         AdminDashboardService,
@@ -48,8 +47,6 @@ describe('EditDashboardModalComponent', () => {
       expect(component.cdfForm.valid).toBeTruthy();
     }, 500);
   });
-
-
 
   it('should  submit edit form BusinessService  when clicked on submit', () => {
     setTimeout(() => {
@@ -85,7 +82,6 @@ describe('EditDashboardModalComponent', () => {
     expect(component.isValidBusAppName()).toBeFalsy();
   });
 
-
   it('should  Owner Information edit from  when clicked on submit', () => {
     component.owners = [USER_LIST[0]];
     component.error = null;
@@ -93,7 +89,6 @@ describe('EditDashboardModalComponent', () => {
     component.saveForm();
     expect(null).toEqual(component.error);
   });
-
 
   it('should  Score edit from  when clicked on submit', () => {
     component.scoreSettings.scoreEnabled = true;
@@ -111,8 +106,6 @@ describe('EditDashboardModalComponent', () => {
     expect(null).toEqual(component.error);
   });
 
-
-
   it('should isActiveUser ', () => {
     const user = USER_LIST[0];
     expect(component.isActiveUser(user)).toBeFalsy();
@@ -126,10 +119,8 @@ describe('EditDashboardModalComponent', () => {
     .toEqual(component.getBusAppToolText());
   });
 
-
   it('should get Bus Ser Tool Text ', () => {
     expect('A top level name which support Business function.')
     .toEqual(component.getBusSerToolText());
   });
-
 });

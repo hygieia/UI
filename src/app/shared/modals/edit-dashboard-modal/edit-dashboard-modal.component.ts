@@ -2,14 +2,13 @@ import { Component, OnInit, Input } from '@angular/core';
 import { DashboardDataService } from 'src/app/admin_modules/admin_dashboard/services/dashboard-data.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { WidgetManagerService } from 'src/app/admin_modules/admin_dashboard/services/widget-manager.service';
-import * as _ from 'lodash';
 import { UserDataService } from 'src/app/admin_modules/admin_dashboard/services/user-data.service';
 import { CmdbDataService } from 'src/app/admin_modules/admin_dashboard/services/cmdb-data.service';
 import { AdminDashboardService } from 'src/app/admin_modules/admin_dashboard/services/dashboard.service';
 import { map, debounceTime, distinctUntilChanged, switchMap, catchError, tap } from 'rxjs/operators';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { DashboardItem } from '../../model/dashboard-item';
+import { DashboardItem } from '../../../admin_modules/admin_dashboard/dashboard/admin-dashboard/model/dashboard-item';
 import { Observable, of } from 'rxjs';
 
 @Component({
@@ -83,58 +82,51 @@ export class EditDashboardModalComponent implements OnInit {
                 [Validators.required, Validators.minLength(6), Validators.maxLength(50), Validators.pattern(/^[a-zA-Z0-9 ]*$/)]]
         });
         this.formBusinessService = this.fromBulider.group({
-            configurationItemBusServ: [''],
-            configurationItemBusApp: ['']
+          configurationItemBusServ: [''],
+          configurationItemBusApp: ['']
         });
-
         this.getConfigItem('app', '');
         this.getConfigItemComponent('', '');
         setTimeout(() => {
-            this.cdfForm.get('dashboardTitle').setValue(this.getDashboardTitle());
+          this.cdfForm.get('dashboardTitle').setValue(this.getDashboardTitle());
         }, 100);
-
     }
 
-
-        searchconfigItemBusServ = (text$: Observable<string>) =>
-        text$.pipe(
-          debounceTime(200),
-          distinctUntilChanged(),
-          tap(() => this.noResults = false),
-          switchMap(term =>
+    searchconfigItemBusServ = (text$: Observable<string>) =>
+      text$.pipe(
+        debounceTime(200),
+        distinctUntilChanged(),
+        tap(() => this.noResults = false),
+        switchMap(term =>
             this.cmdbData.getConfigItemList('app', { search: term, size: 20 })
-            .pipe(
+              .pipe(
                 map( (result: any) => {
-                    if (!result || result.length === 0) {
-                        this.noResults = true;
-                    }
-                    return result;
-                } ),
-              catchError(() => {
+                  if (!result || result.length === 0) {
+                    this.noResults = true;
+                  }
+                  return result;
+                }),
+                catchError(() => {
                   return of([]);
-              }))
-          ),
+                }))),
         )
-
-    formatter = (x: { configurationItem: string }) => x.configurationItem;
-        searchconfigItemBusApp = (text$: Observable<string>) =>
-        text$.pipe(
-          debounceTime(200),
-          distinctUntilChanged(),
-          tap(() => this.noResultsCom = false),
-          switchMap(term =>
+  formatter = (x: { configurationItem: string }) => x.configurationItem;
+    searchconfigItemBusApp = (text$: Observable<string>) =>
+      text$.pipe(
+        debounceTime(200),
+        distinctUntilChanged(),
+        tap(() => this.noResultsCom = false),
+        switchMap(term =>
             this.cmdbData.getConfigItemList('component', { search: term, size: 20 })
-            .pipe(
-                map( (result: any) => {
-                    if (!result || result.length === 0) {
-                        this.noResultsCom = true;
-                    }
-                    return result;
-                } ),
-              catchError(() => {
+              .pipe(map( (result: any) => {
+                if (!result || result.length === 0) {
+                  this.noResultsCom = true;
+                }
+                return result;
+              }),
+                catchError(() => {
                   return of([]);
-              }))
-          ),
+              }))),
         )
 
     formatterConfigItemBusApp = (x: { configurationItem: string }) => x.configurationItem;
@@ -143,10 +135,8 @@ export class EditDashboardModalComponent implements OnInit {
 
     get fB() { return this.formBusinessService.controls; }
 
-
-
     processDashboardDetail = (response) => {
-        this.dashboardData.getMyWidget(response.template).subscribe((result: any) => {
+      this.dashboardData.getMyWidget(response.template).subscribe((result: any) => {
             const widgetsSet = new Set();
             result.forEach(ele => {
                 if (ele.widgets) {
@@ -316,6 +306,7 @@ export class EditDashboardModalComponent implements OnInit {
     getBusSerToolText() {
         return this.dashboardService.getBusSerToolTipText();
     }
+
     tabToggleView(index) {
         this.dupErroMessage = '';
         this.tabView = typeof this.tabs[index] === 'undefined' ? this.tabs[0].name : this.tabs[index].name;
