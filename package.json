@@ -43,7 +43,7 @@
     "get-google-fonts": "^1.2.2",
     "lodash": "^4.17.13",
     "moment": "^2.24.0",
-    "moment-timezone": "^0.5.25",
+    "moment-timezone": "^0.5.31",
     "ngx-moment": "^3.4.0",
     "node-gyp": "^7.0.0",
     "rxjs": "~6.5.2",
