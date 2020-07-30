@@ -4686,19 +4686,6 @@ jszip@^3.1.3:
     readable-stream "~2.3.6"
     set-immediate-shim "~1.0.1"
 
-jw-angular-pagination@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/jw-angular-pagination/-/jw-angular-pagination-1.2.0.tgz#8c7799df72a6416b280ef225857a9723bff7b0e6"
-  integrity sha512-rHkFzeOeRybUtpwImf4FJQ4MhGH/5sqW6c4Za6avaR6iZUrIZCtPGE1RyCNjyPsX4KOmJk5lyzORn5ziGKmWkw==
-  dependencies:
-    jw-paginate "^1.0.4"
-    tslib "^1.10.0"
-
-jw-paginate@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/jw-paginate/-/jw-paginate-1.0.4.tgz#c6e7dbb4a6e9d62e501c7f9562a3a2a33d77c9b9"
-  integrity sha512-W0bv782exgCoynUL/egbRpaYwf/r6T6e02H870H5u3hfSgEYrxgz5POwmFF5aApS6iPi6yhZ0VF8IbafNFsntA==
-
 karma-chrome-launcher@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/karma-chrome-launcher/-/karma-chrome-launcher-2.2.0.tgz#cf1b9d07136cc18fe239327d24654c3dbc368acf"

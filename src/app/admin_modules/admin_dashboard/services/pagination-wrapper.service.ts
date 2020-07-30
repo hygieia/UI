@@ -269,20 +269,20 @@ export class PaginationWrapperService {
         .pipe(map(this.processMyDashboardResponse)));
     } else {
       promises.push(this.dashboardData.filterCount(title, type)
-      .pipe(map((data: any) => {
-        this.totalItems = data;
-        return data;
-     })));
+        .pipe(map((data: any) => {
+          this.totalItems = data;
+          return data;
+        })));
 
       promises.push(this.dashboardData.filterByTitle({ search: title, type, size: this.pageSize, page: 0 })
         .pipe(catchError(this.processDashboardError))
         .pipe(map(this.processDashboardFilterResponse)));
 
       promises.push(this.dashboardData.filterMyDashboardCount(title, type)
-      .pipe(map((data: any) => {
-        this.totalItemsMyDash = data;
-        return data;
-     })));
+        .pipe(map((data: any) => {
+          this.totalItemsMyDash = data;
+          return data;
+        })));
 
       promises.push(this.dashboardData.filterMyDashboardsByTitle({ search: title, type, size: this.pageSize, page: 0 })
         .pipe(catchError(this.processMyDashboardError))
@@ -292,6 +292,3 @@ export class PaginationWrapperService {
     return promises;
   }
 }
-
-
-

@@ -72,12 +72,12 @@ export class UserDataService {
     return this.http.post(route + '/' + id, apiToken);
   }
 
-   promoteUserToAdmin(user) {
+  promoteUserToAdmin(user) {
     const route = this.adminRoute + '/users/addAdmin';
     return this.http.post(route, user);
   }
 
-   demoteUserFromAdmin(user) {
+  demoteUserFromAdmin(user) {
     const route = this.adminRoute + '/users/removeAdmin';
     return this.http.post(route, user);
   }
