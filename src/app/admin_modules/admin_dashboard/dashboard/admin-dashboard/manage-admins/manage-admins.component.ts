@@ -1,28 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, NgModule, OnInit} from '@angular/core';
 import { UserDataService } from '../../../services/user-data.service';
 import { AuthService } from 'src/app/core/services/auth.service';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @Component({
   selector: 'app-manage-admins',
   templateUrl: './manage-admins.component.html',
-  styleUrls: ['./manage-admins.component.scss']
+  styleUrls: ['./manage-admins.component.scss'],
 })
-
+@NgModule({
+  imports: [NgxPaginationModule]
+})
 export class ManageAdminsComponent implements OnInit {
-
   error: any = {};
   users: any[] = [];
   userSearch = '';
   authType: any;
   username: any;
+  p = 1;
 
   constructor(private userData: UserDataService, private authService: AuthService) {
     this.authType = this.authService.getAuthType();
     this.username = this.authService.getUserName();
   }
+
   ngOnInit() {
     this.loadUser();
-
   }
 
   loadUser() {
@@ -30,6 +33,7 @@ export class ManageAdminsComponent implements OnInit {
       this.users = response;
     });
   }
+
   promoteUserToAdmin(user) {
     this.userData.promoteUserToAdmin(user).subscribe(
       (response: any) => {
@@ -41,7 +45,6 @@ export class ManageAdminsComponent implements OnInit {
         this.error = error;
       }
     );
-
   }
 
   demoteUserFromAdmin(user) {
@@ -56,6 +59,4 @@ export class ManageAdminsComponent implements OnInit {
       }
     );
   }
-
 }
-

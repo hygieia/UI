@@ -28,6 +28,7 @@ import { AuthInterceptor } from 'src/app/core/interceptors/auth.interceptor';
 import {PropertiesBuilderComponent} from './dashboard/admin-dashboard/properties-builder/properties-builder.component';
 // tslint:disable-next-line:max-line-length
 import {CreateOrUpdateApiPropertiesComponent} from './dashboard/admin-dashboard/modal/create-or-update-api-properties/create-or-update-api-properties.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import {CreateOrUpdateApiPropertiesComponent} from './dashboard/admin-dashboard/
     HttpClientModule,
     NgbModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    NgxPaginationModule
   ],
   entryComponents: [
     CreateOrUpdateFeatureFlagsComponent,
