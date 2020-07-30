@@ -41,6 +41,8 @@
     "eva-icons": "^1.1.2",
     "font-awesome": "^4.7.0",
     "get-google-fonts": "^1.2.2",
+    "jw-angular-pagination": "^1.2.0",
+    "jw-paginate": "^1.0.4",
     "lodash": "^4.17.19",
     "moment": "^2.27.0",
     "moment-timezone": "^0.5.31",
