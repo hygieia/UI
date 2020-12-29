@@ -1,10 +1,16 @@
 import { NgModule } from '@angular/core';
+import { PipelineDetailComponent } from './pipeline-view/pipeline-detail.component';
+import { PipelineRoutingModule } from './pipeline-routing.module';
 import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    PipelineDetailComponent
+  ],
   imports: [
-    SharedModule
+    SharedModule,
+    PipelineRoutingModule
+
   ]
 })
 export class PipelineModule { }
