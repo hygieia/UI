@@ -6,6 +6,7 @@ import {IAuditResult, IDashboardCI, IDashboardCIResponse} from './interfaces';
 import {IBuildResponse} from '../../widget_modules/build/interfaces';
 import {IOpensourceScanResponse} from '../../widget_modules/opensource-scan/interfaces';
 import {IDeployResponse} from '../../widget_modules/deploy/interfaces';
+import {ICodeProgressResponse} from '../../widget_modules/code-progress/interfaces';
 import {IStaticAnalysisResponse} from '../../widget_modules/static-analysis/interfaces';
 import {ISecurityScanResponse} from '../../widget_modules/security-scan/security-scan-interfaces';
 import {ITest} from '../../widget_modules/test/interfaces';
@@ -23,6 +24,7 @@ export class CollectorItemService {
   private libraryPolicyRoute = '/api/libraryPolicy/';
   private staticAnalysisRoute = '/api/quality/static-analysis';
   private deployDetailRoute = '/api/deploy/status/';
+  private codeProgressDetailRoute = '/api/code-progress/status/';
   private securityScanDetailRoute = '/api/quality/security-analysis';
   private testDetailRoute = '/api/quality/test';
 
@@ -61,6 +63,8 @@ export class CollectorItemService {
       return this.getCodeQualityResult(componentId);
     } else if ( collector.match('Deployment') ) {
       return this.getDeploymentResult(componentId);
+    } else if ( collector.match('CodeProgress') ) {
+      return this.getCodeProgressResult(componentId);
     } else if ( collector.match('Incident') ) {
       return this.getIncidentResult(componentId);
     } else if ( collector.match('LibraryPolicy') ) {
@@ -113,6 +117,12 @@ export class CollectorItemService {
   private getDeploymentResult(componentId: string) {
     if ( !componentId ) { return of([]); }
     return this.http.get<IDeployResponse>(this.deployDetailRoute + componentId).pipe(
+      map(response => response.result));
+  }
+
+  private getCodeProgressResult(componentId: string) {
+    if ( !componentId ) { return of([]); }
+    return this.http.get<ICodeProgressResponse>(this.codeProgressDetailRoute + componentId).pipe(
       map(response => response.result));
   }
 

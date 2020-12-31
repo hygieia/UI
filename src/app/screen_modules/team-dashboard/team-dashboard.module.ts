@@ -11,6 +11,7 @@ import {TestModule} from '../../widget_modules/test/test.module';
 import {BuildModule} from '../../widget_modules/build/build.module';
 import {RepoModule} from '../../widget_modules/repo/repo.module';
 import {DeployModule} from '../../widget_modules/deploy/deploy.module';
+import {CodeProgressModule} from '../../widget_modules/code-progress/code-progress.module';
 import {FeatureModule} from '../../widget_modules/feature/feature.module';
 
 @NgModule({
@@ -28,6 +29,7 @@ import {FeatureModule} from '../../widget_modules/feature/feature.module';
     BuildModule,
     RepoModule,
     DeployModule,
+    CodeProgressModule,
     FeatureModule,
   ],
   entryComponents: [
