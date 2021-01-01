@@ -3,6 +3,7 @@ import {
   ChangeDetectorRef,
   Component,
   ComponentFactoryResolver,
+  NgModule,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -24,6 +25,8 @@ import moment from 'moment';
 import { groupBy } from 'lodash';
 
 import {WidgetState} from '../../../shared/widget-header/widget-state';
+
+
 
 @Component({
   selector: 'app-build-widget',
@@ -105,9 +108,11 @@ export class BuildWidgetComponent extends WidgetComponent implements OnInit, Aft
 
   loadCharts(result: IBuild[]) {
     this.generateBuildsPerDay(result);
+    this.generateBuildsPerDay2(result);
     this.generateTotalBuildCounts(result);
     this.generateAverageBuildDuration(result);
     this.generateLatestBuilds(result);
+    this.generateTotalBuildCounts3(result)
     super.loadComponent(this.childLayoutTag);
   }
 
@@ -122,6 +127,17 @@ export class BuildWidgetComponent extends WidgetComponent implements OnInit, Aft
       && !this.checkBuildStatus(build, 'InProgress') && !this.checkBuildStatus(build, 'Success'));
     this.charts[0].data.dataPoints[0].series = this.collectDataArray(this.countBuildsPerDay(allBuilds));
     this.charts[0].data.dataPoints[1].series = this.collectDataArray(this.countBuildsPerDay(failedBuilds));
+  }
+
+  private generateBuildsPerDay2(result: IBuild[]) {
+    const startDate = this.toMidnight(new Date());
+    startDate.setDate(startDate.getDate() - this.BUILDS_PER_DAY_TIME_RANGE + 1);
+    const allBuilds = result.filter(build => this.checkBuildAfterDate(build, startDate)
+      && !this.checkBuildStatus(build, 'InProgress'));
+    const failedBuilds = result.filter(build => this.checkBuildAfterDate(build, startDate)
+      && !this.checkBuildStatus(build, 'InProgress') && !this.checkBuildStatus(build, 'Success'));
+    //this.charts[4].data.dataPoints[0].series = this.collectDataArray(this.countBuildsPerDay(allBuilds));
+    //this.charts[4].data.dataPoints[1].series = this.collectDataArray(this.countBuildsPerDay(failedBuilds));
   }
 
   private countBuildsPerDay(builds: IBuild[]): any[] {
@@ -203,6 +219,24 @@ export class BuildWidgetComponent extends WidgetComponent implements OnInit, Aft
     this.charts[3].data[0].value = todayCount;
     this.charts[3].data[1].value = bucketOneCount;
     this.charts[3].data[2].value = bucketTwoCount;
+  }
+
+
+
+  private generateTotalBuildCounts3(result: IBuild[]) {
+    const today = this.toMidnight(new Date());
+    const bucketOneStartDate = this.toMidnight(new Date());
+    const bucketTwoStartDate = this.toMidnight(new Date());
+    bucketOneStartDate.setDate(bucketOneStartDate.getDate() - this.TOTAL_BUILD_COUNTS_TIME_RANGES[0] + 1);
+    bucketTwoStartDate.setDate(bucketTwoStartDate.getDate() - this.TOTAL_BUILD_COUNTS_TIME_RANGES[1] + 1);
+
+    const todayCount = result.filter(build => this.checkBuildAfterDate(build, today)).length;
+    const bucketOneCount = result.filter(build => this.checkBuildAfterDate(build, bucketOneStartDate)).length;
+    const bucketTwoCount = result.filter(build => this.checkBuildAfterDate(build, bucketTwoStartDate)).length;
+
+    this.charts[5].data[0].value = todayCount;
+    this.charts[5].data[1].value = bucketOneCount;
+    this.charts[5].data[2].value = bucketTwoCount;
   }
 
   // *********************** AVERAGE BUILD DURATION *********************
@@ -307,3 +341,5 @@ export class BuildWidgetComponent extends WidgetComponent implements OnInit, Aft
     super.loadComponent(this.childLayoutTag);
   }
 }
+
+
