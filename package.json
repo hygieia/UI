@@ -31,7 +31,7 @@
     "@nebular/theme": "^4.6.0",
     "@ng-bootstrap/ng-bootstrap": "^4.2.2",
     "@swimlane/ngx-charts": "^11.2.0",
-    "@swimlane/ngx-datatable": "^18.0.0",
+    "@swimlane/ngx-datatable": "^16.1.1",
     "@swimlane/ngx-ui": "^26.0.1",
     "@types/jest": "^25.2.3",
     "@types/lodash": "^4.14.165",
