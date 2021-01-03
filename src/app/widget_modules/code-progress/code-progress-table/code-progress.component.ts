@@ -8,7 +8,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class CodeProgressComponent implements OnInit {
   rows = [
-    { name: 'version1', gender: 'version2', company: 'version3' },
+    { name: 'version1.1', gender: 'version2', company: 'version3' },
     { name: 'version1', gender: 'version3', company: 'version4' },
     { name: 'version2', gender: 'version4', company: 'version5' },
   ];
