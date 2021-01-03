@@ -126,6 +126,17 @@ export class CodeProgressWidgetComponent extends WidgetComponent implements OnIn
     //   clickableContent: CodeProgressDetailComponent,
     //   clickableHeader: CodeProgressDetailComponent,
     // } as IClickListData;
+    var rows2 = [
+      { name: 'version1', gender: 'version2', company: 'version3' },
+      { name: 'version1', gender: 'version3', company: 'version4' },
+      { name: 'version2', gender: 'version4', company: 'version5' },
+    ];
+    var columns2 = [
+      { name: 'DEV' },
+      { name: 'QA' },
+      { name: 'PROD' }
+    ];
+    this.charts[0].data = [{rows: rows2, columns: columns2}]
   }
 
   setDefaultIfNoData() {
