@@ -126,17 +126,40 @@ export class CodeProgressWidgetComponent extends WidgetComponent implements OnIn
     //   clickableContent: CodeProgressDetailComponent,
     //   clickableHeader: CodeProgressDetailComponent,
     // } as IClickListData;
-    var rows2 = [
-      { name: 'version1', gender: 'version2', company: 'version3' },
-      { name: 'version1', gender: 'version3', company: 'version4' },
-      { name: 'version2', gender: 'version4', company: 'version5' },
+
+    var columns3:any = [];
+    columns3.push({name: 'Components'});
+
+    var aRow:any = new Array(result.length + 1);
+
+    var rows3:any[][] = [];
+
+    var rowCount = 0;
+    result.forEach((value, index) => {
+      columns3.push({name : value.name});
+
+      value.units.forEach((unitValue, unitIdx) => {
+        rows3[rowCount] = [];
+        rows3[rowCount][0] = unitValue.name;
+        rows3[rowCount][index + 1] = unitValue.version;
+
+        rowCount++;
+      });
+
+    });
+
+    var rows2:any[][] = [
+    ['1.1','1.2','1.3'],
+    ['2.1','2.2','2.3'],
+    ['3.1','3.2','3.3']
     ];
+
     var columns2 = [
       { name: 'DEV' },
       { name: 'QA' },
-      { name: 'PROD' }
+      { name: 'PREPROD' }
     ];
-    this.charts[0].data = [{rows: rows2, columns: columns2}]
+    this.charts[0].data = [{rows: rows3, columns: columns3}]
   }
 
   setDefaultIfNoData() {

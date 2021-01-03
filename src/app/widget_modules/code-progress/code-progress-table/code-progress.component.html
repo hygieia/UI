@@ -30,9 +30,10 @@
   </thead>
   <tbody>
    <tr *ngFor="let group of data[0].rows">
-         <td style="color: white">{{group.company}}</td>
-         <td style="color: white">{{group.name}}</td>
-         <td style="color: white">{{group.gender}}</td>
+         <!-- <td style="color: rgb(20, 211, 115)">{{group.company}}</td>
+         <td style="color: rgb(209, 228, 46)">{{group.name}}</td>
+         <td style="color: rgb(172, 42, 133)">{{group.gender}}</td> -->
+         <td style="color: rgb(172, 42, 133)" *ngFor="let item of group">{{item}}</td>
      </tr>
   </tbody>
 </table>
