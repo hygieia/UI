@@ -8,6 +8,9 @@ import {DeployWidgetComponent} from '../../../widget_modules/deploy/deploy-widge
 import {DeployConfigFormComponent} from '../../../widget_modules/deploy/deploy-config-form/deploy-config-form.component';
 import {DeployDeleteFormComponent} from '../../../widget_modules/deploy/deploy-delete-form/deploy-delete-form.component';
 import {RepoWidgetComponent} from '../../../widget_modules/repo/repo-widget/repo-widget.component';
+import {CodeProgressWidgetComponent} from '../../../widget_modules/code-progress/code-progress-widget/code-progress-widget.component';
+import {CodeProgressConfigFormComponent} from '../../../widget_modules/code-progress/code-progress-config-form/code-progress-config-form.component';
+import {CodeProgressDeleteFormComponent} from '../../../widget_modules/code-progress/code-progress-delete-form/code-progress-delete-form.component';
 import {RepoConfigFormComponent} from '../../../widget_modules/repo/repo-config-form/repo-config-form.component';
 import {RepoDeleteFormComponent} from '../../../widget_modules/repo/repo-delete-form/repo-delete-form.component';
 // tslint:disable-next-line:max-line-length
@@ -76,6 +79,14 @@ export const widgetsAll = [
     widgetSize: 'col-xl-6',
     configForm: [StaticAnalysisConfigFormComponent, SecurityScanConfigComponent, OSSConfigFormComponent, TestConfigFormComponent],
     deleteForm: [StaticAnalysisDeleteFormComponent, SecurityScanDeleteFormComponent, OSSDeleteFormComponent, TestDeleteFormComponent]
+  },
+  {
+    title: ['Code Progress'],
+    component: [CodeProgressWidgetComponent],
+    status: 'Success',
+    widgetSize: 'col-xl-6',
+    configForm: [CodeProgressConfigFormComponent],
+    deleteForm: [CodeProgressDeleteFormComponent],
   },
   /*{
     title: ['Placeholder'],

@@ -6,14 +6,17 @@ import { CodeProgressConfigFormComponent } from './code-progress-config-form/cod
 import { CodeProgressDetailComponent } from './code-progress-detail/code-progress-detail.component';
 import { CodeProgressWidgetComponent } from './code-progress-widget/code-progress-widget.component';
 import { CodeProgressDeleteFormComponent} from './code-progress-delete-form/code-progress-delete-form.component';
+import {CodeProgressComponent} from './code-progress-table/code-progress.component';
+import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 
 @NgModule({
-  declarations: [CodeProgressWidgetComponent, CodeProgressConfigFormComponent, CodeProgressDetailComponent, CodeProgressDeleteFormComponent],
-  entryComponents: [CodeProgressWidgetComponent, CodeProgressConfigFormComponent, CodeProgressDetailComponent, CodeProgressDeleteFormComponent],
+  declarations: [CodeProgressWidgetComponent, CodeProgressConfigFormComponent, CodeProgressDetailComponent, CodeProgressDeleteFormComponent, CodeProgressComponent],
+  entryComponents: [CodeProgressWidgetComponent, CodeProgressConfigFormComponent, CodeProgressDetailComponent, CodeProgressDeleteFormComponent, CodeProgressComponent],
   imports: [
     CommonModule,
     NgbModule,
-    SharedModule
+    SharedModule,
+    NgxDatatableModule
   ],
   exports: []
 })

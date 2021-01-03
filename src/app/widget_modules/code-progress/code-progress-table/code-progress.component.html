@@ -1,0 +1,25 @@
+<div>
+  <div>Code Progress</div>
+  <ngx-datatable class="dark" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+  [rowHeight]="50" [scrollbarV]="true" [sorts]="[{prop: 'name', dir: 'desc'}]">
+
+  <ngx-datatable-column name="DEV">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{row.company}}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="QA">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{row.name}}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="PROD">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{row.gender}}
+    </ng-template>
+  </ngx-datatable-column>
+
+</ngx-datatable>
+</div>

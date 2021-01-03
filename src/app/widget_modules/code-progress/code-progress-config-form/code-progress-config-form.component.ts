@@ -7,7 +7,7 @@ import { CollectorService } from 'src/app/shared/collector.service';
 import { DashboardService } from 'src/app/shared/dashboard.service';
 
 @Component({
-  selector: 'app-deploy-config-form',
+  selector: 'app-code-progress-config-form',
   templateUrl: './code-progress-config-form.component.html',
   styleUrls: ['./code-progress-config-form.component.scss']
 })
@@ -94,9 +94,9 @@ export class CodeProgressConfigFormComponent implements OnInit {
     }
 
     const newConfig = {
-      name: 'deploy',
+      name: 'code-progress',
       options: {
-        id: this.widgetConfigId ? this.widgetConfigId : 'deploy0',
+        id: this.widgetConfigId ? this.widgetConfigId : 'code-progress',
         deployRegex: this.deployConfigForm.value.deployRegex,
         deployAggregateServer: this.deployConfigForm.value.deployAggregateServer
       },

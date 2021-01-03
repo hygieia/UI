@@ -2,7 +2,7 @@ import {ChangeDetectorRef, Component, ComponentFactoryResolver, OnInit, ViewChil
 import {IClickListData, IClickListItemDeploy} from 'src/app/shared/charts/click-list/click-list-interfaces';
 import {CodeProgressService} from 'src/app/widget_modules/code-progress/code-progress.service';
 import {of, Subscription} from 'rxjs';
-import {DEPLOY_CHARTS} from 'src/app/widget_modules/deploy/deploy-widget/deploy-charts';
+import {CODEPROGRESS_CHARTS} from 'src/app/widget_modules/code-progress/code-progress-widget/code-progress-charts';
 import {ICodeProgress} from 'src/app/widget_modules/code-progress/interfaces';
 import {DashStatus} from 'src/app/shared/dash-status/DashStatus';
 import {DashboardService} from 'src/app/shared/dashboard.service';
@@ -40,11 +40,11 @@ export class CodeProgressWidgetComponent extends WidgetComponent implements OnIn
   @ViewChild(LayoutDirective) childLayoutTag: LayoutDirective;
 
   ngOnInit() {
-    this.widgetId = 'deploy0';
+    this.widgetId = 'code-progress';
     this.layout = OneChartLayoutComponent;
     // Chart configuration moved to external file
-    this.charts = DEPLOY_CHARTS;
-    this.auditType = 'DEPLOY';
+    this.charts = CODEPROGRESS_CHARTS;
+    this.auditType = 'CODE_PROGRESS';
     this.init();
   }
 
@@ -121,11 +121,11 @@ export class CodeProgressWidgetComponent extends WidgetComponent implements OnIn
       }
     );
 
-    this.charts[0].data = {
-      items: latestDeployData,
-      clickableContent: CodeProgressDetailComponent,
-      clickableHeader: CodeProgressDetailComponent,
-    } as IClickListData;
+    // this.charts[0].data = {
+    //   items: latestDeployData,
+    //   clickableContent: CodeProgressDetailComponent,
+    //   clickableHeader: CodeProgressDetailComponent,
+    // } as IClickListData;
   }
 
   setDefaultIfNoData() {
