@@ -87,45 +87,18 @@ export class CodeProgressWidgetComponent extends WidgetComponent implements OnIn
     super.loadComponent(this.childLayoutTag);
   }
 
-  generateLatestDeployData(result: ICodeProgress[]) {
-    const sorted = result.sort((a: ICodeProgress, b: ICodeProgress): number => {
-      return a.units[0].lastUpdated - b.units[0].lastUpdated;
-    }).reverse().slice(0, 10);
-    const latestDeployData = sorted.map(deploy => {
-        let deployStatusText = '';
-        let regexText = '';
-        const deployStatus = deploy.units[0].deployed ?
-          DashStatus.PASS : DashStatus.FAIL;
-        if ( deployStatus === DashStatus.FAIL) {
-          deployStatusText = '!';
-        }
+  generateLatestDeployData(resultIn: ICodeProgress[]) {
 
-        if (deploy.url) {
-          regexText = deploy.url.match(new RegExp('^(https?:\/\/)?(?:www.)?([^\/]+)'))[0];
-        } else {
-          regexText = 'N/A';
-          deploy.url = '';
-        }
+    let envConfigs = ['DEV', 'QA', 'PROD'];
 
-        return {
-          status: deployStatus,
-          statusText: deployStatusText,
-          title: deploy.name,
-          subtitles: [],
-          url: deploy.url,
-          version: deploy.units[0].version,
-          name: deploy.units[0].name,
-          lastUpdated: deploy.units[0].lastUpdated,
-          regex: regexText
-        } as IClickListItemDeploy;
-      }
-    );
+    let result:ICodeProgress[] = [];
 
-    // this.charts[0].data = {
-    //   items: latestDeployData,
-    //   clickableContent: CodeProgressDetailComponent,
-    //   clickableHeader: CodeProgressDetailComponent,
-    // } as IClickListData;
+    envConfigs.forEach((ev, ei) => {
+    result[ei] = resultIn.filter((elem) => {
+      if(elem.name == ev)
+      return elem;
+    })[0];
+  });
 
     var columns3:any = [];
     columns3.push({name: 'Components'});
