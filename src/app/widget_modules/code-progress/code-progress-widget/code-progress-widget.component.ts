@@ -139,11 +139,20 @@ export class CodeProgressWidgetComponent extends WidgetComponent implements OnIn
       columns3.push({name : value.name});
 
       value.units.forEach((unitValue, unitIdx) => {
-        rows3[rowCount] = [];
-        rows3[rowCount][0] = unitValue.name;
-        rows3[rowCount][index + 1] = unitValue.version;
+        var findRow;
+        for (let row of rows3) {
+          if (row[0] == unitValue.name) findRow = row;
+        }
 
-        rowCount++;
+        if (findRow == null) {
+          rows3[rowCount] = new Array(result.length + 1);
+          rows3[rowCount][0] = unitValue.name;
+          rows3[rowCount][index + 1] = unitValue.version;
+
+          rowCount++;
+        } else {
+          findRow[index + 1] = unitValue.version;
+        }
       });
 
     });
