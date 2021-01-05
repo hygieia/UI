@@ -108,11 +108,11 @@ export class BuildWidgetComponent extends WidgetComponent implements OnInit, Aft
 
   loadCharts(result: IBuild[]) {
     this.generateBuildsPerDay(result);
-    this.generateBuildsPerDay2(result);
+    //this.generateBuildsPerDay2(result);
     this.generateTotalBuildCounts(result);
     this.generateAverageBuildDuration(result);
     this.generateLatestBuilds(result);
-    this.generateTotalBuildCounts3(result)
+    //this.generateTotalBuildCounts3(result)
     super.loadComponent(this.childLayoutTag);
   }
 

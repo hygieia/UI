@@ -101,7 +101,7 @@ export class CodeProgressWidgetComponent extends WidgetComponent implements OnIn
   });
 
     var columns3:any = [];
-    columns3.push({name: 'Components'});
+    columns3.push({name: 'Pipeline Start'});
 
     var aRow:any = new Array(result.length + 1);
 

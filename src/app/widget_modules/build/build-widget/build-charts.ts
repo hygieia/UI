@@ -74,35 +74,5 @@ export let BUILD_CHARTS: IChart[] = [
     xAxisLabel: '',
     yAxisLabel: '',
     colorScheme: 'vivid'
-  },
-
-  {
-    title: 'Code Progress',
-    component: CodeProgressComponent,
-    data: [],
-    xAxisLabel: '',
-    yAxisLabel: '',
-    colorScheme: {}
-  },
-  {
-    title: 'Total Builds',
-    component: NumberCardChartComponent,
-    data: [
-      {
-        name: 'Today',
-        value: 0
-      },
-      {
-        name: 'Last 7 Days',
-        value: 0
-      },
-      {
-        name: 'Last 14 Days',
-        value: 0
-      }
-    ],
-    xAxisLabel: '',
-    yAxisLabel: '',
-    colorScheme: 'vivid'
   }
 ];

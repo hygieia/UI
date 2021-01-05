@@ -1,28 +1,47 @@
 <div>
-  <div>Code Progress</div>
-  <!-- <ngx-datatable class="dark" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
-  [rowHeight]="50" [scrollbarV]="true" [sorts]="[{prop: 'name', dir: 'desc'}]">
 
-  <ngx-datatable-column name="DEV">
-    <ng-template let-row="row" ngx-datatable-cell-template>
-      {{row.company}}
-    </ng-template>
-  </ngx-datatable-column>
+  <div class="pipeline-view">
+    <header class="clearfix">
 
-  <ngx-datatable-column name="QA">
-    <ng-template let-row="row" ngx-datatable-cell-template>
-      {{row.name}}
-    </ng-template>
-  </ngx-datatable-column>
+        <div class="col-xs-push-3 col-md-push-2 col-xs-9 col-md-10">
+            <div class="row">
+                <span class="pipeline-environment-header col-xs-{{data[0].columns}}" *ngFor="let group of data[0].columns" ng-class="{'down':pipelineView.isDown(key)}">
+                    <span>
+                      {{group.name}}
+                    </span>
+                </span>
+            </div>
+        </div>
+    </header>
+    <section>
+        <div class="pipeline-row clearfix" *ngFor="let group of data[0].rows">
+            <!-- <div class="col-xs-3 col-md-2">
+                <div class="row">
+                    <div class="pipeline-unit-name dash-overflow">
+                        {{unit.name}}
+                    </div>
+                </div>
+            </div> -->
+            <div class="col-xs-9 col-md-10">
+                <div class="row">
+                    <div class="col-xs-{{data[0].columns}}" *ngFor="let item of group">
+                        <div class="pipeline-data-cell">
+                            <!-- <span dash-status="false" ng-if="unit.environments[key].somethingDown"></span> -->
 
-  <ngx-datatable-column name="PROD">
-    <ng-template let-row="row" ngx-datatable-cell-template>
-      {{row.gender}}
-    </ng-template>
-  </ngx-datatable-column>
-
-</ngx-datatable> -->
-<table class="table table-striped table-bordered table-sm row-border hover" id="datatable">
+                            <div class="version">
+                              {{item}}
+                            </div>
+                            <!-- <div class="text-standard-date">
+                                {{::unit.environments[key].lastUpdate | fromNow}}
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<!-- <table class="table table-striped table-bordered table-sm row-border hover" id="datatable">
   <thead>
     <tr>
       <th bgcolor="green" *ngFor="let group of data[0].columns" style="color: white">{{group.name}}</th>
@@ -30,12 +49,10 @@
   </thead>
   <tbody>
    <tr *ngFor="let group of data[0].rows">
-         <!-- <td style="color: rgb(20, 211, 115)">{{group.company}}</td>
-         <td style="color: rgb(209, 228, 46)">{{group.name}}</td>
-         <td style="color: rgb(172, 42, 133)">{{group.gender}}</td> -->
+
          <td style="color: rgb(172, 42, 133)" *ngFor="let item of group">{{item}}</td>
      </tr>
   </tbody>
-</table>
+</table> -->
 </div>
 
