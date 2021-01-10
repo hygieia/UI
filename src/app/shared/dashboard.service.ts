@@ -30,7 +30,7 @@ export class DashboardService {
 
   private dashboardRefreshSubscription: Subscription;
 
-  private REFRESH_INTERVAL_SECONDS = 3000;
+  private REFRESH_INTERVAL_SECONDS = 15;
 
   private dashboardId: string;
 
