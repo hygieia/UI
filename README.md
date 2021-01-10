@@ -1,4 +1,4 @@
-# Hygieia UI 
+# Hygieia UI   
 [![Build Status](https://travis-ci.com/Hygieia/UI.svg?branch=master)](https://travis-ci.com/Hygieia/UI?branch=master)
 [![Maven Central](https://img.shields.io/maven-central/v/com.capitalone.dashboard/UI.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.capitalone.dashboard%22%20AND%20a:%22UI%22)
 [![Total alerts](https://img.shields.io/lgtm/alerts/github/Hygieia/UI.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Hygieia/UI/alerts/)
