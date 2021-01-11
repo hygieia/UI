@@ -183,4 +183,6 @@ commit 1
 
 Add something in test-branch
 
+commit 2
+
 add something more
